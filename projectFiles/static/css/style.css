@@ -1,0 +1,20 @@
+/* Make the page take the full dynamic viewport height */
+html, body {
+  height: 100dvh;
+  margin: 0;
+}
+
+/* Flex‐center everything inside the body */
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Optional: if you prefer a dedicated wrapper instead of styling body */
+.container-wrapper {
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
