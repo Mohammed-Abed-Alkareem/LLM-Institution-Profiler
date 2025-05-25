@@ -1,0 +1,22 @@
+#loading-indicator {
+  display: none;
+}
+
+.container-card {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px;
+}
+
+#results-area pre {
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+}
