@@ -1,42 +1,50 @@
-<!doctype html>
 <html lang="en">
-  <head>
-    <!-- … -->
-    <link 
-      rel="stylesheet" 
-      href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link 
-      rel="stylesheet" 
-      href="{{ url_for('static', filename='css/style.css') }}">
-  </head>
-  <body>
-    <div class="container-card">
 
-       <div class="container-card">
-    <form method="post" class="row g-2 align-items-center">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Institution Search</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
+</head>
+
+<body>
+  <div class="container-card">
+    <form method="post" class="row g-2 align-items-center" onsubmit="showLoadingIndicator()">
       <div class="col-sm-8">
-        <input 
-          type="text" 
-          name="institution_name" 
-          class="form-control" 
-          placeholder="Enter institution name" 
-          required>
+        <input type="text" name="institution_name" class="form-control" placeholder="Enter institution name"
+          required="">
       </div>
       <div class="col-auto">
         <button type="submit" class="btn btn-primary">Search</button>
       </div>
     </form>
 
-    {% if institution %}
-      <div class="alert alert-info mt-4">
-        You searched for: <strong>{{ institution }}</strong>
+    <!-- Loading -->
+    <div id="loading-indicator" class="mt-4 text-center">
+      <p>Searching... Please wait.</p>
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
+    </div>
+
+    {% if institution_data_str %}
+    <div id="results-area" class="alert alert-info mt-4">
+      {% if 'Please enter an institution name.' not in institution_data_str and request.form.get('institution_name') %}
+      You searched for: <strong>{{ request.form.get('institution_name') }}</strong>
+      <hr>
+      <h5>Processed Data:</h5>
+      {% endif %}
+      <pre>{{ institution_data_str }}</pre>
+    </div>
     {% endif %}
+
   </div>
 
-    <!-- Correct path to the Bootstrap JS bundle -->
-    <script 
-      src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}">
-    </script>
-  </body>
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
 </html>
