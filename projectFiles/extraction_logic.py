@@ -5,7 +5,7 @@ import json
 # The LLM will be prompted to fill these fields, using "Unknown" if information is not found
 STRUCTURED_INFO_KEYS = ["name", "address", "country", "number_of_employees", "entity_type"]
 
-# Change this as we want
+# Change this as we wish
 MODEL = "gemini-2.0-flash"
 # The gemini library is used rn but OpenAI's works with everything as long as you
 # change the link, we can also use curl with OpenAI's API and it has the same effect
@@ -35,14 +35,14 @@ def extract_structured_data(genai_client, raw_text: str, institution_name: str):
     """
     if not genai_client:
         return {
-            key: "Unknown (AI client not available)" for key in STRUCTURED_INFO_KEYS
-            ** {"name": institution_name, "error": "Generative AI client not available for extraction."}
+            **{key: "Unknown (AI client not available)" for key in STRUCTURED_INFO_KEYS},
+            "name": institution_name, "error": "Generative AI client not available for extraction."
         }
 
     if not raw_text:
         return {
-            key: "Unknown (No raw text provided)" for key in STRUCTURED_INFO_KEYS
-            ** {"name": institution_name, "error": "No raw text provided for extraction."}
+            **{key: "Unknown (No raw text provided)" for key in STRUCTURED_INFO_KEYS},
+            "name": institution_name, "error": "No raw text provided for extraction."
         }
 
     # Instructs the LLM to find specific pieces of information and return them in a JSON format
@@ -73,8 +73,8 @@ def extract_structured_data(genai_client, raw_text: str, institution_name: str):
             if hasattr(response, 'prompt_feedback') and response.prompt_feedback and response.prompt_feedback.block_reason:
                 error_message = f"Extraction blocked. Reason: {response.prompt_feedback.block_reason}"
                 return {
-                    key: "Unknown" for key in STRUCTURED_INFO_KEYS
-                    ** {"name": institution_name, "error": error_message}
+                    **{key: "Unknown" for key in STRUCTURED_INFO_KEYS},
+                    "name": institution_name, "error": error_message
                 }
             elif response.candidates and response.candidates[0].content and response.candidates[0].content.parts:
                 text_parts = [part.text for part in response.candidates[0].content.parts if hasattr(part, 'text')]
@@ -106,24 +106,24 @@ def extract_structured_data(genai_client, raw_text: str, institution_name: str):
                     error_message = "Failed to parse JSON response from LLM for structured data."
                     print(f"JSONDecodeError for {institution_name}: {je}. Raw response: {extracted_text}")
                     return {
-                        key: "Unknown" for key in STRUCTURED_INFO_KEYS
-                        ** {"name": institution_name, "error": error_message, "raw_llm_output": extracted_text}
+                        **{key: "Unknown" for key in STRUCTURED_INFO_KEYS},
+                        "name": institution_name, "error": error_message, "raw_llm_output": extracted_text
                     }
             else:
                 error_message = "No text returned from LLM for structured data extraction."
                 return {
-                    key: "Unknown" for key in STRUCTURED_INFO_KEYS
-                    ** {"name": institution_name, "error": error_message}
+                    **{key: "Unknown" for key in STRUCTURED_INFO_KEYS},
+                    "name": institution_name, "error": error_message
                 }
         else:
             error_message = "No response from LLM for structured data extraction."
             return {
-                key: "Unknown" for key in STRUCTURED_INFO_KEYS
-                ** {"name": institution_name, "error": error_message}
+                **{key: "Unknown" for key in STRUCTURED_INFO_KEYS},
+                "name": institution_name, "error": error_message
             }
     except Exception as e:
         print(f"Error during structured data extraction for {institution_name}: {e}")
         return {
-            key: "Unknown" for key in STRUCTURED_INFO_KEYS
-            ** {"name": institution_name, "error": f"Exception during structured data extraction: {str(e)}"}
+            **{key: "Unknown" for key in STRUCTURED_INFO_KEYS},
+            "name": institution_name, "error": f"Exception during structured data extraction: {str(e)}"
         }
