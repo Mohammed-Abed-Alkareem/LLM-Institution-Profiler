@@ -4,7 +4,7 @@ import json # Import json for pretty printing the dictionary
 from symspellpy import SymSpell, Verbosity
 import pandas as pd
 import os
-from autocomplete import initialize_autocomplete, get_autocomplete_service
+from autocomplete import initialize_autocomplete_with_all_institutions, get_autocomplete_service
 
 app = Flask(__name__)
 
@@ -22,12 +22,12 @@ except Exception as e:
     print(f"Warning: Could not load symspell dictionary: {e}")
     print("Spell checking will be disabled, but autocomplete will still work.")
 
-# Initialize autocomplete service with Trie
-csv_path = os.path.join(BASE_DIR, 'spell_check', 'list_of_univs.csv')
-initialize_autocomplete(csv_path)
+# Initialize autocomplete service with all institution types
+initialize_autocomplete_with_all_institutions(BASE_DIR)
 autocomplete_service = get_autocomplete_service()
 
 # Keep the original list for backward compatibility if needed
+csv_path = os.path.join(BASE_DIR, 'spell_check', 'list_of_univs.csv')
 df = pd.read_csv(csv_path, usecols=[5])
 institution_names = df['name'].tolist()
 

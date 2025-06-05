@@ -29,6 +29,30 @@
     border-bottom: none;
 }
 
+/* Content layout for autocomplete items */
+.autocomplete-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.institution-name {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 1rem;
+}
+
+.institution-type {
+    color: #6c757d;
+    font-size: 0.8rem;
+    font-weight: 500;
+    flex-shrink: 0;
+    min-width: fit-content;
+}
+
 /* Hover and selected states */
 .autocomplete-item:hover,
 .autocomplete-item.selected {

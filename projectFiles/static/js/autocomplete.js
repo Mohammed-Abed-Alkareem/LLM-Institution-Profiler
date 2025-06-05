@@ -123,21 +123,52 @@ class AutocompleteWidget {
             this.close();
         }
     }
-    
-    render() {
+      render() {
         this.dropdown.innerHTML = '';
         
         this.suggestions.forEach((suggestion, index) => {
             const item = document.createElement('div');
             item.className = 'autocomplete-item';
-            item.textContent = suggestion;
             item.dataset.index = index;
             
-            // Highlight matching text
+            // Handle both old string format and new object format for backward compatibility
+            let institutionName, institutionType, fullName;
+            if (typeof suggestion === 'object' && suggestion.name) {
+                institutionName = suggestion.name;
+                institutionType = suggestion.type;
+                fullName = suggestion.full_name || suggestion.name;
+            } else {
+                // Fallback for old string format
+                institutionName = suggestion;
+                institutionType = '';
+                fullName = suggestion;
+            }
+            
+            // Create the display structure with proper alignment
+            if (institutionType) {
+                item.innerHTML = `
+                    <div class="autocomplete-item-content">
+                        <span class="institution-name">${institutionName}</span>
+                        <span class="institution-type">(${institutionType})</span>
+                    </div>
+                `;
+            } else {
+                item.innerHTML = `
+                    <div class="autocomplete-item-content">
+                        <span class="institution-name">${institutionName}</span>
+                    </div>
+                `;
+            }
+            
+            // Store the full name for selection
+            item.dataset.fullName = fullName;
+            
+            // Highlight matching text in the institution name
             const query = this.input.value.trim();
             if (query) {
+                const nameSpan = item.querySelector('.institution-name');
                 const regex = new RegExp(`(${this.escapeRegex(query)})`, 'gi');
-                item.innerHTML = suggestion.replace(regex, '<strong>$1</strong>');
+                nameSpan.innerHTML = nameSpan.textContent.replace(regex, '<strong>$1</strong>');
             }
             
             // Click handler
@@ -176,10 +207,21 @@ class AutocompleteWidget {
             item.classList.toggle('selected', index === this.selectedIndex);
         });
     }
-    
-    selectSuggestion(index) {
+      selectSuggestion(index) {
         if (index >= 0 && index < this.suggestions.length) {
-            this.input.value = this.suggestions[index];
+            // Handle both old string format and new object format
+            const suggestion = this.suggestions[index];
+            let valueToSet;
+            
+            if (typeof suggestion === 'object' && suggestion.full_name) {
+                valueToSet = suggestion.full_name;
+            } else if (typeof suggestion === 'object' && suggestion.name) {
+                valueToSet = suggestion.name;
+            } else {
+                valueToSet = suggestion;
+            }
+            
+            this.input.value = valueToSet;
             this.close();
             this.input.focus();
             

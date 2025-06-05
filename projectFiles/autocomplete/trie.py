@@ -6,6 +6,7 @@ class TrieNode:
         self.is_end_word = False
         self.word = None  # Store the complete word at end nodes
         self.frequency = 0  # For ranking suggestions
+        self.institution_type = None  # Store institution type (Edu, Fin, Med)
 
 
 class Trie:
@@ -18,13 +19,14 @@ class Trie:
         self.root = TrieNode()
         self.word_count = 0
     
-    def insert(self, word, frequency=1):
+    def insert(self, word, frequency=1, institution_type=None):
         """
-        Insert a word into the trie with optional frequency for ranking.
+        Insert a word into the trie with optional frequency for ranking and institution type.
         
         Args:
             word (str): The word to insert
             frequency (int): Frequency/weight of the word for ranking
+            institution_type (str): Type of institution (Edu, Fin, Med)
         """
         if not word:
             return
@@ -43,6 +45,7 @@ class Trie:
         node.is_end_word = True
         node.word = word  # Store original case
         node.frequency = max(node.frequency, frequency)
+        node.institution_type = institution_type
     
     def search(self, word):
         """
@@ -68,7 +71,6 @@ class Trie:
             bool: True if prefix exists, False otherwise
         """
         return self._find_node(prefix.lower()) is not None
-    
     def get_suggestions(self, prefix, max_suggestions=5):
         """
         Get autocomplete suggestions for a given prefix.
@@ -78,7 +80,7 @@ class Trie:
             max_suggestions (int): Maximum number of suggestions to return
             
         Returns:
-            list: List of suggested words sorted by frequency (descending)
+            list: List of suggestion dictionaries with 'name' and 'type' keys
         """
         if not prefix:
             return []
@@ -95,7 +97,25 @@ class Trie:
         # Sort by frequency (descending) and then alphabetically
         suggestions.sort(key=lambda x: (-x[1], x[0]))
         
-        return [word for word, _ in suggestions[:max_suggestions]]
+        # Return structured data instead of formatted strings
+        formatted_suggestions = []
+        max_name_length = 50  # Maximum length for institution names
+        
+        for word, _, institution_type in suggestions[:max_suggestions]:
+            # Truncate long names
+            if len(word) > max_name_length:
+                truncated_word = word[:max_name_length - 3] + "..."
+            else:
+                truncated_word = word
+                
+            suggestion = {
+                'name': truncated_word,
+                'type': institution_type or '',
+                'full_name': word  # Keep original for input value
+            }
+            formatted_suggestions.append(suggestion)
+        
+        return formatted_suggestions
     
     def _find_node(self, prefix):
         """
@@ -123,7 +143,7 @@ class Trie:
             words_list (list): List to append found words to
         """
         if node.is_end_word:
-            words_list.append((node.word, node.frequency))
+            words_list.append((node.word, node.frequency, node.institution_type))
         
         for child in node.children.values():
             self._collect_words(child, words_list)
@@ -138,7 +158,7 @@ class Trie:
         words = []
         self._collect_words(self.root, words)
         words.sort(key=lambda x: (-x[1], x[0]))
-        return [word for word, _ in words]
+        return [word for word, _, _ in words]
     
     def size(self):
         """
