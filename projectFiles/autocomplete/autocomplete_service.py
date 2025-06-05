@@ -14,6 +14,13 @@ class AutocompleteService:
         self.trie = Trie()
         self.is_initialized = False
         
+        # Common prefixes for different institution types
+        self.institution_prefixes = {
+            'Edu': ['University of', 'College of', 'Institute of', 'School of'],
+            'Fin': ['Bank of', 'Credit Union of', 'Federal Credit Union of', 'Savings Bank of'],
+            'Med': ['Hospital of', 'Medical Center of', 'Clinic of', 'Healthcare of']
+        }
+        
         if csv_paths:
             if isinstance(csv_paths, str):
                 csv_paths = [csv_paths]
@@ -54,6 +61,65 @@ class AutocompleteService:
                 break
         
         return cleaned
+    
+    def normalize_institution_name(self, name, institution_type):
+        """
+        Create normalized versions of institution names by removing common prefixes.
+        
+        Args:
+            name (str): Original institution name
+            institution_type (str): Type of institution (Edu, Fin, Med)
+            
+        Returns:
+            list: List of normalized name variations
+        """
+        if not name or not isinstance(name, str):
+            return []
+            
+        normalized_names = []
+        name_lower = name.lower()
+        
+        # Get prefixes for this institution type
+        prefixes = self.institution_prefixes.get(institution_type, [])
+        
+        for prefix in prefixes:
+            prefix_lower = prefix.lower()
+            if name_lower.startswith(prefix_lower):
+                # Remove the prefix and add the normalized version
+                normalized = name[len(prefix):].strip()
+                if normalized and normalized not in normalized_names:
+                    normalized_names.append(normalized)
+                break
+        
+        return normalized_names
+    
+    def generate_prefix_variations(self, query, institution_type):
+        """
+        Generate query variations by adding common prefixes.
+        
+        Args:
+            query (str): Original search query
+            institution_type (str): Institution type to focus on (optional)
+            
+        Returns:
+            list: List of query variations with prefixes
+        """
+        variations = []
+        
+        if institution_type and institution_type in self.institution_prefixes:
+            # Focus on the specific institution type
+            prefixes = self.institution_prefixes[institution_type]
+        else:
+            # Try all prefixes if type is unknown
+            prefixes = []
+            for type_prefixes in self.institution_prefixes.values():
+                prefixes.extend(type_prefixes)
+        
+        for prefix in prefixes:
+            variation = f"{prefix} {query}"
+            variations.append(variation)
+            
+        return variations
     
     def load_from_multiple_csvs(self, csv_configs):
         """
@@ -145,19 +211,23 @@ class AutocompleteService:
                         else:
                             # Higher frequency for earlier entries (assumes some ordering)
                             frequency = len(df) - idx
-                        
                         self.trie.insert(cleaned_name, frequency, institution_type)
                         loaded_count += 1
+                        
+                        # Also insert normalized versions (without prefixes) for better search
+                        normalized_names = self.normalize_institution_name(cleaned_name, institution_type)
+                        for normalized_name in normalized_names:
+                            # Insert with slightly lower frequency to prefer original names
+                            self.trie.insert(normalized_name, max(1, frequency - 1), institution_type, original_name=cleaned_name)
                 except Exception as e:
                     # Skip problematic rows
                     continue
             
             return loaded_count
-            
         except Exception as e:
             print(f"Error loading CSV data from {csv_path}: {str(e)}")
             raise
-    
+
     def add_institution(self, name, frequency=1, institution_type=None):
         """
         Add a single institution name to the trie.
@@ -171,12 +241,18 @@ class AutocompleteService:
             cleaned_name = self.clean_institution_name(name.strip())
             if cleaned_name:
                 self.trie.insert(cleaned_name, frequency, institution_type)
+                
+                # Also insert normalized versions (without prefixes) for better search
+                normalized_names = self.normalize_institution_name(cleaned_name, institution_type)
+                for normalized_name in normalized_names:
+                    # Insert with slightly lower frequency to prefer original names
+                    self.trie.insert(normalized_name, max(1, frequency - 1), institution_type, original_name=cleaned_name)
+                
                 if not self.is_initialized:
                     self.is_initialized = True
-    
     def get_suggestions(self, prefix, max_suggestions=5):
         """
-        Get autocomplete suggestions for a given prefix.
+        Get autocomplete suggestions for a given prefix with enhanced prefix handling.
         
         Args:
             prefix (str): The text prefix to get suggestions for
@@ -196,7 +272,38 @@ class AutocompleteService:
         if not clean_prefix:
             return []
         
-        return self.trie.get_suggestions(clean_prefix, max_suggestions)
+        # First, try direct search
+        suggestions = self.trie.get_suggestions(clean_prefix, max_suggestions)
+        
+        # If we have very few suggestions (≤2), try with common prefixes
+        if len(suggestions) <= 2:
+            additional_suggestions = []
+            
+            # Try each institution type's prefixes
+            for institution_type in ['Edu', 'Fin', 'Med']:
+                prefix_variations = self.generate_prefix_variations(clean_prefix, institution_type)
+                
+                for variation in prefix_variations:
+                    variation_suggestions = self.trie.get_suggestions(variation, max_suggestions)
+                    additional_suggestions.extend(variation_suggestions)
+            
+            # Combine and deduplicate suggestions
+            all_suggestions = suggestions + additional_suggestions
+            seen_names = set()
+            unique_suggestions = []
+            
+            for suggestion in all_suggestions:
+                full_name = suggestion['full_name']
+                if full_name.lower() not in seen_names:
+                    seen_names.add(full_name.lower())
+                    unique_suggestions.append(suggestion)
+                    
+                if len(unique_suggestions) >= max_suggestions:
+                    break
+            
+            return unique_suggestions[:max_suggestions]
+        
+        return suggestions
     
     def search_institution(self, name):
         """

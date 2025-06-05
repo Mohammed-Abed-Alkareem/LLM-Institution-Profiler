@@ -10,12 +10,13 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/autocomplete.css') }}">
 </head>
 
-<body>  <div class="container-card">    <form method="post" class="row g-2 align-items-center" onsubmit="showLoadingIndicator()">      <div class="col-sm-9">
+<body>  <div class="container-card">    <form method="post" class="d-flex gap-2 align-items-center" onsubmit="showLoadingIndicator()">
+      <div class="flex-fill">
         <input type="text" name="institution_name" id="institution_name" class="form-control form-control-lg" placeholder="Enter institution name (university, bank, hospital, etc.)"
           required="" autocomplete="off">
       </div>
-      <div class="col-sm-3">
-        <button type="submit" class="btn btn-primary btn-lg w-100">Search</button>
+      <div class="flex-shrink-0">
+        <button type="submit" class="btn btn-primary btn-lg">Search</button>
       </div>
     </form>
 

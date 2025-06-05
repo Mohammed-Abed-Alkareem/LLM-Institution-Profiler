@@ -7,6 +7,7 @@ class TrieNode:
         self.word = None  # Store the complete word at end nodes
         self.frequency = 0  # For ranking suggestions
         self.institution_type = None  # Store institution type (Edu, Fin, Med)
+        self.original_name = None  # Store the original full name (for normalized entries)
 
 
 class Trie:
@@ -14,12 +15,11 @@ class Trie:
     Trie (Prefix Tree) implementation for efficient autocomplete functionality.
     Supports case-insensitive search and frequency-based ranking.
     """
-    
     def __init__(self):
         self.root = TrieNode()
         self.word_count = 0
     
-    def insert(self, word, frequency=1, institution_type=None):
+    def insert(self, word, frequency=1, institution_type=None, original_name=None):
         """
         Insert a word into the trie with optional frequency for ranking and institution type.
         
@@ -27,6 +27,7 @@ class Trie:
             word (str): The word to insert
             frequency (int): Frequency/weight of the word for ranking
             institution_type (str): Type of institution (Edu, Fin, Med)
+            original_name (str): Original full name (for normalized entries)
         """
         if not word:
             return
@@ -46,6 +47,7 @@ class Trie:
         node.word = word  # Store original case
         node.frequency = max(node.frequency, frequency)
         node.institution_type = institution_type
+        node.original_name = original_name or word  # Use original name if provided, otherwise use the word itself
     
     def search(self, word):
         """
@@ -67,10 +69,10 @@ class Trie:
         Args:
             prefix (str): The prefix to check
             
-        Returns:
-            bool: True if prefix exists, False otherwise
+        Returns:            bool: True if prefix exists, False otherwise
         """
         return self._find_node(prefix.lower()) is not None
+    
     def get_suggestions(self, prefix, max_suggestions=5):
         """
         Get autocomplete suggestions for a given prefix.
@@ -125,8 +127,7 @@ class Trie:
             prefix (str): The prefix to find
             
         Returns:
-            TrieNode or None: The node if found, None otherwise
-        """
+            TrieNode or None: The node if found, None otherwise        """
         node = self.root
         for char in prefix:
             if char not in node.children:
@@ -143,7 +144,7 @@ class Trie:
             words_list (list): List to append found words to
         """
         if node.is_end_word:
-            words_list.append((node.word, node.frequency, node.institution_type))
+            words_list.append((node.original_name or node.word, node.frequency, node.institution_type))
         
         for child in node.children.values():
             self._collect_words(child, words_list)
