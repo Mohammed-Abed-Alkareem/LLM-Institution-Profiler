@@ -302,6 +302,11 @@ def initialize_autocomplete_with_all_institutions(base_dir):
             'path': os.path.join(spell_check_dir, 'trust-by-name.csv'),
             'name_column': 'NAME',
             'institution_type': 'Fin'
+        },
+        {
+            'path': os.path.join(spell_check_dir, 'world_hospitals_globalsurg.csv'),
+            'name_column': 'hospital_name',
+            'institution_type': 'Med'
         }
     ]
     
