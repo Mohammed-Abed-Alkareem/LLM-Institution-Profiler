@@ -146,13 +146,12 @@ class AutocompleteService:
             suggestions = unique_suggestions[:max_suggestions]        # If we still have no suggestions and spell correction is enabled, try spell correction
         if len(suggestions) == 0 and include_spell_correction and self.spell_correction.is_initialized:
             # Use the phrase-based spell correction that handles individual words
-            spell_corrections = self.get_spell_corrections(clean_prefix, max_suggestions)
+            spell_corrections = self.get_spell_corrections(clean_prefix, max_suggestions)            
             if spell_corrections:
                 return {
                     'suggestions': spell_corrections,
                     'source': 'spell_correction',
-                    'original_query': prefix,
-                    'message': f'Did you mean one of these?'
+                    'original_query': prefix
                 }
         
         return {
@@ -172,7 +171,6 @@ class AutocompleteService:
             
         Returns:
             list: List of formatted institution suggestions based on spell corrections        """
-        
         if not self.spell_correction.is_initialized:
             return []
         
@@ -196,12 +194,11 @@ class AutocompleteService:
                 full_name = suggestion.get('full_name', '')
                 if full_name.lower() not in seen_names:
                     seen_names.add(full_name.lower())
-                    
-                    # Format the suggestion to indicate it's from spell correction
+                      # Format the suggestion to indicate it's from spell correction
                     formatted_suggestion = {
                         'full_name': full_name,
                         'display_name': full_name,
-                        'institution_type': suggestion.get('institution_type', 'Unknown'),
+                        'institution_type': suggestion.get('type', 'Unknown'),  # Use 'type' from trie
                         'frequency': suggestion.get('frequency', 1),
                         'original_query': phrase,
                         'corrected_query': corrected_phrase,

@@ -67,27 +67,15 @@ def autocomplete():
     term = request.args.get('term', '').strip()
     
     if not term:
-        return jsonify([])
-    
-    # Get suggestions from the Trie-based autocomplete service (now includes spell correction)
+        return jsonify([])    # Get suggestions from the Trie-based autocomplete service (now includes spell correction)
     result = autocomplete_service.get_suggestions(term, max_suggestions=5)
     
-    # For backward compatibility, return just the suggestions array
-    # The frontend expects an array of suggestions
-    if isinstance(result, dict) and 'suggestions' in result:
-        suggestions = result['suggestions']
-          # If this is a spell correction result, format it appropriately
-        if result.get('source') == 'spell_correction':
-            # The spell correction suggestions are already formatted properly
-            # Just add a flag to indicate they're spell corrections
-            for suggestion in suggestions:
-                suggestion['is_spell_correction'] = True
-            return jsonify(suggestions)
-        else:
-            return jsonify(suggestions)
+    # Return the full result object for new format support
+    if isinstance(result, dict):
+        return jsonify(result)
     else:
         # Fallback for old format
-        return jsonify(result if isinstance(result, list) else [])
+        return jsonify(result)
 
 
 @app.route('/autocomplete/debug', methods=['GET'])

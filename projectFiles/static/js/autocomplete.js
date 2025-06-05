@@ -111,19 +111,16 @@ class AutocompleteWidget {
             // Handle the new response format that includes spell correction
             let suggestions = [];
             let isSpellCorrection = false;
-            
-            if (Array.isArray(data)) {
+              if (Array.isArray(data)) {
                 // Old format or direct suggestions array
-                suggestions = data;
-            } else if (data && typeof data === 'object') {
+                suggestions = data;            } else if (data && typeof data === 'object') {
                 // New format with metadata
                 suggestions = data.suggestions || [];
                 isSpellCorrection = data.source === 'spell_correction';
                 
-                // If this is a spell correction, show a helpful message
-                if (isSpellCorrection && suggestions.length > 0) {
-                    this.showSpellCorrectionMessage(data.message, query);
-                }
+                console.log('DEBUG: Response data:', data);
+                console.log('DEBUG: isSpellCorrection:', isSpellCorrection);
+                console.log('DEBUG: First suggestion:', suggestions[0]);
             }
             
             this.suggestions = suggestions;
@@ -164,30 +161,44 @@ class AutocompleteWidget {
                 messageElement.remove();
             }
         }, 5000);
-    }
-
-    render() {
-        this.dropdown.innerHTML = '';        // Add a header for spell corrections
+    }    render() {
+        this.dropdown.innerHTML = '';
+          // Add a separate "Did you mean?" section for spell corrections
         if (this.isSpellCorrection && this.suggestions.length > 0) {
-            const header = document.createElement('div');
-            header.className = 'autocomplete-header spell-correction-header';
-            
-            // Check if we have corrected query information
+            console.log('DEBUG: Creating "Did you mean?" section');
             const firstSuggestion = this.suggestions[0];
-            if (firstSuggestion && firstSuggestion.corrected_query && firstSuggestion.corrections) {
-                // Create a visual representation of the corrections
-                const correctedText = this.highlightCorrections(
-                    firstSuggestion.original_query, 
-                    firstSuggestion.corrections
-                );
-                header.innerHTML = `<span class="correction-icon">📝</span> Did you mean: ${correctedText}?`;
-            } else if (firstSuggestion && firstSuggestion.corrected_query) {
-                header.innerHTML = `<span class="correction-icon">📝</span> Did you mean "<em>${firstSuggestion.corrected_query}</em>"?`;
-            } else {
-                header.innerHTML = '<span class="correction-icon">📝</span> Did you mean:';
-            }
+            console.log('DEBUG: First suggestion for did you mean:', firstSuggestion);
             
-            this.dropdown.appendChild(header);
+            if (firstSuggestion && firstSuggestion.corrected_query) {
+                console.log('DEBUG: Adding "Did you mean?" section with corrected_query:', firstSuggestion.corrected_query);
+                // Create "Did you mean?" section
+                const didYouMeanSection = document.createElement('div');
+                didYouMeanSection.className = 'did-you-mean-section';
+                
+                const didYouMeanText = document.createElement('div');
+                didYouMeanText.className = 'did-you-mean-text';
+                
+                if (firstSuggestion.corrections && firstSuggestion.corrections.length > 0) {
+                    // Show highlighted corrections
+                    const correctedText = this.highlightCorrections(
+                        firstSuggestion.original_query, 
+                        firstSuggestion.corrections
+                    );
+                    didYouMeanText.innerHTML = `<span class="correction-icon">📝</span> Did you mean: ${correctedText}?`;
+                } else {
+                    // Simple fallback
+                    didYouMeanText.innerHTML = `<span class="correction-icon">📝</span> Did you mean: <em>${firstSuggestion.corrected_query}</em>?`;
+                }
+                
+                didYouMeanSection.appendChild(didYouMeanText);
+                this.dropdown.appendChild(didYouMeanSection);
+                
+                // Add a separator
+                const separator = document.createElement('div');
+                separator.className = 'spell-correction-separator';
+                separator.innerHTML = '<hr style="margin: 0; border-color: #ffeaa7;">';
+                this.dropdown.appendChild(separator);
+            }
         }
         
         this.suggestions.forEach((suggestion, index) => {
@@ -307,9 +318,9 @@ class AutocompleteWidget {
     close() {
         this.isOpen = false;
         this.dropdown.style.display = 'none';
-        this.selectedIndex = -1;
-    }
-      escapeRegex(string) {
+        this.selectedIndex = -1;    }
+    
+    escapeRegex(string) {
         return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
     
