@@ -1,0 +1,218 @@
+/* Autocomplete dropdown container */
+.autocomplete-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ced4da;
+    border-top: none;
+    border-radius: 0 0 0.375rem 0.375rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Individual autocomplete items */
+.autocomplete-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid #f8f9fa;
+    transition: background-color 0.15s ease-in-out;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+/* Content layout for autocomplete items */
+.autocomplete-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.institution-name {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 1rem;
+}
+
+.institution-type {
+    color: #6c757d;
+    font-size: 0.8rem;
+    font-weight: 500;
+    flex-shrink: 0;
+    min-width: fit-content;
+}
+
+/* Hover and selected states */
+.autocomplete-item:hover,
+.autocomplete-item.selected {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+/* Highlighted text in suggestions */
+.autocomplete-item strong {
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+/* Input field modifications for autocomplete */
+.autocomplete-input {
+    border-radius: 0.375rem 0.375rem 0 0;
+}
+
+.autocomplete-input:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .autocomplete-dropdown {
+        font-size: 0.8rem;
+    }
+    
+    .autocomplete-item {
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+/* Loading state (optional enhancement) */
+.autocomplete-loading {
+    padding: 0.75rem 1rem;
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* No results state */
+.autocomplete-no-results {
+    padding: 0.75rem 1rem;
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Ensure dropdown appears above other elements */
+.autocomplete-dropdown {
+    z-index: 1050; /* Higher than Bootstrap modals */
+}
+
+/* Smooth scrolling for keyboard navigation */
+.autocomplete-dropdown {
+    scroll-behavior: smooth;
+}
+
+/* Highlighting for corrected words */
+.spell-correction-word {
+    background-color: #ffebee;
+    color: #c62828;
+    font-weight: 600;
+    padding: 0.1rem 0.2rem;
+    border-radius: 0.2rem;
+    text-decoration: underline;
+    text-decoration-color: #c62828;
+}
+
+/* Spell correction specific styles */
+.spell-correction-header {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    border-bottom: 1px solid #ffeaa7;
+    font-size: 0.875rem;
+}
+
+.correction-icon {
+    margin-right: 0.5rem;
+}
+
+.spell-correction-item {
+    background-color: #f8f9fa;
+    border-left: 3px solid #ffc107;
+}
+
+.spell-correction-item:hover {
+    background-color: #e9ecef;
+}
+
+/* Did you mean section */
+.did-you-mean-section {
+    background-color: #fff3cd;
+    border-bottom: 1px solid #ffeaa7;
+    padding: 0.75rem 1rem;
+}
+
+.did-you-mean-text {
+    color: #856404;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    margin: -0.25rem -0.5rem;
+}
+
+.did-you-mean-text:hover {
+    background-color: #ffeaa7;
+    color: #6c4c00;
+}
+
+.spell-correction-separator {
+    margin: 0;
+    padding: 0;
+}
+
+/* Enhanced highlighting for corrected words */
+.spell-correction-word {
+    background-color: #ffebee;
+    color: #c62828;
+    font-weight: 700;
+    padding: 0.15rem 0.3rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ef5350;
+    text-decoration: none;
+    margin: 0 0.1rem;
+    display: inline-block;
+}
+
+.spell-correction-word:hover {
+    background-color: #ffcdd2;
+    cursor: help;
+}
+
+/* Preview text for autocomplete */
+.autocomplete-preview {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    color: #999 !important;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+}
+
+/* Input container for preview text positioning */
+.autocomplete-input-container {
+    position: relative !important;
+}

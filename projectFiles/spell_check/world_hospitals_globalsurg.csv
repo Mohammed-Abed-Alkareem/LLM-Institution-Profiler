@@ -1,0 +1,925 @@
+hospital_id,country,city,hospital_name,hospital_shortcode
+20001,Albania,Shkoder,Shkoder Regional Hospital,al_shkoder_reg
+20002,Albania,Tirana,University Hospital Center Nene Tereza,al_tir_nenetere
+30001,Algeria,Alger,Établissement Hospitalier Spécialisé en Cancérologie - Centre Pierre-et-Marie-Curie,dz_alger_curie
+80001,Argentina,Gonzalez Catan,Hospital Zonal General De Agudos Simplemente Evita,ar_gonza_agudos
+80002,Argentina,Mendoza,Hospital Luis Lagomaggiore,ar_mendo_lagoma
+80003,Argentina,Rafaela,Sanatorio Nosti,ar_rafa_sanosti
+80004,Argentina,Buenos Aires,Ignacio Pirovano,ar_bue_ignapir
+80005,Argentina,Florencio Varela,Hospital El Cruce,ar_flor_elcruce
+110001,Australia,Alice Springs,Alice Springs Hospital,au_alice_spring
+110002,Australia,Blacktown,Blacktown Hospital,au_black_townhp
+110003,Australia,Brisbane,Royal Brisbane and Women's Hospital,au_bris_royalwo
+110004,Australia,Liverpool,Liverpool Hospital,au_liver_hosp
+110005,Australia,Melbourne,Monash Medical Center,au_melb_monash
+110006,Australia,Port Macquarie,Port Macquarie Base Hospital,au_portm_base
+110007,Australia,Southport,Gold Coast University Hospital,au_south_goldco
+110008,Australia,Sydney,The Royal Prince Alfred Hospital,au_syd_alfred
+110009,Australia,Toowoomba,Toowoomba Hospital,au_toowo_toowo
+110010,Australia,Tweed Heads,The Tweed Hospital,au_tweeh_tweeho
+110011,Australia,Gosford,Gosford Hospital,au_gos_goshos
+110012,Australia,Bundaberg,Bundaberg Base Hospital,au_bund_basehos
+110013,Australia,Melbourne,Northern Hospital,au_mel_northos
+110014,Australia,Redcliffe,Redcliffe Hospital,au_red_redhosp
+110015,Australia,Newcastle,Calvary Mater Newcastle,au_new_calmater
+110016,Australia,Westmead,Westmead Hospital,au_wes_westmhos
+110017,Australia,Melbourne,Peter MacCallum Cancer Centre,au_mel_petmac
+110018,Australia,Wyong,Wyong Public Hospital,au_wyo_publihos
+110019,Australia,Newcastle,John Hunter Hospital,au_new_hunter
+110020,Australia,Brisbane,Princess Alexandra Hospital,au_bris_alex
+110021,Australia,Brisbane,The Mater Hospital,au_bris_mater
+110022,Australia,Newcastle,Lake Macquarie Private Hospital,au_newc_lakmacq
+110023,Australia,Adelaide,Royal Adelaide Hospital,au_adel_royadel
+110024,Australia,Perth,Sir Charles Gairdner Hospital,au_per_chagaird
+110025,Australia,Gosford,Gosford Private Hospital,au_gos_privhos
+110026,Australia,Taree,Manning Base Hospital,au_tar_mannbase
+110027,Australia,Geelong,University Hospital Geelong,au_gee_unihos
+110028,Australia,Brisbane,The Wesley Hospital,au_bris_wesley
+110029,Australia,Adelaide,The Queen Elizabeth Hospital,au_ade_quelizh
+120001,Austria,Salzburg,Paracelsus Medical University Salzburg,at_salzb_parac
+120002,Austria,Vienna,General Hospital of Vienna,at_vie_genhos
+130001,Azerbaijan,Baku,Avrasiya Private hospital,az_baku_avrapri
+160001,Bangladesh,Dhaka,Armed Forces Medical College,bd_dhak_armed
+160002,Bangladesh,Dhaka,BIRDEM General Hospital,bd_dhak_birdgen
+160003,Bangladesh,Dhaka,Dhaka Medical College Hospital,bd_dhak_medcol
+160004,Bangladesh,Dhaka,Dhaka Shishu (Children) Hospital,bd_dhak_shishu
+160005,Bangladesh,Dhaka,Holy Family Red Crescent Medical College & Hospital,bd_dhak_holyred
+160006,Bangladesh,Dinajpur,Lamb Hospital,bd_dinaj_lambh
+160007,Bangladesh,Dhaka,Shaheed Suhrawardy Medical College Hospital,bd_dha_shasuh
+160008,Bangladesh,Dhaka,Bangladesh Medical College Hospital,bd_dha_medcolhp
+160009,Bangladesh,Sylhet,MAG Osmani Medical College Hospital,bd_syl_magosma
+160010,Bangladesh,Dhaka,Mitford Hospital,bd_dhak_mithos
+160011,Bangladesh,Barishal,Sher-e-Bangla Medical College Hospital,bd_baris_medcol
+170001,Barbados,Bridgetown,Queen Elizabeth Hospital,bb_bridg_eliza
+180001,Belarus,Gomel,Gomel Regional Clinical Hospital,by_gomel_region
+180002,Belarus,Mozyr,Mozyr City Hospital,by_mozyr_city
+190001,Belgium,Leuven,UZ Leuven,be_leu_uzleuven
+190002,Belgium,Gent,University Hospital of Ghent,be_gent_unihos
+190003,Belgium,Gilly,Grand Hopital de Charleroi - Site Saint-Joseph,be_gil_charsaij
+190004,Belgium,Brussels,Hôpitaux Iris Sud - Etterbeek-Ixelles,be_brus_etterix
+210001,Benin,Cotonou,Centre National Hospitalier et Universitaire Hubert Koutoukou Maga,bj_coton_hubert
+210002,Benin,Cotonou,Saint Luc Hospital,bj_coton_stluc
+210003,Benin,Porto Novo,Clinique Vignon,bj_porto_vignon
+210004,Benin,Porto Novo,Hopital El Fateh,bj_porto_fateh
+210005,Benin,Porto Novo,Centre Hospitalier Universitaire et Departemental Oueme Plateau,bj_port_hosouem
+230001,Bhutan,Thimphu,JDW National Referral Hospital,bt_thi_jdwnatrh
+260001,Botswana,Gaborone,Princess Marina Hospital,bw_gabor_marina
+270001,Brazil,Campinas,Hospital De Clinicas da Unicamp,br_camp_clinuni
+270002,Brazil,Jundiai,Hospital de Caridade Sao Vincente de Paulo,br_jund_caripau
+270003,Brazil,Serra,Hospital Estadual Doutor Jayme Dos Santos Neves,br_serra_estnev
+270004,Brazil,Sorocaba,Conjunto Hospitalar de Sorocaba,br_soroc_conjun
+270005,Brazil,Vitoria,Hospital Infantil Nosa Senhora da Gloria,br_vito_nosaglo
+270006,Brazil,Vitoria,Hospital Santa Casa de Vitória,br_vito_sancasa
+270007,Brazil,Rio de Janeiro,Hospital Municipal Salgado Filho,br_rio_salgado
+270008,Brazil,Maceio,Hospital Santa Casa de Misericordia de Maceio,br_mac_casmisem
+290001,Brunei,Bandar Seri Begawan,Raja Isteri Pengiran Anak Saleha Hospital,bn_banda_rajai
+290002,Brunei,Kuala Belait,Suri Seri Begawan Hospital,bn_kuala_suris
+290003,Brunei,Tutong,Penigiran Muda Mahkota Penigran Muda Haji Al-Muhtadee Billah Tutong Hospital,bn_tuton_penig
+300001,Bulgaria,Plovdiv,University Hospital Eurohospital,bg_plo_eurohos
+300002,Bulgaria,Sofia,University Hospital Alexandrovska,bg_sof_unialex
+300003,Bulgaria,Pleven,University Hospital Dr Georgi Stranski,bg_plev_stran
+300004,Bulgaria,Sofia,Medical Institute of Ministry of Interior,bg_sof_medinfe
+320001,Burundi,Bujumbura,Kamenge Military Hospital,bi_bujum_kamen
+340001,Cambodia,Battambang,World Mate Emergency Hospital,kh_battam_mate
+350001,Cameroon,Bamenda,Mbingo Baptist Hospital,cm_bamen_mbingo
+350002,Cameroon,Mutengene,Baptist Hospital,cm_mut_bapthos
+360001,Canada,Hamilton,McMaster Children's Hospital,ca_hamil_mcmast
+360002,Canada,Montreal,McGill University Health Center,ca_montre_mcgil
+360003,Canada,Toronto,The Hospital For Sick Children,ca_toron_sickch
+360004,Canada,Montreal,Jewish General Hospital,ca_mont_jewgen
+360005,Canada,Toronto,Sunnybrook Hospital,ca_tor_sunbrook
+360006,Canada,Toronto,North York General Hospital,ca_toro_norgen
+360007,Canada,Ottawa,The Ottawa Hospital,ca_ottawa_hosp
+400001,Chile,Penalolen,Hospital Luis Tisne,cl_penalo_tisne
+400002,Chile,Santiago,Hospital of El Salvador,cl_santi_elsalv
+410001,China,Beijing,Beijing Friendship Hospital,cn_beiji_friend
+410002,China,Shanghai,Huashan Hospital affiliated to Fudan University,cn_shang_huash
+410003,China,Shanghai,Zhongshan Hospital,cn_shan_zhongs
+420001,Colombia,Medellin,CES Clinic,co_medel_cescli
+420002,Colombia,Medellin,Clinica Las Vegas,co_medel_vegas
+420003,Colombia,Medellin,Hospital Universitario San Vicente Fundacion,co_medel_sanvic
+420004,Colombia,Medellin,IPS Universitaria Clinica Leon XIII,co_medel_leon
+420005,Colombia,Medellin,Pablo Tobon Uribe Hospital,co_medel_pablo
+420006,Colombia,Bogota,Instituto Nacional de Cancerologia,co_bog_insnacan
+420007,Colombia,Bogota,Hospital Universitario Mayor Méderi,co_bog_unimayo
+420008,Colombia,Bogota,Fundacion Cardioinfantil-IC,co_bog_funcardi
+440001,"Congo, Dem. Rep.",Goma,HEAL Africa Hospital,cd_goma_healafr
+480001,Croatia,Sibenik,General Hospital Sibenik,hr_siben_gensib
+480002,Croatia,Zadar,Zadar General Hospital,hr_zadar_zadgen
+480003,Croatia,Zagreb,University Hospital Center Sestre milosrdnice,hr_zag_sesmilo
+480004,Croatia,Slavonski Brod,General Hospital Dr. Josip Bencevic,hr_slav_josiben
+480005,Croatia,Zagreb,Clinical Hospital Merkur,hr_zagr_merkur
+500001,Curacao,Willemstad,Saint Elisabeth Hospital,cw_will_stelisa
+520001,Czech Republic,Hradec Kralove,Charles University Hospital,cz_hrad_charun
+520002,Czech Republic,Opava,"Slezská nemocnice v Opavě, p.o.",cz_opa_sleznemo
+520003,Czech Republic,Prague,The General University Hospital in Prague,cz_pra_genuni
+560001,Dominican Republic,Santo Domingo,"CEDIMAT - Centro de Diagnóstico, Medicina Avanzada, Laboratorio y Telemedicina",do_santo_cedima
+570001,Ecuador,Quito,Hospital Metropolitano,ec_qui_metropol
+570002,Ecuador,Quito,Hospital Carlos Andrade Marín,ec_qui_carland
+570003,Ecuador,Quito,Hospital de Especialidades Eugenio Espejo,ec_qui_eugespe
+580001,Egypt,Alexandria,Ras El Tin General Hospital,eg_alexa_rasel
+580002,Egypt,Alexandria,Alexandria Main University Hospital,eg_alexa_mainu
+580003,Egypt,Alexandria,Alexandria Medical Research Institute,eg_alexa_medres
+580004,Egypt,Alexandria,Smouha University Hospital,eg_alexa_smouh
+580005,Egypt,Assiut,Assiut University Hospital,eg_assiu_unihos
+580006,Egypt,Banha,Banha University Hospital,eg_banha_unihos
+580007,Egypt,Belbes,Belbes Central Hospital,eg_belb_centhos
+580008,Egypt,Beni Suef,Beni Suef University Hospital,eg_benis_unihos
+580009,Egypt,Cairo,Al Hussein University Hospital,eg_cairo_alhuse
+580010,Egypt,Cairo,Alazher University Hospital,eg_cairo_alazhu
+580011,Egypt,Cairo,Bab El-Shareia Hospital,eg_cairo_babels
+580012,Egypt,Cairo,El Mataria Educational Hospital,eg_cairo_elmate
+580013,Egypt,Cairo,"Kasr Alainy Hospital, Faculty of Medicine, Cairo University",eg_cairo_kasral
+580014,Egypt,Damietta,New Damietta University Hospital,eg_damie_newdam
+580015,Egypt,El Gharbia,El Mahalla General Hospital,eg_elgha_elmaha
+580016,Egypt,El Shohadaa,El Shohadaa Central Hospital,eg_elsho_elshoh
+580017,Egypt,Giza,October 6 University Hospital,eg_giza_octobun
+580018,Egypt,Giza,The Memorial Soaad Kafafi University Hospital,eg_giza_memsoa
+580019,Egypt,Mansoura,El Dawly Hospital,eg_manso_eldaw
+580020,Egypt,Mansoura,Mansoura University Hospital,eg_manso_unihos
+580021,Egypt,Menoufia,Menofiya University Hospital,eg_menou_unihos
+580022,Egypt,Menoufia,Shebin Elkom Teaching Hospital,eg_menou_shebel
+580023,Egypt,Minia,Minia University Hospital,eg_minia_unihos
+580024,Egypt,Quweisna,Quweisna Central Hospital,eg_quwei_cenhos
+580025,Egypt,Seuz Canal,Seuz Canal University Hospital,eg_seuzc_unihos
+580026,Egypt,Sohag,Sohag University Hospital,eg_sohag_unihos
+580027,Egypt,Talla,Talla Central Hospital,eg_talla_cenhos
+580028,Egypt,Tanta,El-Menshawy Hospital,eg_tanta_elmens
+580029,Egypt,Tanta,Tanta University Hospital,eg_tanta_unihos
+580030,Egypt,Zagazig,Zagazig University Hospitals,eg_zagaz_unihos
+580031,Egypt,Mansoura,Oncology Center Mansoura University,eg_mans_oncocen
+580032,Egypt,Alexandria,Gamal Abd El Nasser Hospital,eg_alex_gamabd
+580033,Egypt,Qena,Qena University Hospital,eg_qena_unihos
+580034,Egypt,Cairo,El Demerdash University Hospital,eg_cai_eldemer
+580035,Egypt,Cairo,Ain Shams University Specialized Hospital,eg_cai_ainshams
+580036,Egypt,Cairo,National Institute of Diabetes and Endocrinology Hospital,eg_cai_instdian
+580037,Egypt,Assiut,South Egypt Cancer Institute And Hospital,eg_assi_caninst
+580038,Egypt,Cairo,National Cancer Institute,eg_cai_natcanin
+580039,Egypt,Cairo,Al-Tagamoh Hospital,eg_cairo_eltag
+620001,Estonia,Tallinn,The North Estonia Medical Centre,ee_tal_northest
+630002,Ethiopia,Addis Ababa,Menelik II Referral Hospital,et_addis_menel
+630003,Ethiopia,Addis Ababa,Myungsung Christian Medical Centre,et_addis_myung
+630004,Ethiopia,Addis Ababa,Tikur Anbessa (Black Lion) Hospital,et_addis_tikur
+630005,Ethiopia,Dessie,Dessie Referral Hospital,et_dessi_refer
+630006,Ethiopia,Addis Ababa,St Paul's Hospital,et_add_paulhosp
+660001,Finland,Helsinki,Helsinki University Hospital,fi_helsi_helsi
+660002,Finland,Hameenlinna,Kanta-Hame Central Hospital,fi_ham_kantcent
+670001,France,Amiens,CHU Amiens,fr_amie_chuami
+670002,France,Angers,CHU Angers,fr_anger_chuang
+670003,France,Caen,CHU Caen,fr_caen_chucae
+670004,France,Fort de France,CHU Martinique,fr_fortd_chumaq
+670005,France,Lille,Hôpital Saint Vincent de Paul,fr_lile_vindpau
+670006,France,Limoges,CHU Limoges,fr_limo_chulimo
+670007,France,Nice,CHU Lenval Nice,fr_nice_chulenv
+670008,France,Paris,Hôpital Cochin - APHP,fr_pari_cocaphp
+670009,France,Paris,Hôpital Necker Enfants Malades - APHP,fr_pari_neckenf
+670010,France,Paris,Hôpital Robert Ballanger,fr_pari_robball
+670011,France,Paris,Hôpital Trousseau - APHP,fr_pari_trouse
+670012,France,Paris,Robert Debré Children University Hospital - APHP,fr_pari_robdeb
+670013,France,Poitiers,CHU Poitiers,fr_poit_chupoit
+670014,France,Rennes,CHU Rennes - Breast Surgery,fr_renne_chubre
+670015,France,Rouen,CHU Rouen,fr_rouen_churou
+670016,France,Saint Etienne,CHU Saint Etienne,fr_saint_chuset
+670017,France,Toulouse,CHU Toulouse,fr_toulo_chutou
+670018,France,Clichy,Hôpital Beaujon - APHP,fr_cli_hopbeau
+670019,France,Lyon,Hôpital Femme Mère Enfant,fr_lyon_femenf
+670020,France,Rennes,CHU Rennes - General Surgery,fr_renne_chugen
+720001,Germany,Heidelberg,University Hospital Heidelberg,de_heid_unihos
+720002,Germany,Eggenfelden,Rottal-Inn-Kliniken,de_egg_rottalin
+730001,Ghana,Accra,Korle-Bu Teaching Hospital,gh_accra_korle
+730002,Ghana,Berekum,Berekum Holy Family Hospital,gh_bere_holyfam
+730003,Ghana,Bolgatanga,Upper East Regional Hospital,gh_bolga_upper
+730004,Ghana,Cape-Coast,Cape Coast Teaching Hosital,gh_capec_coast
+730005,Ghana,Dominase,"Sda Hospital, Dominase",gh_domin_sdadom
+730006,Ghana,Dormaa-Ahenkro,Dormaa Presbyterian Hospital,gh_dorma_presby
+730007,Ghana,Drobo,St. Mary's Hospital,gh_drobo_stmary
+730008,Ghana,Keta,District Hospital,gh_keta_distri
+730009,Ghana,Kumasi,Komfo-Anokye Teaching Hospital,gh_kumas_komfo
+730010,Ghana,Kumasi,Kwame Nkrumah University of Science and Technology/Komfo Anokye Teaching Hospital,gh_kumas_kwame
+730011,Ghana,Nalerigu,Baptist Medical Center,gh_naler_bapti
+730012,Ghana,Offinso,St. Patrick's Hospital,gh_offin_stpat
+730013,Ghana,Sampa,Sampa Goverment Hospital,gh_sampa_govhos
+730014,Ghana,Sunyani,Brongho-Ahafo Regional Hospital,gh_sunya_brong
+730015,Ghana,Tamale,Tamale Teaching Hospital,gh_tamal_tamtea
+730016,Ghana,Techiman,Holy Family Hospital,gh_tech_holyfam
+730017,Ghana,Wa,Upper West Regional Hospital,gh_wa_upperwest
+750001,Greece,Athens,Agios Savvas Anticancer Hospital,gr_athen_agiosa
+750002,Greece,Athens,Aretaieion Hospital,gr_athen_aretai
+750003,Greece,Athens,Attikon University General Hospital,gr_athen_attik
+750004,Greece,Athens,G. Gennimatas Hospital,gr_athen_ggenn
+750005,Greece,Athens,General Oncological Hospital Of Kifissia,gr_athen_onckif
+750006,Greece,Athens,Konstantopouleio General Hospital of Athens,gr_athen_konsta
+750007,Greece,Athens,Laiko University Hospital,gr_athen_laiko
+750008,Greece,Athens,Naval And Veterans Hospital,gr_athen_naval
+750009,Greece,Larrisa,General University Hospital of Larissa,gr_lari_genlari
+750010,Greece,Nafplio,General Hospital Of Nafplio,gr_nafpl_gennaf
+750011,Greece,Serres,Serres General Hospital,gr_serre_sergen
+750012,Greece,Thessaloniki,George Papanikolaou General Hospital of Thessaloniki,gr_thess_geopap
+750013,Greece,Volos,Achillopoyleio General Hospital of Volos,gr_volo_achilge
+750014,Greece,Athens,Athens Medical Center,gr_ath_medcent
+750015,Greece,Athens,Athens Euroclinic,gr_ath_euroclin
+750016,Greece,Piraeus,General Hospital of Nikaia,gr_pirae_gen
+750017,Greece,Athens,Hippocratio General Hospital,gr_athen_hipgen
+750018,Greece,Argos,General Hospital of Argos,gr_argos_genhos
+750019,Greece,Patras,General University Hospital of Patras,gr_pat_genuniho
+790001,Guatemala,Guatemala City,Hospital De Accidentes Ceibal,gt_guate_accice
+790002,Guatemala,Guatemala City,Hospital General De Enfermedades,gt_guate_genenf
+790003,Guatemala,Guatemala City,Hospital General San Juan De Dios,gt_guate_sanjua
+790004,Guatemala,Guatemala City,Hospital Herrera Llerandi,gt_guate_herlle
+790005,Guatemala,Guatemala City,Hospital Juan Jose Arevalo Bermejo,gt_guate_juajos
+790006,Guatemala,Guatemala City,Hospital Roosevelt,gt_guate_roose
+790007,Guatemala,Guatemala City,Hospital San Vicente,gt_guate_sanvic
+790008,Guatemala,Retalhuleu,Hospital Regional De Retalhuleu,gt_reta_regreta
+790009,Guatemala,Guatemala City,Sanatorio Nuestra Señora del Pilar,gt_gua_sanuespi
+830001,Haiti,Mirebalais,Hopital Universitaire De Mirebalais,ht_mire_mirebal
+850001,"Hong Kong SAR, China",Pok Fu Lam,Queen Mary Hospital,hk_pokfu_mary
+850002,"Hong Kong SAR, China",Sha Tin,Prince of Wales Hospital,hk_sha_princwal
+860001,Hungary,Budapest,1st Department of Surgery - Semmelweis University,hu_buda_semmel
+880001,India,Bangalore,Excelcare Hospital,in_banga_excel
+880002,India,Coimbatore,Kovai Medical Centre and Hospital,in_coimb_kovai
+880003,India,Dharwad,Sri Dharmasthala Manjunatheshwara College of Medical Sciences and Hospital,in_dhar_sridha
+880004,India,Jaipur,Sawai Man Singh Medical College and Hospitals,in_jaipu_sawai
+880005,India,Kollam,Travancore Medical College Hospital,in_kolla_travan
+880006,India,Kuppam,PES Institute of Medical Sciences and Research,in_kuppa_pesin
+880007,India,Lucknow,Sanjay Gandhi Post Graduate Institute Of Medical Sciences,in_luck_sangand
+880008,India,Manali,Lady Willingdon Hospital,in_manal_ladyw
+880009,India,Manipal,"Kasturba Medical College Hospital, Manipal",in_manip_kastu
+880010,India,Mumbai,King Edward Memorial Hospital,in_mumba_kinged
+880011,India,New Delhi,Vardhman Mahavir Medical College & Safdarjung Hospital,in_newde_varsaf
+880012,India,Srinagar,New City Hospital,in_srin_newcity
+880013,India,Navi Mumbai,MGM Medical College and Hospital,in_nav_mgmmed
+880014,India,Hyderabad,Candy Children's Hospital,in_hyd_canchild
+880015,India,Mangalore,K.S. Hegde Medical Academy Hospital,in_manga_acad
+880016,India,Ahmedabad,The Gujarat Cancer & Research Institute,in_ahme_gujacan
+880017,India,Cochin,MOSC Medical College Hospital,in_coch_moscmed
+880019,India,Thrissur,Jubilee Mission Medical College & Research Institute,in_thr_jubmiss
+880020,India,Ludhiana,Christian Medical College & Hospital,in_lud_chrismed
+880021,India,Bangalore,Vydehi Institute of Medical Sciences and Research Center,in_bang_vydehi
+880022,India,Bangalore,Victoria Hospital,in_bang_vichos
+880023,India,Bangalore,Command Hospital Air Force,in_bang_commhos
+880024,India,Hyderabad,MNJ Institute of Oncology & Regional Cancer Center Hyderabad,in_hyd_oncreg
+880025,India,Rohtak,Pandit Bhagwat Dayal Sharma Post Graduate Institute of Medical Sciences,in_roh_panbhada
+880026,India,Delhi,Guru Teg Bahadur Hospital,in_del_gurubaha
+880027,India,Sawarde,BKL Walawalkar Hospital,in_saw_bklwalwa
+880028,India,Silchar,Cachar Cancer Hospital and Research Centre,in_silch_canres
+880029,India,Thiruvananthapuram,Regional Cancer Centre,in_thiru_regcan
+880030,India,Hyderabad,Basavatarakam Indo American Cancer Hospital & Research Institute,in_hyd_basava
+880031,India,Kolkata,Chittaranjan National Cancer Institute,in_kol_chitnatc
+880032,India,Hyderabad,Kamineni Hospitals - LB Nagar,in_hyd_kamnagar
+880033,India,Pondicherry,Jawaharlal Institute of Postgraduate Medical Education and Research,in_pond_jawains
+880034,India,Delhi,Max Superspeciality Hospital Patparganj,in_delhi_maxpat
+880035,India,Cochin,Amrita Institute of Medical Sciences Hospital,in_coch_amrita
+880036,India,Thalassery,Malabar Cancer Centre,in_thala_malcan
+880037,India,Bangalore,Jayanagar Manipal Hospital,in_banga_jayman
+880038,India,Madurai,Government Rajaji Hospital,in_madu_govraj
+880039,India,Mumbai,Tata Memorial Centre,in_mumb_tatamem
+880040,India,Shillong,North Eastern Indira Gandhi Regional Institute of Health and Medical Sciences (NEIGRIHMS),in_shil_neindir
+880041,India,Kolkata,Tata Medical Centre,in_kolk_tatamed
+880042,India,Rishikesh,All India Institute of Medical Sciences (Aiims),in_rishi_allind
+880043,India,Vellore,Christian Medical College (CMC),in_vello_christ
+880044,India,Padhar,Padhar Hospital,in_padhar_hosp
+890001,Indonesia,Jakarta,Atma jaya Hospital,id_jak_atmaj
+890002,Indonesia,Jakarta,Dr Cipto Mangunkusumo National General Hospital,id_jak_ciptoman
+890003,Indonesia,Jember Regency,RSD Dr Soebandi,id_jembe_soeban
+890004,Indonesia,Surakarta,Rumah Sakit Dr. Oen Surakarta Hospital,id_surak_rumah
+890005,Indonesia,Yogyakarta,Central General Hospital dr. Sardjito,id_yog_cengensa
+890006,Indonesia,Kudus,Mardi Rahayu Hospital,id_kud_mardrah
+890007,Indonesia,Jakarta,Pondok Indah General Hospital,id_jak_ponindah
+900001,"Iran, Islamic Rep.",Hamedan,Besat Hospital,ir_ham_besat
+900002,"Iran, Islamic Rep.",Mashhad,Imam Reza hospital,ir_mas_imamrez
+910001,Iraq,Baghdad,Baghdad Medical City,iq_baghd_bagmed
+910002,Iraq,Mosul,Al-Jumhoori Teaching Hospital,iq_mosul_aljum
+910003,Iraq,Najaf,Al-Sader Medical City,iq_najaf_alsad
+910004,Iraq,Basra,Basra Teaching Hospital,iq_bas_teachos
+920001,Ireland,Cork,Cork University Hospital,ie_cork_corkuh
+920002,Ireland,Cork,Mercy University Hospital,ie_cork_mercy
+920003,Ireland,Dublin,Mater Misericordiae University Hospital,ie_dub_matermis
+920004,Ireland,Dublin,Tallaght Hospital,ie_dub_tallag
+920005,Ireland,Limerick,University Hospital Limerick,ie_limer_unihos
+920006,Ireland,Mullingar,Midlands Regional Hospital Mullingar,ie_mulli_midla
+920007,Ireland,Wexford,Wexford General Hospital,ie_wexfo_wexgen
+920008,Ireland,Dublin,St Vincent's University Hospital,ie_dub_stvince
+920009,Ireland,Dublin,Beacon Hospital,ie_dub_beacon
+920010,Ireland,Dublin,St. James's Hospital,ie_dub_stjamhos
+920011,Ireland,Galway,University Hospital Galway,ie_gal_unihos
+940001,Israel,Jerusalem,Hadassah Medical Center,il_jerus_hadas
+940002,Israel,Kfar Saba,Meir Medical Center,il_kfar_meirmed
+940003,Israel,Jerusalem,Shaare Zedek Medical Center,il_jerus_shaare
+950001,Italy,Bari,Azienda Ospedaliero Universitaria Consorziale Policlinico Di Bari,it_bari_azienos
+950002,Italy,Bari,University of Bari 'Aldo Moro',it_bari_aldomor
+950003,Italy,Bergamo,Papa Giovanni XXIII Hospital,it_berga_papag
+950004,Italy,Bologna,Maggiore Hospital,it_bolog_maggi
+950005,Italy,Brescia,"ASST Spedali Civili, Ospedale di Brescia",it_bres_asstciv
+950006,Italy,Catanzaro,Mater Domini University Hospital,it_catan_matdom
+950007,Italy,Cuneo,Santa Croce and Carle Hospital,it_cuneo_sancro
+950008,Italy,Ferrara,Azienda Ospedaliero-Universitaria Di Ferrara,it_ferra_azieos
+950009,Italy,Firenze,Azienda Ospedaliera Universitaria Careggi,it_firen_azicar
+950010,Italy,Gallarate,San Antonio Abate Hospital,it_galla_sanan
+950011,Italy,Gallarate,"Sant'Antonio Abate Hospital, Gallarate",it_galla_santa
+950012,Italy,La Spezia,"S. Andrea Hospital, Poll-Asl 5, La Spezia",it_laspe_sandr
+950013,Italy,Lecco,ASST di Lecco - P.O di Lecco,it_lecco_asstd
+950015,Italy,Milan,Ospedale Luigi Sacco Milano,it_milan_luisac
+950016,Italy,Milan,"San Raffaele Scientific Institute, Milan",it_milan_sanraf
+950017,Italy,Naples,Federico II University of Naples,it_naple_feder
+950018,Italy,Naples,"Istituto Nazionale Tumori Fondazione, Pascale-I.R.C.C.S.",it_naple_istpas
+950019,Italy,Naples,"Universitá della Campania ""Luigi Vanvitelli"", Naples",it_naple_luivan
+950020,Italy,Orbassano,San Luigi Gonzaga Hospital,it_orba_luigonz
+950021,Italy,Osimo,Santi Benvenuto E Rocco Hospital Asur,it_osimo_benroc
+950022,Italy,Padova,Azienda Ospedaliera di Padova,it_padov_azipad
+950023,Italy,Padova,IOV - Istituto Oncologico Veneto,it_padov_iovis
+950024,Italy,Palermo,Policlinico Paolo Giaccone di Palermo,it_paler_paogia
+950026,Italy,Pietra Ligure,"Ospedale Santa Corona, Pietra Ligure (SV)",it_pietl_sancor
+950027,Italy,Pordenone,Azienda Per L'assistenza Sanitaria N. 5 Friuli Occidentale,it_pord_lassani
+950028,Italy,Rho,Ospedale Di Rho - ASST Rhodense,it_rho_asstrho
+950029,Italy,Rome,Fondazione Policlinico Universitario Agostino Gemelli,it_rome_fonagos
+950030,Italy,Rome,"Policlinico Tor Vergata Hospital, Rome",it_rome_torverg
+950031,Italy,Rome,Policlinico Umberto I,it_rome_poliumb
+950032,Italy,Rome,"Sant'Andrea Hospital, Sapienza University of Rome",it_rome_santasa
+950033,Italy,Rossano,Nicola Giannettasio Hospital,it_ross_nicgian
+950034,Italy,San Donato,IRCCS Policlinico San Donato,it_sando_irccs
+950035,Italy,San Donato Milanese,Policlinico San Donato,it_sando_polisa
+950036,Italy,Treviglio,Treviglio Hospital,it_trev_trevhos
+950038,Italy,Vercelli,"Santa Rita Clinic, Vercelli",it_verce_srita
+950039,Italy,Verona,Azienda Ospedaliera Universitaria Integrata di Verona,it_veron_integ
+950040,Italy,Verona,San Bonifacio Hospital,it_veron_sanbon
+950041,Italy,Reggio Emilia,Arcispedale Santa Maria Nuova,it_regem_sanmar
+950042,Italy,Spoleto (PG),San Matteo degli Infermi,it_spol_sanmatt
+950043,Italy,Milan,Humanitas Research Hospital,it_mil_humanres
+950044,Italy,Castellana Grotte (Ba),IRCCS 'Saverio de Bellis',it_cast_savebel
+950045,Italy,Potenza,Azienda Ospedaliera Regionale 'San Carlo',it_pot_sancarlo
+950046,Italy,Chieti,Policlinico Santissima Annunziata,it_chie_polisan
+950047,Italy,Pavia,Policlinico San Matteo,it_pav_sanmatte
+950048,Italy,Seriate,Ospedale Bolognini,it_ser_ospbolog
+950049,Italy,Monza,Ospedale San Gerardo,it_mon_sangera
+950050,Italy,Rome,Fatebenefratelli Isola Tiberina,it_rom_fatetibe
+950051,Italy,Nuoro,San Francesco Hospital,it_nuo_sanfranc
+950052,Italy,Cagliari,Santissima Trinità - ATS Sardegna,it_cag_santrini
+950053,Italy,Milan,Casa di Cura Igea,it_mil_casaigea
+950054,Italy,Pavia,ICS Maugeri,it_pav_icsmauge
+950055,Italy,San Sossio Baronia,San Giovanni Battista Hospital,it_sans_giovan
+950056,Italy,Faenza,Ospedale degli Infermi di Faenza,it_fae_deginfer
+950057,Italy,Rimini,Ospedale Infermi di Rimini,it_rim_inferim
+950058,Italy,Vicenza,San Bortolo Hospital,it_vic_sanborto
+950059,Italy,Esine,ASST Valcamonica Ospedale di Esine,it_esi_valcamon
+950060,Italy,Rome,Ospedale San Filippo Neri,it_rome_sanfiln
+950061,Italy,Aosta,Ospedale Regionale Umberto Parini,it_aos_umbparin
+950062,Italy,Milan,Ospedale Fatebenefratelli e Oftalmico,it_milan_fateb
+950063,Italy,Acquaviva delle Fonti,Ospedale Generale Regionale F. Miulli,it_acq_ospgenmi
+950064,Italy,Ortona,Hospital G.Bernabeo,it_ort_gbernab
+950065,Italy,Cesena,Ospedale M. Bufalini,it_ces_mbufali
+950066,Italy,Bologna,S.Orsola-Malpighi Hospital,it_bolog_orsola
+950067,Italy,Verona,Ospedale Pederzoli,it_veron_pederz
+980001,Jordan,Amman,Jordan University Hospital,jo_amma_jorduni
+980002,Jordan,Ar Ramtha,King Abdullah University Hospital,jo_arra_abdul
+980003,Jordan,Amman,King Hussein Cancer Center,jo_amm_kinghusc
+980004,Jordan,Amman,Al-Basheer Hospital,jo_amm_albashe
+1000001,Kenya,Bomet,Tenwek Hospital,ke_bomet_tenwek
+1000002,Kenya,Nairobi,Kenyatta National Hospital,ke_nairo_kennat
+1000003,Kenya,Mombasa,Coast Provincial General Hospital,ke_momb_coast
+1000004,Kenya,Nyeri,Consolata Hospital,ke_nyeri_consol
+1070001,Latvia,Riga,Riga East CUH Latvia Oncology center,lv_riga_eastcuh
+1110001,Libya,Misurata,Misurata Central Hospital,ly_misu_misucen
+1110002,Libya,Tripoli,Tripoli Medical Center,ly_tri_medcent
+1110003,Libya,Misurata,Misurata Cancer Center,ly_misu_cancer
+1110004,Libya,Sabratha,National cancer institute,ly_sab_natcanin
+1110005,Libya,Tripoli,Alkhadra Hospital,ly_trip_alkhad
+1110006,Libya,Tripoli,Tripoli Central Hospital,ly_trip_centhos
+1110007,Libya,Tripoli,New Bridge Hospital,ly_trip_newbri
+1110008,Libya,Tripoli,Alabraj hospital,ly_tripo_alabra
+1130001,Lithuania,Alytus,S. Kudirka Regional Hospital of Alytus,lt_alytu_skudi
+1130002,Lithuania,Jonava,Jonava Hospital,lt_jona_jonhosp
+1130003,Lithuania,Kaunas,Lithuanian University of Health Sciences Kaunas Clinics,lt_kaun_cics
+1130004,Lithuania,Kaunas,Lithuanian University of Health Sciences Kaunas Clinical Hospital,lt_kaun_ccal
+1130005,Lithuania,Kaunas,Republican Hospital of Kaunas,lt_kaun_repub
+1130007,Lithuania,Klaipeda,Klaipeda Republic Hospital,lt_klai_klarep
+1130008,Lithuania,Klaipeda,Klaipeda Seamen's Hospital,lt_klai_klaisea
+1130009,Lithuania,Panevėžys,Panevezys Republic Hospital,lt_panev_panrep
+1130010,Lithuania,Rokiškis,Rokiskis District Municipality Hospital,lt_rokis_rokdis
+1130012,Lithuania,Tauragė,Taurage Hospital,lt_tau_taurahos
+1130013,Lithuania,Vilnius,Vilnius University Hospital,lt_vil_vilunhos
+1130014,Lithuania,Vilnius,National Cancer Institute,lt_vil_natcanc
+1130015,Lithuania,Siauliai,Republican Siauliai County Hospital,lt_sia_repcount
+1130016,Lithuania,Klaipeda,Klaipeda University Hospital,lt_klai_unihos
+1170001,Madagascar,Antananarivo,Joseph Ravoahangy Andrianavalona Hospital,mg_anta_joserav
+1170002,Madagascar,Mandritsara,Hopitaly Vaovao Mahafaly,mg_mand_vaomaha
+1180001,Malawi,Blantyre,Queen Elizabeth Central Hospital,mw_blant_eliza
+1180002,Malawi,Lilongwe,Kamuzu Central Hospital,mw_lilon_kamuz
+1180003,Malawi,Mzuzu,Mzuzu Central Hospital,mw_mzu_centhos
+1190001,Malaysia,"Batu Pahat, Johor",Hospital Sultanah Nora Ismail,my_batu_sulnora
+1190002,Malaysia,"Kajang, Selangor",Hospital Kajang,my_kajan_kajhos
+1190003,Malaysia,"Keningau, Sabah",Hospital Keningau,my_kenin_kenhos
+1190004,Malaysia,Kuala Lumpur,University Kebangsaan Malaysia Medical Centre,my_kuala_keban
+1190005,Malaysia,Kuala Lumpur,University Malaya Medical Centre,my_kuala_malaya
+1190006,Malaysia,"Kuching, Sarawak",Sarawak General Hospital,my_kuchi_saraw
+1190007,Malaysia,Pulau Pinang,Hospital Pulau Pinang / Penang Medical College,my_pulau_pinpen
+1190008,Malaysia,"Selayang, Selangor",Selayang Hospital,my_selay_selay
+1190009,Malaysia,"Seremban, Negeri Sembilan",Hospital Tuanku Ja'afar,my_serem_tuanku
+1190010,Malaysia,"Sibu, Sarawak",Hospital Sibu,my_sibu_sibuhos
+1190011,Malaysia,Kuantan,Hospital Tengku Ampuan Afzan,my_kua_tengamaf
+1190012,Malaysia,Alor Setar,Hospital Sultanah Bahiyah,my_alors_sultba
+1190013,Malaysia,Sandakan,Duchess of Kent Hospital,my_san_duchkent
+1190014,Malaysia,Kelantan,Hospital Universiti Sains Malaysia,my_kelan_unisai
+1220001,Malta,Msida,Mater Dei Hospital,mt_msida_mater
+1240001,Martinique,Fort-De-France,University Hospital of Martinique,mq_fort_unimart
+1270001,Mexico,Veracruz,Hospital Español Veracruz,mx_vera_espvera
+1270002,Mexico,Veracruz,Hospital de Alta Especialidad de Veracruz,mx_vera_altaesp
+1270003,Mexico,Veracruz,Hospital Regional de Alta Especialidad,mx_vera_regalta
+1270004,Mexico,Veracruz,"Unidad de Medicina de Alta Especialidad   ""Adolfo Ruiz Cortines""",mx_vera_adoruiz
+1270005,Mexico,Mexico City,ABC Medical Center,mx_mex_abcmed
+1270006,Mexico,Mexico City,"Instituto Nacional de Ciencias Médicas y Nutrición ""Salvador Zubirán""",mx_mex_instsalv
+1270007,Mexico,Puebla,Hospital Angeles Puebla,mx_pueb_angeles
+1270008,Mexico,Monterrey,Hospital Universitario Dr José Eleuterio González,mx_mont_unijose
+1270009,Mexico,Guadalajara,"Hospital de Especialidades, CMNO-IMSS",mx_gua_espcmno
+1270010,Mexico,Mexico City,Hospital Angeles Pedregal,mx_mex_angelped
+1270011,Mexico,Toluca,Centro Médico ISSEMyM Toluca,mx_toluca_issem
+1270012,Mexico,Merida,Hospital Regional de Alta Especialidad de la Península de Yucatán,mx_merida_reg
+1270013,Mexico,Guadalajara,Hospital San Javier,mx_guad_sanjav
+1270014,Mexico,Guadalajara,ANKER Oncologia Global Especializada,mx_gua_ankonco
+1270015,Mexico,Guadalajara,Morgan Oncología Soluciones Integrales,mx_guad_morgan
+1330001,Morocco,Rabat,Centre Hospitalier Universitaire Ibn Sina Rabat,ma_rabat_sinrab
+1330003,Morocco,Casablanca,Centre Hospitalier Universitaire Ibnou Rochd,ma_cas_churochd
+1330004,Morocco,Rabat,Institut National d'Oncologie,ma_rabat_onco
+1340001,Mozambique,Maputo,Maputo Central Hospital,mz_mapu_mapucen
+1350001,Myanmar,Yangon,North Okkalapa General Hospital,mm_yangon_gen
+1350002,Myanmar,Insein,Insein General Hospital,mm_ins_genhosp
+1360001,Namibia,Walvis Bay,Welwitschia Hospital,NA_wal_welwits
+1360002,Namibia,Swakopmund,Mediclinic Cottage Hospital,NA_swak_medclin
+1380001,Nepal,Bharatpur,B.P. Koirala Memorial Cancer hospital,np_bha_koirala
+1390001,Netherlands,Rotterdam,IJsselland Hospital,nl_rotte_ijsse
+1390002,Netherlands,Amsterdam,"Amsterdam UMC, University of Amsterdam",nl_ams_umcams
+1390003,Netherlands,Amsterdam,Onze Lieve Vrouwe Gasthuis,nl_ams_onlvgras
+1390004,Netherlands,Amsterdam,Amsterdam UMC VUmc,nl_ams_umcvumc
+1390005,Netherlands,Hilversum,Tergooi Hospital,nl_hil_tergooi
+1390006,Netherlands,Zaandam,Zaans Medisch Centrum,nl_zaa_medicent
+1390007,Netherlands,Almere,Flevoziekenhuis,nl_almere_flevo
+1410001,New Zealand,Whangarei,Whangarei Hospital,nz_whan_whanhos
+1410002,New Zealand,Auckland,North Shore Hospital,nz_auc_norshore
+1410003,New Zealand,Christchurch,Christchurch Hospital,nz_chr_churhos
+1410004,New Zealand,New Plymouth,Taranaki Base Hospital,nz_newpl_tarbas
+1420001,Nicaragua,Leon,Oscar Danilo Rosales Hospital School Arguello,ni_leo_oscardan
+1430001,Niger,Zinder,Zinder National Hospital,ne_zin_nathos
+1430002,Niger,Zinder,Zinder Mother Child Center,ne_zin_motchice
+1430003,Niger,Agadez,Agadez Hospital,ne_agadez_hosp
+1440001,Nigeria,Abeokuta,Federal Medical Centre,ng_abeo_fedmed
+1440002,Nigeria,Abuja,National Hospital,ng_abuja_natio
+1440003,Nigeria,Birnin-Kebbi,Federal Medical Centre,ng_birni_fedmed
+1440004,Nigeria,Gwagwalada,University of Abuja Teaching Hospital,ng_gwa_abuteach
+1440005,Nigeria,Ibadan,University College Hospital,ng_ibada_unicol
+1440006,Nigeria,Idi Araba,Lagos University Teaching Hospital,ng_idi_lagteach
+1440007,Nigeria,Ikeja,Lagos State University Teaching Hospital,ng_ike_lagstatu
+1440008,Nigeria,Ilishan-Remo,Babcock University Teaching Hospital,ng_ilish_babco
+1440009,Nigeria,Ilorin,University of Ilorin Teaching Hospital,ng_ilo_iloteach
+1440010,Nigeria,Iwo,Bowen University Teaching Hospital,ng_iwo_bowen
+1440011,Nigeria,Kaduna,Barau Dikko Teaching Hospital,ng_kadun_barau
+1440012,Nigeria,Kano,Aminu Kano Teaching Hospital,ng_kano_aminu
+1440013,Nigeria,Sagamu,Olabisi Onabanjo University Teaching Hospital,ng_sag_olabiona
+1440014,Nigeria,Sokoto,Usmanu Danfodiyo University Teaching Hospital,ng_sok_usmandan
+1440015,Nigeria,Zaria,Ahmadu Bello University Teaching Hospital,ng_zaria_ahmad
+1440016,Nigeria,Ile-Ife,Obafemi Awolowo University Teaching Hospitals Complex,ng_ile_obawolow
+1440017,Nigeria,Ilesa,Obafemi Awolowo University Teaching Hospitals Complex Wesley Guild Hospital Unit,ng_iles_obawol
+1440018,Nigeria,Bauchi,Abubakar Tafawa Balewa University Teaching Hospital Bauchi,ng_bauchi_teach
+1440019,Nigeria,Owerri,Federal Medical Center,ng_ower_fedmed
+1440020,Nigeria,Enugu,University of Nigeria Teaching Hospital,ng_enugu_teach
+1440021,Nigeria,Calabar,University of Calabar Teaching Hospital,ng_cal_unihos
+1440022,Nigeria,Ado-Ekiti,Ekiti State University Teaching Hospital,ng_ado_teachosp
+1440023,Nigeria,Uyo,University of Uyo Teaching Hospital,ng_uyo_teachosp
+1460001,Norway,Kristiansand,Soerlandet Hospital Kristiansand,no_krist_soerl
+1460002,Norway,Oslo,Akershus University Hospital,no_oslo_akersh
+1460003,Norway,Oslo,Oslo University Hospital,no_oslo_osloun
+1460004,Norway,Skien,Sykehuset Telemark HF,no_skien_sykeh
+1460005,Norway,Stavanger,Stavanger University Hospital,no_stava_stavun
+1460006,Norway,Tromso,University Hospital Of North Norway,no_troms_uninor
+1460007,Norway,Trondheim,St Olavs University Hospital,no_trond_stolav
+1470001,Oman,Sohar,Sohar Hospital,om_soh_sohahos
+1480001,Pakistan,Bahawalpur,Bahawal Victoria Hospital,pk_baha_bahavic
+1480002,Pakistan,Faisalabad,"Allied Hospital, Faisalabad",pk_faisa_allie
+1480003,Pakistan,Jamshoro,Dow University Hospital,pk_jamsh_dowun
+1480004,Pakistan,Karachi,Aga Khan University,pk_kara_agakh
+1480005,Pakistan,Karachi,"Karachi Medical and Dental College, Abbasi Shaheed Hospital",pk_kara_abbasha
+1480006,Pakistan,Karachi,The Indus Hospital,pk_kara_thein
+1480007,Pakistan,Lahore,CMH Lahore Medical And Dental College,pk_laho_cmhlah
+1480008,Pakistan,Lahore,Fatima Memorial Hospital,pk_laho_fatimem
+1480009,Pakistan,Lahore,"King Edward Medical University, Mayo Hospital, Lahore",pk_laho_kingedm
+1480010,Pakistan,Multan,Nishtar Medical College And Hospital,pk_multa_nisht
+1480011,Pakistan,Lahore,"Lahore General Hospital, PGMI, AMC",pk_lah_genpgmi
+1480012,Pakistan,Lahore,Ganga Ram Hospital,pk_lah_gangram
+1480013,Pakistan,Lahore,Jinnah Hospital,pk_lah_jinnah
+1480014,Pakistan,Lahore,Services Hospital Lahore,pk_lah_servihos
+1480015,Pakistan,Islamabad,Shifa international hospital,pk_isla_shifint
+1480016,Pakistan,Karachi,Jinnah post graduate medical center,pk_kar_jinnpost
+1480017,Pakistan,Jamshoro,Liaquat University of Medical & Health Sciences,pk_jam_liaquni
+1480018,Pakistan,Karachi,Patel Hospital,pk_kar_patelhos
+1480019,Pakistan,Karachi,Sindh Institute of Urology and Transplantation,pk_kar_sinuro
+1480020,Pakistan,Islamabad,The Pakistan Institute of Medical Sciences,pk_isla_instmed
+1480021,Pakistan,Lahore,Shaukat Khanam Memorial Cancer Hospital and Research Centre,pk_lah_shakhame
+1500001,Palestine,"Bethlehem, West Bank",Beit Jala Governmental Hospital (Al Hussein),ps_beth_beitjal
+1500002,Palestine,Gaza,Al-Shifa Hospital,ps_gaza_alshi
+1500003,Palestine,Gaza,Beit Hanoun Hospital,ps_gaza_beithan
+1500004,Palestine,Gaza,European Gaza Hospital,ps_gaza_eurogaz
+1500005,Palestine,Gaza,Indonesian Hospital,ps_gaza_indon
+1500006,Palestine,Gaza,Nasser Hospital,ps_gaza_nasser
+1500007,Palestine,"Hebron, West Bank",Al-Mezan Speciality Hospital,ps_hebro_almez
+1500008,Palestine,"Hebron, West Bank",Governmental Hebron Hospital-Alia,ps_hebro_govheb
+1500009,Palestine,"Jerusalem, West Bank",Al Makassed Islamic Charitable Society Hospital Jerusalem,ps_jerus_almak
+1500010,Palestine,"Ramallah, West Bank",Palestine Medical Complex,ps_rama_palemed
+1500011,Palestine,"Tulkarm, West Bank",Martyr Thabet Thabet Govermental Hospital,ps_tulka_martha
+1500012,Palestine,"Jerusalem, West Bank",Augusta Victoria Hospital,ps_jerus_augvic
+1500013,Palestine,"Hebron, West Bank",Al-Ahli Hospital,ps_hebro_ahli
+1500015,Palestine,"Nablus, West Bank",Rafidia Hospital,ps_nablus_rafid
+1500016,Palestine,"Bethlehem, West Bank",Bethlehem Arab Society for Rehabilitation (BASR),ps_bethl_rehab
+1500017,Palestine,Nablus,An-Najah National University Hospital,ps_nab_annajnat
+1500019,Palestine,"Jenin, West Bank",The Martyr Dr. Khalil Sulaiman Hospital (Jenin Governmental Hospital),ps_jen_martyr
+1530001,Paraguay,Asuncion,"Hospital de Clínicas, II Cátedra de Clínica Quirúrgica, Universidad Nacional de Asunción",py_asun_catequi
+1530002,Paraguay,San Lorenzo,Hospital De Clínicas,py_sanlor_clin
+1540001,Peru,Arequipa,Carlos Alberto Seguin Escobedo National Hospital,pe_arequ_carlar
+1540002,Peru,Arequipa,Goyeneche Hospital,pe_arequ_goyen
+1540003,Peru,Arequipa,Honorio Delgado Espinoza Regional Hospital,pe_arequ_hondel
+1540004,Peru,Ayacucho,Ayacucho Regional Hospital,pe_ayacu_reg
+1540005,Peru,Lima,Arzopispo Loayza National Hospital,pe_lim_arzoloa
+1540006,Peru,Lima,Cayetano Heredia National Hospital,pe_lim_cayethe
+1540007,Peru,Lima,Clinic of Medical Specialties,pe_lim_clinspec
+1540008,Peru,Lima,Edgardo Rebagliati Martins National Hospital,pe_lim_edgareb
+1540009,Peru,Lima,Guillermo Almenara National Hospital,pe_lim_guilalm
+1540010,Peru,Lima,Maria Auxiliadora Hospital,pe_lim_mariaux
+1540011,Peru,Lima,Pediatric Emergency Hospital,pe_lim_pediaem
+1540012,Peru,Lima,Police Hospital,pe_lim_policho
+1540013,Peru,Moyobamba,II Minsa Moyobamba Hospital,pe_moyo_iiminmo
+1540014,Peru,Piura,Jose Cayetano Heredia III Regional Hospital,pe_piur_josecay
+1540015,Peru,Chiclayo,Hospital Nacional Almanzor Aguinaga Asenjo,pe_chic_nacalma
+1540016,Peru,Ica,Hospital IV Augusto Hernández Mendoza,pe_ica_aughern
+1550001,Philippines,Manila,"Philippine General Hospital, University Of The Philippines Manila",ph_mani_philgen
+1550002,Philippines,Pasig,The Medical City,ph_pasig_theme
+1550003,Philippines,Pasig,Rizal Medical Center,ph_pas_rizamed
+1550004,Philippines,Quezon city,Quirino Memorial Medical Center,ph_que_quimem
+1550005,Philippines,Manila,José R. Reyes Memorial Medical Center,ph_manil_reyes
+1560001,Poland,Krakow,Jagiellonian University Medical College,pl_krako_jagie
+1560002,Poland,Warsaw,Military Institute Of Medicine,pl_warsa_milins
+1560003,Poland,Wejherowo,Ceynowa Hospital,pl_wej_ceynhos
+1560004,Poland,Krakow,Gabriel Narutowicz Specialist Municipal Hospital,pl_kra_gabnaru
+1570001,Portugal,Porto,Centro Hospitalar Sao Joao,pt_port_censajo
+1570002,Portugal,Covilha,Centro Hospitalar Cova da Beira,pt_cov_cencova
+1570003,Portugal,Guimaraes,Hospital da Senhora da Oliveira,pt_guim_senholi
+1570004,Portugal,Portimao,Centro Hospitalar Universitario do Algarve,pt_port_cenalga
+1570005,Portugal,Angra do Heroismo,Hospital de Santo Espirito da ilha Terceira,pt_ang_santesp
+1570006,Portugal,Viseu,Centro Hospitalar Tondela-Viseu,pt_vis_centonde
+1570007,Portugal,Evora,Hospital do Espirito Santo,pt_evo_espsanto
+1570008,Portugal,Beja,Unidade Local de Saude do Baixo Alentejo,pt_bej_saubai
+1570009,Portugal,Vila Nova de Famalicao,Centro Hospitalar do Medio Ave,pt_vila_cenhosp
+1570010,Portugal,Figueira da Foz,Hospital Distrital da Figueira da Foz,pt_fig_distfig
+1570011,Portugal,Horta,"Hospital da Horta, E.P.E.",pt_hort_hortepe
+1570012,Portugal,Matosinhos,Unidade Local de Saude de Matosinhos - Hospital Pedro Hispano,pt_mato_sauped
+1570013,Portugal,Santarem,Hospital de Santarem,pt_sant_hosdesa
+1570014,Portugal,Viana do Castelo,Hospital de Santa Luzia,pt_via_santluz
+1570015,Portugal,Setúbal,Centro Hospitalar de Setúbal,pt_setub_centro
+1570016,Portugal,Castelo Branco,Unidade Local de Saúde de Castelo Branco,pt_casbran_unid
+1570017,Portugal,Portalegre,Hospital Doutor José Maria Grande,pt_portal_maria
+1570018,Portugal,Amadora,"Hospital Prof. Doutor Fernando Fonseca, E.P.E.",pt_ama_doufern
+1570019,Portugal,Vila Franca de Xira,Hospital Vila Franca de Xira,pt_vil_hosvilfr
+1570020,Portugal,Vila Nova de Gaia,Centro Hospitalar Vila Nova de Gaia/Espinho,pt_novgai_centr
+1570021,Portugal,Elvas,Hospital Santa Luzia Elvas,pt_elvas_luzia
+1570022,Portugal,Lisbon,Hospital de Egas Moniz,pt_lis_deegasmo
+1570023,Portugal,Lisbon,Hospital Sao Francisco Xavier,pt_lis_saofranx
+1570024,Portugal,Lisbon,Hospital Santa Cruz,pt_lis_santcruz
+1570025,Portugal,Porto,IPO Porto,pt_porto_ipo
+1570026,Portugal,Barreiro,"Centro Hospitalar Barreiro Montijo, EPE",pt_bar_centhos
+1570027,Portugal,Santa Maria da Feira,Centro Hospitalar Entre o Douro e Vouga,pt_feira_entre
+1570028,Portugal,Aveiro,Centro Hospitalar do Baixo Vouga,pt_aveiro_baixo
+1570029,Portugal,Lisbon,Centro Hospitalar Lisboa Norte,pt_lisbon_norte
+1570030,Portugal,Santiago do Cacém,Hospital do Litoral Alentejano,pt_santca_lito
+1570031,Portugal,Coimbra,Hospital Geral - Centro Hospitalar de Coimbra,pt_coimbr_geral
+1600001,Reunion,Saint Denis,CHU Reunion,re_saint_chureu
+1610001,Romania,Brasov,Emergency Clinical Hospital Brasov,ro_bras_emergcl
+1610002,Romania,Brasov,Spitalul Clinic De Copii Brasov,ro_bras_clicopi
+1610003,Romania,Bucharest,Emergency Clinical Hospital Bucharest,ro_buch_emergcl
+1610004,Romania,Craiova,Spitalul Judetean De Urgenta Din Craiova,ro_crai_judurge
+1620001,Russian Federation,Kaliningrad,Kaliningrad Regional Hospital,ru_kalin_reg
+1620002,Russian Federation,Moscow,State Scientific Centre of Coloproctology,ru_moscow_colop
+1620003,Russian Federation,Moscow,N.N.Blokhin Russian Cancer Research Center,ru_mosc_blokhi
+1630001,Rwanda,Kibungo,Kibungo Hospital,rw_kibu_kibuhos
+1630002,Rwanda,Kigali,University Teaching Hospital of Kigali,rw_kiga_uniteac
+1630003,Rwanda,Kigali,King Faisal Hospital,rw_kig_kingfai
+1630004,Rwanda,Kigali,Rwanda Military Hospital,rw_kig_military
+1640001,Saint Kitts and Nevis,Basseterre,Joseph N France General Hospital,kn_basse_josefr
+1660001,San Marino,San Marino,San Marino State Hospital,sm_sanma_samast
+1680001,Saudi Arabia,Al-Ahsa,King Abdulaziz National Guard Hospital,sa_ala_kingagua
+1680002,Saudi Arabia,Dammam,Imam Abdulrahman Al Faisal Hospital,sa_damm_imabfai
+1680003,Saudi Arabia,Hafr Al-Batin,King Khalid General Hospital,sa_hafra_kingkh
+1680004,Saudi Arabia,Jeddah,King Abdulaziz Hospital and Oncology Center,sa_jed_kingabon
+1680005,Saudi Arabia,Jeddah,King Abdulaziz University Hospital,sa_jed_kingabun
+1680006,Saudi Arabia,Jeddah,King Fahad Armed Forces Hospital,sa_jed_kingfarm
+1680007,Saudi Arabia,Jeddah,King Fahad General Hospital,sa_jed_kingfage
+1680008,Saudi Arabia,Jeddah,King Khalid National Guard Hospital,sa_jed_kingkhgu
+1680009,Saudi Arabia,Qassim,Buraidah Central Hospital,sa_qassi_burace
+1680010,Saudi Arabia,Riyadh,King Fahad Medical City,sa_riya_kingfam
+1680011,Saudi Arabia,Riyadh,King Khalid University Hospital,sa_riya_kingkhu
+1680012,Saudi Arabia,Riyadh,Security Forces Hospital,sa_riya_secufor
+1680013,Saudi Arabia,Yanbu,Royal Commission Medical Centre,sa_yanb_roycom
+1680014,Saudi Arabia,Makkah,Security Armed Forces Hospital,sa_mak_secarmed
+1680015,Saudi Arabia,Jeddah,International Medical Center,sa_jed_intmedic
+1690001,Senegal,Dakar,Hopital Aristide Le Dantec,sn_dak_arisdant
+1700001,Serbia,Nis,"Clinic For General Surgery, Clinical Center Nis",rs_nis_clingens
+1700002,Serbia,Belgrade,Zvezdara University Medical Center,rs_bel_zvezdmed
+1730001,Singapore,Singapore,National University Hospital,sg_sing_natioun
+1760001,Slovenia,Ljubljana,University Medical Centre,si_lju_unimed
+1780001,Somalia,Galkayo,Galkayo Medical Center (GMC) University Teaching Hospital,so_gal_medcent
+1790001,South Africa,Cape Town,Groote Schuur Hospital,za_capet_groots
+1790002,South Africa,Cape Town,Mitchell's Plain District Hospital,za_capet_mitchp
+1790003,South Africa,Cape Town,New Somerset Hospital,za_capet_newsom
+1790004,South Africa,Cape Town,Victoria Hospital Wynberg,za_capet_vicwyn
+1790005,South Africa,Durban,Inkosi Albert Luthuli Central Hospital,za_durb_inkoalb
+1790006,South Africa,Durban,Stanger Hospital,za_durb_stang
+1790007,South Africa,East London,Frere Hospital,za_eastl_frere
+1790008,South Africa,Empangeni,Ngwelezana Hospital,za_empan_ngwele
+1790009,South Africa,Johannesburg,Charlotte Maxeke Johannesburg Academic Hospital,za_johan_chamax
+1790010,South Africa,Johannesburg,Chris Hani Baragwanath Academic Hospital,za_johan_chriha
+1790011,South Africa,Johannesburg,Helen Joseph Hospital,za_johan_helejo
+1790012,South Africa,Johannesburg,Leratong Hospital,za_johan_lerato
+1790013,South Africa,Johannesburg,Milpark Hospital,za_johan_milpah
+1790014,South Africa,Nelspruit,Rob Ferreira Hospital,za_nelsp_robfer
+1790015,South Africa,Pietermaritzburg,Edendale Hospital,za_piete_edend
+1790016,South Africa,Potchefstroom,Mediclinic Potchefstroom,za_potch_medicp
+1790017,South Africa,Pretoria,Dr George Mukhari Academic Hospital,za_preto_geomuk
+1790018,South Africa,Tembisa,Tembisa Provincial Tertiary Hospital,za_temb_provter
+1790019,South Africa,Pietermaritzburg,Greys hospital,za_piet_greyhos
+1790020,South Africa,Kimberley,Kimberley Provincial Hospital,za_kim_provhos
+1790021,South Africa,Pretoria,Kalafong Academic Hospital,za_pret_kalacad
+1790022,South Africa,Pretoria,Steve Biko Academic Hospital,za_pret_stebika
+1810001,Spain,Avilés,San Agustín University Hospital,es_avile_sanag
+1810002,Spain,Barcelona,Vall d'Hebron University Hospital,es_barc_valheb
+1810003,Spain,Getafe,Getafe University Hospital,es_geta_getafun
+1810004,Spain,Leganés,Severo Ochoa University Hospital,es_legan_sevoch
+1810005,Spain,Madrid,Hospital Central De La Defensa Gomez Ulla,es_madri_defgom
+1810006,Spain,Móstoles,Rey Juan Carlos University Hospital,es_mosto_reyju
+1810007,Spain,Murcia,Morales Meseguer University Hospital,es_murci_morame
+1810008,Spain,Oviedo,Central University Hospital Of Asturias,es_ovie_cenuast
+1810009,Spain,Palma de Mallorca,Son Espases University Hospital,es_palm_sonesun
+1810010,Spain,San Sebastian de Los Reyes,Infanta Sofía University Hospital,es_sanse_infaso
+1810011,Spain,Madrid,Infanta Leonor University Hospital,es_mad_infanleo
+1810012,Spain,Las Palmas de Gran Canaria,Complejo Hospitalario Universitario Insular-Materno Infantil,es_laspa_comins
+1810013,Spain,Vigo,Álvaro Cunqueiro Hospital,es_vig_alvacun
+1810014,Spain,Talavera de la Reina,Hospital Nuestra Señora Del Prado,es_talde_neusen
+1810015,Spain,Valencia,Hospital Universitario y Politécnico La Fe,es_val_unilafe
+1810016,Spain,Elche,Hospital General Universitario de Elche,es_elc_genuniv
+1810017,Spain,Mahon,Hospital Mateu Orfila,es_mah_mateorf
+1810018,Spain,Santander,Marqués de Valdecilla University Hospital,es_sant_marq
+1810019,Spain,Madrid,12 de Octubre University Hospital,es_mad_12octub
+1810020,Spain,Palencia,Complejo Asistencial Universitario de Palencia,es_pal_comassun
+1810021,Spain,Valladolid,Hospital Clínico Universitario de Valladolid,es_vall_clinuni
+1810022,Spain,Madrid,Hospital Universitario del Sureste,es_mad_unisures
+1810023,Spain,Girona,Hospital Universitari de Girona Dr. Josep Trueta,es_gir_josetrue
+1810024,Spain,Bormujos,Hospital San Juan de Dios Bormujos,es_bor_sanjuan
+1810025,Spain,Barcelona,Hospital del Mar,es_bar_hosdelma
+1810026,Spain,Valencia,Hospital Universitario Doctor Peset,es_val_unidocpe
+1810027,Spain,Sevilla,Hospital Universitario Virgen del Rocio,es_sev_univiroc
+1810028,Spain,Huesca,Hospital General San Jorge,es_hue_gensanjo
+1810029,Spain,Tarragona,Hospital Universitari de Tarragona Joan XXIII,es_tarr_unijoan
+1810030,Spain,Madrid,Hospital Universitario la Paz,es_mad_unilapaz
+1820001,Sri Lanka,Anuradhapura,Teaching Hospital Anuradhapura,lk_anur_teachos
+1820002,Sri Lanka,Colombo,National Hospital of Sri Lanka,lk_colo_natioho
+1820003,Sri Lanka,Kandy,Teaching Hospital Kandy,lk_kand_teachos
+1820004,Sri Lanka,Ragama,North Colombo Teaching Hospital,lk_rag_colomb
+1860001,Sudan,Khartoum,Ibrahim Malik Teaching Hospital,sd_khar_ibramal
+1860002,Sudan,Khartoum,Jarash International Specialized Hospital,sd_khar_jarains
+1860003,Sudan,Khartoum,Khartoum Teaching Hospital,sd_khar_teach
+1860004,Sudan,Khartoum,Omdurman Teaching Hospital,sd_khar_omdutea
+1860005,Sudan,Wad Madani,University of Gezira Hospital,sd_wadma_unigez
+1860006,Sudan,Khartoum,Soba University Hospital,sd_khar_soba
+1890001,Sweden,Helsingborg,Helsingborgs Lasarett,se_helsi_helasa
+1890002,Sweden,Hudiksvall,Hudiksvall Hospital,se_hudi_hudihos
+1890003,Sweden,Mora,Mora Hospital,se_mora_morah
+1890004,Sweden,Norrköping,Vrinnevi Hospital,se_norrk_vrinn
+1890005,Sweden,Skovde,Skaraborg Hospital Skovde,se_skovd_skara
+1890006,Sweden,Stockholm,Capio St Goran Hospital,se_stock_capio
+1890007,Sweden,Stockholm,Danderyds Hospital,se_stock_dande
+1890008,Sweden,Stockholm,Ersta Hospital,se_stock_erstah
+1890009,Sweden,Stockholm,Karolinska University Hospital,se_stock_karolu
+1890010,Sweden,Sundsvall,Sundsvall Hospital,se_sunds_sundsv
+1890011,Sweden,Skelleftea,Umea University Hospital,se_skel_unihosp
+1890012,Sweden,Vasteras,Västmanlands Hospital Västerås,se_vaste_vastma
+1890013,Sweden,Vaxjo,Vaxjo Central Hospital,se_vaxjo_vaxcen
+1890014,Sweden,Visby,Visby Hospital,se_visby_vishos
+1890015,Sweden,Stockholm,South General Hospital,se_stock_sougen
+1890016,Sweden,Umea,Umea University Hospital,se_umea_unihosp
+1900001,Switzerland,Baden,Kantonsspital Baden,ch_baden_kanton
+1900002,Switzerland,Davos,Davos Hospital,ch_davos_davhos
+1900003,Switzerland,Muri,Kreisspital Fuer Das Freiamt Muri Ag,ch_muri_kreifue
+1900004,Switzerland,Olten,Kantonsspital Olten,ch_olten_kanton
+1900005,Switzerland,Solothurn,Bürgerspital Solothurn,ch_solot_burger
+1900006,Switzerland,Wetzikon,Gzo Spital Wetzikon,ch_wetzi_gzowet
+1900007,Switzerland,Winterthur,Kantonsspital Winterthur,ch_winte_kanton
+1900008,Switzerland,Lausanne,Lausanne University Hospital CHUV,ch_lau_launihos
+1900009,Switzerland,"Ticino (Lugano, Bellinzona, Locarno, Mendrisio)",Ente Ospedaliero Cantonale,ch_ticino_ente
+1900010,Switzerland,Chur,Kantonsspital Graubunden,ch_chu_kantgrau
+1910001,Syrian Arab Republic,Damascus,Al-Bairouni University Hospital,sy_dam_albaiuni
+1910002,Syrian Arab Republic,Damascus,Al-Mouwasat University Hospital,sy_dam_almouni
+1910003,Syrian Arab Republic,Damascus,Al-Assad University Hospital,sy_dam_alassuni
+1910004,Syrian Arab Republic,Latakia,Tishreen University Hospital,sy_lat_tishunih
+1910005,Syrian Arab Republic,Aleppo,Aleppo University Hospital,sy_alep_unihosp
+1910006,Syrian Arab Republic,Damascus,Damascus Hospital,sy_dama_damhosp
+1940001,Tanzania,Mbeya,Mbalizi Christian Designated Hospital,tz_mbey_mbachri
+1940002,Tanzania,Dar es Salaam,Muhimbili National Hospital,tz_dar_muhimb
+1940003,Tanzania,Dar es Salaam,The Aga Khan Hospital,tz_dare_agakhan
+2000001,Tunisia,Tunis,Institut Salah Azaiez,tn_tun_instsala
+2010001,Turkey,Istanbul,Acibadem Atakent Hospital,tr_ista_aciatak
+2010002,Turkey,Istanbul,Bagcilar Research And Training Hospital,tr_ista_bagcil
+2010003,Turkey,Istanbul,Bakirkoy Dr. Sadi Konuk Training And Research Hospital,tr_ista_bakikon
+2010004,Turkey,Istanbul,Okmeydanı Training And Research Hospital,tr_ista_okmey
+2010005,Turkey,Ordu,Ordu University Training and Research Hospital,tr_ordu_orduu
+2010006,Turkey,Samsun,Ondokuz Mayis University Hospital,tr_samsu_ondok
+2010007,Turkey,Sanliurfa,Harran University Research and Treatment Hospital,tr_sanli_harrun
+2010008,Turkey,Trabzon,Karadeniz Technical University Farabi Hospital,tr_trabz_karad
+2010009,Turkey,Erzincan,Erzincan University Hospital,tr_erzincan_uni
+2010010,Turkey,Samsun,Samsun Training and Research Hospital,tr_sam_trainres
+2010011,Turkey,Adana,Cukurova University Faculty of Medicine,tr_ada_cukufac
+2010012,Turkey,Istanbul,Cerrahpasa Medical Faculty Istanbul University,tr_ista_cerrah
+2010013,Turkey,Kocaeli,Kocaeli University Teaching Hospital,tr_koc_uniteach
+2010014,Turkey,Ankara,Gazi University Medical Faculty Hospital,tr_ank_gazunim
+2010016,Turkey,Bursa,Medicana Bursa Hospital,tr_bursa_med
+2010017,Turkey,Istanbul,Kanuni Sultan Suleyman Training and Research Hospital,tr_istan_kanuni
+2010018,Turkey,Istanbul,Istanbul Education and Research Hospital,tr_ist_eduresho
+2010019,Turkey,Istanbul,Acibadem Maslak Hospital,tr_ista_acibmas
+2010020,Turkey,Ankara,Memorial Ankara Hospital,tr_ank_memorial
+2050001,Uganda,Matany,St. Kizito Hospital,ug_mat_kizito
+2050002,Uganda,Mbale,Mbale Regional Referral Centre,ug_mba_regrefce
+2050003,Uganda,Ishaka,Kampala International University Teaching Hospital,ug_isha_kamunih
+2050004,Uganda,Kampala,Mengo Hospital,ug_kamp_mengo
+2050005,Uganda,Fort Portal,Fort Portal Regional Referral Hospital,ug_fortpo_regio
+2060001,Ukraine,Vinnitsa,Vinnitsa Regional Pirogov Clinical Hospital,ua_vin_regiopir
+2060002,Ukraine,Dnipro,Dnepropetrovsk Regional Clinical Oncology Center,ua_dnip_regonco
+2060003,Ukraine,Kiev,Kyiv Regional Clinical Hospital,ua_kie_regclin
+2070001,United Arab Emirates,Abu Dhabi,Burjeel hospital,ae_abudha_burje
+2070002,United Arab Emirates,Dubai,Rashid Hospital,ae_dub_rashid
+2080001,United Kingdom,Aberdeen,Aberdeen Royal Infirmary,gb_aber_royinf
+2080002,United Kingdom,Abergavenny,Nevill Hall Hospital,gb_aberg_neviha
+2080003,United Kingdom,Aylesbury,"Stoke Mandeville, Wycombe General",gb_ayle_stokman
+2080004,United Kingdom,Ayr,University Hospital Ayr,gb_ayr_univhos
+2080005,United Kingdom,Barnet,Barnet General Hospital,gb_barn_barngen
+2080006,United Kingdom,Barnstable,North Devon District Hospital,gb_barns_nortde
+2080007,United Kingdom,Basildon,Basildon University Hospital,gb_basil_basiun
+2080008,United Kingdom,Bath,Royal United Hospital Bath,gb_bath_royauni
+2080009,United Kingdom,Birmingham,Heartlands Hospital,gb_birmi_hearth
+2080010,United Kingdom,Birmingham,Queen Elizabeth Hospital Birmingham,gb_birmi_qeliza
+2080011,United Kingdom,Birmingham,Sandwell General Hospital,gb_birmi_sangen
+2080012,United Kingdom,Blackpool,Blackpool Victoria Hospital,gb_black_blavic
+2080013,United Kingdom,Boston,Pilgrim Hospital,gb_bost_pilghos
+2080014,United Kingdom,Bridgend,"Princess of Wales Hospital, Bridgend",gb_brid_princwa
+2080015,United Kingdom,Bristol,Bristol Royal Infirmary,gb_brist_royinf
+2080016,United Kingdom,Bristol,Southmead Hospital,gb_brist_southm
+2080017,United Kingdom,Calow,Chesterfield Royal Hospital,gb_calo_chesroy
+2080018,United Kingdom,Camberley,Frimley Park Hospital,gb_cambe_frimpa
+2080019,United Kingdom,Cambridge,Addenbrooke's Hospital,gb_cambr_adden
+2080020,United Kingdom,Cardiff,University Hospital of Wales,gb_card_uniwale
+2080021,United Kingdom,Carmarthen,Glangwili General Hospital,gb_carma_glangw
+2080022,United Kingdom,Cheltenham,Cheltenham General Hospital,gb_chel_chelgen
+2080023,United Kingdom,Chester,Countess of Chester Hospital,gb_chest_count
+2080024,United Kingdom,Chichester,St Richard's Hospital,gb_chich_strich
+2080025,United Kingdom,Colchester,Colchester Hospital University,gb_colch_coluni
+2080026,United Kingdom,Coleraine,Causeway Hospital,gb_coler_cause
+2080027,United Kingdom,Coventry,University Hospital Coventry,gb_coven_unihos
+2080028,United Kingdom,Crewe,Leighton Hospital,gb_crewe_leigh
+2080029,United Kingdom,Darlington,Darlington Memorial Hospital,gb_darl_darlmem
+2080030,United Kingdom,Derby,Royal Derby Hospital,gb_derby_royal
+2080031,United Kingdom,Doncaster,Doncaster Royal Infirmary,gb_donca_royinf
+2080032,United Kingdom,Dorchester,Dorset County Hospital,gb_dorc_dorseco
+2080033,United Kingdom,Dumfries,Dumfries and Galloway Royal Infirmary,gb_dumfr_royinf
+2080034,United Kingdom,Dundee,Ninewells Hospital,gb_dunde_ninew
+2080035,United Kingdom,Dundonald,Ulster Hospital Dundonald,gb_dundo_ulste
+2080036,United Kingdom,East Kilbride,Hairmyres Hospital,gb_eastk_hairm
+2080037,United Kingdom,Edinburgh,Royal Hospital for Sick Children,gb_edin_roysick
+2080038,United Kingdom,Edinburgh,Royal Infirmary of Edinburgh,gb_edin_royinf
+2080039,United Kingdom,Edinburgh,Western General Hospital,gb_edin_westgen
+2080040,United Kingdom,Elgin,Dr Gray's Hospital Elgin,gb_elgin_drgray
+2080041,United Kingdom,Exeter,Royal Devon and Exeter Hospital,gb_exe_roydevex
+2080042,United Kingdom,Farnworth,Royal Bolton Hospital,gb_farnw_roybol
+2080043,United Kingdom,Glasgow,Queen Elizabeth University Hospital,gb_glasg_qeliza
+2080044,United Kingdom,Gloucester,Gloucestershire Royal Hospital,gb_glouc_royhos
+2080045,United Kingdom,Greenock,Inverclyde Royal Hospital,gb_gree_inveroy
+2080046,United Kingdom,Grimsby,Diana Princess of Wales Hospital Grimsby,gb_grim_dianpri
+2080047,United Kingdom,Hammersmith,Charing Cross Hospital,gb_hamm_charicr
+2080048,United Kingdom,Hampstead,Royal Free Hospital,gb_hamps_royal
+2080049,United Kingdom,Harlow,Princess Alexandra Hospital,gb_har_prinalex
+2080050,United Kingdom,Harrow,Northwick Park Hospital,gb_harro_northp
+2080051,United Kingdom,Hereford,Hereford County Hospital,gb_heref_hercnt
+2080052,United Kingdom,Huntingdon,Hinchingbrooke Hospital,gb_hunt_hinchbr
+2080053,United Kingdom,Ilford,King George Hospital,gb_ilfor_kingg
+2080054,United Kingdom,Inverness,Raigmore Hospital Inverness,gb_inver_raigm
+2080055,United Kingdom,Ipswich,Ipswich Hospital,gb_ipswi_ipswih
+2080056,United Kingdom,Isleworth,West Middlesex University Hospital,gb_islew_westmu
+2080057,United Kingdom,Kettering,Kettering General Hospital,gb_kett_kettgen
+2080058,United Kingdom,King's Lynn,Queen Elizabeth Hospital King's Lynn,gb_kingl_qeliza
+2080059,United Kingdom,Kirkcaldy,Victoria Hospital Kirkcaldy,gb_kirkc_victo
+2080060,United Kingdom,Larbert,Forth Valley Royal Hospital,gb_larb_forthva
+2080061,United Kingdom,Leeds,Leeds General Infirmary,gb_leeds_geninf
+2080062,United Kingdom,Leeds,St James's University Hospital Leeds,gb_leeds_stjamu
+2080063,United Kingdom,Leicester,Leicester Royal Infirmary,gb_leice_royinf
+2080064,United Kingdom,Lerwick,Gilbert Bain Hospital,gb_lerw_gilbeba
+2080065,United Kingdom,Llantrisant,Royal Glamorgan Hospital,gb_llan_royglam
+2080066,United Kingdom,London,Chelsea and Westminster Hospital,gb_lond_chelwes
+2080067,United Kingdom,London,Evelina London Children's Hospital,gb_lond_evechil
+2080068,United Kingdom,London,Great Ormond Street Hospital for Children,gb_lond_gretorm
+2080069,United Kingdom,London,Guy's Hospital,gb_lond_guyshos
+2080070,United Kingdom,London,King's College Hospital,gb_lond_kingcol
+2080071,United Kingdom,London,North Middlesex University Hospital,gb_lond_nortmid
+2080072,United Kingdom,London,"Queen Elizabeth Hospital, Woolwich",gb_lond_elizawo
+2080073,United Kingdom,London,Royal London Hospital,gb_lond_royhos
+2080074,United Kingdom,London,St George's Hospital,gb_lond_stgeo
+2080075,United Kingdom,London,St Mary's Hospital,gb_lond_stmary
+2080076,United Kingdom,London,St Thomas' Hospital,gb_lond_stthom
+2080077,United Kingdom,London,Whipps Cross University Hospital,gb_lond_whipcrs
+2080078,United Kingdom,Londonderry,Altnagelvin Area Hospital,gb_lond_altnag
+2080079,United Kingdom,Luton,Luton and Dunstable Hospital,gb_luton_lutdun
+2080080,United Kingdom,Macclesfield,Macclesfield District General Hospital,gb_maccl_macdis
+2080081,United Kingdom,Maidstone,Tunbridge Wells Hospital,gb_maid_tunbrwe
+2080082,United Kingdom,Manchester,The University Hospital of South Manchester,gb_manch_unisou
+2080083,United Kingdom,Margate,Queen Elizabeth the Queen Mother Hospital Margate,gb_marg_elizama
+2080084,United Kingdom,Melrose,Borders General Hospital,gb_melr_bordgen
+2080085,United Kingdom,Middlesbrough,James Cook University Hospital,gb_midd_jamesco
+2080086,United Kingdom,Newport,Royal Gwent Hospital,gb_newpo_roygwe
+2080087,United Kingdom,Newry,Daisy Hill Hospital,gb_newr_daishil
+2080088,United Kingdom,Northampton,Northampton General Hospital,gb_nort_nortgen
+2080089,United Kingdom,Norwich,Norfolk and Norwich University Hospital,gb_norw_norfnor
+2080090,United Kingdom,Nottingham,Nottingham Children's Hospital,gb_nott_nottchi
+2080091,United Kingdom,Nottingham,Nottingham City Hospital,gb_nott_nottcit
+2080092,United Kingdom,Nuneaton,George Eliot Hospital,gb_nune_georgel
+2080093,United Kingdom,Oxford,John Radcliffe Hospital,gb_oxfor_johnra
+2080094,United Kingdom,Paisley,Royal Alexandra Hospital,gb_pais_royalex
+2080095,United Kingdom,Perth,Perth Royal Infirmary,gb_perth_royinf
+2080096,United Kingdom,Plymouth,Derriford Hospital,gb_plymo_derrif
+2080098,United Kingdom,Portadown,Craigavon Area Hospital,gb_port_craigar
+2080099,United Kingdom,Romford,Queen's Hospital Romford,gb_romfo_queen
+2080100,United Kingdom,Salford,Salford Royal Hospital,gb_salfo_salroy
+2080101,United Kingdom,Sheffield,Northern General Hospital,gb_shef_nortgen
+2080102,United Kingdom,Sheffield,Sheffield Children's Hospital,gb_shef_shefchi
+2080103,United Kingdom,Southend,Southend University Hospital,gb_south_southe
+2080104,United Kingdom,Stevenage,Lister Hospital,gb_steve_liste
+2080105,United Kingdom,Stockport,Stepping Hill Hospital,gb_stock_stephi
+2080106,United Kingdom,Stoke-on-Trent,Royal Stoke University Hospital,gb_stok_roystok
+2080107,United Kingdom,Stornoway,Western Isles Hospital,gb_storn_westis
+2080108,United Kingdom,Sutton Coldfield,Good Hope Hospital,gb_sutto_goodhp
+2080109,United Kingdom,Sutton-In-Ashfield,King's Mill Hospital,gb_sutto_kingml
+2080110,United Kingdom,Swansea,Morriston Hospital Swansea,gb_swans_morris
+2080111,United Kingdom,Swindon,Great Western Hospital,gb_swind_greatw
+2080112,United Kingdom,Uxbridge,Hillingdon Hospital,gb_uxbri_hillig
+2080113,United Kingdom,Walsall,Walsall Manor Hospital,gb_wals_walsman
+2080114,United Kingdom,Watford,Watford General Hospital,gb_watfo_watgen
+2080115,United Kingdom,Weston-super-Mare,Weston General Hospital,gb_wesma_wesgen
+2080116,United Kingdom,Whiston,Whiston Hospital,gb_whist_whisto
+2080117,United Kingdom,Wishaw,Wishaw General Hospital,gb_wish_wishgen
+2080118,United Kingdom,Worthing,Worthing Hospital,gb_worth_wortng
+2080119,United Kingdom,Wrexham,Wrexham Maelor Hospital,gb_wrexh_wrexma
+2080120,United Kingdom,Yeovil,Yeovil District Hospital,gb_yeov_dist
+2080121,United Kingdom,Worcester,Worcestershire Royal Hospital,gb_worc_royhos
+2080122,United Kingdom,Portsmouth,Queen Alexandra Hospital,gb_port_quealex
+2080123,United Kingdom,Belfast,Royal Victoria Hospital,gb_bel_royvicho
+2080124,United Kingdom,Slough,Wexham Park Hospital,gb_slou_wexham
+2080125,United Kingdom,Brighton,Royal Sussex County Hospital,gb_bri_roysuss
+2080126,United Kingdom,Grantham,Grantham and District Hospital,gb_gran_disthos
+2080127,United Kingdom,Guildford,Royal Surrey County Hospital,gb_guil_roysurr
+2080128,United Kingdom,Glasgow,Glasgow Royal Infirmary,gb_glas_royinf
+2080129,United Kingdom,Glasgow,Gartnavel General Hospital,gb_glas_gartgen
+2080130,United Kingdom,Southampton,Southampton General Hospital,gb_sou_genhos
+2080131,United Kingdom,Bradford,Bradford Royal Infirmary,gb_brad_royinf
+2080132,United Kingdom,Liverpool,Aintree University Hospital,gb_liv_aintree
+2080133,United Kingdom,Manchester,North Manchester General Hospital,gb_manc_ngenhos
+2080134,United Kingdom,Sheffield,Royal Hallamshire Hospital,gb_shef_royhall
+2080135,United Kingdom,Manchester,The Christie Hospital,gb_manc_christ
+2080136,United Kingdom,Chelmsford,Broomfield Hospital,gb_chel_broom
+2080137,United Kingdom,Nottingham,Queens Medical Centre,gb_nott_quemed
+2080138,United Kingdom,Airdrie,University Hospital Monklands,gb_aird_unimonk
+2080139,United Kingdom,Bury St Edmunds,West Suffolk Hospital,gb_bury_wesuffo
+2080140,United Kingdom,Oxford,Churchill Hospital,gb_oxf_churchos
+2080141,United Kingdom,Lincoln,Lincoln County Hospital,gb_linc_counhos
+2080142,United Kingdom,Bedford,Bedford Hospital,gb_bedford_hosp
+2090001,United States,"Ann Arbor, MI",University Of Michigan Medical Center,us_annar_unimic
+2090002,United States,"Boston, MA",Massachusetts General Hospital,us_bosto_massa
+2090003,United States,"Boston, MA",Tufts Medical Center,us_bosto_tuftsm
+2090004,United States,"Chicago, IL",Northwestern Memorial Hospital,us_chic_nortmem
+2090005,United States,"Chicago, IL",Rush University Medical Centre,us_chic_rushum
+2090006,United States,"Forth Worth, TX",John Peter Smith Hospital,us_forth_johnps
+2090007,United States,"New York, NY",NewYork-Presbyterian / Columbia University Medical Center,us_newy_prescol
+2090008,United States,"Philadelphia, PA",Thomas Jefferson University Hospital,us_phil_thomjef
+2090009,United States,"Pittsburgh, PA",University of Pittsburgh Medical Center,us_pitts_unipit
+2090010,United States,"Providence, RI",The Rhode Island Hospital,us_provi_rhoisl
+2090011,United States,"Rochester, MN",Mayo Clinic,us_roche_mayoc
+2090012,United States,"Washington, D.C.",Medstar Washington Hospital Center,us_wash_medstwa
+2090013,United States,"Baltimore, MD",Johns Hopkins Hospital,us_bal_johnhop
+2090014,United States,"Baltimore, MD",University of Maryland Hospital,us_bal_unimaryl
+2090015,United States,"New York, NY",NYU Langone Medical Center,us_newy_langmed
+2090016,United States,Miami,Jackson Memorial Hospital,us_mia_jackson
+2090017,United States,"New Haven, CT",Yale New Haven Hospital,us_newh_yalehos
+2090018,United States,Baltimore,Mercy Medical Center,us_bal_mercmed
+2090019,United States,"Temple, TX",Baylor Scott&White Medical Center,us_templ_baysco
+2090020,United States,College Station,Baylor Scott & White Hospital,us_colstat_bayl
+2090021,United States,"Philadelphia, PA",Hahnemann University Hospital,us_phila_hahnun
+2090022,United States,"Palo Alto, CA",Stanford Health Care,us_palt_stancar
+2090023,United States,"Palo Alto, CA",VA Palo Alto Hospital,us_paloalt_vapa
+2100001,Uruguay,Montevideo,Hospital Maciel,uy_montev_maci
+2100002,Uruguay,Montevideo,Hospital De Clinicas,uy_montev_clini
+2100003,Uruguay,Montevideo,Hospital Espanol,uy_montev_esp
+2100004,Uruguay,Montevideo,Casa de Galicia,uy_mont_casgali
+2100005,Uruguay,Florida,Cooperativa Medica de Florida,uy_flo_comedica
+2160001,Zambia,Katete,St Francis Hospital,zm_katet_stfran
+2160002,Zambia,Ndola,Ndola Central Hospital,zm_ndol_central
+2160003,Zambia,Kitwe,Kitwe Teaching Hospital,zm_kit_teachos
+2160004,Zambia,Lusaka,University Teaching Hospital,zm_lus_teachos
+2160005,Zambia,Livingstone,Livingstone Central Hospital,zm_livi_centhos
