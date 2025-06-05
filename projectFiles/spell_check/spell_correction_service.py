@@ -65,32 +65,6 @@ class SpellCorrectionService:
         """
         self.dictionary_manager.add_words_from_trie(trie)
         self.is_initialized = self.dictionary_manager.is_initialized()
-      # Removed get_corrections_for_phrase - we only use smart corrections now
-      # Removed get_corrections - we only use smart corrections now
-      # Removed get_best_correction - we only use smart corrections now
-    
-    def is_word_in_dictionary(self, word):
-        """
-        Check if a word exists in the spell correction dictionary.
-        
-        Args:
-            word (str): Word to check
-            
-        Returns:
-            bool: True if word exists, False otherwise
-        """
-        if not self.is_initialized or not word:
-            return False
-        
-        try:
-            sym_spell = self.dictionary_manager.get_sym_spell()
-            if not sym_spell:
-                return False
-                  # Use lookup with very strict parameters to check exact match
-            suggestions = sym_spell.lookup(word.strip().lower(), Verbosity.TOP, max_edit_distance=0)
-            return len(suggestions) > 0 and suggestions[0].distance == 0
-        except:
-            return False
     
     def get_smart_corrections_for_phrase(self, phrase, trie, max_suggestions=5):
         """
@@ -224,20 +198,6 @@ class SpellCorrectionService:
         except Exception as e:
             print(f"Error getting smart spell corrections for phrase '{phrase}': {e}")
             return []
-    
-    def get_stats(self):
-        """
-        Get statistics about the spell correction service.
-        
-        Returns:
-            dict: Dictionary containing service statistics
-        """
-        sym_spell = self.dictionary_manager.get_sym_spell()
-        return {
-            'is_initialized': self.is_initialized,
-            'word_count': sym_spell.word_count if sym_spell else 0,
-            'max_edit_distance': self.max_edit_distance
-        }
     
     def _calculate_edit_distance(self, word1, word2):
         """Calculate simple edit distance between two words."""
@@ -383,45 +343,3 @@ class SpellCorrectionService:
         
         return 0
     
-    def get_corrections_with_debug_info(self, phrase, trie, max_suggestions=5, debug=False):
-        """
-        Get spell corrections with detailed debug information about ranking.
-        
-        Args:
-            phrase (str): The phrase to get corrections for
-            trie: Trie object containing institution names for validation
-            max_suggestions (int): Maximum number of suggestions to return
-            debug (bool): Whether to include debug information
-            
-        Returns:
-            dict: Contains corrections and optionally debug information
-        """
-        corrections = self.get_smart_corrections_for_phrase(phrase, trie, max_suggestions)
-        
-        result = {
-            'corrections': corrections,
-            'original_phrase': phrase
-        }
-        
-        if debug and corrections:
-            result['debug_info'] = {
-                'ranking_explanation': [],
-                'total_corrections_found': len(corrections)
-            }
-            
-            for i, correction in enumerate(corrections):
-                debug_item = {
-                    'rank': i + 1,
-                    'corrected_phrase': correction['corrected_phrase'],
-                    'score': correction.get('_ranking_score', 0),
-                    'num_suggestions': correction.get('_num_suggestions', 0),
-                    'avg_frequency': correction.get('_avg_frequency', 0),
-                    'max_frequency': correction.get('_max_frequency', 0),
-                    'match_quality': correction.get('_match_quality', 0),
-                    'correction_penalty': correction.get('_correction_penalty', 0),
-                    'corrections_made': len(correction.get('corrections', [])),
-                    'top_suggestion': correction['suggestions'][0] if correction['suggestions'] else None
-                }
-                result['debug_info']['ranking_explanation'].append(debug_item)
-        
-        return result
