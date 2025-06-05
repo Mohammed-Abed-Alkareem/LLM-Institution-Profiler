@@ -1,25 +1,22 @@
 from flask import Flask, render_template, request, jsonify
 from institution_processor import process_institution_pipeline # Import the processor
 import json # Import json for pretty printing the dictionary
-from symspellpy import SymSpell, Verbosity
 import pandas as pd
 import os
-from autocomplete import initialize_autocomplete_with_all_institutions, get_autocomplete_service
+from service_factory import initialize_autocomplete_with_all_institutions, get_autocomplete_service
+from spell_check import SpellCorrectionService, DictionaryManager
 
 app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Initialize SymSpell for spell checking
-sym_spell = SymSpell(max_dictionary_edit_distance=2, prefix_length=7)
-dictionary_path = os.path.join(BASE_DIR, 'spell_check', 'symspell_dict.txt') # Renamed from symspell_dict_new.txt
+# Initialize spell checking service
+dictionary_path = os.path.join(BASE_DIR, 'spell_check', 'symspell_dict.txt')
+spell_service = SpellCorrectionService(dictionary_path=dictionary_path)
 
-# Load dictionary with proper encoding handling
-try:
-    sym_spell.load_dictionary(dictionary_path, term_index=0, count_index=1, encoding='utf-8')
-    print(f"Successfully loaded symspell dictionary with {sym_spell.word_count} words") # Corrected to .word_count (attribute)
-except Exception as e:
-    print(f"Warning: Could not load symspell dictionary: {e}")
+# Check if spell correction is available
+if not spell_service.is_initialized:
+    print("Warning: Spell checking service is not initialized.")
     print("Spell checking will be disabled, but autocomplete will still work.")
 
 # Initialize autocomplete service with all institution types
@@ -41,11 +38,13 @@ def index():
         institution_name = request.form.get('institution_name')
         if institution_name:
 
-            # Check for spelling corrections
-            suggestions = sym_spell.lookup_compound(institution_name, max_edit_distance=2)
-            if suggestions:
-                print("Suggestions:", suggestions)
-                #TODO: return the suggestions to the user
+            # Check for spelling corrections if service is initialized
+            if spell_service.is_initialized:
+                corrections = spell_service.get_corrections_for_phrase(institution_name)
+                if corrections:
+                    corrected = corrections[0]['corrected_phrase']
+                    print(f"Spell correction: '{institution_name}' → '{corrected}'")
+                    # TODO: return the suggestions to the user
 
             # Process the institution name
             processed_data = process_institution_pipeline(institution_name)

@@ -4,7 +4,8 @@ Provides convenient initialization functions for different use cases.
 """
 
 import os
-from .autocomplete_service import AutocompleteService
+from autocomplete.autocomplete_service import AutocompleteService
+from spell_check import DictionaryManager
 
 
 # Singleton instance for the autocomplete service

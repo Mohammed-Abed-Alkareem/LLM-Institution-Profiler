@@ -6,7 +6,8 @@ Simplified version that delegates specific functionality to specialized modules.
 from .trie import Trie
 from .csv_loader import CSVLoader
 from .institution_normalizer import InstitutionNormalizer
-from .spell_correction import SpellCorrectionService
+# Import SpellCorrectionService from the spell_check module
+from spell_check import SpellCorrectionService
 
 
 class AutocompleteService:
@@ -163,18 +164,27 @@ class AutocompleteService:
     
     def get_spell_corrections(self, phrase, max_suggestions=3):
         """
-        Get spell correction suggestions for a phrase and find matching institutions.
+        Get smart spell correction suggestions for a phrase and find matching institutions.
+        
+        This method exclusively uses the smart correction strategy which:
+        1. Generates candidate corrections for each word in the phrase
+        2. Tries combinations of corrected words
+        3. Validates all combinations against actual institution names
+        4. Only returns corrections that match real institutions
+        
+        This ensures that all "did you mean" suggestions are meaningful and accurate.
         
         Args:
             phrase (str): Phrase to get corrections for
             max_suggestions (int): Maximum number of suggestions to return
-            
-        Returns:
-            list: List of formatted institution suggestions based on spell corrections        """
+              Returns:
+            list: List of formatted institution suggestions based on validated spell corrections        
+        """
         if not self.spell_correction.is_initialized:
             return []
         
-        # Get smart corrected phrases that are validated against actual institutions
+        # Use smart correction strategy - this generates candidate corrections
+        # and validates them against actual institutions in the trie
         correction_results = self.spell_correction.get_smart_corrections_for_phrase(phrase, self.trie, max_suggestions=5)
         
         formatted_suggestions = []
