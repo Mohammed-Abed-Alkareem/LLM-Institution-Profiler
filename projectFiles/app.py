@@ -62,16 +62,32 @@ def autocomplete():
     """
     Autocomplete endpoint using Trie-based search for fast prefix matching.
     Returns top 5 university suggestions for the given prefix.
+    Falls back to spell correction if no matches found.
     """
     term = request.args.get('term', '').strip()
     
     if not term:
         return jsonify([])
     
-    # Get suggestions from the Trie-based autocomplete service
-    suggestions = autocomplete_service.get_suggestions(term, max_suggestions=5)
+    # Get suggestions from the Trie-based autocomplete service (now includes spell correction)
+    result = autocomplete_service.get_suggestions(term, max_suggestions=5)
     
-    return jsonify(suggestions)
+    # For backward compatibility, return just the suggestions array
+    # The frontend expects an array of suggestions
+    if isinstance(result, dict) and 'suggestions' in result:
+        suggestions = result['suggestions']
+          # If this is a spell correction result, format it appropriately
+        if result.get('source') == 'spell_correction':
+            # The spell correction suggestions are already formatted properly
+            # Just add a flag to indicate they're spell corrections
+            for suggestion in suggestions:
+                suggestion['is_spell_correction'] = True
+            return jsonify(suggestions)
+        else:
+            return jsonify(suggestions)
+    else:
+        # Fallback for old format
+        return jsonify(result if isinstance(result, list) else [])
 
 
 @app.route('/autocomplete/debug', methods=['GET'])
@@ -89,6 +105,31 @@ def autocomplete_debug():
     }
     
     return jsonify(debug_info)
+
+
+@app.route('/spell-check', methods=['GET'])
+def spell_check():
+    """
+    Spell correction endpoint for getting "did you mean" suggestions.
+    Returns spell correction suggestions for misspelled institution names.
+    """
+    term = request.args.get('term', '').strip()
+    
+    if not term:
+        return jsonify({
+            'corrections': [],
+            'original_query': term,
+            'message': 'Empty query'
+        })
+    
+    # Get spell corrections directly
+    corrections = autocomplete_service.get_spell_corrections(term, max_suggestions=5)
+    
+    return jsonify({
+        'corrections': corrections,
+        'original_query': term,
+        'message': f'Found {len(corrections)} suggestions' if corrections else 'No suggestions found'
+    })
 
 
 if __name__ == '__main__':

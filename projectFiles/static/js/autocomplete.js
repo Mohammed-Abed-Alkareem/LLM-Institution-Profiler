@@ -103,14 +103,32 @@ class AutocompleteWidget {
             this.close();
         }, 150);
     }
-    
-    async search(query) {
+      async search(query) {
         try {
             const response = await fetch(`${this.options.endpoint}?term=${encodeURIComponent(query)}`);
-            const suggestions = await response.json();
+            const data = await response.json();
+            
+            // Handle the new response format that includes spell correction
+            let suggestions = [];
+            let isSpellCorrection = false;
+            
+            if (Array.isArray(data)) {
+                // Old format or direct suggestions array
+                suggestions = data;
+            } else if (data && typeof data === 'object') {
+                // New format with metadata
+                suggestions = data.suggestions || [];
+                isSpellCorrection = data.source === 'spell_correction';
+                
+                // If this is a spell correction, show a helpful message
+                if (isSpellCorrection && suggestions.length > 0) {
+                    this.showSpellCorrectionMessage(data.message, query);
+                }
+            }
             
             this.suggestions = suggestions;
             this.selectedIndex = -1;
+            this.isSpellCorrection = isSpellCorrection;
             
             if (suggestions.length > 0) {
                 this.render();
@@ -123,25 +141,75 @@ class AutocompleteWidget {
             this.close();
         }
     }
-      render() {
-        this.dropdown.innerHTML = '';
+    
+    showSpellCorrectionMessage(message, originalQuery) {
+        // Create or update a message element to show "Did you mean" suggestions
+        let messageElement = this.input.parentNode.querySelector('.spell-correction-message');
+        if (!messageElement) {
+            messageElement = document.createElement('div');
+            messageElement.className = 'spell-correction-message';
+            this.input.parentNode.appendChild(messageElement);
+        }
+        
+        messageElement.innerHTML = `
+            <div class="spell-correction-content">
+                <span class="spell-correction-text">${message}</span>
+                <small class="original-query">You searched for: "${originalQuery}"</small>
+            </div>
+        `;
+        
+        // Auto-hide the message after 5 seconds
+        setTimeout(() => {
+            if (messageElement) {
+                messageElement.remove();
+            }
+        }, 5000);
+    }
+
+    render() {
+        this.dropdown.innerHTML = '';        // Add a header for spell corrections
+        if (this.isSpellCorrection && this.suggestions.length > 0) {
+            const header = document.createElement('div');
+            header.className = 'autocomplete-header spell-correction-header';
+            
+            // Check if we have corrected query information
+            const firstSuggestion = this.suggestions[0];
+            if (firstSuggestion && firstSuggestion.corrected_query && firstSuggestion.corrections) {
+                // Create a visual representation of the corrections
+                const correctedText = this.highlightCorrections(
+                    firstSuggestion.original_query, 
+                    firstSuggestion.corrections
+                );
+                header.innerHTML = `<span class="correction-icon">📝</span> Did you mean: ${correctedText}?`;
+            } else if (firstSuggestion && firstSuggestion.corrected_query) {
+                header.innerHTML = `<span class="correction-icon">📝</span> Did you mean "<em>${firstSuggestion.corrected_query}</em>"?`;
+            } else {
+                header.innerHTML = '<span class="correction-icon">📝</span> Did you mean:';
+            }
+            
+            this.dropdown.appendChild(header);
+        }
         
         this.suggestions.forEach((suggestion, index) => {
             const item = document.createElement('div');
             item.className = 'autocomplete-item';
+            if (this.isSpellCorrection) {
+                item.classList.add('spell-correction-item');
+            }
             item.dataset.index = index;
-            
-            // Handle both old string format and new object format for backward compatibility
-            let institutionName, institutionType, fullName;
-            if (typeof suggestion === 'object' && suggestion.name) {
-                institutionName = suggestion.name;
-                institutionType = suggestion.type;
-                fullName = suggestion.full_name || suggestion.name;
+              // Handle both old string format and new object format for backward compatibility
+            let institutionName, institutionType, fullName, isSpellCorrection;
+            if (typeof suggestion === 'object' && (suggestion.name || suggestion.full_name || suggestion.term)) {
+                institutionName = suggestion.name || suggestion.full_name || suggestion.term;
+                institutionType = suggestion.type || suggestion.institution_type || '';
+                fullName = suggestion.full_name || suggestion.name || suggestion.term;
+                isSpellCorrection = suggestion.is_spell_correction || suggestion.spell_correction || suggestion.suggestion_type === 'spell_correction';
             } else {
                 // Fallback for old string format
                 institutionName = suggestion;
                 institutionType = '';
                 fullName = suggestion;
+                isSpellCorrection = this.isSpellCorrection;
             }
             
             // Create the display structure with proper alignment
@@ -165,7 +233,8 @@ class AutocompleteWidget {
             
             // Highlight matching text in the institution name
             const query = this.input.value.trim();
-            if (query) {
+            if (query && !isSpellCorrection) {
+                // Only highlight for regular autocomplete, not spell corrections
                 const nameSpan = item.querySelector('.institution-name');
                 const regex = new RegExp(`(${this.escapeRegex(query)})`, 'gi');
                 nameSpan.innerHTML = nameSpan.textContent.replace(regex, '<strong>$1</strong>');
@@ -240,9 +309,41 @@ class AutocompleteWidget {
         this.dropdown.style.display = 'none';
         this.selectedIndex = -1;
     }
-    
-    escapeRegex(string) {
+      escapeRegex(string) {
         return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    
+    highlightCorrections(originalQuery, corrections) {
+        /**
+         * Create a visual representation showing what was corrected
+         * @param {string} originalQuery - The original search query
+         * @param {Array} corrections - Array of correction objects
+         * @returns {string} HTML string with corrections highlighted
+         */
+        if (!corrections || corrections.length === 0) {
+            return `<em>${originalQuery}</em>`;
+        }
+        
+        const words = originalQuery.toLowerCase().split(' ');
+        const correctedWords = [...words]; // Copy original words
+        
+        // Apply corrections
+        corrections.forEach(correction => {
+            if (correction.position < correctedWords.length) {
+                correctedWords[correction.position] = correction.corrected;
+            }
+        });
+        
+        // Create HTML with corrections highlighted
+        const htmlWords = words.map((word, index) => {
+            const correction = corrections.find(c => c.position === index);
+            if (correction) {
+                return `<span class="spell-correction-word" title="Changed from '${correction.original}'">${correction.corrected}</span>`;
+            }
+            return word;
+        });
+        
+        return `<em>${htmlWords.join(' ')}</em>`;
     }
 }
 

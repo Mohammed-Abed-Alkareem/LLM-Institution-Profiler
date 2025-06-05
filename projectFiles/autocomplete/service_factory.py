@@ -11,16 +11,19 @@ from .autocomplete_service import AutocompleteService
 _autocomplete_service = None
 
 
-def get_autocomplete_service():
+def get_autocomplete_service(spell_dict_path=None):
     """
     Get the singleton autocomplete service instance.
+    
+    Args:
+        spell_dict_path (str): Optional path to spell correction dictionary
     
     Returns:
         AutocompleteService: The singleton instance
     """
     global _autocomplete_service
     if _autocomplete_service is None:
-        _autocomplete_service = AutocompleteService()
+        _autocomplete_service = AutocompleteService(spell_dict_path=spell_dict_path)
     return _autocomplete_service
 
 
@@ -50,6 +53,12 @@ def initialize_autocomplete_with_all_institutions(base_dir):
         base_dir (str): Base directory path where the spell_check folder is located
     """
     spell_check_dir = os.path.join(base_dir, 'spell_check')
+    
+    # Path to spell correction dictionary
+    spell_dict_path = os.path.join(spell_check_dir, 'symspell_dict.txt')
+    
+    # Get service with spell correction support
+    service = get_autocomplete_service(spell_dict_path=spell_dict_path)
     
     csv_configs = [
         {
