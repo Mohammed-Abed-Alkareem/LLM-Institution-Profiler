@@ -4,18 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Institution Search</title>
-
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/autocomplete.css') }}">
 </head>
 
 <body>
   <div class="container-card">
-    <form method="post" class="row g-2 align-items-center" onsubmit="showLoadingIndicator()">
-      <div class="col-sm-8">
-        <input type="text" name="institution_name" class="form-control" placeholder="Enter institution name"
-          required="">
+    <form method="post" class="row g-2 align-items-center" onsubmit="showLoadingIndicator()">      <div class="col-sm-8">
+        <input type="text" name="institution_name" id="institution_name" class="form-control" placeholder="Enter institution name"
+          required="" autocomplete="off">
       </div>
       <div class="col-auto">
         <button type="submit" class="btn btn-primary">Search</button>
@@ -42,9 +41,9 @@
     {% endif %}
 
   </div>
-
   <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/autocomplete.js') }}"></script>
 </body>
 
 </html>
