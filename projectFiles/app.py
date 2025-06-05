@@ -1,10 +1,9 @@
 from flask import Flask, render_template, request, jsonify
-from institution_processor import process_institution_pipeline # Import the processor
-import json # Import json for pretty printing the dictionary
-import pandas as pd
+from institution_processor import process_institution_pipeline
+import json
 import os
 from service_factory import initialize_autocomplete_with_all_institutions, get_autocomplete_service
-from spell_check import SpellCorrectionService, DictionaryManager
+from spell_check import SpellCorrectionService
 
 app = Flask(__name__)
 
@@ -23,11 +22,6 @@ if not spell_service.is_initialized:
 initialize_autocomplete_with_all_institutions(BASE_DIR)
 autocomplete_service = get_autocomplete_service()
 
-# Keep the original list for backward compatibility if needed
-csv_path = os.path.join(BASE_DIR, 'spell_check', 'list_of_univs.csv')
-df = pd.read_csv(csv_path, usecols=[5])
-institution_names = df['name'].tolist()
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
@@ -37,15 +31,6 @@ def index():
     if request.method == 'POST':
         institution_name = request.form.get('institution_name')
         if institution_name:
-
-            # Check for spelling corrections if service is initialized
-            if spell_service.is_initialized:
-                corrections = spell_service.get_corrections_for_phrase(institution_name)
-                if corrections:
-                    corrected = corrections[0]['corrected_phrase']
-                    print(f"Spell correction: '{institution_name}' → '{corrected}'")
-                    # TODO: return the suggestions to the user
-
             # Process the institution name
             processed_data = process_institution_pipeline(institution_name)
             # show as pure text for now
@@ -66,15 +51,10 @@ def autocomplete():
     term = request.args.get('term', '').strip()
     
     if not term:
-        return jsonify([])    # Get suggestions from the Trie-based autocomplete service (now includes spell correction)
+        return jsonify([])    # Get suggestions from the Trie-based autocomplete service (includes spell correction)
     result = autocomplete_service.get_suggestions(term, max_suggestions=5)
     
-    # Return the full result object for new format support
-    if isinstance(result, dict):
-        return jsonify(result)
-    else:
-        # Fallback for old format
-        return jsonify(result)
+    return jsonify(result)
 
 
 @app.route('/autocomplete/debug', methods=['GET'])
