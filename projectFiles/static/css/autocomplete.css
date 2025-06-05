@@ -158,6 +158,16 @@
     color: #856404;
     font-weight: 600;
     font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    margin: -0.25rem -0.5rem;
+}
+
+.did-you-mean-text:hover {
+    background-color: #ffeaa7;
+    color: #6c4c00;
 }
 
 .spell-correction-separator {
@@ -181,4 +191,28 @@
 .spell-correction-word:hover {
     background-color: #ffcdd2;
     cursor: help;
+}
+
+/* Preview text for autocomplete */
+.autocomplete-preview {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    color: #999 !important;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+}
+
+/* Input container for preview text positioning */
+.autocomplete-input-container {
+    position: relative !important;
 }
