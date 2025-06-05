@@ -1,3 +1,13 @@
+/**
+ * AutocompleteWidget Class
+ * 
+ * A comprehensive autocomplete widget that supports:
+ * - Real-time search suggestions
+ * - Spell correction with "Did you mean?" functionality
+ * - Preview text showing completion
+ * - Keyboard navigation
+ * - Mouse interaction
+ */
 class AutocompleteWidget {
     constructor(inputElement, options = {}) {
         this.input = inputElement;
@@ -13,16 +23,23 @@ class AutocompleteWidget {
         this.selectedIndex = -1;
         this.isOpen = false;
         this.debounceTimer = null;
+        this.isSpellCorrection = false;
 
         this.init();
     }
 
+    /**
+     * Initialize the autocomplete widget
+     */
     init() {
         this.createDropdown();
         this.createPreviewText();
         this.attachEventListeners();
     }
 
+    /**
+     * Create the dropdown container for suggestions
+     */
     createDropdown() {
         // Create dropdown container
         this.dropdown = document.createElement('div');
@@ -32,7 +49,12 @@ class AutocompleteWidget {
         // Position dropdown relative to input
         this.input.parentNode.style.position = 'relative';
         this.input.parentNode.appendChild(this.dropdown);
-    }    createPreviewText() {
+    }
+
+    /**
+     * Create preview text overlay for autocomplete suggestions
+     */
+    createPreviewText() {
         // Create a container for the input and preview overlay
         const inputContainer = this.input.parentNode;
         inputContainer.style.position = 'relative';
@@ -81,6 +103,9 @@ class AutocompleteWidget {
         this.input.style.background = 'transparent';
     }
 
+    /**
+     * Attach all event listeners
+     */
     attachEventListeners() {
         // Input events
         this.input.addEventListener('input', (e) => this.handleInput(e));
@@ -95,6 +120,10 @@ class AutocompleteWidget {
             }
         });
     }
+
+    /**
+     * Handle input changes with debouncing
+     */
     handleInput(e) {
         const value = e.target.value.trim();
 
@@ -115,6 +144,10 @@ class AutocompleteWidget {
             }
         }, this.options.delay);
     }
+
+    /**
+     * Handle keyboard navigation and selection
+     */
     handleKeydown(e) {
         if (!this.isOpen) {
             // Handle Tab for autocomplete even when dropdown is closed
@@ -153,6 +186,9 @@ class AutocompleteWidget {
         }
     }
 
+    /**
+     * Handle input focus
+     */
     handleFocus(e) {
         const value = e.target.value.trim();
         if (value.length >= this.options.minLength && this.suggestions.length > 0) {
@@ -160,12 +196,19 @@ class AutocompleteWidget {
         }
     }
 
+    /**
+     * Handle input blur with delay for suggestion clicks
+     */
     handleBlur(e) {
         // Delay closing to allow clicking on suggestions
         setTimeout(() => {
             this.close();
         }, 150);
     }
+
+    /**
+     * Perform search and handle response
+     */
     async search(query) {
         try {
             const response = await fetch(`${this.options.endpoint}?term=${encodeURIComponent(query)}`);
@@ -186,9 +229,11 @@ class AutocompleteWidget {
                 console.log('DEBUG: isSpellCorrection:', isSpellCorrection);
                 console.log('DEBUG: First suggestion:', suggestions[0]);
             }
+
             this.suggestions = suggestions;
             this.selectedIndex = -1;
             this.isSpellCorrection = isSpellCorrection;
+
             // Update preview text with first suggestion
             this.updatePreviewText();
 
@@ -202,7 +247,12 @@ class AutocompleteWidget {
             console.error('Autocomplete search failed:', error);
             this.close();
         }
-    }    updatePreviewText() {
+    }
+
+    /**
+     * Update preview text showing completion
+     */
+    updatePreviewText() {
         if (!this.previewText) return;
 
         const currentValue = this.input.value;
@@ -234,6 +284,10 @@ class AutocompleteWidget {
             }
         }
     }
+
+    /**
+     * Clear the preview text
+     */
     clearPreviewText() {
         if (this.previewText) {
             this.previewText.style.display = 'none';
@@ -242,6 +296,9 @@ class AutocompleteWidget {
         }
     }
 
+    /**
+     * Show spell correction message
+     */
     showSpellCorrectionMessage(message, originalQuery) {
         // Create or update a message element to show "Did you mean" suggestions
         let messageElement = this.input.parentNode.querySelector('.spell-correction-message');
@@ -264,8 +321,14 @@ class AutocompleteWidget {
                 messageElement.remove();
             }
         }, 5000);
-    } render() {
+    }
+
+    /**
+     * Render suggestions in the dropdown
+     */
+    render() {
         this.dropdown.innerHTML = '';
+
         // Add a separate "Did you mean?" section for spell corrections
         if (this.isSpellCorrection && this.suggestions.length > 0) {
             console.log('DEBUG: Creating "Did you mean?" section');
@@ -274,6 +337,7 @@ class AutocompleteWidget {
 
             if (firstSuggestion && firstSuggestion.corrected_query) {
                 console.log('DEBUG: Adding "Did you mean?" section with corrected_query:', firstSuggestion.corrected_query);
+                
                 // Create "Did you mean?" section
                 const didYouMeanSection = document.createElement('div');
                 didYouMeanSection.className = 'did-you-mean-section';
@@ -318,6 +382,7 @@ class AutocompleteWidget {
                 item.classList.add('spell-correction-item');
             }
             item.dataset.index = index;
+
             // Handle both old string format and new object format for backward compatibility
             let institutionName, institutionType, fullName, isSpellCorrection;
             if (typeof suggestion === 'object' && (suggestion.name || suggestion.full_name || suggestion.term)) {
@@ -379,6 +444,9 @@ class AutocompleteWidget {
         this.updatePreviewText();
     }
 
+    /**
+     * Navigation methods
+     */
     selectNext() {
         this.selectedIndex = Math.min(this.selectedIndex + 1, this.suggestions.length - 1);
         this.updateSelection();
@@ -400,6 +468,10 @@ class AutocompleteWidget {
             item.classList.toggle('selected', index === this.selectedIndex);
         });
     }
+
+    /**
+     * Select a suggestion and close dropdown
+     */
     selectSuggestion(index) {
         if (index >= 0 && index < this.suggestions.length) {
             // Handle both old string format and new object format
@@ -423,10 +495,18 @@ class AutocompleteWidget {
         }
     }
 
+    /**
+     * Open the dropdown
+     */
     open() {
         this.isOpen = true;
         this.dropdown.style.display = 'block';
-    } close() {
+    }
+
+    /**
+     * Close the dropdown
+     */
+    close() {
         this.isOpen = false;
         this.dropdown.style.display = 'none';
         this.selectedIndex = -1;
@@ -435,10 +515,16 @@ class AutocompleteWidget {
         this.clearPreviewText();
     }
 
+    /**
+     * Utility method to escape regex characters
+     */
     escapeRegex(string) {
         return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
+    /**
+     * Highlight corrections in spell correction suggestions
+     */
     highlightCorrections(originalQuery, corrections) {
         /**
          * Create a visual representation showing what was corrected
@@ -471,6 +557,10 @@ class AutocompleteWidget {
 
         return `<em>${htmlWords.join(' ')}</em>`;
     }
+
+    /**
+     * Apply corrected query from spell correction
+     */
     applyCorrectedQuery(correctedQuery) {
         // Apply the corrected query to the input
         this.input.value = correctedQuery;
@@ -488,15 +578,3 @@ class AutocompleteWidget {
         this.input.setSelectionRange(correctedQuery.length, correctedQuery.length);
     }
 }
-
-// Initialize autocomplete when DOM is loaded
-document.addEventListener('DOMContentLoaded', function () {
-    const institutionInput = document.querySelector('input[name="institution_name"]');
-    if (institutionInput) {
-        new AutocompleteWidget(institutionInput, {
-            minLength: 2,
-            maxSuggestions: 5,
-            delay: 300
-        });
-    }
-});
