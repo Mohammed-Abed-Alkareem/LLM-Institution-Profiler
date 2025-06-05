@@ -6,7 +6,10 @@ suggest university names based on user input prefixes.
 """
 
 from .trie import Trie, TrieNode
-from .autocomplete_service import AutocompleteService, get_autocomplete_service, initialize_autocomplete, initialize_autocomplete_with_all_institutions
+from .autocomplete_service import AutocompleteService
+from .service_factory import get_autocomplete_service, initialize_autocomplete, initialize_autocomplete_with_all_institutions
+from .institution_normalizer import InstitutionNormalizer
+from .csv_loader import CSVLoader
 
 __all__ = [
     'Trie',
@@ -14,5 +17,7 @@ __all__ = [
     'AutocompleteService',
     'get_autocomplete_service',
     'initialize_autocomplete',
-    'initialize_autocomplete_with_all_institutions'
+    'initialize_autocomplete_with_all_institutions',
+    'InstitutionNormalizer',
+    'CSVLoader'
 ]
