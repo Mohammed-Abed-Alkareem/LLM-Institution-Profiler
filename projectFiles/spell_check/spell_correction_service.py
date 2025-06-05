@@ -187,9 +187,8 @@ class SpellCorrectionService:
                 
                 if depth == len(word_lists):
                     combinations_tried += 1
-                    test_phrase = ' '.join(current_combo)
-                      # Check if this combination exists in trie
-                    suggestions = trie.get_suggestions(test_phrase, max_suggestions=1)
+                    test_phrase = ' '.join(current_combo)                    # Check if this combination exists in trie
+                    suggestions = trie.get_suggestions(test_phrase, max_suggestions=10)  # Get more suggestions for better ranking
                     
                     if suggestions:
                         
@@ -208,16 +207,17 @@ class SpellCorrectionService:
                             'corrected_phrase': test_phrase,
                             'original_phrase': phrase.strip().lower(),
                             'corrections': used_corrections,
-                            'has_corrections': len(used_corrections) > 0,                            'suggestions': suggestions  # Include the actual institution matches
+                            'has_corrections': len(used_corrections) > 0,
+                            'suggestions': suggestions,  # Include the actual institution matches
+                            'total_edit_distance': sum(corr['distance'] for corr in used_corrections)
                         })
                     return
                 
                 for option in word_lists[depth]:
                     generate_combinations(word_lists, current_combo + [option], depth + 1)
             
-            generate_combinations(word_options)
-              # Sort by number of corrections (fewer corrections = better)
-            valid_corrections.sort(key=lambda x: len(x['corrections']))
+            generate_combinations(word_options)            # Enhanced ranking based on trie results
+            self._rank_corrections_by_trie_results(valid_corrections)
             
             return valid_corrections[:max_suggestions]
             
@@ -258,3 +258,170 @@ class SpellCorrectionService:
             previous_row = current_row
         
         return previous_row[-1]
+    
+    def _rank_corrections_by_trie_results(self, corrections):
+        """
+        Rank spell corrections based on trie results to prioritize better suggestions.
+        
+        This method enhances the ranking by considering:
+        1. Number of trie suggestions (more matches = better)
+        2. Average frequency of matched institutions
+        3. Quality of the best match
+        4. Number of corrections made (fewer = better)
+        5. Edit distance of corrections
+        
+        Args:
+            corrections (list): List of correction dictionaries to rank in-place
+        """
+        for correction in corrections:
+            suggestions = correction.get('suggestions', [])
+            
+            # Calculate ranking metrics
+            num_suggestions = len(suggestions)
+            
+            # Calculate average frequency and best frequency
+            if suggestions:
+                # Extract frequency from suggestions (check different possible structures)
+                frequencies = []
+                for suggestion in suggestions:
+                    if isinstance(suggestion, dict):
+                        # Handle structured suggestion format
+                        freq = suggestion.get('frequency', 1)
+                        if freq is None:
+                            freq = 1
+                        frequencies.append(freq)
+                    else:
+                        # Fallback for simpler formats
+                        frequencies.append(1)
+                
+                avg_frequency = sum(frequencies) / len(frequencies) if frequencies else 1
+                max_frequency = max(frequencies) if frequencies else 1
+                
+                # Get the best match quality (longest common prefix or exact match bonus)
+                best_match_quality = self._calculate_match_quality(
+                    correction['corrected_phrase'], 
+                    suggestions[0] if suggestions else None
+                )
+            else:
+                avg_frequency = 0
+                max_frequency = 0
+                best_match_quality = 0
+            
+            # Calculate correction penalty (higher penalty for more/bigger corrections)
+            correction_penalty = 0
+            for corr in correction.get('corrections', []):
+                correction_penalty += corr.get('distance', 1)
+            
+            # Calculate overall score (higher is better)
+            # Weight factors can be tuned based on preference
+            score = (
+                num_suggestions * 10 +           # More suggestions = better
+                avg_frequency * 5 +              # Higher average frequency = better  
+                max_frequency * 3 +              # High-quality top match = better
+                best_match_quality * 15 +        # Good match quality = better
+                -correction_penalty * 2          # Fewer/smaller corrections = better
+            )
+            
+            correction['_ranking_score'] = score
+            correction['_num_suggestions'] = num_suggestions
+            correction['_avg_frequency'] = avg_frequency
+            correction['_max_frequency'] = max_frequency
+            correction['_match_quality'] = best_match_quality
+            correction['_correction_penalty'] = correction_penalty
+        
+        # Sort by ranking score (descending - higher scores first)
+        corrections.sort(key=lambda x: x.get('_ranking_score', 0), reverse=True)
+    
+    def _calculate_match_quality(self, corrected_phrase, best_suggestion):
+        """
+        Calculate the quality of match between corrected phrase and the best suggestion.
+        
+        Args:
+            corrected_phrase (str): The corrected search phrase
+            best_suggestion: The best suggestion from trie (can be dict or string)
+            
+        Returns:
+            float: Match quality score (higher is better)
+        """
+        if not best_suggestion:
+            return 0
+        
+        # Extract the suggestion text
+        if isinstance(best_suggestion, dict):
+            suggestion_text = best_suggestion.get('full_name', 
+                             best_suggestion.get('name', ''))
+        else:
+            suggestion_text = str(best_suggestion)
+        
+        if not suggestion_text:
+            return 0
+        
+        corrected_lower = corrected_phrase.lower().strip()
+        suggestion_lower = suggestion_text.lower().strip()
+        
+        # Exact match bonus
+        if corrected_lower == suggestion_lower:
+            return 100
+        
+        # Prefix match bonus
+        if suggestion_lower.startswith(corrected_lower):
+            prefix_ratio = len(corrected_lower) / len(suggestion_lower)
+            return 50 + (prefix_ratio * 30)  # 50-80 range
+        
+        # Contains match
+        if corrected_lower in suggestion_lower:
+            return 30
+        
+        # Word-level matches
+        corrected_words = set(corrected_lower.split())
+        suggestion_words = set(suggestion_lower.split())
+        
+        if corrected_words and suggestion_words:
+            word_overlap = len(corrected_words.intersection(suggestion_words))
+            word_ratio = word_overlap / max(len(corrected_words), len(suggestion_words))
+            return word_ratio * 25  # 0-25 range
+        
+        return 0
+    
+    def get_corrections_with_debug_info(self, phrase, trie, max_suggestions=5, debug=False):
+        """
+        Get spell corrections with detailed debug information about ranking.
+        
+        Args:
+            phrase (str): The phrase to get corrections for
+            trie: Trie object containing institution names for validation
+            max_suggestions (int): Maximum number of suggestions to return
+            debug (bool): Whether to include debug information
+            
+        Returns:
+            dict: Contains corrections and optionally debug information
+        """
+        corrections = self.get_smart_corrections_for_phrase(phrase, trie, max_suggestions)
+        
+        result = {
+            'corrections': corrections,
+            'original_phrase': phrase
+        }
+        
+        if debug and corrections:
+            result['debug_info'] = {
+                'ranking_explanation': [],
+                'total_corrections_found': len(corrections)
+            }
+            
+            for i, correction in enumerate(corrections):
+                debug_item = {
+                    'rank': i + 1,
+                    'corrected_phrase': correction['corrected_phrase'],
+                    'score': correction.get('_ranking_score', 0),
+                    'num_suggestions': correction.get('_num_suggestions', 0),
+                    'avg_frequency': correction.get('_avg_frequency', 0),
+                    'max_frequency': correction.get('_max_frequency', 0),
+                    'match_quality': correction.get('_match_quality', 0),
+                    'correction_penalty': correction.get('_correction_penalty', 0),
+                    'corrections_made': len(correction.get('corrections', [])),
+                    'top_suggestion': correction['suggestions'][0] if correction['suggestions'] else None
+                }
+                result['debug_info']['ranking_explanation'].append(debug_item)
+        
+        return result

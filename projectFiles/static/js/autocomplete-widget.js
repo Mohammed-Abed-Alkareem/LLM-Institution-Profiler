@@ -119,9 +119,7 @@ class AutocompleteWidget {
                 this.close();
             }
         });
-    }
-
-    /**
+    }    /**
      * Handle input changes with debouncing
      */
     handleInput(e) {
@@ -129,6 +127,9 @@ class AutocompleteWidget {
 
         // Clear preview text when input changes
         this.clearPreviewText();
+
+        // Reset spell correction flag when user continues typing
+        this.isSpellCorrection = false;
 
         // Clear previous timer
         if (this.debounceTimer) {
@@ -247,9 +248,7 @@ class AutocompleteWidget {
             console.error('Autocomplete search failed:', error);
             this.close();
         }
-    }
-
-    /**
+    }    /**
      * Update preview text showing completion
      */
     updatePreviewText() {
@@ -258,28 +257,69 @@ class AutocompleteWidget {
         const currentValue = this.input.value;
         this.clearPreviewText();
 
-        // Only show preview for regular autocomplete, not spell corrections
-        if (this.suggestions.length > 0 && currentValue.length > 0 && !this.isSpellCorrection) {
-            const firstSuggestion = this.suggestions[0];
-            let suggestionText = '';
+        if (this.suggestions.length > 0 && currentValue.length > 0) {
+            // Find the first suggestion that's an actual institution (not spell correction metadata)
+            let suggestionToUse = null;
 
-            if (typeof firstSuggestion === 'object') {
-                suggestionText = firstSuggestion.full_name || firstSuggestion.name || firstSuggestion.term || '';
-            } else {
-                suggestionText = firstSuggestion;
+            for (const suggestion of this.suggestions) {
+                // Skip suggestions that are spell correction metadata (have corrected_query but no institution data)
+                if (typeof suggestion === 'object' && suggestion.corrected_query && 
+                    !suggestion.name && !suggestion.full_name && !suggestion.term) {
+                    continue;
+                }
+
+                suggestionToUse = suggestion;
+                break;
             }
 
-            // Check if the suggestion starts with the current input (case insensitive)
-            if (suggestionText.toLowerCase().startsWith(currentValue.toLowerCase())) {
-                const completionPart = suggestionText.substring(currentValue.length);
+            if (suggestionToUse) {
+                let suggestionText = '';
+                
+                if (typeof suggestionToUse === 'object') {
+                    suggestionText = suggestionToUse.full_name || suggestionToUse.name || suggestionToUse.term || '';
+                } else {
+                    suggestionText = suggestionToUse;
+                }
 
-                if (completionPart.length > 0) {
-                    // Create preview text with invisible user input + grey completion
-                    this.previewText.innerHTML = `<span style="color: transparent; user-select: none;">${currentValue}</span><span style="color: #aaa;">${completionPart}</span>`;
+                // For spell corrections, we need to be more flexible about matching
+                // The suggestion might match the corrected query rather than the original input
+                let shouldShowPreview = false;
+                let previewContent = '';
+
+                if (suggestionText.toLowerCase().startsWith(currentValue.toLowerCase())) {
+                    // Direct match with current input
+                    const completionPart = suggestionText.substring(currentValue.length);
+                    if (completionPart.length > 0) {
+                        previewContent = `<span style="color: transparent; user-select: none;">${currentValue}</span><span style="color: #aaa;">${completionPart}</span>`;
+                        shouldShowPreview = true;
+                    }
+                } else if (this.isSpellCorrection) {
+                    // For spell corrections, check if the suggestion matches a corrected query
+                    const spellCorrectionData = this.suggestions.find(s => 
+                        typeof s === 'object' && s.corrected_query
+                    );
+                    
+                    if (spellCorrectionData && spellCorrectionData.corrected_query) {
+                        const correctedQuery = spellCorrectionData.corrected_query;
+                        if (suggestionText.toLowerCase().startsWith(correctedQuery.toLowerCase())) {
+                            const completionPart = suggestionText.substring(correctedQuery.length);
+                            if (completionPart.length > 0) {
+                                // Show current input (transparent) + what was corrected (grey) + completion (grey)
+                                const correctedPart = correctedQuery.substring(currentValue.length);
+                                previewContent = `<span style="color: transparent; user-select: none;">${currentValue}</span><span style="color: #aaa;">${correctedPart}${completionPart}</span>`;
+                                shouldShowPreview = true;
+                            }
+                        }
+                    }
+                }
+
+                if (shouldShowPreview) {
+                    this.previewText.innerHTML = previewContent;
                     this.previewText.style.display = 'block';
                     
                     console.log('DEBUG: Preview text set:', this.previewText.innerHTML);
                     console.log('DEBUG: Preview display:', this.previewText.style.display);
+                    console.log('DEBUG: Used suggestion:', suggestionToUse);
                 }
             }
         }
@@ -373,9 +413,13 @@ class AutocompleteWidget {
                 separator.innerHTML = '<hr style="margin: 0; border-color: #ffeaa7;">';
                 this.dropdown.appendChild(separator);
             }
-        }
+        }        this.suggestions.forEach((suggestion, index) => {
+            // Skip spell correction metadata (has corrected_query but no institution data)
+            if (typeof suggestion === 'object' && suggestion.corrected_query && 
+                !suggestion.name && !suggestion.full_name && !suggestion.term) {
+                return;
+            }
 
-        this.suggestions.forEach((suggestion, index) => {
             const item = document.createElement('div');
             item.className = 'autocomplete-item';
             if (this.isSpellCorrection) {
@@ -395,7 +439,7 @@ class AutocompleteWidget {
                 institutionName = suggestion;
                 institutionType = '';
                 fullName = suggestion;
-                isSpellCorrection = this.isSpellCorrection;
+                isSpellCorrection = false; // Regular suggestions from corrected queries are not spell corrections
             }
 
             // Create the display structure with proper alignment
@@ -467,15 +511,19 @@ class AutocompleteWidget {
         items.forEach((item, index) => {
             item.classList.toggle('selected', index === this.selectedIndex);
         });
-    }
-
-    /**
+    }    /**
      * Select a suggestion and close dropdown
      */
     selectSuggestion(index) {
         if (index >= 0 && index < this.suggestions.length) {
-            // Handle both old string format and new object format
             const suggestion = this.suggestions[index];
+            
+            // Skip spell correction metadata (has corrected_query but no institution data)
+            if (typeof suggestion === 'object' && suggestion.corrected_query && 
+                !suggestion.name && !suggestion.full_name && !suggestion.term) {
+                return;
+            }
+            
             let valueToSet;
 
             if (typeof suggestion === 'object' && suggestion.full_name) {
@@ -501,9 +549,7 @@ class AutocompleteWidget {
     open() {
         this.isOpen = true;
         this.dropdown.style.display = 'block';
-    }
-
-    /**
+    }    /**
      * Close the dropdown
      */
     close() {
@@ -513,6 +559,9 @@ class AutocompleteWidget {
 
         // Clear preview text when closing
         this.clearPreviewText();
+        
+        // Reset spell correction flag when closing
+        this.isSpellCorrection = false;
     }
 
     /**

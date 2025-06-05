@@ -173,19 +173,22 @@ class AutocompleteService:
         4. Only returns corrections that match real institutions
         
         This ensures that all "did you mean" suggestions are meaningful and accurate.
-        
-        Args:
+          Args:
             phrase (str): Phrase to get corrections for
             max_suggestions (int): Maximum number of suggestions to return
-              Returns:
-            list: List of formatted institution suggestions based on validated spell corrections        
+            
+        Returns:
+            list: List of formatted institution suggestions based on validated spell corrections
         """
         if not self.spell_correction.is_initialized:
             return []
-        
-        # Use smart correction strategy - this generates candidate corrections
-        # and validates them against actual institutions in the trie
-        correction_results = self.spell_correction.get_smart_corrections_for_phrase(phrase, self.trie, max_suggestions=5)
+            
+        # Use smart correction strategy with increased edit distance if needed
+        correction_results = self.spell_correction.get_smart_corrections_for_phrase(
+            phrase, 
+            self.trie, 
+            max_suggestions=5
+        )
         
         formatted_suggestions = []
         seen_names = set()
