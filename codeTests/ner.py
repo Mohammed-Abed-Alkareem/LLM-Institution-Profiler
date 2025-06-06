@@ -18,13 +18,15 @@ def is_organization(name):
 
 def capitalize_name(name):
     """
-    Capitalizes the first letter of each word in the name.
+    Capitalizes the first letter of each word in the name, including after hyphens.
     """
-    return ' '.join(word.capitalize() for word in name.split())
+    def cap_word(word):
+        return '-'.join(part.capitalize() for part in word.split('-'))
+    return ' '.join(cap_word(word) for word in name.split())
 
 
 # Example usage
-input_name = " Juzoor for Health and Social Development"
+input_name = "Tel-Aviv University"
 input_name = capitalize_name(input_name)
 if is_organization(input_name):
     print(f"✅ '{input_name}' is an organization.")
