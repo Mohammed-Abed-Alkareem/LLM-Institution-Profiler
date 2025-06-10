@@ -6,13 +6,13 @@ Briefly put, it's to build a website that asks for you to input an institution n
 
 ### Key Tasks
 1) **Website UI & UX:**
-    - [-] Should at least have an input form, loading animation & other forms of feedback, and a screen to show the output profile in a tidy way, which may vary by institution type
+    - [ ] Should at least have an input form, loading animation & other forms of feedback, and a screen to show the output profile in a tidy way, which may vary by institution type
     - [X] Input can be supported by autocomplete (several option lists) and autocorrect with the use of prefix trees
     - [ ] Output screen might include images or logos if found for the organisation
-    - [ ] Additional input options (like region or address, or explicit type of organisation) in case distinguishing by the name alone is not possible might need to be included as optional fields (with conditional visibility if necessary)
+    - [X] Additional input options (like region or address, or explicit type of organisation) in case distinguishing by the name alone is not possible might need to be included as optional fields (with conditional visibility if necessary)
  
 2) **Data Retrieval:**
-    - [ ] A custom query can be formed (especially if optional fields were specified) and used to search for initial documents either with search APIs, or if not possible some other way (like using google on a browser with selenium)
+    - [X] A custom query can be formed (especially if optional fields were specified) and used to search for initial documents either with search APIs, or if not possible some other way (like using google on a browser with selenium)
     - [ ] Initial websites/docs then have to be crawled to visit all pages and download all the text 
     - [ ] Relevant data then needs to be retrieved and the rest ignored, there are methods like RAG which decide which chunks of data are relevant and there's a lot of models that can be used for
     - [ ] Relevance might need to be explicitly defined when saving data, like "does this text have the number of workers in the institution" when information is retrieved, in case we want the LLM to build some fields in the profile as a separate request, where a lot of information we give it would be useless
@@ -29,7 +29,7 @@ Briefly put, it's to build a website that asks for you to input an institution n
     - [ ] Fields that are empty or didn't pass validation and so on should be hidden or some error shown for that field
 
 5) **Benchmarking & Accuracy Validation:**
-    - [ ] If we want to get the best grade and compare performing we should at least log cost and speed between methods or models or pipeline versions or whatever
+    - [X] If we want to get the best grade and compare performing we should at least log cost and speed between methods or models or pipeline versions or whatever
     - [ ] If there's a way to also check for accuracy or quality it'd be great
 
 

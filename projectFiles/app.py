@@ -2,9 +2,12 @@ from flask import Flask, render_template, request, jsonify
 from institution_processor import process_institution_pipeline
 import json
 import os
+import asyncio
+import time
 from service_factory import initialize_autocomplete_with_all_institutions, get_autocomplete_service
 from spell_check import SpellCorrectionService
 from search.search_service import SearchService
+from crawler.crawler_service import CrawlerService
 
 app = Flask(__name__)
 
@@ -25,6 +28,9 @@ autocomplete_service = get_autocomplete_service()
 
 # Initialize search service
 search_service = SearchService(BASE_DIR)
+
+# Initialize crawler service
+crawler_service = CrawlerService(BASE_DIR)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -362,11 +368,174 @@ def cleanup_old_caches():
     
     cleanup_result = cache_config.cleanup_old_caches(dry_run=dry_run)
     
-    return jsonify({
-        'dry_run': dry_run,
+    return jsonify({        'dry_run': dry_run,
         'cleanup_result': cleanup_result,
         'message': 'Dry run completed - use ?dry_run=false to actually clean up' if dry_run else 'Cleanup completed'
     })
+
+
+# =============================================================================
+# CRAWLER ENDPOINTS - Comprehensive Web Crawling with Central Cache Integration
+# =============================================================================
+
+@app.route('/crawl', methods=['POST'])
+def crawl_institution():
+    """
+    Main crawling endpoint - Comprehensive institution data extraction.
+    Uses central cache system and benchmarking.
+    """
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'success': False, 'error': 'No JSON data provided'}), 400
+        
+        institution_name = data.get('institution_name', '').strip()
+        urls = data.get('urls', [])
+        institution_type = data.get('institution_type', 'general')
+        max_pages = min(int(data.get('max_pages', 5)), 20)  # Limit to 20 pages
+        
+        if not institution_name:
+            return jsonify({'success': False, 'error': 'Institution name is required'}), 400
+        
+        if not urls:
+            return jsonify({'success': False, 'error': 'URLs list is required'}), 400
+        
+        # Convert institution type string to enum
+        from crawler.crawler_config import InstitutionType
+        try:
+            inst_type = InstitutionType(institution_type.lower())
+        except ValueError:
+            inst_type = InstitutionType.GENERAL
+        
+        # Run async crawling
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        result = loop.run_until_complete(
+            crawler_service.crawl_institution_urls(
+                urls=urls[:max_pages],  # Limit URLs
+                institution_type=inst_type,
+                session_id=f"web_{institution_name}_{int(time.time())}"
+            )
+        )
+        
+        loop.close()
+        
+        return jsonify({
+            'success': True,
+            'institution_name': institution_name,
+            'institution_type': institution_type,
+            'crawl_results': result,
+            'cache_integration': 'centralized_project_cache',
+            'benchmark_tracking': 'enabled'
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': f'Crawling error: {str(e)}'
+        }), 500
+
+
+@app.route('/crawl/cache', methods=['GET'])
+def get_crawler_cache_stats():
+    """Get crawler cache statistics and management."""
+    try:
+        cache_stats = crawler_service.get_cache_stats()
+        cache_info = crawler_service.cache_config.get_cache_info()
+        
+        return jsonify({
+            'success': True,
+            'cache_stats': cache_stats,
+            'central_cache_info': cache_info,
+            'cache_directories': {
+                'crawling_data': crawler_service.cache_config.get_crawling_cache_dir(),
+                'benchmarks': crawler_service.cache_config.get_benchmarks_dir()
+            }
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': f'Cache stats error: {str(e)}'
+        }), 500
+
+
+@app.route('/crawl/cache/clear', methods=['POST'])
+def clear_crawler_cache():
+    """Clear crawler cache (central cache integration)."""
+    try:
+        result = crawler_service.clear_cache()
+        
+        return jsonify({
+            'success': True,
+            'message': 'Crawler cache cleared successfully',
+            'cache_cleared': result,
+            'central_cache_integration': 'maintained'
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': f'Cache clear error: {str(e)}'
+        }), 500
+
+
+@app.route('/crawl/benchmark', methods=['GET'])
+def get_crawler_benchmarks():
+    """Get crawler performance benchmarks and analytics."""
+    try:
+        # Get benchmark data
+        benchmark_data = crawler_service.get_benchmark_summary()
+        
+        return jsonify({
+            'success': True,
+            'benchmarks': benchmark_data,
+            'benchmark_storage': 'centralized_project_cache',
+            'analytics_available': True
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': f'Benchmark error: {str(e)}'
+        }), 500
+
+
+@app.route('/crawl/test', methods=['GET'])
+def test_crawler():
+    """Quick crawler test endpoint."""
+    try:
+        test_url = request.args.get('url', 'https://example.com')
+        
+        # Run quick test
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        from crawler.crawler_config import InstitutionType
+        result = loop.run_until_complete(
+            crawler_service.crawl_institution_urls(
+                urls=[test_url],
+                institution_type=InstitutionType.GENERAL,
+                session_id=f"test_{int(time.time())}"
+            )
+        )
+        
+        loop.close()
+        
+        return jsonify({
+            'success': True,
+            'test_url': test_url,
+            'crawl_result': result,
+            'cache_integration': 'verified',
+            'message': 'Crawler test completed successfully'
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': f'Crawler test error: {str(e)}'
+        }), 500
 
 
 if __name__ == '__main__':

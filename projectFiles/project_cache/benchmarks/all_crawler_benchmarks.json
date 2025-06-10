@@ -1,0 +1,27 @@
+[
+  {
+    "session_id": "crawl_1749560032_b7e9e5e5",
+    "institution_name": "Birzeit University",
+    "institution_type": "university",
+    "timestamp": 1749560032.2746677,
+    "urls_requested": [
+      "https://www.birzeit.edu/en",
+      "https://fobzu.org/",
+      "https://www.jns.org/harvard-ends-partnership-with-antisemitic-birzeit-university/",
+      "https://icph.birzeit.edu/",
+      "https://en.wikipedia.org/wiki/Birzeit_University"
+    ],
+    "total_crawl_time": 0.9557449817657471,
+    "success": true,
+    "urls_successful": 0,
+    "urls_failed": 0,
+    "cache_hits": 0,
+    "api_calls": 0,
+    "total_content_size_bytes": 0,
+    "total_word_count": 0,
+    "average_quality_score": 0.0,
+    "url_benchmarks": [],
+    "domains_crawled": {},
+    "errors": []
+  }
+]

@@ -1,7 +1,8 @@
 # processing_logic.py
 import os
 import json
-from typing import Dict
+import asyncio
+from typing import Dict, List
 from google import genai
 from google.genai.types import Tool, GoogleSearch, GenerateContentConfig 
 
@@ -10,6 +11,7 @@ from search.search_enhancer import SearchQueryEnhancer
 from benchmark import ComprehensiveBenchmarkTracker
 from extraction_logic import extract_structured_data, STRUCTURED_INFO_KEYS
 from crawling_prep import get_institution_links_for_crawling
+from crawler import CrawlerService, CrawlingStrategy, InstitutionType
 
 # I'm using google for now, but OpenAI's library can be used for everything if you
 # change the link since they all support its API
@@ -34,38 +36,54 @@ except Exception as e:
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 search_service = SearchService(BASE_DIR)
 
+# Initialize crawler service for comprehensive content extraction
+crawler_service = CrawlerService(BASE_DIR)
+
 # Initialize comprehensive benchmark tracker with centralized cache
 from cache_config import get_cache_config
 cache_config = get_cache_config(BASE_DIR)
 benchmark_tracker = ComprehensiveBenchmarkTracker(cache_config.get_benchmarks_dir())
 
 # pipeline flow here
-def process_institution_pipeline(institution_name: str, institution_type: str = None, search_params: dict = None, skip_extraction: bool = False):
+def process_institution_pipeline(institution_name: str, institution_type: str = None, search_params: dict = None, skip_extraction: bool = False, enable_crawling: bool = True):
     """
-    Coordinates the pipeline for processing an institution's name with enhanced search parameters:
-    1. Fetches raw descriptive text about the institution using enhanced search with flexible parameters
-    2. Prepares links for crawling (for full data extraction later)
-    3. Optionally extracts basic structured information from search snippets
+    Coordinates the comprehensive pipeline for processing an institution's name:
+    1. Enhanced search with flexible parameters to find initial data and URLs
+    2. Comprehensive web crawling to extract detailed content including:
+       - About/overview information
+       - Contact details
+       - Key statistics and facts
+       - Images including logos and facility photos
+       - Links to important pages
+    3. LLM-powered structured data extraction for complete profiling
+    4. Comprehensive benchmarking and caching throughout
     
     Args:
         institution_name: The name of the institution to process
         institution_type: Optional type of institution (university, hospital, bank, etc.)
         search_params: Enhanced search parameters (location, keywords, domain_hint, exclude_terms)
-        skip_extraction: If True, skip LLM extraction and just prepare for crawling
+        skip_extraction: If True, skip LLM extraction but still perform crawling
+        enable_crawling: If True, perform comprehensive web crawling (recommended)
         
     Returns:
-        A dictionary containing structured data about the institution,
-        including raw text, source notes, crawling links, and any errors encountered.
+        A dictionary containing complete structured data about the institution,
+        including crawled content, images, links, extracted data, and benchmarks.
     """
-    # Initialize the base structure to ensure 
-    # consistent keys even if errors happen early on
+    # Initialize the comprehensive result structure
     final_result = {key: "Unknown" for key in STRUCTURED_INFO_KEYS}
-    final_result["name"] = institution_name if institution_name else "Unknown"
-    final_result["description_raw"] = "N/A"
-    final_result["data_source_notes"] = ""
-    final_result["crawling_links"] = []
-    final_result["crawling_config"] = {}
-    final_result["error"] = None
+    final_result.update({
+        "name": institution_name if institution_name else "Unknown",
+        "description_raw": "N/A",
+        "data_source_notes": "",
+        "crawling_links": [],
+        "crawling_config": {},
+        "crawled_data": {},
+        "images_found": [],
+        "logos_found": [],
+        "comprehensive_content": {},
+        "content_summary": {},
+        "error": None
+    })
 
     if not institution_name:
         final_result["error"] = "No institution name provided."
@@ -77,11 +95,12 @@ def process_institution_pipeline(institution_name: str, institution_type: str = 
     final_result["pipeline_id"] = pipeline_id
     
     try:
-        # Get links for crawling (this also gets search data) with enhanced search params
+        # Phase 1: Enhanced Search to find URLs and initial data
+        print(f"🔍 Phase 1: Searching for {institution_name}...")
         crawling_data = get_institution_links_for_crawling(
             institution_name, 
             institution_type, 
-            max_links=10,
+            max_links=15,  # Get more links for comprehensive crawling
             base_dir=BASE_DIR,
             search_params=search_params
         )
@@ -131,33 +150,217 @@ def process_institution_pipeline(institution_name: str, institution_type: str = 
         link_manager = InstitutionLinkManager(BASE_DIR)
         final_result["crawling_config"] = link_manager.prepare_crawling_config(crawling_data)
 
-        # Skip extraction if requested (for when we plan to use crawler data)
-        if skip_extraction:
-            final_result["data_source_notes"] += "Skipped extraction - prepared for crawling."
+        # Phase 2: Comprehensive Web Crawling (if enabled)
+        crawled_content = {}
+        if enable_crawling and final_result["crawling_links"]:
+            print(f"🕷️ Phase 2: Comprehensive crawling of {len(final_result['crawling_links'])} URLs...")
             
-            # Complete pipeline successfully (search phase only)
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=25.0)
+            try:
+                # Determine institution type if not provided
+                detected_type = institution_type
+                if not detected_type:
+                    # Try to detect from URL patterns or search results
+                    for link in final_result["crawling_links"][:3]:
+                        url = link.get('url', '').lower()
+                        title = link.get('title', '').lower()
+                        snippet = link.get('snippet', '').lower()
+                        content = f"{url} {title} {snippet}"
+                        
+                        if any(word in content for word in ['university', 'college', 'education', 'academic']):
+                            detected_type = 'university'
+                            break
+                        elif any(word in content for word in ['hospital', 'medical', 'health', 'clinic']):
+                            detected_type = 'hospital'
+                            break
+                        elif any(word in content for word in ['bank', 'banking', 'financial', 'finance']):
+                            detected_type = 'bank'
+                            break
+                    
+                    if not detected_type:
+                        detected_type = 'general'
+                
+                # Run async crawling
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+                
+                crawl_result = loop.run_until_complete(
+                    crawler_service.crawl_institution_urls(
+                        institution_name=institution_name,
+                        urls=[link['url'] for link in final_result["crawling_links"]],
+                        institution_type=detected_type,
+                        max_pages=12,  # Comprehensive crawling
+                        strategy=CrawlingStrategy.ADVANCED
+                    )
+                )
+                
+                loop.close()
+                
+                # Store comprehensive crawled data
+                final_result["crawled_data"] = crawl_result
+                crawled_content = crawl_result
+                
+                # Extract comprehensive media and content with enhanced processor
+                all_images = []
+                logos_found = []
+                facility_images = []
+                social_media_links = {}
+                documents_found = []
+                
+                for page in crawl_result.get('crawled_pages', []):
+                    if page.get('success') and page.get('processed_content'):
+                        processed = page['processed_content']
+                        
+                        # Extract comprehensive image data
+                        images_and_logos = processed.get('images_and_logos', {})
+                        
+                        # Add all images with source information
+                        for category in ['logos', 'facility_images', 'people_images', 'general_images']:
+                            for img in images_and_logos.get(category, []):
+                                img_with_source = img.copy()
+                                img_with_source.update({
+                                    'source_page': page.get('url', ''),
+                                    'page_title': page.get('title', ''),
+                                    'category': category
+                                })
+                                all_images.append(img_with_source)
+                                
+                                # Separate logos for easy access
+                                if category == 'logos':
+                                    logos_found.append(img_with_source)
+                                elif category == 'facility_images':
+                                    facility_images.append(img_with_source)
+                        
+                        # Aggregate social media links
+                        page_social = processed.get('social_media_links', {})
+                        for platform, links in page_social.items():
+                            if platform not in social_media_links:
+                                social_media_links[platform] = []
+                            social_media_links[platform].extend(links)
+                        
+                        # Collect important documents
+                        page_docs = processed.get('documents_and_files', {})
+                        for doc_type, docs in page_docs.items():
+                            for doc in docs:
+                                documents_found.append({
+                                    'url': doc,
+                                    'type': doc_type,
+                                    'source_page': page.get('url', ''),
+                                    'page_title': page.get('title', '')
+                                })
+                
+                # Remove duplicates and organize data
+                final_result["images_found"] = all_images
+                final_result["logos_found"] = _deduplicate_images(logos_found)
+                final_result["facility_images"] = _deduplicate_images(facility_images)
+                final_result["social_media_links"] = _deduplicate_social_links(social_media_links)
+                final_result["documents_found"] = _deduplicate_documents(documents_found)
+                
+                # Create comprehensive content summary
+                total_content = ""
+                page_summaries = []
+                
+                for page in crawl_result.get('crawled_pages', []):
+                    if page.get('success') and page.get('processed_content'):
+                        processed = page['processed_content']
+                        
+                        # Add cleaned text
+                        if processed.get('cleaned_text'):
+                            total_content += f"\n\n--- Content from {page.get('url', 'Unknown URL')} ---\n"
+                            total_content += processed['cleaned_text'][:2000]  # Limit per page
+                        
+                        # Store page summary
+                        page_summaries.append({
+                            'url': page.get('url', ''),
+                            'title': page.get('title', ''),
+                            'quality_score': page.get('content_quality_score', 0),
+                            'word_count': page.get('word_count', 0),
+                            'key_info': processed.get('key_information', {}),
+                            'content_sections': processed.get('content_sections', {})
+                        })
+                
+                final_result["comprehensive_content"] = {
+                    'total_text': total_content,
+                    'page_summaries': page_summaries,
+                    'crawl_summary': crawl_result.get('crawl_summary', {}),
+                    'total_pages_crawled': len(crawl_result.get('crawled_pages', [])),
+                    'total_images_found': len(all_images),
+                    'logos_identified': len(logos_found)
+                }
+                
+                # Update raw text with comprehensive content for better extraction
+                if total_content.strip():
+                    raw_text = total_content[:8000]  # Use crawled content instead of search snippets
+                    final_result["description_raw"] = raw_text
+                    final_result["data_source_notes"] += f"Enhanced with comprehensive crawling: {len(crawl_result.get('crawled_pages', []))} pages. "
+                
+                print(f"✅ Crawling completed: {len(crawl_result.get('crawled_pages', []))} pages, {len(all_images)} images, {len(logos_found)} logos")
+                
+            except Exception as e:
+                print(f"⚠️ Crawling failed: {str(e)}")
+                final_result["data_source_notes"] += f"Crawling failed: {str(e)}. "
+                benchmark_tracker.add_pipeline_error(pipeline_id, 'crawling', str(e))
+        
+        elif not enable_crawling:
+            final_result["data_source_notes"] += "Crawling disabled. "
+        else:
+            final_result["data_source_notes"] += "No URLs available for crawling. "
+
+        # Skip extraction if requested (but we've done crawling)
+        if skip_extraction:
+            # Calculate completeness based on what we have
+            completeness = 50.0  # Base for search + crawling
+            if crawled_content.get('crawled_pages'):
+                completeness = 70.0  # Good crawling results
+            if final_result.get('logos_found'):
+                completeness += 5.0
+            if final_result.get('images_found'):
+                completeness += 5.0
+            
+            final_result["data_source_notes"] += "Skipped LLM extraction - comprehensive crawling completed."
+            
+            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness)
             final_result["benchmark_data"] = {
                 'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
                 'success': True,
-                'phase': 'search_only',
-                'completeness_percent': 25.0
+                'phase': 'search_and_crawling',
+                'completeness_percent': completeness,
+                'pages_crawled': len(crawled_content.get('crawled_pages', [])),
+                'images_found': len(final_result.get('images_found', [])),
+                'logos_found': len(final_result.get('logos_found', []))
             }
             return final_result
 
-        # Only do extraction if we have an LLM client and enough text
+        # Phase 3: LLM-Powered Extraction for Complete Profiling
+        print(f"🤖 Phase 3: LLM extraction from comprehensive content...")
+        
         if not genai_client:
-            final_result["data_source_notes"] += "Skipped extraction - AI client not configured. Use crawling for full data."
+            # Calculate completeness without LLM extraction
+            completeness = 60.0 if crawled_content.get('crawled_pages') else 30.0
+            final_result["data_source_notes"] += "Skipped extraction - AI client not configured. Comprehensive crawling completed."
             
-            # Complete pipeline (search successful, extraction skipped)
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=30.0)
+            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness)
             final_result["benchmark_data"] = {
                 'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
                 'success': True,
-                'phase': 'search_only',
-                'completeness_percent': 30.0
+                'phase': 'search_and_crawling',
+                'completeness_percent': completeness
             }
             return final_result
+
+        if len(raw_text.strip()) < 50:  # Very little text available
+            completeness = 40.0 if crawled_content.get('crawled_pages') else 35.0
+            final_result["data_source_notes"] += "Skipped extraction - insufficient text content available."
+            
+            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness)
+            final_result["benchmark_data"] = {
+                'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
+                'success': True,
+                'phase': 'search_and_crawling',
+                'completeness_percent': completeness
+            }
+            return final_result
+
+        # Extract comprehensive information from the raw text (enhanced with crawling)
 
         if len(raw_text.strip()) < 50:  # Very little text from search snippets
             final_result["data_source_notes"] += "Skipped extraction - insufficient text from search snippets. Use crawling for full data."
@@ -228,6 +431,46 @@ def process_institution_pipeline(institution_name: str, institution_type: str = 
             'phase': 'error'
         }
         return final_result
+
+def _deduplicate_images(images: List[Dict]) -> List[Dict]:
+    """Remove duplicate images based on URL."""
+    seen_urls = set()
+    unique_images = []
+    
+    for img in images:
+        url = img.get('url', img.get('src', ''))
+        if url and url not in seen_urls:
+            seen_urls.add(url)
+            unique_images.append(img)
+    
+    return unique_images[:20]  # Limit to top 20
+
+
+def _deduplicate_social_links(social_links: Dict[str, List[str]]) -> Dict[str, List[str]]:
+    """Remove duplicate social media links."""
+    deduplicated = {}
+    
+    for platform, links in social_links.items():
+        unique_links = list(set(links))[:3]  # Keep top 3 per platform
+        if unique_links:
+            deduplicated[platform] = unique_links
+    
+    return deduplicated
+
+
+def _deduplicate_documents(documents: List[Dict]) -> List[Dict]:
+    """Remove duplicate documents based on URL."""
+    seen_urls = set()
+    unique_docs = []
+    
+    for doc in documents:
+        url = doc.get('url', '')
+        if url and url not in seen_urls:
+            seen_urls.add(url)
+            unique_docs.append(doc)
+    
+    return unique_docs[:15]  # Limit to top 15
+
 def get_institution_profile(institution_name, document_text=None):
     """
     Generates a general textual profile for an institution.
