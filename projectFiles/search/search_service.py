@@ -6,12 +6,10 @@ import time
 from typing import Dict, List, Optional
 from .google_client import GoogleSearchClient
 from .cache import SearchCache
-from benchmark import ComprehensiveBenchmarkTracker, SearchBenchmark
 
 
 class SearchService:
     """Main search service with caching and benchmarking."""
-    
     def __init__(self, base_dir: str = None):
         self.base_dir = base_dir or os.getcwd()
         
@@ -21,9 +19,10 @@ class SearchService:
         
         # Initialize components with centralized cache paths
         cache_path = cache_config.get_search_cache_dir()
-        benchmark_path = cache_config.get_benchmarks_dir()
         self.cache = SearchCache(cache_path)
-        self.benchmark_tracker = ComprehensiveBenchmarkTracker(benchmark_path)
+        
+        # Enhanced benchmarking integration will be handled at the app level
+        # No need for direct benchmark tracker in service layer
         
         # Initialize Google client (may raise ValueError if not configured)
         try:
@@ -67,24 +66,13 @@ class SearchService:
             if cached_result:
                 source = 'similar_cache' if cached_result.get('cache_similarity', 0) > 0 else 'cache'
                 cache_similarity = cached_result.get('cache_similarity', 0)
-        
-        # If cache hit, return cached result
+          # If cache hit, return cached result
         if cached_result and not force_api:
             response_time = time.time() - start_time
             
-            # Record benchmark
-            benchmark = SearchBenchmark(
-                query=institution_name,
-                timestamp=start_time,
-                response_time=response_time,
-                success=cached_result.get('success', True),
-                source=source,
-                num_results=len(cached_result.get('results', [])),
-                total_results=cached_result.get('total_results', '0'),
-                cache_similarity=cache_similarity,
-                institution_type=institution_type
-            )
-            self.benchmark_tracker.record_search(benchmark)
+            # Legacy benchmark recording disabled - now handled by enhanced system
+            # benchmark = SearchBenchmark(...)
+            # self.benchmark_tracker.record_search(benchmark)
             
             return {
                 **cached_result,
@@ -92,8 +80,7 @@ class SearchService:
                 'source': source,
                 'response_time': response_time
             }
-        
-        # Make API call
+          # Make API call
         if not self.is_configured:
             error_result = {
                 'success': False,
@@ -102,19 +89,9 @@ class SearchService:
                 'source': 'error'
             }
             
-            # Record failed benchmark
-            benchmark = SearchBenchmark(
-                query=institution_name,
-                timestamp=start_time,
-                response_time=time.time() - start_time,
-                success=False,
-                source='error',
-                num_results=0,
-                total_results='0',
-                error='API not configured',
-                institution_type=institution_type
-            )
-            self.benchmark_tracker.record_search(benchmark)
+            # Legacy benchmark recording disabled - now handled by enhanced system
+            # benchmark = SearchBenchmark(...)
+            # self.benchmark_tracker.record_search(benchmark)
             
             return error_result
           # Make the API call with enhanced parameters
@@ -125,20 +102,9 @@ class SearchService:
         if api_result.get('success', False):
             self.cache.put(institution_name, api_result, cache_params)
         
-        # Record benchmark
-        benchmark = SearchBenchmark(
-            query=institution_name,
-            timestamp=start_time,
-            response_time=response_time,
-            success=api_result.get('success', False),
-            source='api',
-            num_results=len(api_result.get('results', [])),
-            total_results=api_result.get('total_results', '0'),
-            api_search_time=api_result.get('search_time', 0),
-            error=api_result.get('error'),
-            institution_type=institution_type
-        )
-        self.benchmark_tracker.record_search(benchmark)
+        # Record benchmark        # Legacy benchmark recording disabled - now handled by enhanced system
+        # benchmark = SearchBenchmark(...)
+        # self.benchmark_tracker.record_search(benchmark)
         
         return {
             **api_result,
@@ -182,27 +148,30 @@ class SearchService:
             'cleared_entries': cleared_count,
             'message': f'Cleared {cleared_count} expired cache entries'
         }
-    
     def get_stats(self) -> Dict:
         """Get comprehensive service statistics."""
         cache_stats = self.cache.get_stats()
-        session_stats = self.benchmark_tracker.get_session_stats()
-        all_time_stats = self.benchmark_tracker.get_all_time_stats()
+        # Legacy benchmark stats disabled - now handled by enhanced system
+        # session_stats = self.benchmark_tracker.get_session_stats()
+        # all_time_stats = self.benchmark_tracker.get_all_time_stats()
         
         return {
             'service_configured': self.is_configured,
             'cache_stats': cache_stats,
-            'session_stats': session_stats,
-            'all_time_stats': all_time_stats
+            # 'session_stats': session_stats,
+            # 'all_time_stats': all_time_stats
         }
     
     def get_recent_searches(self, limit: int = 10) -> List[Dict]:
         """Get recent search history."""
-        return self.benchmark_tracker.get_recent_searches(limit)
-    
+        # Legacy benchmark method disabled - now handled by enhanced system
+        # return self.benchmark_tracker.get_recent_searches(limit)
+        return []
     def analyze_performance(self) -> Dict:
         """Get performance analysis by institution type."""
-        return self.benchmark_tracker.analyze_performance_by_type()
+        # Legacy benchmark method disabled - now handled by enhanced system
+        # return self.benchmark_tracker.analyze_performance_by_type()
+        return {}
     
     def get_cached_queries(self) -> List[Dict]:
         """Get list of all cached queries."""

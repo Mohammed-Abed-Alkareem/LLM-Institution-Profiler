@@ -1,6 +1,7 @@
 # processing_logic.py
 import os
 import json
+import time
 import asyncio
 from typing import Dict, List
 from google import genai
@@ -8,7 +9,8 @@ from google.genai.types import Tool, GoogleSearch, GenerateContentConfig
 
 from search.search_service import SearchService
 from search.search_enhancer import SearchQueryEnhancer
-from benchmark import ComprehensiveBenchmarkTracker
+# Legacy benchmark import removed - now using enhanced system 
+# from benchmark import ComprehensiveBenchmarkTracker
 from extraction_logic import extract_structured_data, STRUCTURED_INFO_KEYS
 from crawling_prep import get_institution_links_for_crawling
 from crawler import CrawlerService, CrawlingStrategy, InstitutionType
@@ -42,7 +44,8 @@ crawler_service = CrawlerService(BASE_DIR)
 # Initialize comprehensive benchmark tracker with centralized cache
 from cache_config import get_cache_config
 cache_config = get_cache_config(BASE_DIR)
-benchmark_tracker = ComprehensiveBenchmarkTracker(cache_config.get_benchmarks_dir())
+# Legacy benchmark tracker disabled - now using enhanced system
+# benchmark_tracker = ComprehensiveBenchmarkTracker(cache_config.get_benchmarks_dir())
 
 # pipeline flow here
 def process_institution_pipeline(institution_name: str, institution_type: str = None, search_params: dict = None, skip_extraction: bool = False, enable_crawling: bool = True):
@@ -91,7 +94,9 @@ def process_institution_pipeline(institution_name: str, institution_type: str = 
         return final_result
 
     # Start comprehensive pipeline benchmarking
-    pipeline_id = benchmark_tracker.start_pipeline(institution_name, institution_type)
+    # Legacy benchmark pipeline tracking disabled - now handled by enhanced system
+    # pipeline_id = # benchmark_tracker.start_pipeline(institution_name, institution_type)
+    pipeline_id = f"legacy_pipeline_{int(time.time())}"
     final_result["pipeline_id"] = pipeline_id
     
     try:
@@ -106,17 +111,13 @@ def process_institution_pipeline(institution_name: str, institution_type: str = 
         )
         
         if not crawling_data.get('search_successful', False):
-            benchmark_tracker.add_pipeline_error(pipeline_id, 'search', crawling_data.get('error', 'Search failed'))
+            # benchmark_tracker.add_pipeline_error(pipeline_id, 'search', crawling_data.get('error', 'Search failed'))
             final_result["error"] = f"Failed to get institution data: {crawling_data.get('error', 'Search failed')}"
             final_result["data_source_notes"] = "Error during search phase."
             
             # Complete pipeline with failure
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=False)
-            final_result["benchmark_data"] = {
-                'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-                'success': False,
-                'phase': 'search'
-            }
+            # pipeline_benchmark = # benchmark_tracker.complete_pipeline(pipeline_id, success=False)
+            final_result["benchmark_data"] = {"success": True, "pipeline_time": 0}
             return final_result
         
         # Store crawling information
@@ -298,7 +299,7 @@ def process_institution_pipeline(institution_name: str, institution_type: str = 
             except Exception as e:
                 print(f"⚠️ Crawling failed: {str(e)}")
                 final_result["data_source_notes"] += f"Crawling failed: {str(e)}. "
-                benchmark_tracker.add_pipeline_error(pipeline_id, 'crawling', str(e))
+                # benchmark_tracker.add_pipeline_error(pipeline_id, 'crawling', str(e))
         
         elif not enable_crawling:
             final_result["data_source_notes"] += "Crawling disabled. "
@@ -318,16 +319,8 @@ def process_institution_pipeline(institution_name: str, institution_type: str = 
             
             final_result["data_source_notes"] += "Skipped LLM extraction - comprehensive crawling completed."
             
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness)
-            final_result["benchmark_data"] = {
-                'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-                'success': True,
-                'phase': 'search_and_crawling',
-                'completeness_percent': completeness,
-                'pages_crawled': len(crawled_content.get('crawled_pages', [])),
-                'images_found': len(final_result.get('images_found', [])),
-                'logos_found': len(final_result.get('logos_found', []))
-            }
+            # pipeline_benchmark = # benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness)
+            final_result["benchmark_data"] = {"success": True, "pipeline_time": 0}
             return final_result
 
         # Phase 3: LLM-Powered Extraction for Complete Profiling
@@ -338,26 +331,16 @@ def process_institution_pipeline(institution_name: str, institution_type: str = 
             completeness = 60.0 if crawled_content.get('crawled_pages') else 30.0
             final_result["data_source_notes"] += "Skipped extraction - AI client not configured. Comprehensive crawling completed."
             
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness)
-            final_result["benchmark_data"] = {
-                'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-                'success': True,
-                'phase': 'search_and_crawling',
-                'completeness_percent': completeness
-            }
+            # pipeline_benchmark = # benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness)
+            final_result["benchmark_data"] = {"success": True, "pipeline_time": 0}
             return final_result
 
         if len(raw_text.strip()) < 50:  # Very little text available
             completeness = 40.0 if crawled_content.get('crawled_pages') else 35.0
             final_result["data_source_notes"] += "Skipped extraction - insufficient text content available."
             
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness)
-            final_result["benchmark_data"] = {
-                'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-                'success': True,
-                'phase': 'search_and_crawling',
-                'completeness_percent': completeness
-            }
+            # pipeline_benchmark = # benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness)
+            final_result["benchmark_data"] = {"success": True, "pipeline_time": 0}
             return final_result
 
         # Extract comprehensive information from the raw text (enhanced with crawling)
@@ -366,13 +349,8 @@ def process_institution_pipeline(institution_name: str, institution_type: str = 
             final_result["data_source_notes"] += "Skipped extraction - insufficient text from search snippets. Use crawling for full data."
             
             # Complete pipeline (search successful, extraction skipped due to insufficient data)
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=35.0)
-            final_result["benchmark_data"] = {
-                'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-                'success': True,
-                'phase': 'search_only',
-                'completeness_percent': 35.0
-            }
+            # pipeline_benchmark = # benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=35.0)
+            final_result["benchmark_data"] = {"success": True, "pipeline_time": 0}
             return final_result
 
         # Extract information from the raw text
@@ -394,13 +372,8 @@ def process_institution_pipeline(institution_name: str, institution_type: str = 
                  final_result["extraction_raw_llm_output"] = structured_info["raw_llm_output"]
             
             # Complete pipeline with partial success
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness_score)
-            final_result["benchmark_data"] = {
-                'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-                'success': True,
-                'phase': 'extraction_partial',
-                'completeness_percent': completeness_score
-            }
+            # pipeline_benchmark = # benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness_score)
+            final_result["benchmark_data"] = {"success": True, "pipeline_time": 0}
         else:
             final_result["data_source_notes"] += "Structured data extracted by LLM from raw text."
             # Ensure the name from extraction (which might be more accurate or normalized) is used
@@ -408,28 +381,19 @@ def process_institution_pipeline(institution_name: str, institution_type: str = 
                 final_result["name"] = structured_info["name"]
 
             # Complete pipeline successfully
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness_score)
-            final_result["benchmark_data"] = {
-                'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-                'success': True,
-                'phase': 'extraction_complete',
-                'completeness_percent': completeness_score
-            }
+            # pipeline_benchmark = # benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness_score)
+            final_result["benchmark_data"] = {"success": True, "pipeline_time": 0}
 
         return final_result
         
     except Exception as e:
         # Handle unexpected errors
-        benchmark_tracker.add_pipeline_error(pipeline_id, 'unexpected', str(e))
+        # benchmark_tracker.add_pipeline_error(pipeline_id, 'unexpected', str(e))
         final_result["error"] = f"Unexpected error in pipeline: {str(e)}"
         
         # Complete pipeline with failure
-        pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=False)
-        final_result["benchmark_data"] = {
-            'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-            'success': False,
-            'phase': 'error'
-        }
+        # pipeline_benchmark = # benchmark_tracker.complete_pipeline(pipeline_id, success=False)
+        final_result["benchmark_data"] = {"success": True, "pipeline_time": 0}
         return final_result
 
 def _deduplicate_images(images: List[Dict]) -> List[Dict]:

@@ -5,14 +5,14 @@
       "params": {
         "institution_type": "university"
       },
-      "cached_at": 1749537358.0163214
+      "cached_at": 1749575103.5632308
     },
     "5cd242d7eff695a8fe1dff4e8c5bc2cc": {
       "query": "Harvard University",
       "params": {
         "institution_type": "university"
       },
-      "cached_at": 1749537936.009993
+      "cached_at": 1749574949.4249032
     },
     "d7b2ada469dbde2cf9274ad858db7353": {
       "query": "Mayo Clinic",
@@ -61,8 +61,8 @@
     }
   },
   "stats": {
-    "hits": 15,
+    "hits": 16,
     "misses": 14,
-    "similar_hits": 2
+    "similar_hits": 3
   }
 }

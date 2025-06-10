@@ -1,23 +1,23 @@
 {
-  "query": "MIT university education academic",
+  "query": "MIT university education",
   "params": {
     "institution_type": "university"
   },
-  "cached_at": 1749537358.0152833,
-  "timestamp": 1749537358.014283,
+  "cached_at": 1749575103.562287,
+  "timestamp": 1749575103.562287,
   "success": true,
   "results": [
     {
       "title": "Education | MIT - Massachusetts Institute of Technology",
       "link": "https://www.mit.edu/education/",
       "displayLink": "www.mit.edu",
-      "snippet": "At MIT, we revel in a culture of learning by doing. In more than 30 departments across five schools and one college, our students combine analytical rigor\u00a0..."
+      "snippet": "From science and engineering to the arts, humanities, social sciences, and interdisciplinary programs, we offer excellence across the board."
     },
     {
-      "title": "Degree Charts | MIT Course Catalog",
-      "link": "https://catalog.mit.edu/degree-charts/",
-      "displayLink": "catalog.mit.edu",
-      "snippet": "Undergraduate Degree Charts \u00b7 School of Architecture and Planning \u00b7 School of Engineering \u00b7 School of Humanities, Arts, and Social Sciences \u00b7 Sloan School of\u00a0..."
+      "title": "Schools & Departments | MIT - Massachusetts Institute of Technology",
+      "link": "https://web.mit.edu/education/schools-and-departments",
+      "displayLink": "web.mit.edu",
+      "snippet": "Thumbnail of School of Science. MIT Schwarzman College of Computing \u00b7 Massachusetts Institute of Technology \u00b7 Education \u00b7 Research \u00b7 Innovation \u00b7 Admissions +\u00a0..."
     },
     {
       "title": "Schools & Departments | MIT - Massachusetts Institute of Technology",
@@ -26,18 +26,41 @@
       "snippet": "School of Architecture and Planning \u00b7 Architecture 4 \u00b7 School of Engineering \u00b7 Aeronautics and Astronautics 16 \u00b7 School of Humanities, Arts, and Social Sciences."
     },
     {
-      "title": "Academic Diary",
-      "link": "https://mitpress.mit.edu/9781906897581/academic-diary/",
-      "displayLink": "mitpress.mit.edu",
-      "snippet": "Mar 25, 2016 ... Is a university education still relevant? What are the forces that threaten it? Should academics ever be allowed near Twitter?"
+      "title": "MIT OpenCourseWare | Free Online Course Materials",
+      "link": "https://ocw.mit.edu/",
+      "displayLink": "ocw.mit.edu",
+      "snippet": "Topics: Teaching and Education, Curriculum and Teaching. New Courses ... MIT OpenCourseWare \u201cchanged how I think about teaching and what a university\u00a0..."
     },
     {
-      "title": "MIT - Massachusetts Institute of Technology",
-      "link": "https://www.mit.edu/",
-      "displayLink": "www.mit.edu",
-      "snippet": "A new study finds U.S. universities drive regional innovation, yielding companies and patents. They're key to \u201cattracting inventors into their regions, training\u00a0..."
+      "title": "Loughborough Business School joins Massachusetts Institute of ...",
+      "link": "https://www.lboro.ac.uk/media-centre/press-releases/2024/july/loughborough-partner-mit-joint-masters-degree/",
+      "displayLink": "www.lboro.ac.uk",
+      "snippet": "Jul 4, 2024 ... ... (MIT) and an MIT certificate as well as a Loughborough degree. ... The four university centres (MIT, ZLC, LCL, and NISCI) offer their\u00a0..."
+    },
+    {
+      "title": "Abhijit Banerjee | MIT Economics",
+      "link": "https://research.kent.ac.uk/development-economics/person/abhijit-banerjee/",
+      "displayLink": "research.kent.ac.uk",
+      "snippet": "Abhijit Banerjee, Ford Foundation International Professor of Economics. Research Fields: Development Economics, Macroeconomics, Political Economy."
+    },
+    {
+      "title": "UCL and MIT team up for first human internet touch | UCL News ...",
+      "link": "https://www.ucl.ac.uk/news/2002/oct/ucl-and-mit-team-first-human-internet-touch",
+      "displayLink": "www.ucl.ac.uk",
+      "snippet": "Oct 28, 2002 ... The Massachusetts Institute of Technology (MIT) is one of the world's outstanding universities. Education and research - with relevance to\u00a0..."
+    },
+    {
+      "title": "MIT CogNet",
+      "link": "http://gpbib.cs.ucl.ac.uk/cache/bin/cache.php?ross:1996:vesaGP,http___cognet.mit.edu_library_books_view_isbn_0262611279,http://cognet.mit.edu/library/books/view?isbn=0262611279",
+      "displayLink": "gpbib.cs.ucl.ac.uk",
+      "snippet": "David Danks, Professor of Philosophy & Psychology, Carnegie Mellon University. Features. Reference works. MIT CogNet offers the complete text of major\u00a0..."
     }
   ],
-  "total_results": "50400000",
-  "search_time": 0.45749
+  "total_results": "279000",
+  "search_time": 0.196725,
+  "enhancement_info": {
+    "enhanced": true,
+    "detected_type": "university",
+    "strategy_used": "official_sites"
+  }
 }
