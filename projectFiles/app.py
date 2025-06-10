@@ -34,9 +34,11 @@ def index():
 
     if request.method == 'POST':
         institution_name = request.form.get('institution_name')
+        institution_type = request.form.get('institution_type', '').strip() or None
+        
         if institution_name:
-            # Process the institution name
-            processed_data = process_institution_pipeline(institution_name)
+            # Process the institution name with optional type
+            processed_data = process_institution_pipeline(institution_name, institution_type)
             # show as pure text for now
             institution_data_str = json.dumps(processed_data, indent=2)
         else:
@@ -197,6 +199,159 @@ def clear_search_cache():
     """
     result = search_service.clear_cache()
     return jsonify(result)
+
+
+@app.route('/benchmarks/pipeline', methods=['GET'])
+def pipeline_benchmarks():
+    """
+    Get comprehensive pipeline benchmarking statistics.
+    """
+    from benchmark import ComprehensiveBenchmarkTracker
+    from cache_config import get_cache_config
+    
+    cache_config = get_cache_config(BASE_DIR)
+    benchmark_tracker = ComprehensiveBenchmarkTracker(cache_config.get_benchmarks_dir())
+    
+    stats = {
+        'pipeline_stats': benchmark_tracker.get_pipeline_stats(),
+        'comprehensive_stats': benchmark_tracker.get_comprehensive_stats(),
+        'recent_pipelines': benchmark_tracker.get_recent_pipelines(10)
+    }
+    return jsonify(stats)
+
+
+@app.route('/benchmarks/overview', methods=['GET'])
+def benchmarks_overview():
+    """
+    Get a complete overview of all benchmarking data.
+    """
+    from benchmark import ComprehensiveBenchmarkTracker
+    from cache_config import get_cache_config
+    
+    cache_config = get_cache_config(BASE_DIR)
+    benchmark_tracker = ComprehensiveBenchmarkTracker(cache_config.get_benchmarks_dir())
+    
+    overview = {
+        'search_only': {
+            'session_stats': search_service.get_stats().get('session_stats', {}),
+            'all_time_stats': search_service.get_stats().get('all_time_stats', {}),
+            'recent_searches': search_service.get_recent_searches(5)
+        },
+        'pipeline_comprehensive': {
+            'pipeline_stats': benchmark_tracker.get_pipeline_stats(),
+            'comprehensive_stats': benchmark_tracker.get_comprehensive_stats(),
+            'recent_pipelines': benchmark_tracker.get_recent_pipelines(5)
+        }
+    }
+    return jsonify(overview)
+
+
+@app.route('/crawling/prepare', methods=['GET'])
+def prepare_crawling():
+    """
+    Prepare crawling configuration for an institution.
+    """
+    institution_name = request.args.get('name', '').strip()
+    institution_type = request.args.get('type', '').strip() or None
+    max_links = int(request.args.get('max_links', 10))
+    
+    if not institution_name:
+        return jsonify({
+            'success': False,
+            'error': 'Institution name is required'
+        })
+    
+    from crawling_prep import get_institution_links_for_crawling, InstitutionLinkManager
+    
+    # Get crawling data
+    crawling_data = get_institution_links_for_crawling(
+        institution_name, institution_type, max_links, 
+        os.path.dirname(os.path.abspath(__file__))
+    )
+    
+    if not crawling_data.get('search_successful'):
+        return jsonify({
+            'success': False,
+            'error': crawling_data.get('error', 'Failed to prepare crawling data'),
+            'institution_name': institution_name,
+            'institution_type': institution_type
+        })
+    
+    # Prepare crawling configuration
+    link_manager = InstitutionLinkManager(os.path.dirname(os.path.abspath(__file__)))
+    crawling_config = link_manager.prepare_crawling_config(crawling_data)
+    
+    return jsonify({
+        'success': True,
+        'institution_name': institution_name,
+        'institution_type': institution_type,
+        'links_found': len(crawling_data['links']),
+        'crawling_data': crawling_data,
+        'crawling_config': crawling_config
+    })
+
+
+@app.route('/process/skip-extraction', methods=['POST'])
+def process_institution_skip_extraction():
+    """
+    Process institution but skip extraction - prepare for crawling instead.
+    """
+    data = request.get_json() or {}
+    institution_name = data.get('institution_name', '').strip()
+    institution_type = data.get('institution_type', '').strip() or None
+    
+    if not institution_name:
+        return jsonify({
+            'success': False,
+            'error': 'Institution name is required'
+        })
+    
+    # Process with extraction skipped
+    result = process_institution_pipeline(institution_name, institution_type, skip_extraction=True)
+    
+    return jsonify({
+        'success': not result.get('error'),
+        'data': result
+    })
+
+
+@app.route('/cache/info', methods=['GET'])
+def cache_info():
+    """
+    Get information about all cache directories and usage.
+    """
+    from cache_config import get_cache_config
+    
+    cache_config = get_cache_config(BASE_DIR)
+    cache_info = cache_config.get_cache_info()
+    
+    return jsonify({
+        'cache_structure': cache_info,
+        'total_cache_size_mb': sum(
+            dir_info['total_size_mb'] 
+            for dir_info in cache_info['cache_directories'].values()
+        )
+    })
+
+
+@app.route('/cache/cleanup', methods=['POST'])
+def cleanup_old_caches():
+    """
+    Clean up old cache directories outside the centralized project_cache.
+    Use ?dry_run=false to actually perform the cleanup.
+    """
+    from cache_config import get_cache_config
+    
+    dry_run = request.args.get('dry_run', 'true').lower() != 'false'
+    cache_config = get_cache_config(BASE_DIR)
+    
+    cleanup_result = cache_config.cleanup_old_caches(dry_run=dry_run)
+    
+    return jsonify({
+        'dry_run': dry_run,
+        'cleanup_result': cleanup_result,
+        'message': 'Dry run completed - use ?dry_run=false to actually clean up' if dry_run else 'Cleanup completed'
+    })
 
 
 if __name__ == '__main__':

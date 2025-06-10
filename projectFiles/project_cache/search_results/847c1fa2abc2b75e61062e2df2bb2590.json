@@ -1,0 +1,41 @@
+{
+  "query": "Birzeit University",
+  "params": {},
+  "cached_at": 1749540447.3129802,
+  "timestamp": 1749540447.3119822,
+  "success": true,
+  "results": [
+    {
+      "title": "Birzeit University",
+      "link": "https://www.birzeit.edu/en",
+      "displayLink": "www.birzeit.edu",
+      "snippet": "Birzeit University Hosts Preparatory Meeting for the Annual Conference of the Palestinian Students Scholarship Fund (PSSF), with Wide Participation from Higher\u00a0..."
+    },
+    {
+      "title": "Birzeit University - Wikipedia",
+      "link": "https://en.wikipedia.org/wiki/Birzeit_University",
+      "displayLink": "en.wikipedia.org",
+      "snippet": "Birzeit University ... Birzeit University (Arabic: \u062c\u0627\u0645\u0639\u0629 \u0628\u064a\u0631\u0632\u064a\u062a) is a public university in the West Bank, Palestine, registered by the Palestinian Ministry of\u00a0..."
+    },
+    {
+      "title": "Fobzu - Friends of Birzeit University",
+      "link": "https://fobzu.org/",
+      "displayLink": "fobzu.org",
+      "snippet": "Fobzu supports the right to education and its role in the creation of a free and flourishing Palestine."
+    },
+    {
+      "title": "Harvard ends partnership with antisemitic Birzeit University - JNS.org",
+      "link": "https://www.jns.org/harvard-ends-partnership-with-antisemitic-birzeit-university/",
+      "displayLink": "www.jns.org",
+      "snippet": "Mar 31, 2025 ... The university suspended a partnership between its Fran\u00e7ois-Xavier Bagnoud Center for Health and Human Rights and Birzeit University, a\u00a0..."
+    },
+    {
+      "title": "icph@birzeit.edu",
+      "link": "https://icph.birzeit.edu/",
+      "displayLink": "icph.birzeit.edu",
+      "snippet": "What We Do. Research. ICPH research is integrally linked to training, teaching and advocacy, with a special focus on current and emerging Palestinian need for\u00a0..."
+    }
+  ],
+  "total_results": "1460000",
+  "search_time": 0.452165
+}

@@ -4,7 +4,7 @@ Configuration settings for the search module.
 import os
 
 # Google Custom Search API configuration
-GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY', '')
+GOOGLE_SEARCH_API_KEY = os.getenv('GOOGLE_SEARCH_API_KEY', '')
 GOOGLE_CSE_ID = os.getenv('GOOGLE_CSE_ID', '')
 
 # Search parameters

@@ -5,7 +5,7 @@ import requests
 import time
 from typing import Dict, List, Optional
 from .config import (
-    GOOGLE_API_KEY, GOOGLE_CSE_ID, DEFAULT_SEARCH_RESULTS,
+    GOOGLE_SEARCH_API_KEY, GOOGLE_CSE_ID, DEFAULT_SEARCH_RESULTS,
     REQUEST_TIMEOUT, MAX_REQUESTS_PER_MINUTE
 )
 from .rate_limiter import RateLimiter
@@ -15,7 +15,7 @@ class GoogleSearchClient:
     """Client for Google Custom Search JSON API."""
     
     def __init__(self, api_key: str = None, cse_id: str = None):
-        self.api_key = api_key or GOOGLE_API_KEY
+        self.api_key = api_key or GOOGLE_SEARCH_API_KEY
         self.cse_id = cse_id or GOOGLE_CSE_ID
         self.base_url = "https://www.googleapis.com/customsearch/v1"
         self.rate_limiter = RateLimiter(max_requests=MAX_REQUESTS_PER_MINUTE, time_window=60)

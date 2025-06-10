@@ -1,5 +1,6 @@
 from google.genai.types import Tool, GoogleSearch, GenerateContentConfig
 from search.search_service import SearchService
+from crawling_prep import get_institution_links_for_crawling
 import os
 
 # Initialize search service
@@ -60,6 +61,7 @@ def fetch_raw_institution_text_api_version(institution_name: str, institution_ty
 def get_institution_links_for_crawling(institution_name: str, institution_type: str = None, max_links: int = 10):
     """
     Get links for an institution that can be used for web crawling.
+    This function now includes priority scoring and crawling preparation.
     
     Args:
         institution_name: Name of the institution
@@ -67,12 +69,20 @@ def get_institution_links_for_crawling(institution_name: str, institution_type: 
         max_links: Maximum number of links to return
         
     Returns:
-        List of URLs suitable for crawling
+        Dictionary with prioritized links and crawling metadata
     """
     if not search_service.is_ready():
-        return []
+        return {
+            'institution_name': institution_name,
+            'institution_type': institution_type,
+            'search_successful': False,
+            'error': 'Search service not configured',
+            'links': [],
+            'metadata': {}
+        }
     
-    return search_service.get_search_links(institution_name, institution_type, max_links)
+    # Use the enhanced crawling preparation function
+    return get_institution_links_for_crawling(institution_name, institution_type, max_links, BASE_DIR)
 
 # The reason I'm using LLMs for this and not a search API is the current ones are
 # either rate limited (100-2k requests) or they'll be out of service soon (bing in october or so)

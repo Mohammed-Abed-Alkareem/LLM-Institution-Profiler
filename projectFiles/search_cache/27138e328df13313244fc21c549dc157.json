@@ -1,0 +1,43 @@
+{
+  "query": "JPMorgan Chase bank finance banking",
+  "params": {
+    "institution_type": "bank"
+  },
+  "cached_at": 1749539825.7897434,
+  "timestamp": 1749539825.7887492,
+  "success": true,
+  "results": [
+    {
+      "title": "JPMorgan Chase - Wikipedia",
+      "link": "https://en.wikipedia.org/wiki/JPMorgan_Chase",
+      "displayLink": "en.wikipedia.org",
+      "snippet": "JPMorgan Chase & Co. (stylized as JPMorganChase) is an American multinational finance corporation headquartered in New York City and incorporated in\u00a0..."
+    },
+    {
+      "title": "Comptroller Lander Casts Protest Votes Against Wells Fargo ...",
+      "link": "https://comptroller.nyc.gov/newsroom/comptroller-lander-casts-protest-votes-against-wells-fargo-citibank-jp-morgan-chases-banking-designations/",
+      "displayLink": "comptroller.nyc.gov",
+      "snippet": "May 13, 2025 ... ... JP Morgan Chase during today's New York City Banking Commission designation vote. \u201cThe banks that hold New..."
+    },
+    {
+      "title": "CFPB Sues JPMorgan Chase, Bank of America, and Wells Fargo for ...",
+      "link": "https://www.consumerfinance.gov/about-us/newsroom/cfpb-sues-jpmorgan-chase-bank-of-america-and-wells-fargo-for-allowing-fraud-to-fester-on-zelle/",
+      "displayLink": "www.consumerfinance.gov",
+      "snippet": "Dec 20, 2024 ... The Consumer Financial Protection Bureau (CFPB) sued the operator of Zelle and three of the nation's largest banks for failing to protect\u00a0..."
+    },
+    {
+      "title": "Private Banking & Wealth Management | J.P. Morgan Private Bank ...",
+      "link": "https://www.cepcweb.org/council/spnsr/6704",
+      "displayLink": "www.cepcweb.org",
+      "snippet": "... banking & wealth management services ... Bank deposit products, such as checking, savings and bank lending and related services are offered by JPMorgan Chase Bank\u00a0..."
+    },
+    {
+      "title": "NYC Comptroller Lander and NYC Public Pension Boards Reach ...",
+      "link": "https://comptroller.nyc.gov/newsroom/nyc-comptroller-lander-and-nyc-public-pension-boards-reach-agreement-on-climate-finance-disclosures-with-jpmorgan-chase-citi-and-royal-bank-of-canada/",
+      "displayLink": "comptroller.nyc.gov",
+      "snippet": "Apr 4, 2024 ... ... Finance Disclosures with JPMorgan Chase, Citi, and Royal Bank of Canada ... banking sector. We call on Bank of America, Goldman Sachs, and\u00a0..."
+    }
+  ],
+  "total_results": "879000",
+  "search_time": 0.310633
+}

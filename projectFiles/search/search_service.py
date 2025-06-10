@@ -6,8 +6,7 @@ import time
 from typing import Dict, List, Optional
 from .google_client import GoogleSearchClient
 from .cache import SearchCache
-from .benchmark import BenchmarkTracker, SearchBenchmark
-from .config import CACHE_DIR, BENCHMARK_DIR
+from benchmark import ComprehensiveBenchmarkTracker, SearchBenchmark
 
 
 class SearchService:
@@ -16,12 +15,15 @@ class SearchService:
     def __init__(self, base_dir: str = None):
         self.base_dir = base_dir or os.getcwd()
         
-        # Initialize components
-        cache_path = os.path.join(self.base_dir, CACHE_DIR)
-        benchmark_path = os.path.join(self.base_dir, BENCHMARK_DIR)
+        # Use centralized cache configuration
+        from cache_config import get_cache_config
+        cache_config = get_cache_config(self.base_dir)
         
+        # Initialize components with centralized cache paths
+        cache_path = cache_config.get_search_cache_dir()
+        benchmark_path = cache_config.get_benchmarks_dir()
         self.cache = SearchCache(cache_path)
-        self.benchmark_tracker = BenchmarkTracker(benchmark_path)
+        self.benchmark_tracker = ComprehensiveBenchmarkTracker(benchmark_path)
         
         # Initialize Google client (may raise ValueError if not configured)
         try:

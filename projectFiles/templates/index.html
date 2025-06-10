@@ -16,6 +16,20 @@
           required="" autocomplete="off">
       </div>
       <div class="flex-shrink-0">
+        <select name="institution_type" class="form-select form-select-lg" style="min-width: 150px;">
+          <option value="">Auto-detect type</option>
+          <option value="university">University</option>
+          <option value="college">College</option>
+          <option value="school">School</option>
+          <option value="hospital">Hospital</option>
+          <option value="clinic">Clinic</option>
+          <option value="bank">Bank</option>
+          <option value="financial">Financial</option>
+          <option value="government">Government</option>
+          <option value="nonprofit">Non-profit</option>
+        </select>
+      </div>
+      <div class="flex-shrink-0">
         <button type="submit" class="btn btn-primary btn-lg">Search</button>
       </div>
     </form>
@@ -26,12 +40,13 @@
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
-    </div>
-
-    {% if institution_data_str %}
+    </div>    {% if institution_data_str %}
     <div id="results-area" class="alert alert-info mt-4">
       {% if 'Please enter an institution name.' not in institution_data_str and request.form.get('institution_name') %}
       You searched for: <strong>{{ request.form.get('institution_name') }}</strong>
+      {% if request.form.get('institution_type') %}
+      (Type: <strong>{{ request.form.get('institution_type') }}</strong>)
+      {% endif %}
       <hr>
       <h5>Processed Data:</h5>
       {% endif %}

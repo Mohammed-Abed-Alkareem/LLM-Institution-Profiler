@@ -10,14 +10,14 @@ def check_environment():
     """Check if required environment variables are set."""
     print("Checking environment configuration...")
     
-    api_key = os.getenv('GOOGLE_API_KEY')
+    api_key = os.getenv('GOOGLE_SEARCH_API_KEY')
     cse_id = os.getenv('GOOGLE_CSE_ID')
     
     if not api_key:
-        print("❌ GOOGLE_API_KEY environment variable not set")
+        print("❌ GOOGLE_SEARCH_API_KEY environment variable not set")
         return False
     else:
-        print(f"✅ GOOGLE_API_KEY found (starts with: {api_key[:10]}...)")
+        print(f"✅ GOOGLE_SEARCH_API_KEY found (starts with: {api_key[:10]}...)")
     
     if not cse_id:
         print("❌ GOOGLE_CSE_ID environment variable not set")
@@ -112,7 +112,7 @@ def main():
         print("2. Fill in your Google API credentials")
         print("3. Set environment variables or load .env file")
         print("\nFor PowerShell:")
-        print("   $env:GOOGLE_API_KEY='your_key_here'")
+        print("   $env:GOOGLE_SEARCH_API_KEY='your_key_here'")
         print("   $env:GOOGLE_CSE_ID='your_cse_id_here'")
         return 1
     

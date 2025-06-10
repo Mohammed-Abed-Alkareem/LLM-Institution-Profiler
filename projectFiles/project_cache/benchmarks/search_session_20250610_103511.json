@@ -1,0 +1,15 @@
+[
+  {
+    "query": "Birzeit University",
+    "timestamp": 1749540911.326494,
+    "response_time": 0.0010111331939697266,
+    "success": true,
+    "source": "cache",
+    "num_results": 5,
+    "total_results": "1460000",
+    "api_search_time": 0.0,
+    "error": null,
+    "cache_similarity": 0,
+    "institution_type": null
+  }
+]

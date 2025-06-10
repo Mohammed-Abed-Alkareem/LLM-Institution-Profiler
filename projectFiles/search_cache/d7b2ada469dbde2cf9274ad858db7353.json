@@ -1,0 +1,43 @@
+{
+  "query": "Mayo Clinic hospital healthcare medical",
+  "params": {
+    "institution_type": "hospital"
+  },
+  "cached_at": 1749539825.2568264,
+  "timestamp": 1749539825.255785,
+  "success": true,
+  "results": [
+    {
+      "title": "Mayo Clinic: Top-ranked Hospital in the Nation",
+      "link": "https://www.mayoclinic.org/",
+      "displayLink": "www.mayoclinic.org",
+      "snippet": "Mayo Clinic is a top-ranked hospital in the U.S., with campuses in Arizona, Florida, and Minnesota."
+    },
+    {
+      "title": "Mayo Clinic Health System: Home",
+      "link": "https://www.mayoclinichealthsystem.org/",
+      "displayLink": "www.mayoclinichealthsystem.org",
+      "snippet": "We bring the experience and specialized care of Mayo Clinic to you. Convenient. Every aspect of your care is coordinated, and teams of experts work together."
+    },
+    {
+      "title": "About Us - Mayo Clinic",
+      "link": "https://www.mayoclinic.org/about-mayo-clinic",
+      "displayLink": "www.mayoclinic.org",
+      "snippet": "Who we areTransforming health care ... Mayo Clinic is the largest integrated, not-for-profit medical group practice in the world. We're building the future, one\u00a0..."
+    },
+    {
+      "title": "Locations - Mayo Clinic Careers",
+      "link": "https://jobs.mayoclinic.org/alllocations",
+      "displayLink": "jobs.mayoclinic.org",
+      "snippet": "Mayo Clinic Health System is a group of clinics, hospitals and health care facilities that provide primary and specialty care close to home for people in more\u00a0..."
+    },
+    {
+      "title": "Eau Claire hospital and clinics - Mayo Clinic Health System",
+      "link": "https://www.mayoclinichealthsystem.org/locations/eau-claire",
+      "displayLink": "www.mayoclinichealthsystem.org",
+      "snippet": "We serve the Eau Claire, Wisconsin, community through routine, preventive and specialized care services, wellness support and community engagement."
+    }
+  ],
+  "total_results": "1430000",
+  "search_time": 0.309332
+}

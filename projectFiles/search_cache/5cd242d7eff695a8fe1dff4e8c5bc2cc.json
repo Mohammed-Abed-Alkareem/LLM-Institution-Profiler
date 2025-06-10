@@ -1,0 +1,43 @@
+{
+  "query": "Harvard University university education academic",
+  "params": {
+    "institution_type": "university"
+  },
+  "cached_at": 1749537936.0089958,
+  "timestamp": 1749537936.0089958,
+  "success": true,
+  "results": [
+    {
+      "title": "Harvard Graduate School of Education: Homepage",
+      "link": "https://www.gse.harvard.edu/",
+      "displayLink": "www.gse.harvard.edu",
+      "snippet": "The mission of the Harvard Graduate School of Education is to prepare education leaders and innovators who will change the world by expanding opportunities\u00a0..."
+    },
+    {
+      "title": "Harvard University",
+      "link": "https://www.harvard.edu/",
+      "displayLink": "www.harvard.edu",
+      "snippet": "Harvard University is devoted to excellence in teaching, learning, and research, and to developing leaders who make a difference globally."
+    },
+    {
+      "title": "Master's Programs in Education | Harvard Graduate School of ...",
+      "link": "https://www.gse.harvard.edu/degrees/masters",
+      "displayLink": "www.gse.harvard.edu",
+      "snippet": "The Harvard Graduate School of Education offers the Master's in Education (Ed.M.) degree in two formats \u2014 residential and online \u2014 and in a variety of programs\u00a0..."
+    },
+    {
+      "title": "Programs - Harvard University",
+      "link": "https://www.harvard.edu/programs/",
+      "displayLink": "www.harvard.edu",
+      "snippet": "Explore programs available at Harvard \u00b7 African and African American Studies \u00b7 Anthropology \u00b7 Applied Mathematics \u00b7 Art, Film, and Visual Studies \u00b7 Astrophysics."
+    },
+    {
+      "title": "Harvard College | Harvard",
+      "link": "https://college.harvard.edu/",
+      "displayLink": "college.harvard.edu",
+      "snippet": "With world-class faculty, groundbreaking research opportunities, and a commitment to a diverse environment of bright, talented students, Harvard is more\u00a0..."
+    }
+  ],
+  "total_results": "186000000",
+  "search_time": 0.456671
+}
