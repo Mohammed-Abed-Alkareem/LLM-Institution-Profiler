@@ -39,11 +39,21 @@
       "query": "Birzeit University",
       "params": {},
       "cached_at": 1749540447.3129802
+    },
+    "540f39882aabfe7e1f3fb75bcd9ad078": {
+      "query": "Harvard Medical School",
+      "params": {},
+      "cached_at": 1749542482.513394
+    },
+    "424e822aed61876c6d4fe638f5cb1761": {
+      "query": "Stanford Hospital",
+      "params": {},
+      "cached_at": 1749542499.942626
     }
   },
   "stats": {
-    "hits": 8,
-    "misses": 8,
-    "similar_hits": 0
+    "hits": 9,
+    "misses": 10,
+    "similar_hits": 2
   }
 }

@@ -10,27 +10,68 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/autocomplete.css') }}">
 </head>
 
-<body>  <div class="container-card">    <form method="post" class="d-flex gap-2 align-items-center" onsubmit="showLoadingIndicator()">
-      <div class="flex-fill">
-        <input type="text" name="institution_name" id="institution_name" class="form-control form-control-lg" placeholder="Enter institution name (university, bank, hospital, etc.)"
-          required="" autocomplete="off">
+<body>  <div class="container-card">    <form method="post" onsubmit="showLoadingIndicator()">      <!-- Main search row -->
+      <div class="d-flex gap-2 align-items-center mb-3">
+        <div class="flex-fill">
+          <input type="text" name="institution_name" id="institution_name" class="form-control form-control-lg" 
+                 placeholder="Institution name (university, bank, hospital, etc.)" required="" autocomplete="off">
+        </div>
+        <div class="flex-shrink-0">
+          <button type="button" class="btn btn-light border btn-lg additional-info-toggle" id="toggle-additional-info">
+            <i class="fas fa-sliders-h me-2" id="toggle-icon"></i>
+            <span id="toggle-text">Refine Search</span>
+          </button>
+        </div>
+        <div class="flex-shrink-0">
+          <button type="submit" class="btn btn-primary btn-lg">
+            <i class="fas fa-search me-2"></i>Search
+          </button>
+        </div>
       </div>
-      <div class="flex-shrink-0">
-        <select name="institution_type" class="form-select form-select-lg" style="min-width: 150px;">
-          <option value="">Auto-detect type</option>
-          <option value="university">University</option>
-          <option value="college">College</option>
-          <option value="school">School</option>
-          <option value="hospital">Hospital</option>
-          <option value="clinic">Clinic</option>
-          <option value="bank">Bank</option>
-          <option value="financial">Financial</option>
-          <option value="government">Government</option>
-          <option value="nonprofit">Non-profit</option>
-        </select>
-      </div>
-      <div class="flex-shrink-0">
-        <button type="submit" class="btn btn-primary btn-lg">Search</button>
+
+      <!-- Additional search parameters (hidden by default) -->
+      <div id="additional-info-panel" class="collapse">
+        <div class="card border-0 bg-light">
+          <div class="card-body">
+            <h6 class="card-title text-muted mb-3">
+              <i class="fas fa-filter me-2"></i>Search Refinement Options
+            </h6>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label for="institution_type" class="form-label">Institution Type</label>
+                <input type="text" name="institution_type" id="institution_type" class="form-control" 
+                       placeholder="e.g., university, hospital, bank">
+                <div class="form-text">Helps focus the search (auto-detected if empty)</div>
+              </div>
+              <div class="col-md-4">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" name="location" id="location" class="form-control" 
+                       placeholder="e.g., Boston, California, UK">
+                <div class="form-text">City, state, country, or region</div>
+              </div>
+              <div class="col-md-4">
+                <label for="additional_keywords" class="form-label">Additional Keywords</label>
+                <input type="text" name="additional_keywords" id="additional_keywords" class="form-control" 
+                       placeholder="e.g., research, teaching, medical">
+                <div class="form-text">Specific terms to include in search</div>
+              </div>
+            </div>
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <label for="domain_hint" class="form-label">Domain Hint</label>
+                <input type="text" name="domain_hint" id="domain_hint" class="form-control" 
+                       placeholder="e.g., mit.edu, mayo.org">
+                <div class="form-text">If you know part of the website domain</div>
+              </div>
+              <div class="col-md-6">
+                <label for="exclude_terms" class="form-label">Exclude Terms</label>
+                <input type="text" name="exclude_terms" id="exclude_terms" class="form-control" 
+                       placeholder="e.g., jobs, admissions, news">
+                <div class="form-text">Terms to exclude from search results</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </form>
 

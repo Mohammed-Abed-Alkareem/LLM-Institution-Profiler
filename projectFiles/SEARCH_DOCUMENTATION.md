@@ -1,46 +1,100 @@
-# Institution Profiler Search System Documentation
+# Institution Profiler Enhanced Search System Documentation
 
-This document explains the complete integrated search and data processing pipeline for the Institution Profiler project.
+This document explains the complete integrated search and data processing pipeline for the Institution Profiler project, including the latest enhancements.
 
 ## System Overview
 
-The Institution Profiler uses a sophisticated multi-stage pipeline to gather, process, and extract structured data about institutions:
+The Institution Profiler uses a sophisticated multi-stage pipeline with intelligent query enhancement and flexible search parameters:
 
 ### **Complete Pipeline Flow:**
-1. **Search & Discovery** → Google Custom Search API (primary) + LLM Search (fallback)
-2. **Link Prioritization** → Institution type-aware domain scoring
-3. **Web Crawling** → Intelligent content extraction from prioritized sites
-4. **RAG Processing** → Document chunking and relevance filtering
-5. **LLM Extraction** → Structured data extraction with validation
-6. **Benchmarking** → End-to-end performance and cost tracking
+1. **Smart Query Enhancement** → Flexible search parameters with auto-detection
+2. **Search & Discovery** → Google Custom Search API (primary) + LLM Search (fallback)
+3. **Link Prioritization** → Institution type-aware domain scoring
+4. **Web Crawling** → Intelligent content extraction from prioritized sites *(planned)*
+5. **RAG Processing** → Document chunking and relevance filtering *(planned)*
+6. **LLM Extraction** → Structured data extraction with validation
+7. **Comprehensive Benchmarking** → End-to-end performance and cost tracking
+
+### **Latest Enhancements (June 2025):**
+- ✅ **Flexible Search Parameters**: Location, keywords, domain hints, exclusion terms
+- ✅ **Smart Query Enhancement**: Automatic institution type detection and query optimization
+- ✅ **Modern Web Interface**: Polished toggle-based refinement panel
+- ✅ **Centralized Cache System**: All cache data organized in `project_cache/` folder
+- ✅ **Enhanced Benchmarking**: Pipeline-wide performance tracking
+- ✅ **Improved User Experience**: Clean, intuitive search refinement options
 
 ### **Core Features:**
+- **Smart Query Building**: Automatic enhancement based on institution type and context
+- **Flexible Search Parameters**: Optional location, keywords, domain hints, exclusions
 - **Dual Search Strategy**: Google Custom Search API with LLM fallback
 - **Intelligent Caching** with similarity matching to minimize API costs
-- **Institution Type-Aware Processing** leveraging autocomplete system
+- **Institution Type-Aware Processing** with auto-detection
 - **Crawling Optimization** with domain prioritization and extraction targets
 - **Comprehensive Benchmarking** tracking entire pipeline performance
 - **Cost Optimization** through caching, rate limiting, and smart processing
 
-## Detailed Pipeline Stages
+## Enhanced Search System
 
-### **Stage 1: Search & Discovery**
+### **Smart Query Enhancement**
 
-**Primary Method: Google Custom Search API**
-- Institution type-aware query construction
-- Domain-specific search optimization (`.edu`, `.org`, `.gov` prioritization)
-- Intelligent caching with similarity matching (85% threshold)
-- Rate limiting and quota management
+The system now intelligently enhances queries using configurable parameters:
 
-**Fallback Method: LLM Search**
-- Google Search grounding via Gemini API
-- Used when Custom Search API is unavailable or fails
-- Provides broader context but higher latency
+**Verified Enhancement Examples:**
+- `MIT` → `"MIT university education academic"` (auto-detected: university) ✅ **WORKING**
+- `Mayo Clinic` → `"Mayo Clinic hospital healthcare medical"` (auto-detected: hospital) ✅ **WORKING**
+- `Harvard University` → Enhanced with university keywords ✅ **WORKING**
+- `JPMorgan Chase` → `"JPMorgan Chase bank banking financial"` (auto-detected: bank) *(example)*
 
-**Institution Type Integration:**
-- Leverages existing autocomplete system's type detection
-- Types: Educational (`Edu`), Financial (`Fin`), Medical (`Med`)
-- Automatic type inference from institution name when not specified
+**Enhancement Parameters:**
+- **Institution Type**: Auto-detected or manually specified
+- **Location**: Geographic filtering (e.g., "Boston", "California", "UK")
+- **Additional Keywords**: Domain-specific terms (e.g., "research", "cardiology")
+- **Domain Hint**: Known website domains (e.g., "mit.edu", "mayo.org")
+- **Exclude Terms**: Terms to avoid (e.g., "jobs", "admissions", "news")
+
+**Query Strategy Selection:**
+```javascript
+// Strategy examples based on parameters
+{
+  "official_sites_first": true,     // Try .edu/.org/.gov first
+  "fallback_to_general": true,      // Broaden search if needed
+  "combine_results": true,          // Merge official + general results
+  "max_results_per_query": 10       // Adaptive result limits
+}
+```
+
+### **Modern Web Interface**
+
+**Refined Search Panel:**
+- Clean toggle button: "Refine Search" with sliders icon
+- Smooth animations and hover effects
+- Card-based layout for additional parameters
+- Visual feedback for active/inactive states
+
+**Search Parameters Available:**
+1. **Institution Type** - Auto-detected or manual override
+2. **Location** - Geographic context for better targeting
+3. **Additional Keywords** - Domain-specific enhancement terms
+4. **Domain Hint** - Known website domains for precise targeting
+5. **Exclude Terms** - Terms to filter out from results
+
+### **Enhanced Caching System**
+
+**Centralized Structure:**
+```
+project_cache/
+├── search_results/          # Enhanced search cache with parameters
+├── benchmarks/              # Performance tracking data
+├── crawling_data/           # Web crawling cache (future)
+├── rag_embeddings/          # RAG processing cache (future)
+└── llm_responses/           # LLM response cache (future)
+```
+
+**Smart Caching Features:**
+- Parameter-aware cache keys
+- Similarity matching (85% threshold)
+- Enhanced metadata tracking
+- Automatic cleanup of old cache folders
 
 ### **Stage 2: Link Prioritization & Crawling Preparation**
 

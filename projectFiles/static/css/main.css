@@ -21,3 +21,60 @@
   border: 1px solid #dee2e6;
   border-radius: 0.25rem;
 }
+
+/* Additional Info Toggle Styling */
+.additional-info-toggle {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.additional-info-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.additional-info-toggle:active {
+  transform: translateY(0);
+}
+
+/* Smooth collapse animation */
+.collapse {
+  transition: all 0.4s ease;
+}
+
+/* Search refinement panel styling */
+#additional-info-panel .card {
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  margin-top: 1rem;
+}
+
+#additional-info-panel .card-body {
+  padding: 1.5rem;
+}
+
+#additional-info-panel .form-control {
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#additional-info-panel .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+#additional-info-panel .form-text {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+/* Icon animations */
+#toggle-icon {
+  transition: all 0.3s ease;
+}
+
+.additional-info-toggle:hover #toggle-icon {
+  transform: scale(1.1);
+}

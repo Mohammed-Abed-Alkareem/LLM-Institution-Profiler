@@ -1,0 +1,46 @@
+{
+  "query": "Stanford Hospital hospital healthcare",
+  "params": {},
+  "cached_at": 1749542499.942626,
+  "timestamp": 1749542499.942626,
+  "success": true,
+  "results": [
+    {
+      "title": "Stanford Health Care (SHC) - Stanford Medical Center | Stanford ...",
+      "link": "https://stanfordhealthcare.org/",
+      "displayLink": "stanfordhealthcare.org",
+      "snippet": "Stanford Health Care delivers the highest levels of care and compassion. SHC treats cancer, heart disease, brain disorders, primary care issues, and many\u00a0..."
+    },
+    {
+      "title": "Stanford Health Care jobs",
+      "link": "https://careers.stanfordhealthcare.org/",
+      "displayLink": "careers.stanfordhealthcare.org",
+      "snippet": "Whether you're an experienced professional or just beginning your career, Stanford Health Care has a wealth of opportunities to work in the future of\u00a0..."
+    },
+    {
+      "title": "Contact Us By Phone and Online | Stanford Health Care",
+      "link": "https://stanfordhealthcare.org/about-us/contact.html",
+      "displayLink": "stanfordhealthcare.org",
+      "snippet": "Contact us via phone number directory or online form, including emergencies, admitting, or appointments. Hospital Operator: 650-723-4000."
+    },
+    {
+      "title": "Our Locations | Stanford Health Care",
+      "link": "https://careers.stanfordhealthcare.org/us/en/locations",
+      "displayLink": "careers.stanfordhealthcare.org",
+      "snippet": "500 Pasteur Drive, Stanford, CA 94305 The new Stanford Hospital opened its doors in November 2019 and sets a global standard for patient care."
+    },
+    {
+      "title": "MyHealth at Stanford",
+      "link": "https://myhealth.stanfordhealthcare.org/",
+      "displayLink": "myhealth.stanfordhealthcare.org",
+      "snippet": "The MyHealth app is easier to use on your smartphone (iOS and Android). USE THE MYHEALTH APPContinue to the website. MyHealth Mobile App Illustration."
+    }
+  ],
+  "total_results": "1560000",
+  "search_time": 0.247489,
+  "enhancement_info": {
+    "enhanced": true,
+    "detected_type": "hospital",
+    "strategy_used": "official_sites"
+  }
+}

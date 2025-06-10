@@ -28,7 +28,6 @@ search_service = SearchService(BASE_DIR)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-
     institution_data_str = None
     corrected = None
 
@@ -36,9 +35,26 @@ def index():
         institution_name = request.form.get('institution_name')
         institution_type = request.form.get('institution_type', '').strip() or None
         
+        # Get additional search parameters
+        location = request.form.get('location', '').strip() or None
+        additional_keywords = request.form.get('additional_keywords', '').strip() or None
+        domain_hint = request.form.get('domain_hint', '').strip() or None
+        exclude_terms = request.form.get('exclude_terms', '').strip() or None
+        
         if institution_name:
-            # Process the institution name with optional type
-            processed_data = process_institution_pipeline(institution_name, institution_type)
+            # Build search parameters dictionary
+            search_params = {}
+            if institution_type:
+                search_params['institution_type'] = institution_type
+            if location:
+                search_params['location'] = location
+            if additional_keywords:
+                search_params['additional_keywords'] = additional_keywords
+            if domain_hint:
+                search_params['domain_hint'] = domain_hint
+            if exclude_terms:
+                search_params['exclude_terms'] = exclude_terms            # Process the institution with enhanced search parameters
+            processed_data = process_institution_pipeline(institution_name, institution_type, search_params=search_params)
             # show as pure text for now
             institution_data_str = json.dumps(processed_data, indent=2)
         else:
@@ -305,9 +321,8 @@ def process_institution_skip_extraction():
             'success': False,
             'error': 'Institution name is required'
         })
-    
-    # Process with extraction skipped
-    result = process_institution_pipeline(institution_name, institution_type, skip_extraction=True)
+      # Process with extraction skipped
+    result = process_institution_pipeline(institution_name, institution_type, skip_extraction=True, search_params={})
     
     return jsonify({
         'success': not result.get('error'),

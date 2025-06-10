@@ -33,9 +33,8 @@ class SearchService:
             print(f"Warning: Google Search not configured: {e}")
             self.google_client = None
             self.is_configured = False
-    
     def search_institution(self, institution_name: str, institution_type: str = None, 
-                          force_api: bool = False) -> Dict:
+                          force_api: bool = False, search_params: Dict = None) -> Dict:
         """
         Search for institution information with caching and benchmarking.
         
@@ -43,22 +42,28 @@ class SearchService:
             institution_name: Name of the institution
             institution_type: Optional type of institution
             force_api: Force API call even if cache hit exists
+            search_params: Additional search parameters (location, keywords, etc.)
             
         Returns:
             Dictionary containing search results and metadata
         """
         start_time = time.time()
         
-        # Prepare search parameters
-        search_params = {'institution_type': institution_type} if institution_type else None
+        # Prepare search parameters, combining institution_type with additional params
+        if not search_params:
+            search_params = {}
+        if institution_type:
+            search_params['institution_type'] = institution_type
+        
+        # Create cache key that includes all search parameters
+        cache_params = search_params if search_params else None
         
         # Try cache first (unless forced to use API)
         cached_result = None
         source = 'api'
         cache_similarity = 0.0
-        
         if not force_api:
-            cached_result = self.cache.get(institution_name, search_params)
+            cached_result = self.cache.get(institution_name, cache_params)
             if cached_result:
                 source = 'similar_cache' if cached_result.get('cache_similarity', 0) > 0 else 'cache'
                 cache_similarity = cached_result.get('cache_similarity', 0)
@@ -112,14 +117,13 @@ class SearchService:
             self.benchmark_tracker.record_search(benchmark)
             
             return error_result
-        
-        # Make the API call
-        api_result = self.google_client.search_institution(institution_name, institution_type)
+          # Make the API call with enhanced parameters
+        api_result = self.google_client.search_institution(institution_name, institution_type, search_params)
         response_time = time.time() - start_time
         
         # Cache the result if successful
         if api_result.get('success', False):
-            self.cache.put(institution_name, api_result, search_params)
+            self.cache.put(institution_name, api_result, cache_params)
         
         # Record benchmark
         benchmark = SearchBenchmark(

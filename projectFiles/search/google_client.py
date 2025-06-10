@@ -86,54 +86,98 @@ class GoogleSearchClient:
                 'error': f"Unexpected error: {str(e)}",
                 'timestamp': time.time()
             }
-    
-    def search_institution(self, institution_name: str, institution_type: str = None) -> Dict:
+    def search_institution(self, institution_name: str, institution_type: str = None, 
+                          search_params: Dict = None) -> Dict:
         """
-        Search specifically for institution information.
+        Search specifically for institution information with enhanced query building.
         
         Args:
             institution_name: Name of the institution
             institution_type: Optional type filter (university, hospital, bank, etc.)
+            search_params: Additional search parameters (location, keywords, etc.)
             
         Returns:
             Dictionary containing search results
         """
-        # Build targeted query
-        query_parts = [institution_name]
+        # Import here to avoid circular imports
+        from search_enhancer import SearchQueryEnhancer
         
+        # Enhance the query with additional parameters
+        enhancer = SearchQueryEnhancer()
+        
+        # Prepare search parameters
+        if not search_params:
+            search_params = {}
         if institution_type:
-            query_parts.append(institution_type)
+            search_params['institution_type'] = institution_type
         
-        # Add relevant keywords for institutions
-        if institution_type in ['university', 'college', 'school']:
-            query_parts.extend(['education', 'academic'])
-        elif institution_type in ['hospital', 'clinic', 'medical']:
-            query_parts.extend(['healthcare', 'medical'])
-        elif institution_type in ['bank', 'financial']:
-            query_parts.extend(['finance', 'banking'])
+        enhanced_query = enhancer.enhance_query(institution_name, search_params)
+        strategy = enhanced_query['search_strategy']
         
-        query = ' '.join(query_parts)
+        # Get formatted query for API
+        query, site_restriction = enhancer.format_search_query_for_api(enhanced_query)
         
-        # Try official sites first
-        official_result = self.search(
-            query, 
-            num_results=5,
-            site_restrict='site:edu OR site:org OR site:gov'
-        )
+        results = []
         
-        # If we have good official results, return them
-        if official_result['success'] and len(official_result.get('results', [])) >= 3:
-            return official_result
+        # Try official sites first if strategy recommends it
+        if strategy['use_official_sites_first'] and enhanced_query['site_restrictions']:
+            for site_restrict in enhanced_query['site_restrictions'][:2]:  # Try top 2 site restrictions
+                official_result = self.search(
+                    enhanced_query['primary_query'],
+                    num_results=strategy['max_results_per_query'] // 2,
+                    site_restrict=site_restrict
+                )
+                
+                if official_result['success'] and official_result.get('results'):
+                    results.extend(official_result['results'])
+                    
+                    # If we have enough good results, return them
+                    if len(results) >= 5:
+                        official_result['results'] = results[:10]
+                        official_result['query'] = query
+                        official_result['enhancement_info'] = {
+                            'enhanced': enhanced_query['enhancement_applied'],
+                            'detected_type': enhanced_query['detected_type'],
+                            'strategy_used': 'official_sites'
+                        }
+                        return official_result
         
-        # Otherwise, do a general search
-        general_result = self.search(query, num_results=10)
+        # Try the primary enhanced query
+        primary_result = self.search(query, num_results=strategy['max_results_per_query'])
         
-        # Combine results if we had some official ones
-        if official_result['success'] and official_result.get('results'):
-            combined_results = official_result['results'] + general_result.get('results', [])
-            general_result['results'] = combined_results[:10]  # Limit to 10 total
+        if primary_result['success']:
+            if strategy['combine_results'] and results:
+                # Combine with previous results
+                combined_results = results + primary_result.get('results', [])
+                primary_result['results'] = combined_results[:10]
+            
+            primary_result['enhancement_info'] = {
+                'enhanced': enhanced_query['enhancement_applied'],
+                'detected_type': enhanced_query['detected_type'],
+                'strategy_used': 'enhanced_primary'
+            }
+            return primary_result
         
-        return general_result
+        # Fallback to query variations if primary fails
+        if strategy['fallback_to_general'] and enhanced_query['query_variations']:
+            for variation in enhanced_query['query_variations'][:3]:  # Try top 3 variations
+                fallback_result = self.search(variation, num_results=8)
+                if fallback_result['success'] and fallback_result.get('results'):
+                    fallback_result['enhancement_info'] = {
+                        'enhanced': enhanced_query['enhancement_applied'],
+                        'detected_type': enhanced_query['detected_type'],
+                        'strategy_used': 'fallback_variation',
+                        'variation_used': variation
+                    }
+                    return fallback_result
+        
+        # If all else fails, return the primary result even if it failed
+        primary_result['enhancement_info'] = {
+            'enhanced': enhanced_query['enhancement_applied'],
+            'detected_type': enhanced_query['detected_type'],
+            'strategy_used': 'failed_enhanced'
+        }
+        return primary_result
     
     def is_configured(self) -> bool:
         """Check if the client is properly configured."""

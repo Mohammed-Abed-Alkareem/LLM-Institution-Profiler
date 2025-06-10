@@ -50,5 +50,70 @@
     "error": null,
     "cache_similarity": 0,
     "institution_type": null
+  },
+  {
+    "query": "MIT",
+    "timestamp": 1749542429.1765213,
+    "response_time": 0.0013377666473388672,
+    "success": true,
+    "source": "cache",
+    "num_results": 5,
+    "total_results": "50400000",
+    "api_search_time": 0.0,
+    "error": null,
+    "cache_similarity": 0,
+    "institution_type": "university"
+  },
+  {
+    "query": "Harvard Medical School",
+    "timestamp": 1749542481.1992278,
+    "response_time": 1.3131687641143799,
+    "success": true,
+    "source": "api",
+    "num_results": 8,
+    "total_results": "294000",
+    "api_search_time": 0.375611,
+    "error": null,
+    "cache_similarity": 0.0,
+    "institution_type": null
+  },
+  {
+    "query": "Stanford Hospital",
+    "timestamp": 1749542499.4544504,
+    "response_time": 0.488175630569458,
+    "success": true,
+    "source": "api",
+    "num_results": 5,
+    "total_results": "1560000",
+    "api_search_time": 0.247489,
+    "error": null,
+    "cache_similarity": 0.0,
+    "institution_type": null
+  },
+  {
+    "query": "Harvard University",
+    "timestamp": 1749543140.4489799,
+    "response_time": 0.003013134002685547,
+    "success": true,
+    "source": "cache",
+    "num_results": 5,
+    "total_results": "186000000",
+    "api_search_time": 0.0,
+    "error": null,
+    "cache_similarity": 0,
+    "institution_type": null
+  },
+  {
+    "query": "MIT",
+    "timestamp": 1749543183.3951242,
+    "response_time": 0.0010013580322265625,
+    "success": true,
+    "source": "cache",
+    "num_results": 5,
+    "total_results": "50400000",
+    "api_search_time": 0.0,
+    "error": null,
+    "cache_similarity": 0,
+    "institution_type": null
   }
 ]

@@ -1,6 +1,7 @@
 # processing_logic.py
 import os
 import json
+from typing import Dict
 from google import genai
 from google.genai.types import Tool, GoogleSearch, GenerateContentConfig 
 
@@ -39,7 +40,8 @@ cache_config = get_cache_config(BASE_DIR)
 benchmark_tracker = ComprehensiveBenchmarkTracker(cache_config.get_benchmarks_dir())
 
 # pipeline flow here
-def process_institution_pipeline(institution_name: str, institution_type: str = None, skip_extraction: bool = False):
+def process_institution_pipeline(institution_name: str, institution_type: str = None, 
+                                skip_extraction: bool = False, search_params: Dict = None):
     """
     Coordinates the pipeline for processing an institution's name:
     1. Fetches raw descriptive text about the institution (using Google Custom Search API with fallback to LLM search).
@@ -49,205 +51,36 @@ def process_institution_pipeline(institution_name: str, institution_type: str = 
     Args:
         institution_name: The name of the institution to process.
         institution_type: Optional type of institution (university, hospital, bank, etc.)
-        skip_extraction: If True, skip LLM extraction and just prepare for crawling
-        
-    Returns:
-        A dictionary containing structured data about the institution,
-        including raw text, source notes, crawling links, and any errors encountered.
-        Example:
-        {
-            "name": "Institution Name",
-            "address": "...",
-            "country": "...",
-            "number_of_employees": "...",
-            "entity_type": "...",
-            "description_raw": "Full raw text fetched...",
-            "data_source_notes": "Details about how data was fetched/processed",
-            "crawling_links": [...],
-            "crawling_config": {...},
-            "error": "Error message if any, else null"
-        }
+        skip_extraction: If True, skips LLM extraction and only prepares for crawling
+        search_params: Additional search parameters (location, keywords, domain hints, etc.)
     """
-    # Initialize the base structure to ensure 
-    # consistent keys even if errors happen early on
-    final_result = {key: "Unknown" for key in STRUCTURED_INFO_KEYS}
-    final_result["name"] = institution_name if institution_name else "Unknown"
-    final_result["description_raw"] = "N/A"
-    final_result["data_source_notes"] = ""
-    final_result["crawling_links"] = []
-    final_result["crawling_config"] = {}
-    final_result["error"] = None
 
-    if not institution_name:
-        final_result["error"] = "No institution name provided."
-        final_result["data_source_notes"] = "Processing aborted: No institution name."
-        return final_result
+from google.genai.types import Tool, GoogleSearch, GenerateContentConfig 
 
-    # Start comprehensive pipeline benchmarking
-    pipeline_id = benchmark_tracker.start_pipeline(institution_name, institution_type)
-    final_result["pipeline_id"] = pipeline_id
+from search_logic import fetch_raw_institution_text_LLM_version, fetch_raw_institution_text_api_version
+from crawling_prep import get_institution_links_for_crawling
+from extraction_logic import extract_structured_data, STRUCTURED_INFO_KEYS
+from search.search_service import SearchService
+from benchmark import ComprehensiveBenchmarkTracker
 
-    # Initialize the base structure to ensure 
-    # consistent keys even if errors happen early on
-    final_result = {key: "Unknown" for key in STRUCTURED_INFO_KEYS}
-    final_result["name"] = institution_name if institution_name else "Unknown"
-    final_result["description_raw"] = "N/A"
-    final_result["data_source_notes"] = ""
-    final_result["crawling_links"] = []
-    final_result["crawling_config"] = {}
-    final_result["error"] = None
+# I'm using google for now, but OpenAI's library can be used for everything if you
+# change the link since they all support its API
 
-    if not institution_name:
-        final_result["error"] = "No institution name provided."
-        final_result["data_source_notes"] = "Processing aborted: No institution name."
-        return final_result
+# TODO: switch to OpenAI's library if we want to use it
 
-    # Start comprehensive pipeline benchmarking
-    pipeline_id = benchmark_tracker.start_pipeline(institution_name, institution_type)
-    final_result["pipeline_id"] = pipeline_id
-    
-    try:
-        # Get links for crawling (this also gets search data)
-        crawling_data = get_institution_links_for_crawling(institution_name, institution_type, max_links=10)
-        
-        if not crawling_data.get('search_successful', False):
-            benchmark_tracker.add_pipeline_error(pipeline_id, 'search', crawling_data.get('error', 'Search failed'))
-            final_result["error"] = f"Failed to get institution data: {crawling_data.get('error', 'Search failed')}"
-            final_result["data_source_notes"] = "Error during search phase."
-            
-            # Complete pipeline with failure
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=False)
-            final_result["benchmark_data"] = {
-                'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-                'success': False,
-                'phase': 'search'
-            }
-            return final_result
-        
-        # Store crawling information
-        final_result["crawling_links"] = crawling_data.get('links', [])
-        final_result["data_source_notes"] = f"Found {len(final_result['crawling_links'])} links for crawling. "
-        
-        # Create basic description from search snippets
-        text_parts = []
-        for link_data in final_result["crawling_links"][:3]:  # Use top 3 results
-            if link_data.get('title'):
-                text_parts.append(f"Title: {link_data['title']}")
-            if link_data.get('snippet'):
-                text_parts.append(f"Description: {link_data['snippet']}")
-            text_parts.append("---")
-        
-        raw_text = "\n".join(text_parts)
-        final_result["description_raw"] = raw_text
-        final_result["data_source_notes"] += f"Search method: {crawling_data.get('metadata', {}).get('source', 'unknown')}. "
-        
-        # Add metadata from search
-        search_metadata = crawling_data.get('metadata', {})
-        if search_metadata.get('cache_hit'):
-            final_result["data_source_notes"] += "Used cached search results. "
-        
-        # Prepare crawling configuration for later use
-        from crawling_prep import InstitutionLinkManager
-        link_manager = InstitutionLinkManager(BASE_DIR)
-        final_result["crawling_config"] = link_manager.prepare_crawling_config(crawling_data)
-
-        # Skip extraction if requested (for when we plan to use crawler data)
-        if skip_extraction:
-            final_result["data_source_notes"] += "Skipped extraction - prepared for crawling."
-            
-            # Complete pipeline successfully (search phase only)
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=25.0)  # 25% for search only
-            final_result["benchmark_data"] = {
-                'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-                'success': True,
-                'phase': 'search_only',
-                'completeness_percent': 25.0
-            }
-            return final_result
-
-        # Only do extraction if we have an LLM client and enough text
-        if not genai_client:
-            final_result["data_source_notes"] += "Skipped extraction - AI client not configured. Use crawling for full data."
-            
-            # Complete pipeline (search successful, extraction skipped)
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=30.0)
-            final_result["benchmark_data"] = {
-                'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-                'success': True,
-                'phase': 'search_only',
-                'completeness_percent': 30.0
-            }
-            return final_result
-
-        if len(raw_text.strip()) < 50:  # Very little text from search snippets
-            final_result["data_source_notes"] += "Skipped extraction - insufficient text from search snippets. Use crawling for full data."
-            
-            # Complete pipeline (search successful, extraction skipped due to insufficient data)
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=35.0)
-            final_result["benchmark_data"] = {
-                'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-                'success': True,
-                'phase': 'search_only',
-                'completeness_percent': 35.0
-            }
-            return final_result
-
-        # Extract information from the raw text
-        structured_info = extract_structured_data(genai_client, raw_text, institution_name)
-
-        # Merge extracted data
-        for key in STRUCTURED_INFO_KEYS:
-            if key in structured_info:
-                final_result[key] = structured_info[key]
-        
-        # Calculate completeness score based on extracted fields
-        extracted_fields = sum(1 for key in STRUCTURED_INFO_KEYS if final_result.get(key) != "Unknown")
-        completeness_score = (extracted_fields / len(STRUCTURED_INFO_KEYS)) * 100
-        
-        if "error" in structured_info and structured_info["error"]:
-            final_result["error"] = (final_result["error"] + "; " if final_result["error"] else "") + f"Extraction issue: {structured_info['error']}"
-            final_result["data_source_notes"] += "Error during structured data extraction from raw text."
-            if "raw_llm_output" in structured_info: # Include raw output from LLM if JSON parsing failed
-                 final_result["extraction_raw_llm_output"] = structured_info["raw_llm_output"]
-            
-            # Complete pipeline with partial success
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness_score)
-            final_result["benchmark_data"] = {
-                'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-                'success': True,
-                'phase': 'extraction_partial',
-                'completeness_percent': completeness_score
-            }
-        else:
-            final_result["data_source_notes"] += "Structured data extracted by LLM from raw text."
-            # Ensure the name from extraction (which might be more accurate or normalized) is used
-            if "name" in structured_info and structured_info["name"] != "Unknown":
-                final_result["name"] = structured_info["name"]
-
-            # Complete pipeline successfully
-            pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=True, completeness_score=completeness_score)
-            final_result["benchmark_data"] = {
-                'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-                'success': True,
-                'phase': 'extraction_complete',
-                'completeness_percent': completeness_score
-            }
-
-        return final_result
-        
-    except Exception as e:
-        # Handle unexpected errors
-        benchmark_tracker.add_pipeline_error(pipeline_id, 'unexpected', str(e))
-        final_result["error"] = f"Unexpected error in pipeline: {str(e)}"
-        
-        # Complete pipeline with failure
-        pipeline_benchmark = benchmark_tracker.complete_pipeline(pipeline_id, success=False)
-        final_result["benchmark_data"] = {
-            'pipeline_time': pipeline_benchmark.total_pipeline_time if pipeline_benchmark else 0,
-            'success': False,
-            'phase': 'error'
-        }
-        return final_result
+# Get the key from https://aistudio.google.com/app/apikey
+# If environmental variables aren't detected, try to set it in VScode directly
+# The client gets passed to the other modules.
+try:
+    GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+    if not GOOGLE_API_KEY:
+        print("Warning: GOOGLE_API_KEY environment variable not set. AI features will be limited.")
+        genai_client = None
+    else:
+        genai_client = genai.Client(api_key=GOOGLE_API_KEY)
+except Exception as e:
+    print(f"Fatal Error: Could not configure Google Generative AI Client: {e}")
+    genai_client = None
 
 def get_institution_profile(institution_name, document_text=None):
     """
