@@ -139,13 +139,18 @@ class CrawlerService:
             'crawl_summary': {},
             'benchmark_data': {},
             'cache_hits': 0,
-            'api_calls': 0
-        }
+            'api_calls': 0        }
         
         try:
             # Configure crawler based on institution type and strategy
+            try:
+                institution_type_enum = InstitutionType(institution_type.lower())
+            except (ValueError, AttributeError):
+                # Default to GENERAL if the institution type is not recognized
+                institution_type_enum = InstitutionType.GENERAL
+                
             crawler_config = CrawlerConfig.for_institution_type(
-                InstitutionType(institution_type), strategy
+                institution_type_enum, strategy
             )
             
             # Create the async crawler
