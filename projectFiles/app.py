@@ -4,6 +4,7 @@ import json
 import os
 from service_factory import initialize_autocomplete_with_all_institutions, get_autocomplete_service
 from spell_check import SpellCorrectionService
+from search.search_service import SearchService
 
 app = Flask(__name__)
 
@@ -21,6 +22,9 @@ if not spell_service.is_initialized:
 # Initialize autocomplete service with all institution types
 initialize_autocomplete_with_all_institutions(BASE_DIR)
 autocomplete_service = get_autocomplete_service()
+
+# Initialize search service
+search_service = SearchService(BASE_DIR)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -97,6 +101,102 @@ def spell_check():
         'original_query': term,
         'message': f'Found {len(corrections)} suggestions' if corrections else 'No suggestions found'
     })
+
+
+@app.route('/search', methods=['GET'])
+def search_institution():
+    """
+    Search endpoint for institution information.
+    """
+    institution_name = request.args.get('name', '').strip()
+    institution_type = request.args.get('type', '').strip() or None
+    force_api = request.args.get('force_api', 'false').lower() == 'true'
+    
+    if not institution_name:
+        return jsonify({
+            'success': False,
+            'error': 'Institution name is required'
+        })
+    
+    result = search_service.search_institution(institution_name, institution_type, force_api)
+    return jsonify(result)
+
+
+@app.route('/search/links', methods=['GET'])
+def get_search_links():
+    """
+    Get links for an institution (useful for crawling).
+    """
+    institution_name = request.args.get('name', '').strip()
+    institution_type = request.args.get('type', '').strip() or None
+    max_links = int(request.args.get('max_links', 10))
+    
+    if not institution_name:
+        return jsonify({
+            'success': False,
+            'error': 'Institution name is required'
+        })
+    
+    links = search_service.get_search_links(institution_name, institution_type, max_links)
+    return jsonify({
+        'success': True,
+        'institution_name': institution_name,
+        'institution_type': institution_type,
+        'links': links,
+        'count': len(links)
+    })
+
+
+@app.route('/search/stats', methods=['GET'])
+def search_stats():
+    """
+    Get search service statistics and performance metrics.
+    """
+    stats = search_service.get_stats()
+    return jsonify(stats)
+
+
+@app.route('/search/recent', methods=['GET'])
+def recent_searches():
+    """
+    Get recent search history.
+    """
+    limit = int(request.args.get('limit', 10))
+    recent = search_service.get_recent_searches(limit)
+    return jsonify({
+        'recent_searches': recent,
+        'count': len(recent)
+    })
+
+
+@app.route('/search/performance', methods=['GET'])
+def search_performance():
+    """
+    Get performance analysis by institution type.
+    """
+    analysis = search_service.analyze_performance()
+    return jsonify(analysis)
+
+
+@app.route('/search/cache', methods=['GET'])
+def search_cache_info():
+    """
+    Get cached queries information.
+    """
+    cached_queries = search_service.get_cached_queries()
+    return jsonify({
+        'cached_queries': cached_queries,
+        'count': len(cached_queries)
+    })
+
+
+@app.route('/search/cache/clear', methods=['POST'])
+def clear_search_cache():
+    """
+    Clear expired cache entries.
+    """
+    result = search_service.clear_cache()
+    return jsonify(result)
 
 
 if __name__ == '__main__':
