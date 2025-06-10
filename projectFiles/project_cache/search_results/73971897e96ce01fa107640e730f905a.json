@@ -1,0 +1,46 @@
+{
+  "query": "Bank of America bank banking",
+  "params": {},
+  "cached_at": 1749583896.682404,
+  "timestamp": 1749583896.6813872,
+  "success": true,
+  "results": [
+    {
+      "title": "Bank of America Free Museums on Us - Museum List by State",
+      "link": "https://accounts.nfhs.org/users/single_logout?redirect_to=https://about.bankofamerica.com/en/making-an-impact/museums-on-us-partners",
+      "displayLink": "accounts.nfhs.org",
+      "snippet": "Bank of America offers our cardholders free general admission \u2013 during the first full weekend of every month \u2013 to cultural institutions across the United\u00a0..."
+    },
+    {
+      "title": "Bank of America Charitable Foundation philanthropic strategy",
+      "link": "https://cgpct.org/BankOfAmericaCharitable",
+      "displayLink": "cgpct.org",
+      "snippet": "We focus on improving the lives of individuals and families by investing in health, jobs, and strengthening broader community vitality."
+    },
+    {
+      "title": "Home Loans and Current Rates from Bank of America",
+      "link": "https://web.marioncc.org/wcdirectory/directory.aspx?listingid=4074&profileid=3J1S1B3P5A8R14&action=uweb&url=http%3A%2F%2Fwww.countrywide.com",
+      "displayLink": "web.marioncc.org",
+      "snippet": "Find competitive home loan rates and get the knowledge you need to help you make informed decisions when buying a home."
+    },
+    {
+      "title": "Bank of America: The Humble Beginnings of a Large Bank | OCC",
+      "link": "https://www.occ.treas.gov/about/who-we-are/history/1866-1913/1866-1913-bank-of-america.html",
+      "displayLink": "www.occ.treas.gov",
+      "snippet": "On November 1, 1930, the Bank of Italy in San Francisco changed its name to Bank of America. The bank today has the same national bank charter number as\u00a0..."
+    },
+    {
+      "title": "TD Bank: Online Banking, Loans, Credit Cards & Home Lending",
+      "link": "http://www.tdbank.org/",
+      "displayLink": "www.tdbank.org",
+      "snippet": "Welcome to TD Bank! Explore our banking services, credit cards, loans, home lending, and other financial products for you and your business."
+    }
+  ],
+  "total_results": "73900000",
+  "search_time": 0.392583,
+  "enhancement_info": {
+    "enhanced": true,
+    "detected_type": "bank",
+    "strategy_used": "official_sites"
+  }
+}

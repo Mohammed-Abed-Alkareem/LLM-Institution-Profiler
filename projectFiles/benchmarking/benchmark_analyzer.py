@@ -68,13 +68,12 @@ class BenchmarkAnalyzer:
         """Load all available benchmark data."""
         all_benchmarks = []
         
-        try:
-            # Load enhanced benchmarks
-            enhanced_file = os.path.join(self.config.benchmarks_dir, "all_enhanced_benchmarks.json")
-            if os.path.exists(enhanced_file):
-                with open(enhanced_file, 'r', encoding='utf-8') as f:
-                    enhanced_data = json.load(f)
-                    all_benchmarks.extend(enhanced_data)
+        try:            # Load main benchmarks
+            benchmarks_file = os.path.join(self.config.benchmarks_dir, "all_benchmarks.json")
+            if os.path.exists(benchmarks_file):
+                with open(benchmarks_file, 'r', encoding='utf-8') as f:
+                    benchmark_data = json.load(f)
+                    all_benchmarks.extend(benchmark_data)
             
             # Load legacy benchmarks for compatibility
             legacy_file = os.path.join(self.config.benchmarks_dir, "all_benchmarks.json")

@@ -274,8 +274,7 @@ class BenchmarkingManager:
             if os.path.exists(benchmarks_file):
                 with open(benchmarks_file, 'r', encoding='utf-8') as f:
                     benchmark_data = json.load(f)
-                    all_benchmarks.extend(benchmark_data)
-              # Load session benchmarks
+                    all_benchmarks.extend(benchmark_data)            # Load session benchmarks
             session_files = [f for f in os.listdir(self.config.benchmarks_dir) 
                            if f.startswith('session_') and f.endswith('.json')]
             

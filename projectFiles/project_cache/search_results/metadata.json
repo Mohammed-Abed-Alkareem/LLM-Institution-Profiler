@@ -58,11 +58,16 @@
         "exclude_terms": "admissions"
       },
       "cached_at": 1749544817.4451709
+    },
+    "73971897e96ce01fa107640e730f905a": {
+      "query": "Bank of America",
+      "params": {},
+      "cached_at": 1749583896.6843414
     }
   },
   "stats": {
-    "hits": 16,
-    "misses": 14,
-    "similar_hits": 3
+    "hits": 22,
+    "misses": 15,
+    "similar_hits": 5
   }
 }

@@ -44,15 +44,14 @@ class BenchmarkTracker:
             'comparisons': [],
             'summary_stats': {}
         }
-        
-        # File paths
+          # File paths
         self.session_file = os.path.join(
             config.benchmarks_dir, 
-            f"enhanced_session_{self.session_id}.json"
+            f"session_{self.session_id}.json"
         )
         self.all_benchmarks_file = os.path.join(
             config.benchmarks_dir, 
-            "all_enhanced_benchmarks.json"
+            "all_benchmarks.json"
         )
     
     # === Pipeline Tracking ===
@@ -496,7 +495,7 @@ class BenchmarkTracker:
         try:
             # Clean session files
             for filename in os.listdir(self.config.benchmarks_dir):
-                if filename.startswith('enhanced_session_') and filename.endswith('.json'):
+                if filename.startswith('session_') and filename.endswith('.json'):
                     file_path = os.path.join(self.config.benchmarks_dir, filename)
                     if os.path.getmtime(file_path) < cutoff_time:
                         os.remove(file_path)
