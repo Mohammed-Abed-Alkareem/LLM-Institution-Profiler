@@ -1,0 +1,15 @@
+[
+  {
+    "query": "MIT",
+    "timestamp": 1749544232.81847,
+    "response_time": 0.0009989738464355469,
+    "success": true,
+    "source": "cache",
+    "num_results": 5,
+    "total_results": "50400000",
+    "api_search_time": 0.0,
+    "error": null,
+    "cache_similarity": 0,
+    "institution_type": "university"
+  }
+]

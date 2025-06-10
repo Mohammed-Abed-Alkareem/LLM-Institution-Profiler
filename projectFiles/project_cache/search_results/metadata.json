@@ -49,11 +49,20 @@
       "query": "Stanford Hospital",
       "params": {},
       "cached_at": 1749542499.942626
+    },
+    "01ad4ce194180e2399e612d3aa75be44": {
+      "query": "Birzeit University",
+      "params": {
+        "institution_type": "university",
+        "location": "palestine",
+        "exclude_terms": "admissions"
+      },
+      "cached_at": 1749544817.4451709
     }
   },
   "stats": {
-    "hits": 9,
-    "misses": 10,
+    "hits": 10,
+    "misses": 14,
     "similar_hits": 2
   }
 }

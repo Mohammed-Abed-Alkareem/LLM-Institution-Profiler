@@ -99,8 +99,8 @@ class GoogleSearchClient:
         Returns:
             Dictionary containing search results
         """
-        # Import here to avoid circular imports
-        from search_enhancer import SearchQueryEnhancer
+        
+        from .search_enhancer import SearchQueryEnhancer
         
         # Enhance the query with additional parameters
         enhancer = SearchQueryEnhancer()

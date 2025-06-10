@@ -85,8 +85,7 @@ def get_institution_links_for_crawling(institution_name: str, institution_type: 
     return get_institution_links_for_crawling(institution_name, institution_type, max_links, BASE_DIR)
 
 # The reason I'm using LLMs for this and not a search API is the current ones are
-# either rate limited (100-2k requests) or they'll be out of service soon (bing in october or so)
-# so I didn't want to mess with them, there are some other options but they need to be checked
+# either rate limited (100-2k requests monthly)
 def fetch_raw_institution_text_LLM_version(genai_client, institution_name: str):
     """
     Fetches a general raw text description of an institution using an LLM call

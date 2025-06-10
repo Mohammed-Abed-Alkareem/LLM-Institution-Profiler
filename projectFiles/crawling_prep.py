@@ -2,7 +2,7 @@
 Link extraction and crawling preparation for institution data.
 """
 import os
-from typing import List, Dict, Optional
+from typing import List, Dict
 from search.search_service import SearchService
 
 
@@ -12,9 +12,8 @@ class InstitutionLinkManager:
     def __init__(self, base_dir: str = None):
         self.base_dir = base_dir or os.getcwd()
         self.search_service = SearchService(base_dir)
-    
     def get_crawling_links(self, institution_name: str, institution_type: str = None, 
-                          max_links: int = 10, include_search_metadata: bool = True) -> Dict:
+                          max_links: int = 10, include_search_metadata: bool = True, search_params: dict = None) -> Dict:
         """
         Get links for institution crawling with metadata.
         
@@ -23,12 +22,13 @@ class InstitutionLinkManager:
             institution_type: Type of institution (if known)
             max_links: Maximum number of links to return
             include_search_metadata: Whether to include search metadata
+            search_params: Enhanced search parameters (location, keywords, domain_hint, exclude_terms)
             
         Returns:
             Dictionary with links and metadata for crawling
         """
-        # Get search results with links
-        search_result = self.search_service.search_institution(institution_name, institution_type)
+        # Get search results with links using enhanced search params
+        search_result = self.search_service.search_institution(institution_name, institution_type, search_params=search_params)
         
         crawling_data = {
             'institution_name': institution_name,
@@ -189,7 +189,7 @@ class InstitutionLinkManager:
 
 
 def get_institution_links_for_crawling(institution_name: str, institution_type: str = None, 
-                                     max_links: int = 10, base_dir: str = None) -> Dict:
+                                     max_links: int = 10, base_dir: str = None, search_params: dict = None) -> Dict:
     """
     Convenience function to get institution links for crawling.
     
@@ -198,9 +198,10 @@ def get_institution_links_for_crawling(institution_name: str, institution_type: 
         institution_type: Type of institution
         max_links: Maximum number of links to return
         base_dir: Base directory for search service
+        search_params: Enhanced search parameters (location, keywords, domain_hint, exclude_terms)
         
     Returns:
         Dictionary with links and metadata for crawling
     """
     link_manager = InstitutionLinkManager(base_dir)
-    return link_manager.get_crawling_links(institution_name, institution_type, max_links)
+    return link_manager.get_crawling_links(institution_name, institution_type, max_links, search_params=search_params)

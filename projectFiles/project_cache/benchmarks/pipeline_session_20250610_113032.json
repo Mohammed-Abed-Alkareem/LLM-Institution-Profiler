@@ -1,0 +1,22 @@
+[
+  {
+    "institution_name": "MIT",
+    "institution_type": "university",
+    "pipeline_start": 1749544232.81847,
+    "pipeline_end": 1749544232.8224723,
+    "total_pipeline_time": 0.00400233268737793,
+    "success": false,
+    "search_benchmark": null,
+    "crawling_benchmark": null,
+    "rag_benchmark": null,
+    "llm_benchmark": null,
+    "data_quality_score": 0.0,
+    "completeness_score": 0.0,
+    "total_cost_estimate": 0.0,
+    "cache_efficiency": 0.0,
+    "phase_errors": {
+      "pipeline": "cannot import name 'prepare_crawling_links' from 'crawling_prep' (C:\\Users\\jihad\\Desktop\\nlp\\LLM-Institution-Profiler\\projectFiles\\crawling_prep.py)"
+    },
+    "warnings": []
+  }
+]
