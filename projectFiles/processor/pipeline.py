@@ -11,6 +11,7 @@ from .crawling_phase import CrawlingPhaseHandler
 from .extraction_phase import ExtractionPhaseHandler
 from extraction_logic import STRUCTURED_INFO_KEYS
 from benchmarking.integration import get_benchmarking_manager, benchmark_context, BenchmarkCategory
+from benchmarking.quality_score_integration import quality_integrator
 
 
 class InstitutionPipeline:
@@ -184,15 +185,18 @@ class InstitutionPipeline:
             
             if extraction_result["success"] and not extraction_result.get("skipped"):
                 self._merge_extraction_results(final_result, extraction_result)
-            
-            # Calculate final metrics
+              # Calculate final metrics
             pipeline_time = time.time() - pipeline_start_time
             final_result["performance_metrics"] = {
                 "total_pipeline_time": pipeline_time,
                 "phases_completed": sum(1 for phase in final_result["processing_phases"].values() if phase["completed"]),
                 "overall_success": all(phase["success"] for phase in final_result["processing_phases"].values() if phase["completed"])
             }
-              # Record final benchmarking metrics
+            
+            # Calculate information quality score after all phases complete
+            self._calculate_and_attach_quality_score(final_result)
+            
+            # Record final benchmarking metrics
             if benchmark_ctx:
                 self._record_final_benchmark_metrics(benchmark_ctx, final_result, search_result, crawling_result, extraction_result)
                 # Attach benchmark metrics to final result
@@ -479,10 +483,61 @@ class InstitutionPipeline:
                 final_result["error"] += f"; {extraction_result['error']}"
             else:
                 final_result["error"] = extraction_result["error"]
-        
-        # Ensure name is properly set
+          # Ensure name is properly set
         if structured_data.get("name") and structured_data["name"] != "Unknown":
             final_result["name"] = structured_data["name"]
+            
+        # Integrate quality score calculation
+        self._integrate_quality_score(final_result)
+    def _integrate_quality_score(self, final_result):
+        """
+        Integrate quality score calculation using the core quality scoring system.
+        This adds the same quality metrics used in the web interface to pipeline results.
+        """
+        try:
+            # Import locally to avoid circular import issues
+            import sys
+            import os
+            
+            # Ensure benchmarking module is in path
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            project_dir = os.path.dirname(current_dir)
+            if project_dir not in sys.path:
+                sys.path.append(project_dir)
+            
+            from benchmarking.quality_score_integration import QualityScoreIntegrator
+            
+            # Create fresh integrator instance
+            integrator = QualityScoreIntegrator()
+            
+            # Calculate enhanced quality metrics
+            quality_metrics = integrator.calculate_enhanced_quality_metrics(
+                final_result, 
+                benchmark_context={"pipeline_stage": "post_extraction"}
+            )
+            
+            # Add quality metrics to final result
+            final_result['quality_score'] = quality_metrics.get('core_quality_score', 0)
+            final_result['quality_rating'] = quality_metrics.get('core_quality_rating', 'Unknown')
+            final_result['quality_details'] = quality_metrics.get('core_quality_details', {})
+            final_result['quality_metrics'] = quality_metrics
+            
+        except Exception as e:
+            # Graceful fallback if quality integration fails
+            print(f"Warning: Quality score integration failed: {e}")
+            # Try fallback to direct calculation
+            try:
+                from quality_score_calculator import calculate_information_quality_score
+                score, rating, details = calculate_information_quality_score(final_result)
+                final_result['quality_score'] = score
+                final_result['quality_rating'] = rating
+                final_result['quality_details'] = details
+            except Exception as fallback_e:
+                print(f"Warning: Fallback quality calculation also failed: {fallback_e}")
+                final_result['quality_score'] = 0
+                final_result['quality_rating'] = 'Error'
+                final_result['quality_details'] = {'error': str(e), 'fallback_error': str(fallback_e)}
+    
     def _prepare_text_for_extraction(self, final_result, crawling_result):
         """
         Prepare comprehensive text for extraction using the best available content formats.
@@ -830,3 +885,22 @@ class InstitutionPipeline:
             final_result.setdefault('latency_metrics', {})
             final_result.setdefault('quality_metrics', {})
             final_result.setdefault('efficiency_metrics', {})
+    
+    def _calculate_and_attach_quality_score(self, final_result: Dict):
+        """Calculate and attach information quality score to final result."""
+        try:
+            # Use the quality integrator to calculate enhanced score
+            enhanced_score = quality_integrator.calculate_enhanced_quality_score(final_result)
+            
+            # Attach all quality scoring data to final result
+            final_result.update(enhanced_score)
+            
+            print(f"✅ Quality score calculated: {enhanced_score.get('quality_score', 0):.1f} "
+                  f"({enhanced_score.get('quality_rating', 'Unknown')})")
+            
+        except Exception as e:
+            print(f"⚠️ Warning: Could not calculate quality score: {e}")
+            # Set default quality metrics to prevent template errors
+            final_result.setdefault('quality_score', 0.0)
+            final_result.setdefault('quality_rating', 'Unknown')
+            final_result.setdefault('quality_details', {})

@@ -1,0 +1,87 @@
+{
+  "session_id": "20250611_152422",
+  "start_time": 1749644662.1954887,
+  "pipelines": [
+    {
+      "pipeline_id": "pipeline_Bank of America California_1749644723_8c4c8cdf",
+      "pipeline_name": "pipeline",
+      "pipeline_version": "1.0",
+      "institution_name": "Bank of America California",
+      "institution_type": "general",
+      "cost_metrics": {
+        "google_search_queries": 1,
+        "google_search_cost_usd": 0.005,
+        "llm_model_used": "gemini-2.0-flash",
+        "input_tokens": 15177,
+        "output_tokens": 3084,
+        "total_tokens": 18261,
+        "llm_cost_usd": 0.00138537,
+        "compute_time_seconds": 0.0,
+        "storage_bytes": 0,
+        "bandwidth_bytes": 0,
+        "infrastructure_cost_usd": 0.0,
+        "total_cost_usd": 0.0063853700000000005
+      },
+      "latency_metrics": {
+        "search_time_seconds": 0.0010056495666503906,
+        "crawling_time_seconds": 0.0,
+        "rag_processing_time_seconds": 0.0,
+        "llm_processing_time_seconds": 7.88159966468811,
+        "total_pipeline_time_seconds": 39.57139706611633,
+        "cache_lookup_time_seconds": 0.0,
+        "api_call_time_seconds": 0.0,
+        "data_processing_time_seconds": 0.0,
+        "network_requests": 0,
+        "total_network_time_seconds": 0.0,
+        "average_network_latency_ms": 0.0,
+        "start_timestamp": 1749644723.1026711,
+        "end_timestamp": 1749644762.6740682
+      },
+      "quality_metrics": {
+        "fields_requested": 97,
+        "fields_extracted": 70,
+        "completeness_score": 0.7216494845360825,
+        "accuracy_score": 0.0,
+        "precision_score": 0.0,
+        "recall_score": 0.0,
+        "f1_score": 0.0,
+        "content_quality_score": 0.8,
+        "relevance_score": 0.8,
+        "coherence_score": 0.0,
+        "validation_passed": true,
+        "validation_errors": [
+          "Low accuracy score"
+        ],
+        "confidence_scores": {},
+        "source_authority_score": 0.0,
+        "source_freshness_score": 0.0,
+        "source_credibility_score": 0.0
+      },
+      "efficiency_metrics": {
+        "cache_requests": 1,
+        "cache_hits": 1,
+        "cache_misses": 0,
+        "cache_hit_rate": 1.0,
+        "memory_usage_mb": 0.0,
+        "cpu_usage_percent": 0.0,
+        "disk_io_mb": 0.0,
+        "network_io_mb": 0.0,
+        "items_processed": 2,
+        "processing_rate_per_second": 0.0,
+        "error_rate": 0.0,
+        "retry_count": 0,
+        "input_data_size_mb": 12.282807350158691,
+        "output_data_size_mb": 0.0,
+        "compression_ratio": 0.0
+      },
+      "status": "completed",
+      "success": true,
+      "error_message": null,
+      "pipeline_config": {},
+      "results_summary": {}
+    }
+  ],
+  "comparisons": [],
+  "summary_stats": {},
+  "last_updated": 1749644762.6740682
+}

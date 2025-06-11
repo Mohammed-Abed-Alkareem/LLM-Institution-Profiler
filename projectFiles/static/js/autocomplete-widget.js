@@ -16,6 +16,10 @@ class AutocompleteWidget {
             maxSuggestions: 5,
             delay: 300,
             endpoint: '/autocomplete',
+            // Preview text positioning adjustments (in pixels)
+            previewOffsetX: 5, // Horizontal offset from left (icon width)
+            previewOffsetY: 5,  // Vertical offset adjustment
+            previewSpacing: 2,  // Space between typed text and preview
             ...options
         };
 
@@ -49,9 +53,7 @@ class AutocompleteWidget {
         // Position dropdown relative to input
         this.input.parentNode.style.position = 'relative';
         this.input.parentNode.appendChild(this.dropdown);
-    }
-
-    /**
+    }    /**
      * Create preview text overlay for autocomplete suggestions
      */
     createPreviewText() {
@@ -63,44 +65,44 @@ class AutocompleteWidget {
         // Create preview text element
         this.previewText = document.createElement('div');
         this.previewText.className = 'autocomplete-preview';
-        this.previewText.style.position = 'absolute';
-        this.previewText.style.top = '0';
-        this.previewText.style.left = '0';
-        this.previewText.style.pointerEvents = 'none';
-        this.previewText.style.whiteSpace = 'nowrap';
-        this.previewText.style.overflow = 'hidden';
-        this.previewText.style.color = '#999';
-        this.previewText.style.zIndex = '1';
-        this.previewText.style.background = 'transparent';
-        this.previewText.style.border = 'none';
-        this.previewText.style.outline = 'none';
-        this.previewText.style.fontSize = window.getComputedStyle(this.input).fontSize;
-        this.previewText.style.fontFamily = window.getComputedStyle(this.input).fontFamily;
-        this.previewText.style.fontWeight = window.getComputedStyle(this.input).fontWeight;
-        this.previewText.style.lineHeight = window.getComputedStyle(this.input).lineHeight;
-        this.previewText.style.height = window.getComputedStyle(this.input).height;
-        this.previewText.style.padding = window.getComputedStyle(this.input).padding;
-        this.previewText.style.margin = '0';
-        this.previewText.style.boxSizing = 'border-box';
-        this.previewText.style.width = '100%';
-        this.previewText.style.display = 'none';
 
-        // Create a hidden span for measuring text width
-        this.measureSpan = document.createElement('span');
-        this.measureSpan.style.visibility = 'hidden';
-        this.measureSpan.style.position = 'absolute';
-        this.measureSpan.style.whiteSpace = 'pre';
-        this.measureSpan.style.fontSize = this.previewText.style.fontSize;
-        this.measureSpan.style.fontFamily = this.previewText.style.fontFamily;
-        this.measureSpan.style.fontWeight = this.previewText.style.fontWeight;
-        this.measureSpan.style.lineHeight = this.previewText.style.lineHeight;
-        this.measureSpan.style.padding = this.previewText.style.padding;
-        inputContainer.appendChild(this.measureSpan);
+        // Get computed styles from the input to match exactly
+        const inputStyles = window.getComputedStyle(this.input);
+        
+        // Set styles to match the input exactly
+        this.previewText.style.cssText = `
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: ${this.input.offsetWidth}px !important;
+            height: ${this.input.offsetHeight}px !important;            
+            border: ${inputStyles.border} !important;
+            border-color: transparent !important;
+            outline: none !important;
+            background: transparent !important;
+            color: #aaa !important;
+            pointer-events: none !important;
+            z-index: 1 !important;
+            font-size: ${inputStyles.fontSize} !important;
+            font-family: ${inputStyles.fontFamily} !important;
+            font-weight: ${inputStyles.fontWeight} !important;
+            line-height: ${inputStyles.lineHeight} !important;
+            padding: ${inputStyles.padding} !important;
+            margin: 0 !important;
+            box-sizing: ${inputStyles.boxSizing} !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-align: ${inputStyles.textAlign} !important;
+            display: none !important;
+        `;
 
         // Insert preview behind the input
         inputContainer.appendChild(this.previewText);
+
         // Ensure input is above preview
         this.input.style.position = 'relative';
+        this.input.style.zIndex = '2';
+        this.input.style.background = 'transparent';
     }
 
     /**
@@ -134,9 +136,9 @@ class AutocompleteWidget {
         });
     }    /**
      * Handle input changes with debouncing
-     */
-    handleInput(e) {
-        const value = e.target.value.trim();
+     */    handleInput(e) {
+        const value = e.target.value;
+        const trimmedValue = value.trim();
 
         // Clear preview text when input changes
         this.clearPreviewText();
@@ -149,10 +151,10 @@ class AutocompleteWidget {
             clearTimeout(this.debounceTimer);
         }
 
-        // Debounce the search
+        // Debounce the search - use trimmed value for search but pass actual value for preview
         this.debounceTimer = setTimeout(() => {
-            if (value.length >= this.options.minLength) {
-                this.search(value);
+            if (trimmedValue.length >= this.options.minLength) {
+                this.search(trimmedValue, value); // Pass both trimmed and actual value
             } else {
                 this.close();
             }
@@ -222,8 +224,7 @@ class AutocompleteWidget {
 
     /**
      * Perform search and handle response
-     */
-    async search(query) {
+     */    async search(query, actualInputValue = null) {
         try {
             const response = await fetch(`${this.options.endpoint}?term=${encodeURIComponent(query)}`);
             const data = await response.json();
@@ -258,7 +259,9 @@ class AutocompleteWidget {
                     firstSuggestionText = firstSuggestion;
                 }
             }
-            this.updatePreviewText(query, firstSuggestionText);
+            // Use actual input value for preview positioning if provided
+            const valueForPreview = actualInputValue || query;
+            this.updatePreviewText(valueForPreview, firstSuggestionText);
 
             if (suggestions.length > 0) {
                 this.render();
@@ -271,26 +274,94 @@ class AutocompleteWidget {
             this.close();
         }
     }    /**
-     * Update the preview text and align it after the user's input
-     * @param {string} userText - The text the user has typed
-     * @param {string} suggestion - The full suggestion text
+     * Update preview text showing completion
+     */    updatePreviewText(query = null, suggestionText = null) {
+        if (!this.previewText) return;
+
+        const currentValue = query || this.input.value;
+        this.clearPreviewText();        if (this.suggestions.length > 0 && currentValue.length > 0) {
+            // Use provided suggestion text or find the first suggestion that's an actual institution
+            let finalSuggestionText = suggestionText;
+            
+            if (!finalSuggestionText) {
+                // Find the first suggestion that's an actual institution (not spell correction metadata)
+                let suggestionToUse = null;
+
+                for (const suggestion of this.suggestions) {
+                    // Skip suggestions that are spell correction metadata (have corrected_query but no institution data)
+                    if (typeof suggestion === 'object' && suggestion.corrected_query && 
+                        !suggestion.name && !suggestion.full_name && !suggestion.term) {
+                        continue;
+                    }
+
+                    suggestionToUse = suggestion;
+                    break;
+                }
+
+                if (suggestionToUse) {
+                    if (typeof suggestionToUse === 'object') {
+                        finalSuggestionText = suggestionToUse.name || suggestionToUse.full_name || suggestionToUse.term || '';
+                    } else {
+                        finalSuggestionText = suggestionToUse;
+                    }
+                }
+            }
+
+            if (finalSuggestionText) {// For spell corrections, we need to be more flexible about matching
+                // The suggestion might match the corrected query rather than the original input
+                let shouldShowPreview = false;
+                let remainingText = '';                if (finalSuggestionText.toLowerCase().startsWith(currentValue.toLowerCase())) {
+                    // Direct match - show remaining text including any space
+                    remainingText = finalSuggestionText.substring(currentValue.length);
+                    
+                    // Ensure we show the space if there should be one
+                    if (remainingText && !remainingText.startsWith(' ') && 
+                        currentValue.length < finalSuggestionText.length &&
+                        finalSuggestionText.charAt(currentValue.length) === ' ') {
+                        // Add the space that was cut off
+                        remainingText = ' ' + remainingText;
+                    }
+                    
+                    shouldShowPreview = remainingText.length > 0;
+                } else if (this.isSpellCorrection && this.suggestions[0] && this.suggestions[0].corrected_query) {
+                    // For spell corrections, check if the suggestion matches the corrected query
+                    const correctedQuery = this.suggestions[0].corrected_query;
+                    if (finalSuggestionText.toLowerCase().startsWith(correctedQuery.toLowerCase())) {
+                        remainingText = finalSuggestionText.substring(correctedQuery.length);
+                        shouldShowPreview = true;
+                    }
+                }                if (shouldShowPreview && remainingText) {
+                    // Use HTML approach to preserve spaces properly with custom 65px padding
+                    const previewContent = `<span style="color: transparent; user-select: none; padding-right: 65px;">${currentValue}</span><span style="color: #aaa;">${remainingText}</span>`;
+                    this.previewText.innerHTML = previewContent;
+                    this.previewText.style.textIndent = '0px'; // Reset text indent
+                    this.previewText.style.display = 'block';
+                }
+            }
+        }
+    }
+
+    /**
+     * Update preview positioning (for external adjustment)
      */
-    updatePreviewText(userText, suggestion) {
-        if (!suggestion || !userText || !suggestion.toLowerCase().startsWith(userText.toLowerCase())) {
-            this.previewText.style.display = 'none';
-            return;
-        }        // Set the preview text to the remaining suggestion
-        const remaining = suggestion.substring(userText.length);
-        this.previewText.textContent = remaining;
-        // Measure the width of the user's input text
-        this.measureSpan.textContent = userText;
-        const textWidth = this.measureSpan.offsetWidth;
-        // Adjust textIndent based on the measured width of userText.
-        // The preview element's CSS (left: 60px) already accounts for any icon.
-        // Add a small horizontal offset (e.g., 2px, equivalent to a space) to push the preview text slightly to the right.
-        const horizontalOffset = 6; // Adjust this value as needed for the desired spacing
-        this.previewText.style.textIndent = (textWidth + horizontalOffset) + 'px';
-        this.previewText.style.display = 'block';
+    adjustPreviewPosition(offsetX = null, offsetY = null, spacing = null) {
+        if (offsetX !== null) this.options.previewOffsetX = offsetX;
+        if (offsetY !== null) this.options.previewOffsetY = offsetY;
+        if (spacing !== null) this.options.previewSpacing = spacing;
+          // Re-update the preview if it's currently showing
+        if (this.previewText && this.previewText.style.display === 'block') {
+            const currentQuery = this.input.value; // Don't trim here - we need exact value
+            const firstSuggestion = this.suggestions[0];
+            let firstSuggestionText = '';
+            if (firstSuggestion) {
+                if (typeof firstSuggestion === 'object') {
+                    firstSuggestionText = firstSuggestion.name || firstSuggestion.full_name || firstSuggestion.term || '';
+                } else if (typeof firstSuggestion === 'string') {
+                    firstSuggestionText = firstSuggestion;
+                }
+            }
+            this.updatePreviewText(currentQuery, firstSuggestionText);
+        }
     }
 
     /**

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Institution Profiler - AI-Powered Institutional Intelligence</title>
+  <title>Institution Profiler - NLP Project</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
@@ -23,10 +23,9 @@
               <div class="icon-wrapper">
                 <i class="fas fa-university"></i>
               </div>
-            </div>
-            <h1 class="hero-title mb-3">Institution Profiler</h1>
+            </div>            <h1 class="hero-title mb-3">Institution Profiler</h1>
             <p class="hero-subtitle mb-4">
-              Discover comprehensive profiles of universities, hospitals, banks, and organizations worldwide using advanced AI technology.
+              Create comprehensive profiles of universities, hospitals, banks, and organizations using Large Language Models and web crawling techniques.
             </p>
             <div class="hero-stats d-flex justify-content-center gap-4 mb-4">
               <div class="stat-item">
@@ -40,7 +39,7 @@
               </div>
               <div class="stat-divider"></div>
               <div class="stat-item">
-                <div class="stat-number">10-30s</div>
+                <div class="stat-number">10-60s</div>
                 <div class="stat-label">Analysis Time</div>
               </div>
             </div>
@@ -53,25 +52,23 @@
                 <div class="search-input-group autocomplete-input-container">
                   <div class="search-icon">
                     <i class="fas fa-search"></i>
-                  </div>
-                  <input type="text" name="institution_name" id="institution_name" 
+                  </div>                  <input type="text" name="institution_name" id="institution_name" 
                          class="form-control search-input autocomplete-input" 
-                         placeholder="Search any institution: MIT, Mayo Clinic, JPMorgan Chase..." 
+                         placeholder="Enter institution name: Birzeit University, Mayo Clinic, Goldman Sachs..." 
                          required="" autocomplete="off">
                   <button type="submit" class="btn btn-primary search-btn">
-                    <i class="fas fa-arrow-right me-1"></i>Analyze
+                    <i class="fas fa-arrow-right me-1"></i>Generate Profile
                   </button>
                 </div>
               </div>
 
-              <!-- Quick Examples -->
-              <div class="examples-section mb-4">
+              <!-- Quick Examples -->              <div class="examples-section mb-4">
                 <div class="text-center mb-3">
-                  <small class="text-muted">Try these examples:</small>
+                  <small class="text-muted">Try these sample institutions:</small>
                 </div>
                 <div class="examples-grid">
-                  <button type="button" class="example-btn" data-example="Harvard University">
-                    <i class="fas fa-graduation-cap me-2"></i>Harvard University
+                  <button type="button" class="example-btn" data-example="Birzeit University">
+                    <i class="fas fa-graduation-cap me-2"></i>Birzeit University
                   </button>
                   <button type="button" class="example-btn" data-example="Mayo Clinic">
                     <i class="fas fa-hospital me-2"></i>Mayo Clinic
@@ -140,17 +137,16 @@
             </form>
           </div>
 
-          <!-- Features Section -->
-          <div class="features-section mt-5">
+          <!-- Features Section -->          <div class="features-section mt-5">
             <div class="row g-4">
               <div class="col-md-4">
                 <div class="feature-card">
                   <div class="feature-icon">
                     <i class="fas fa-brain"></i>
                   </div>
-                  <h5 class="feature-title">AI-Powered Analysis</h5>
+                  <h5 class="feature-title">NLP-Powered Analysis</h5>
                   <p class="feature-description">
-                    Advanced language models extract and structure data from multiple sources automatically.
+                    Large Language Models extract and structure institutional data from web sources automatically.
                   </p>
                 </div>
               </div>
@@ -159,9 +155,9 @@
                   <div class="feature-icon">
                     <i class="fas fa-chart-line"></i>
                   </div>
-                  <h5 class="feature-title">Comprehensive Metrics</h5>
+                  <h5 class="feature-title">Comprehensive Profiles</h5>
                   <p class="feature-description">
-                    Get detailed performance benchmarks, quality scores, and 96+ structured data fields.
+                    Automated web crawling and structured data extraction to generate detailed institutional profiles.
                   </p>
                 </div>
               </div>
@@ -170,9 +166,9 @@
                   <div class="feature-icon">
                     <i class="fas fa-clock"></i>
                   </div>
-                  <h5 class="feature-title">Real-Time Results</h5>
+                  <h5 class="feature-title">Intelligent Processing</h5>
                   <p class="feature-description">
-                    Get complete institutional profiles in seconds, not hours of manual research.
+                    Advanced information extraction and profile generation from multiple institutional data sources.
                   </p>
                 </div>
               </div>
@@ -191,8 +187,7 @@
         <div class="spinner-border text-primary mb-3" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
-      </div>
-      <h5 class="loading-title">Processing Institution Profile</h5>
+      </div>      <h5 class="loading-title">Generating Institution Profile</h5>
       <div class="loading-steps">
         <div class="step" data-step="search">
           <i class="fas fa-search step-icon"></i>
@@ -204,7 +199,7 @@
         </div>
         <div class="step" data-step="extract">
           <i class="fas fa-brain step-icon"></i>
-          <span class="step-text">Extracting structured data with AI...</span>
+          <span class="step-text">Processing data with NLP models...</span>
         </div>
       </div>
       <p class="loading-note text-muted mt-3">

@@ -152,6 +152,7 @@ Given the following institution name: "{institution_name}", and the raw web cont
 
 **Organization Details:**
 - **type**: Be very specific (e.g., "Public Research University", "Private Investment Bank", "Teaching Hospital")
+- **description**: Provide a comprehensive, detailed description of the institution. This should be 1-2 paragraphs covering the institution's mission, history, key characteristics, primary activities, and significance. Include context about what makes the institution unique or notable. Be thorough and informative rather than brief.
 - **founded**: Extract exact founding year or date
 - **size**: Provide specific numbers (students for universities, employees for companies, beds for hospitals)
 - **annual_revenue**: Include financial figures if publicly available

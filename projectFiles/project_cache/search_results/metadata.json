@@ -105,11 +105,23 @@
         "location": "palestine"
       },
       "cached_at": 1749619854.883837
+    },
+    "ffde25b566f64ca0be084d083f299b5f": {
+      "query": "World Health Organization",
+      "params": {},
+      "cached_at": 1749640269.3429523
+    },
+    "8b4198d915b0e6aee0ab097a41d93bfc": {
+      "query": "Birzeit University",
+      "params": {
+        "additional_keywords": "courses"
+      },
+      "cached_at": 1749643242.6251173
     }
   },
   "stats": {
-    "hits": 64,
-    "misses": 22,
-    "similar_hits": 38
+    "hits": 77,
+    "misses": 24,
+    "similar_hits": 41
   }
 }

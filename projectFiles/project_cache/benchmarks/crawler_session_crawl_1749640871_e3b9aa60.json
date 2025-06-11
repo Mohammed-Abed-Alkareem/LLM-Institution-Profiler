@@ -1,0 +1,51 @@
+{
+  "session_id": "crawl_1749640871_e3b9aa60",
+  "institution_name": "Harvard University",
+  "institution_type": "university",
+  "timestamp": 1749640871.7559454,
+  "urls_requested": [
+    "https://www.gse.harvard.edu/",
+    "https://www.harvard.edu/",
+    "https://www.gse.harvard.edu/degrees/masters",
+    "https://www.harvard.edu/programs/",
+    "https://www.imperial.ac.uk/news/234774/harvard-president-ukraine-climate-threat-diversity/",
+    "https://library.leeds.ac.uk/referencing-examples//9/leeds-harvard",
+    "https://0-doi-org.brum.beds.ac.uk/10.1056%2FNEJMsa1803972",
+    "https://www.ucl.ac.uk/news/2021/feb/fossil-fuel-air-pollution-responsible-1-5-deaths-worldwide"
+  ],
+  "total_crawl_time": 26.211992979049683,
+  "success": true,
+  "urls_successful": 0,
+  "urls_failed": 1,
+  "cache_hits": 0,
+  "api_calls": 0,
+  "total_content_size_bytes": 0,
+  "total_word_count": 0,
+  "average_quality_score": 0.0,
+  "url_benchmarks": [
+    {
+      "url_benchmark_id": "url_1749640874_4bfa4b71",
+      "session_id": "crawl_1749640871_e3b9aa60",
+      "url": "https://0-doi-org.brum.beds.ac.uk/10.1056%2FNEJMsa1803972",
+      "timestamp": 1749640874.0581453,
+      "crawl_time": 23.511436700820923,
+      "success": false,
+      "content_size_bytes": 0,
+      "word_count": 0,
+      "quality_score": 0.0,
+      "data_types_extracted": {},
+      "content_format_sizes": {},
+      "media_counts": {},
+      "institution_data_quality": {},
+      "error": "Crawl failed: Unexpected error in _crawl_web at line 744 in _crawl_web (nlp\\Lib\\site-packages\\crawl4ai\\async_crawler_strategy.py):\nError: Failed on navigating ACS-GOTO:\nPage.goto: net::ERR_CONNECTION_TIMED_OUT at https://0-doi-org.brum.beds.ac.uk/10.1056%2FNEJMsa1803972\nCall log:\n  - navigating to \"https://0-doi-org.brum.beds.ac.uk/10.1056%2FNEJMsa1803972\", waiting until \"domcontentloaded\"\n\n\nCode context:\n 739                       response = await page.goto(\n 740                           url, wait_until=config.wait_until, timeout=config.page_timeout\n 741                       )\n 742                       redirected_url = page.url\n 743                   except Error as e:\n 744 →                     raise RuntimeError(f\"Failed on navigating ACS-GOTO:\\n{str(e)}\")\n 745   \n 746                   await self.execute_hook(\n 747                       \"after_goto\", page, context=context, url=url, response=response, config=config\n 748                   )\n 749   ",
+      "status_code": null,
+      "crawl4ai_performance": {}
+    }
+  ],
+  "domains_crawled": {
+    "0-doi-org.brum.beds.ac.uk": 1
+  },
+  "errors": [
+    "https://0-doi-org.brum.beds.ac.uk/10.1056%2FNEJMsa1803972: Crawl failed: Unexpected error in _crawl_web at line 744 in _crawl_web (nlp\\Lib\\site-packages\\crawl4ai\\async_crawler_strategy.py):\nError: Failed on navigating ACS-GOTO:\nPage.goto: net::ERR_CONNECTION_TIMED_OUT at https://0-doi-org.brum.beds.ac.uk/10.1056%2FNEJMsa1803972\nCall log:\n  - navigating to \"https://0-doi-org.brum.beds.ac.uk/10.1056%2FNEJMsa1803972\", waiting until \"domcontentloaded\"\n\n\nCode context:\n 739                       response = await page.goto(\n 740                           url, wait_until=config.wait_until, timeout=config.page_timeout\n 741                       )\n 742                       redirected_url = page.url\n 743                   except Error as e:\n 744 →                     raise RuntimeError(f\"Failed on navigating ACS-GOTO:\\n{str(e)}\")\n 745   \n 746                   await self.execute_hook(\n 747                       \"after_goto\", page, context=context, url=url, response=response, config=config\n 748                   )\n 749   "
+  ]
+}
