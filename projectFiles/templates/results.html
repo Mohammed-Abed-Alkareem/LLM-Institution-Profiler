@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institution Profile - {{ institution_data.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <!-- Header Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="header-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="institution-header">
+                            <h1 class="institution-name">{{ institution_data.name }}</h1>
+                            <div class="institution-meta">
+                                <span class="badge bg-primary me-2">{{ institution_data.get('type', institution_data.get('entity_type', 'Unknown Type')) }}</span>
+                                {% if institution_data.get('location_city') and institution_data.get('location_city') != 'Unknown' %}
+                                <span class="location">
+                                    <i class="fas fa-map-marker-alt me-1"></i>
+                                    {{ institution_data.location_city }}{% if institution_data.get('location_country') and institution_data.get('location_country') != 'Unknown' %}, {{ institution_data.location_country }}{% endif %}
+                                </span>
+                                {% elif institution_data.get('city') and institution_data.get('city') != 'Unknown' %}
+                                <span class="location">
+                                    <i class="fas fa-map-marker-alt me-1"></i>
+                                    {{ institution_data.city }}{% if institution_data.get('country') and institution_data.get('country') != 'Unknown' %}, {{ institution_data.country }}{% endif %}
+                                </span>
+                                {% endif %}
+                                {% if institution_data.get('founded') and institution_data.get('founded') != 'Unknown' %}
+                                <span class="founded-year">
+                                    <i class="fas fa-calendar me-1"></i>
+                                    Founded {{ institution_data.founded }}
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="/" class="btn btn-outline-light text-white">
+                                <i class="fas fa-arrow-left me-2"></i>New Search
+                            </a>
+                            <button class="btn btn-light" onclick="toggleBenchmarks()">
+                                <i class="fas fa-chart-line me-2"></i>View Benchmarks
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="row">
+            <!-- Left Column: Institution Details -->
+            <div class="col-lg-8">
+                <!-- Logo and Images Section -->
+                {% if institution_data.get('logos_found') or institution_data.get('images_found') %}
+                <div class="content-card mb-4">
+                    <h3 class="card-title">
+                        <i class="fas fa-image me-2"></i>Visual Assets
+                    </h3>
+                    
+                    <!-- Logos -->
+                    {% if institution_data.get('logos_found') %}
+                    <div class="logos-section mb-4">
+                        <h5>Institution Logos</h5>
+                        <div class="logo-grid">
+                            {% for logo in institution_data.logos_found[:3] %}
+                            <div class="logo-item">
+                                <div class="logo-container">
+                                    <img src="{{ logo.url }}" alt="{{ logo.get('alt', 'Institution Logo') }}" 
+                                         class="logo-image" loading="lazy" 
+                                         onerror="handleImageError(this)" 
+                                         onload="handleImageLoad(this)">
+                                </div>
+                                <div class="logo-meta">
+                                    <small class="text-muted">
+                                        <i class="fas fa-star me-1"></i>
+                                        Confidence: {{ logo.get('confidence', 'medium').title() }}
+                                    </small>
+                                    {% if logo.get('source_page') %}
+                                    <small class="text-muted d-block">
+                                        <i class="fas fa-link me-1"></i>
+                                        <a href="{{ logo.source_page }}" target="_blank" rel="noopener" class="text-muted">Source</a>
+                                    </small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <!-- If we have logo URL from extraction -->
+                        {% if institution_data.get('logo_url') and institution_data.logo_url != 'Unknown' %}
+                        <div class="extracted-logo mt-3">
+                            <h6>Primary Logo (Extracted)</h6>
+                            <div class="logo-item">
+                                <div class="logo-container">
+                                    <img src="{{ institution_data.logo_url }}" alt="Primary Institution Logo" 
+                                         class="logo-image" loading="lazy"
+                                         onerror="handleImageError(this)" 
+                                         onload="handleImageLoad(this)">
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% elif institution_data.get('logo_url') and institution_data.logo_url != 'Unknown' %}
+                    <!-- Show extracted logo even if no crawled logos -->
+                    <div class="logos-section mb-4">
+                        <h5>Institution Logo</h5>
+                        <div class="logo-grid">
+                            <div class="logo-item">
+                                <div class="logo-container">
+                                    <img src="{{ institution_data.logo_url }}" alt="Institution Logo" 
+                                         class="logo-image" loading="lazy"
+                                         onerror="handleImageError(this)" 
+                                         onload="handleImageLoad(this)">
+                                </div>
+                                <div class="logo-meta">
+                                    <small class="text-muted">
+                                        <i class="fas fa-check me-1"></i>Primary Logo
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Other Images -->
+                    {% if institution_data.get('images_found') %}
+                    <div class="images-section">
+                        <h5>Institution Images</h5>
+                        <div class="image-grid">
+                            {% for image in institution_data.images_found[:6] %}
+                            <div class="image-item" data-image-container>
+                                <div class="image-container">
+                                    <img src="{{ image.url }}" alt="{{ image.get('alt', 'Institution Image') }}" 
+                                         class="content-image" loading="lazy"
+                                         onerror="handleImageError(this)" 
+                                         onload="handleImageLoad(this)">
+                                </div>
+                                <div class="image-overlay">
+                                    <small>{{ image.get('category', 'general').replace('_', ' ').title() }}</small>
+                                    {% if image.get('score') %}
+                                    <div class="score-badge">{{ image.score }}/6</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <!-- Institution Information -->
+                <div class="content-card mb-4">
+                    <h3 class="card-title">
+                        <i class="fas fa-info-circle me-2"></i>Institution Details
+                    </h3>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Basic Information</h5>
+                                <dl class="info-list">
+                                    {% if institution_data.get('official_name') and institution_data.official_name != 'Unknown' %}
+                                    <dt>Official Name</dt>
+                                    <dd>{{ institution_data.official_name }}</dd>
+                                    {% endif %}
+                                    
+                                    {% if institution_data.get('type') and institution_data.type != 'Unknown' %}
+                                    <dt>Type</dt>
+                                    <dd>{{ institution_data.type }}</dd>
+                                    {% elif institution_data.get('entity_type') and institution_data.entity_type != 'Unknown' %}
+                                    <dt>Type</dt>
+                                    <dd>{{ institution_data.entity_type }}</dd>
+                                    {% endif %}
+                                    
+                                    {% if institution_data.get('founded') and institution_data.founded != 'Unknown' %}
+                                    <dt>Founded</dt>
+                                    <dd>{{ institution_data.founded }}</dd>
+                                    {% elif institution_data.get('founding_year') and institution_data.founding_year != 'Unknown' %}
+                                    <dt>Founded</dt>
+                                    <dd>{{ institution_data.founding_year }}</dd>
+                                    {% endif %}
+                                    
+                                    {% if institution_data.get('size') and institution_data.size != 'Unknown' %}
+                                    <dt>Size</dt>
+                                    <dd>{{ institution_data.size }}</dd>
+                                    {% elif institution_data.get('number_of_employees') and institution_data.number_of_employees != 'Unknown' %}
+                                    <dt>Employees</dt>
+                                    <dd>{{ institution_data.number_of_employees }}</dd>
+                                    {% endif %}
+                                </dl>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Contact Information</h5>
+                                <dl class="info-list">
+                                    {% if institution_data.get('address') and institution_data.address != 'Unknown' %}
+                                    <dt>Address</dt>
+                                    <dd>{{ institution_data.address }}</dd>
+                                    {% endif %}
+                                    
+                                    {% if institution_data.get('phone') and institution_data.phone != 'Unknown' %}
+                                    <dt>Phone</dt>
+                                    <dd><a href="tel:{{ institution_data.phone }}">{{ institution_data.phone }}</a></dd>
+                                    {% endif %}
+                                    
+                                    {% if institution_data.get('email') and institution_data.email != 'Unknown' %}
+                                    <dt>Email</dt>
+                                    <dd><a href="mailto:{{ institution_data.email }}">{{ institution_data.email }}</a></dd>
+                                    {% endif %}
+                                    
+                                    {% if institution_data.get('website') and institution_data.website != 'Unknown' %}
+                                    <dt>Website</dt>
+                                    <dd><a href="{{ institution_data.website }}" target="_blank" rel="noopener">{{ institution_data.website }}</a></dd>
+                                    {% endif %}
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                {% if institution_data.get('description') and institution_data.description != 'Unknown' %}
+                <div class="content-card mb-4">
+                    <h3 class="card-title">
+                        <i class="fas fa-file-text me-2"></i>Description
+                    </h3>
+                    <p class="description-text">{{ institution_data.description }}</p>
+                </div>
+                {% elif institution_data.get('description_raw') and institution_data.description_raw != 'N/A' %}
+                <div class="content-card mb-4">
+                    <h3 class="card-title">
+                        <i class="fas fa-file-text me-2"></i>Description
+                    </h3>
+                    <p class="description-text">{{ institution_data.description_raw }}</p>
+                </div>
+                {% endif %}
+
+                <!-- Leadership & Key Personnel -->
+                {% if (institution_data.get('key_people') and institution_data.key_people != 'Unknown') or 
+                      (institution_data.get('ceo') and institution_data.ceo != 'Unknown') or
+                      (institution_data.get('president') and institution_data.president != 'Unknown') or
+                      (institution_data.get('executive_team') and institution_data.executive_team != 'Unknown') %}
+                <div class="content-card mb-4">
+                    <h3 class="card-title">
+                        <i class="fas fa-users me-2"></i>Leadership & Key Personnel
+                    </h3>
+                    
+                    <div class="row">
+                        <!-- Executive Leadership -->
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Executive Leadership</h5>
+                                <div class="leadership-grid">
+                                    {% if institution_data.get('ceo') and institution_data.ceo != 'Unknown' %}
+                                    <div class="leadership-card">
+                                        <div class="leadership-role">Chief Executive Officer</div>
+                                        <div class="leadership-name">{{ institution_data.ceo }}</div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if institution_data.get('president') and institution_data.president != 'Unknown' %}
+                                    <div class="leadership-card">
+                                        <div class="leadership-role">President</div>
+                                        <div class="leadership-name">{{ institution_data.president }}</div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if institution_data.get('chairman') and institution_data.chairman != 'Unknown' %}
+                                    <div class="leadership-card">
+                                        <div class="leadership-role">Chairman</div>
+                                        <div class="leadership-name">{{ institution_data.chairman }}</div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if institution_data.get('founders') and institution_data.founders != 'Unknown' %}
+                                    <div class="leadership-card">
+                                        <div class="leadership-role">Founder(s)</div>
+                                        <div class="leadership-name">
+                                            {% if institution_data.founders is string %}
+                                            {{ institution_data.founders }}
+                                            {% else %}
+                                            {{ institution_data.founders|join(', ') }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Additional Key People -->
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Key Personnel</h5>
+                                {% if institution_data.get('key_people') and institution_data.key_people != 'Unknown' %}
+                                <div class="key-people-list">
+                                    {% if institution_data.key_people is string %}
+                                    <p>{{ institution_data.key_people }}</p>
+                                    {% else %}
+                                    {% for person in institution_data.key_people[:6] %}
+                                    <div class="person-item">
+                                        <i class="fas fa-user-tie me-2"></i>{{ person }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                                
+                                {% if institution_data.get('executive_team') and institution_data.executive_team != 'Unknown' %}
+                                <div class="executive-list mt-3">
+                                    <h6>Executive Team</h6>
+                                    {% if institution_data.executive_team is string %}
+                                    <p>{{ institution_data.executive_team }}</p>
+                                    {% else %}
+                                    {% for exec in institution_data.executive_team[:4] %}
+                                    <div class="person-item">
+                                        <i class="fas fa-briefcase me-2"></i>{{ exec }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Quick Facts & Key Metrics Cards -->
+                {% set has_quick_facts = (
+                    (institution_data.get('student_population') and institution_data.student_population != 'Unknown') or
+                    (institution_data.get('faculty_count') and institution_data.faculty_count != 'Unknown') or
+                    (institution_data.get('annual_revenue') and institution_data.annual_revenue != 'Unknown') or
+                    (institution_data.get('patient_capacity') and institution_data.patient_capacity != 'Unknown') or
+                    (institution_data.get('campus_size') and institution_data.campus_size != 'Unknown') or
+                    (institution_data.get('employees_worldwide') and institution_data.employees_worldwide != 'Unknown')
+                ) %}
+                
+                {% if has_quick_facts %}
+                <div class="content-card mb-4">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-bar me-2"></i>Quick Facts & Key Metrics
+                    </h3>
+                    
+                    <div class="quick-facts-grid">
+                        {% if institution_data.get('student_population') and institution_data.student_population != 'Unknown' %}
+                        <div class="fact-card" data-metric="student_population">
+                            <div class="fact-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="fact-content">
+                                <div class="fact-number">{{ institution_data.student_population }}</div>
+                                <div class="fact-label">Students</div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if institution_data.get('faculty_count') and institution_data.faculty_count != 'Unknown' %}
+                        <div class="fact-card" data-metric="faculty_count">
+                            <div class="fact-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <div class="fact-content">
+                                <div class="fact-number">{{ institution_data.faculty_count }}</div>
+                                <div class="fact-label">Faculty</div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if institution_data.get('annual_revenue') and institution_data.annual_revenue != 'Unknown' %}
+                        <div class="fact-card" data-metric="annual_revenue">
+                            <div class="fact-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="fact-content">
+                                <div class="fact-number">{{ institution_data.annual_revenue }}</div>
+                                <div class="fact-label">Annual Revenue</div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if institution_data.get('patient_capacity') and institution_data.patient_capacity != 'Unknown' %}
+                        <div class="fact-card" data-metric="patient_capacity">
+                            <div class="fact-icon">
+                                <i class="fas fa-bed"></i>
+                            </div>
+                            <div class="fact-content">
+                                <div class="fact-number">{{ institution_data.patient_capacity }}</div>
+                                <div class="fact-label">Patient Capacity</div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if institution_data.get('campus_size') and institution_data.campus_size != 'Unknown' %}
+                        <div class="fact-card" data-metric="campus_size">
+                            <div class="fact-icon">
+                                <i class="fas fa-map"></i>
+                            </div>
+                            <div class="fact-content">
+                                <div class="fact-number">{{ institution_data.campus_size }}</div>
+                                <div class="fact-label">Campus Size</div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if institution_data.get('employees_worldwide') and institution_data.employees_worldwide != 'Unknown' %}
+                        <div class="fact-card" data-metric="employees_worldwide">
+                            <div class="fact-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="fact-content">
+                                <div class="fact-number">{{ institution_data.employees_worldwide }}</div>
+                                <div class="fact-label">Global Employees</div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}                <!-- Programs & Services -->
+                {% set has_programs = (
+                    (institution_data.get('programs_offered') and institution_data.programs_offered != 'Unknown') or
+                    (institution_data.get('services_offered') and institution_data.services_offered != 'Unknown') or
+                    (institution_data.get('medical_specialties') and institution_data.medical_specialties != 'Unknown') or
+                    (institution_data.get('degrees_awarded') and institution_data.degrees_awarded != 'Unknown') or
+                    (institution_data.get('departments') and institution_data.departments != 'Unknown') or
+                    (institution_data.get('products') and institution_data.products != 'Unknown')
+                ) %}
+                {% if has_programs %}
+                <div class="content-card mb-4">
+                    <h3 class="card-title">
+                        <i class="fas fa-list-ul me-2"></i>Programs & Services
+                    </h3>
+                    
+                    <div class="row">
+                        {% if institution_data.get('programs_offered') and institution_data.programs_offered != 'Unknown' %}
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Academic Programs</h5>
+                                {% if institution_data.programs_offered is string %}
+                                <p>{{ institution_data.programs_offered }}</p>
+                                {% else %}
+                                <ul class="programs-list">
+                                    {% for program in institution_data.programs_offered %}
+                                    <li><i class="fas fa-graduation-cap me-2"></i>{{ program }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if institution_data.get('services_offered') and institution_data.services_offered != 'Unknown' %}
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Services Offered</h5>
+                                {% if institution_data.services_offered is string %}
+                                <p>{{ institution_data.services_offered }}</p>
+                                {% else %}
+                                <ul class="services-list">
+                                    {% for service in institution_data.services_offered %}
+                                    <li><i class="fas fa-check-circle me-2"></i>{{ service }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if institution_data.get('medical_specialties') and institution_data.medical_specialties != 'Unknown' %}
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Medical Specialties</h5>
+                                {% if institution_data.medical_specialties is string %}
+                                <p>{{ institution_data.medical_specialties }}</p>
+                                {% else %}
+                                <ul class="specialties-list">
+                                    {% for specialty in institution_data.medical_specialties %}
+                                    <li><i class="fas fa-stethoscope me-2"></i>{{ specialty }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if institution_data.get('departments') and institution_data.departments != 'Unknown' %}
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Departments</h5>
+                                {% if institution_data.departments is string %}
+                                <p>{{ institution_data.departments }}</p>
+                                {% else %}
+                                <ul class="departments-list">
+                                    {% for dept in institution_data.departments %}
+                                    <li><i class="fas fa-building me-2"></i>{{ dept }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if institution_data.get('degrees_awarded') and institution_data.degrees_awarded != 'Unknown' %}
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Degrees Awarded</h5>
+                                {% if institution_data.degrees_awarded is string %}
+                                <p>{{ institution_data.degrees_awarded }}</p>
+                                {% else %}
+                                <ul class="degrees-list">
+                                    {% for degree in institution_data.degrees_awarded %}
+                                    <li><i class="fas fa-certificate me-2"></i>{{ degree }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if institution_data.get('products') and institution_data.products != 'Unknown' %}
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Products</h5>
+                                {% if institution_data.products is string %}
+                                <p>{{ institution_data.products }}</p>
+                                {% else %}
+                                <ul class="products-list">
+                                    {% for product in institution_data.products %}
+                                    <li><i class="fas fa-box me-2"></i>{{ product }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Affiliations & Partnerships -->
+                {% if (institution_data.get('affiliations') and institution_data.affiliations != 'Unknown') or 
+                      (institution_data.get('partnerships') and institution_data.partnerships != 'Unknown') or
+                      (institution_data.get('member_organizations') and institution_data.member_organizations != 'Unknown') %}
+                <div class="content-card mb-4">
+                    <h3 class="card-title">
+                        <i class="fas fa-handshake me-2"></i>Affiliations & Partnerships
+                    </h3>
+                    
+                    <div class="row">
+                        {% if institution_data.get('affiliations') and institution_data.affiliations != 'Unknown' %}
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Affiliations</h5>
+                                {% if institution_data.affiliations is string %}
+                                <p>{{ institution_data.affiliations }}</p>
+                                {% else %}
+                                <ul class="affiliations-list">
+                                    {% for affiliation in institution_data.affiliations %}
+                                    <li>{{ affiliation }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if institution_data.get('partnerships') and institution_data.partnerships != 'Unknown' %}
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Partnerships</h5>
+                                {% if institution_data.partnerships is string %}
+                                <p>{{ institution_data.partnerships }}</p>
+                                {% else %}
+                                <ul class="partnerships-list">
+                                    {% for partnership in institution_data.partnerships %}
+                                    <li><i class="fas fa-link me-2"></i>{{ partnership }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if institution_data.get('member_organizations') and institution_data.member_organizations != 'Unknown' %}
+                        <div class="col-12 mt-3">
+                            <div class="info-section">
+                                <h5>Member Organizations</h5>
+                                {% if institution_data.member_organizations is string %}
+                                <p>{{ institution_data.member_organizations }}</p>
+                                {% else %}
+                                <div class="member-orgs-grid">
+                                    {% for org in institution_data.member_organizations %}
+                                    <div class="member-org-item">
+                                        <i class="fas fa-certificate me-2"></i>{{ org }}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Fields of Focus / Research Areas -->
+                {% if (institution_data.get('research_areas') and institution_data.research_areas != 'Unknown') or
+                      (institution_data.get('fields_of_focus') and institution_data.fields_of_focus != 'Unknown') or
+                      (institution_data.get('specializations') and institution_data.specializations != 'Unknown') or
+                      (institution_data.get('research_interests') and institution_data.research_interests != 'Unknown') %}
+                <div class="content-card mb-4">
+                    <h3 class="card-title">
+                        <i class="fas fa-microscope me-2"></i>Fields of Focus
+                    </h3>
+                    
+                    <div class="row">
+                        {% if institution_data.get('research_areas') and institution_data.research_areas != 'Unknown' %}
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Research Areas</h5>
+                                {% if institution_data.research_areas is string %}
+                                <p>{{ institution_data.research_areas }}</p>
+                                {% else %}
+                                <ul class="research-list">
+                                    {% for area in institution_data.research_areas %}
+                                    <li><i class="fas fa-flask me-2"></i>{{ area }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if institution_data.get('fields_of_focus') and institution_data.fields_of_focus != 'Unknown' %}
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Fields of Focus</h5>
+                                {% if institution_data.fields_of_focus is string %}
+                                <p>{{ institution_data.fields_of_focus }}</p>
+                                {% else %}
+                                <ul class="focus-list">
+                                    {% for field in institution_data.fields_of_focus %}
+                                    <li><i class="fas fa-bullseye me-2"></i>{{ field }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if institution_data.get('specializations') and institution_data.specializations != 'Unknown' %}
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Specializations</h5>
+                                {% if institution_data.specializations is string %}
+                                <p>{{ institution_data.specializations }}</p>
+                                {% else %}
+                                <ul class="specializations-list">
+                                    {% for spec in institution_data.specializations %}
+                                    <li><i class="fas fa-star me-2"></i>{{ spec }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if institution_data.get('research_interests') and institution_data.research_interests != 'Unknown' %}
+                        <div class="col-md-6">
+                            <div class="info-section">
+                                <h5>Research Interests</h5>
+                                {% if institution_data.research_interests is string %}
+                                <p>{{ institution_data.research_interests }}</p>
+                                {% else %}
+                                <ul class="interests-list">
+                                    {% for interest in institution_data.research_interests %}
+                                    <li><i class="fas fa-lightbulb me-2"></i>{{ interest }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Right Column: Meta Information -->
+            <div class="col-lg-4">
+                <!-- Processing Status -->
+                <div class="content-card mb-4">
+                    <h4 class="card-title">
+                        <i class="fas fa-cogs me-2"></i>Processing Status
+                    </h4>
+                    
+                    <div class="processing-phases">
+                        {% for phase, status in institution_data.get('processing_phases', {}).items() %}
+                        <div class="phase-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="phase-name">{{ phase.title() }} Phase</span>
+                                {% if status.get('success') %}
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check me-1"></i>Success
+                                </span>
+                                {% elif status.get('completed') %}
+                                <span class="badge bg-warning">
+                                    <i class="fas fa-exclamation-triangle me-1"></i>Completed with Issues
+                                </span>
+                                {% else %}
+                                <span class="badge bg-danger">
+                                    <i class="fas fa-times me-1"></i>Failed
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Data Quality Metrics -->
+                <div class="content-card mb-4" id="quality-metrics">
+                    <h4 class="card-title">
+                        <i class="fas fa-chart-bar me-2"></i>Data Quality
+                    </h4>
+                    
+                    <!-- Information Quality Score -->
+                    {% if institution_data.get('quality_score') is not none %}
+                    <div class="quality-score-section mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="fw-bold">Information Quality</span>
+                            {% set quality_class = 'excellent' if institution_data.quality_score >= 85 else 'good' if institution_data.quality_score >= 70 else 'fair' if institution_data.quality_score >= 50 else 'poor' %}
+                            <span class="badge quality-badge-{{ quality_class }}">
+                                {{ institution_data.quality_rating }}
+                            </span>
+                        </div>                        <div class="progress mb-2" style="height: 8px;">
+                            <div class="progress-bar progress-bar-{{ quality_class }}" 
+                                 role="progressbar" 
+                                 style="width: {{ institution_data.quality_score }}%">
+                            </div>
+                        </div>                        <small class="text-muted">
+                            {% if institution_data.get('quality_details') %}
+                            <strong>Overall Score:</strong> {{ institution_data.get('quality_score', 0) }}% ({{ institution_data.get('quality_rating', 'Unknown') }})
+                            <br><strong>Critical Fields:</strong> {{ institution_data.quality_details.get('critical_fields_populated', 0) }}/{{ institution_data.quality_details.get('critical_fields_total', 0) }} essential fields found
+                            <br><strong>Important Fields:</strong> {{ institution_data.quality_details.get('important_fields_populated', 0) }}/{{ institution_data.quality_details.get('important_fields_total', 0) }} key operational details
+                            {% if institution_data.quality_details.get('bonus_points', 0) > 0 %}
+                            <br><strong>Content Bonus:</strong> +{{ institution_data.quality_details.get('bonus_points', 0) }} points for rich media, crawling success, and data quality
+                            {% endif %}
+                            <br><small class="text-muted">Total: {{ institution_data.quality_details.get('populated_fields', 0) }}/{{ institution_data.quality_details.get('total_fields', 0) }} fields • Uses weighted scoring system</small>
+                            {% else %}
+                            <strong>Quality Score:</strong> {{ institution_data.get('quality_score', 0) }}% data completeness
+                            {% endif %}
+                        </small>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <div class="metric-value" id="images-count">{{ institution_data.get('images_found', [])|length }}</div>
+                            <div class="metric-label">Images Found</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">{{ institution_data.get('logos_found', [])|length }}</div>
+                            <div class="metric-label">Logos Detected</div>
+                        </div>                        <div class="metric-item">
+                            <div class="metric-value">{{ institution_data.get('crawling_links', [])|length }}</div>
+                            <div class="metric-label">Pages Crawled</div>
+                        </div>                        <div class="metric-item">
+                            <div class="metric-value">
+                                {% if institution_data.get('extraction_metrics', {}).get('total_tokens') %}
+                                {{ institution_data.extraction_metrics.total_tokens }}
+                                {% elif institution_data.get('tokens', {}).get('total_tokens') %}
+                                {{ institution_data.tokens.total_tokens }}
+                                {% elif institution_data.get('cost_metrics', {}).get('total_tokens') %}
+                                {{ '{:,}'.format(institution_data.cost_metrics.total_tokens) }}
+                                {% else %}
+                                N/A
+                                {% endif %}
+                            </div>
+                            <div class="metric-label">AI Tokens Used</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media Links -->
+                {% if institution_data.get('social_media_links') %}
+                <div class="content-card mb-4">
+                    <h4 class="card-title">
+                        <i class="fas fa-share-alt me-2"></i>Social Media
+                    </h4>
+                    
+                    <div class="social-links">
+                        {% for platform, links in institution_data.social_media_links.items() %}
+                        {% if links %}
+                        <div class="social-item">
+                            <strong>{{ platform.title() }}:</strong>
+                            {% for link in links[:2] %}
+                            <a href="{{ link }}" target="_blank" rel="noopener" class="social-link">
+                                <i class="fab fa-{{ platform.lower() }} me-1"></i>{{ platform }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                        {% endif %}                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}                <!-- Performance Benchmarks -->
+                {% set has_benchmarks = (
+                    institution_data.get('performance_metrics') or
+                    institution_data.get('extraction_metrics') or
+                    institution_data.get('processing_phases') or
+                    institution_data.get('crawl_summary') or
+                    institution_data.get('latency_metrics') or
+                    institution_data.get('cost_metrics') or
+                    institution_data.get('quality_metrics')
+                ) %}
+                <div class="content-card mb-4" id="benchmarks-card" {% if not has_benchmarks %}style="display: none;"{% endif %}>
+                    <h4 class="card-title">
+                        <i class="fas fa-chart-line me-2"></i>Performance Benchmarks
+                    </h4>
+                    
+                    <div class="mb-3">
+                        <h6>Processing Times</h6>
+                        <div class="benchmark-list">
+                            {% if institution_data.get('performance_metrics') %}
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Total Pipeline Time</span>
+                                <span class="benchmark-value" data-benchmark-time="{{ institution_data.performance_metrics.get('total_pipeline_time', 0) }}">{{ institution_data.performance_metrics.get('total_pipeline_time', 0) }}</span>
+                            </div>
+                            {% endif %}
+                            {% if institution_data.get('processing_phases') %}
+                            {% for phase_name, phase_data in institution_data.processing_phases.items() %}
+                            {% if phase_data.get('time') %}
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">{{ phase_name.title() }} Time</span>
+                                <span class="benchmark-value" data-benchmark-time="{{ phase_data.time }}">{{ phase_data.time }}</span>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6>AI Usage Metrics</h6>
+                        <div class="benchmark-list">
+                            {% if institution_data.get('extraction_metrics') %}
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Total Tokens</span>
+                                <span class="benchmark-value" data-benchmark-tokens="{{ institution_data.extraction_metrics.get('total_tokens', 0) }}">{{ institution_data.extraction_metrics.get('total_tokens', 0) }}</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Input Tokens</span>
+                                <span class="benchmark-value" data-benchmark-tokens="{{ institution_data.extraction_metrics.get('input_tokens', 0) }}">{{ institution_data.extraction_metrics.get('input_tokens', 0) }}</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Output Tokens</span>
+                                <span class="benchmark-value" data-benchmark-tokens="{{ institution_data.extraction_metrics.get('output_tokens', 0) }}">{{ institution_data.extraction_metrics.get('output_tokens', 0) }}</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Model Used</span>
+                                <span class="benchmark-value">{{ institution_data.extraction_metrics.get('model_used', 'Unknown') }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>                    <div class="mb-3">
+                        <h6>Cost Metrics</h6>
+                        <div class="benchmark-list">
+                            {% if institution_data.get('cost_metrics') %}
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Total Cost</span>
+                                <span class="benchmark-value" data-benchmark-cost="{{ institution_data.cost_metrics.get('total_cost_usd', 0) }}">{{ institution_data.cost_metrics.get('total_cost_usd', 0) }}</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Search API Cost</span>
+                                <span class="benchmark-value" data-benchmark-cost="{{ institution_data.cost_metrics.get('google_search_cost_usd', 0) }}">{{ institution_data.cost_metrics.get('google_search_cost_usd', 0) }}</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">LLM Cost</span>
+                                <span class="benchmark-value" data-benchmark-cost="{{ institution_data.cost_metrics.get('llm_cost_usd', 0) }}">{{ institution_data.cost_metrics.get('llm_cost_usd', 0) }}</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Infrastructure Cost</span>
+                                <span class="benchmark-value" data-benchmark-cost="{{ institution_data.cost_metrics.get('infrastructure_cost_usd', 0) }}">{{ institution_data.cost_metrics.get('infrastructure_cost_usd', 0) }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>                    <div class="mb-3">
+                        <h6>Quality Metrics</h6>
+                        <div class="benchmark-list">
+                            {% if institution_data.get('quality_metrics') %}
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Completeness Score</span>
+                                <span class="benchmark-value">{{ "%.1f"|format(institution_data.quality_metrics.get('completeness_score', 0) * 100) }}%</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Fields Extracted</span>
+                                <span class="benchmark-value">{{ institution_data.quality_metrics.get('fields_extracted', 0) }}/{{ institution_data.quality_metrics.get('fields_requested', 0) }}</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Content Quality</span>
+                                <span class="benchmark-value">{{ "%.1f"|format(institution_data.quality_metrics.get('content_quality_score', 0) * 100) }}%</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Validation Status</span>
+                                <span class="benchmark-value">{{ "Passed" if institution_data.quality_metrics.get('validation_passed', False) else "Failed" }}</span>
+                            </div>
+                            {% elif institution_data.get('quality_details') %}
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Quality Score</span>
+                                <span class="benchmark-value">{{ institution_data.get('quality_score', 0) }} ({{ institution_data.get('quality_rating', 'Unknown') }})</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Fields Populated</span>
+                                <span class="benchmark-value">{{ institution_data.quality_details.get('populated_fields', 0) }}/{{ institution_data.quality_details.get('total_fields', 0) }}</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Critical Fields</span>
+                                <span class="benchmark-value">{{ institution_data.quality_details.get('critical_fields_populated', 0) }}/{{ institution_data.quality_details.get('critical_fields_total', 0) }}</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Institution Type</span>
+                                <span class="benchmark-value">{{ institution_data.quality_details.get('institution_type', 'Unknown') }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6>Performance Metrics</h6>
+                        <div class="benchmark-list">
+                            {% if institution_data.get('performance_metrics') %}
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Total Pipeline Time</span>
+                                <span class="benchmark-value" data-benchmark-time="{{ institution_data.performance_metrics.get('total_pipeline_time', 0) }}">{{ institution_data.performance_metrics.get('total_pipeline_time', 0) }}</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Phases Completed</span>
+                                <span class="benchmark-value">{{ institution_data.performance_metrics.get('phases_completed', 0) }}</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Overall Success</span>
+                                <span class="benchmark-value">{{ "Yes" if institution_data.performance_metrics.get('overall_success', False) else "No" }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>                    <div class="mb-3">
+                        <h6>Crawling Statistics</h6>
+                        <div class="benchmark-list">
+                            {% if institution_data.get('crawl_summary') %}
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Pages Crawled</span>
+                                <span class="benchmark-value">{{ institution_data.crawl_summary.get('total_urls_requested', 0) }}</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Success Rate</span>
+                                <span class="benchmark-value">{{ institution_data.crawl_summary.get('success_rate', 0) }}%</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Content Size</span>
+                                <span class="benchmark-value">{{ "%.2f"|format(institution_data.crawl_summary.get('total_content_size_mb', 0)) }} MB</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Cache Hit Rate</span>
+                                <span class="benchmark-value">{{ institution_data.crawl_summary.get('cache_hit_rate', 0) }}%</span>
+                            </div>
+                            {% endif %}
+                            {% if institution_data.get('statistics') %}
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Images Found</span>
+                                <span class="benchmark-value">{{ institution_data.statistics.get('total_images_found', 0) }}</span>
+                            </div>
+                            <div class="benchmark-item">
+                                <span class="benchmark-name">Logos Identified</span>
+                                <span class="benchmark-value">{{ institution_data.statistics.get('logos_identified', 0) }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Raw Data Toggle -->
+                    <div class="mt-3">
+                        <button class="btn btn-outline-secondary btn-sm" onclick="toggleRawData()">
+                            <i class="fas fa-code me-2"></i>Show Raw Data
+                        </button>
+                        <div id="raw-data" class="mt-3" style="display: none;">
+                            <pre class="raw-data-content">{{ raw_data }}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Messages -->
+        {% if institution_data.get('error') %}
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>Processing Warnings:</strong> {{ institution_data.error }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    
+    <!-- Hidden data for JavaScript -->
+    <div data-institution-type="{{ institution_data.get('type', institution_data.get('entity_type', '')).lower() }}" style="display: none;"></div>
+    
+    <script src="{{ url_for('static', filename='js/results.js') }}"></script>
+</body>
+</html>

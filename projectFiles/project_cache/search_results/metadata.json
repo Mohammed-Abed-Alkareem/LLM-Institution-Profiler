@@ -88,11 +88,28 @@
         "institution_type": "university"
       },
       "cached_at": 1749602655.9016533
+    },
+    "7be57b2a4f92c9d73d21c33cc70479a6": {
+      "query": "Hospital Luis Lagomaggiore",
+      "params": {},
+      "cached_at": 1749607902.9174788
+    },
+    "79f133da33edd87cd65fbc809b7cb112": {
+      "query": "Bank of America California",
+      "params": {},
+      "cached_at": 1749619435.2531004
+    },
+    "e72a3981c4e05e2e87a6d4d861e4b386": {
+      "query": "arab bank",
+      "params": {
+        "location": "palestine"
+      },
+      "cached_at": 1749619854.883837
     }
   },
   "stats": {
-    "hits": 57,
-    "misses": 19,
-    "similar_hits": 5
+    "hits": 64,
+    "misses": 22,
+    "similar_hits": 38
   }
 }

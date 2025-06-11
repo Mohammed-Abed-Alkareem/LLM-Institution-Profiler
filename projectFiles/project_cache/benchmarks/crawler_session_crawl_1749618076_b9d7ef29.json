@@ -1,0 +1,25 @@
+{
+  "session_id": "crawl_1749618076_b9d7ef29",
+  "institution_name": "Mayo Clinic",
+  "institution_type": "hospital",
+  "timestamp": 1749618076.4206998,
+  "urls_requested": [
+    "https://www.mayoclinichealthsystem.org/",
+    "https://www.mayoclinic.org/",
+    "https://www.mayoclinic.org/about-mayo-clinic",
+    "https://jobs.mayoclinic.org/alllocations",
+    "https://www.mayoclinichealthsystem.org/locations/eau-claire"
+  ],
+  "total_crawl_time": 1.1210229396820068,
+  "success": true,
+  "urls_successful": 0,
+  "urls_failed": 0,
+  "cache_hits": 0,
+  "api_calls": 0,
+  "total_content_size_bytes": 0,
+  "total_word_count": 0,
+  "average_quality_score": 0.0,
+  "url_benchmarks": [],
+  "domains_crawled": {},
+  "errors": []
+}

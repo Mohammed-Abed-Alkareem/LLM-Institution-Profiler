@@ -6,7 +6,57 @@ from openai import OpenAI
 # Defines the core structured information we aim to extract
 # This can be modified to include more or fewer fields as needed
 # The LLM will be prompted to fill these fields, using "Unknown" if information is not found
-STRUCTURED_INFO_KEYS = ["name", "address", "country", "number_of_employees", "entity_type", "logo_url", "main_image_url"]
+# Enhanced structured information keys for comprehensive institutional profiling
+STRUCTURED_INFO_KEYS = [
+    # Basic Information
+    "name", "official_name", "type", "founded", "website", "description",
+    
+    # Location Details
+    "location_city", "location_country", "address", "state", "postal_code",
+    
+    # Contact Information
+    "phone", "email", "social_media", "fax", "mailing_address",
+    
+    # Organization Details
+    "size", "number_of_employees", "entity_type", "fields_of_focus", "industry_sector",
+    "annual_revenue", "market_cap", "stock_symbol", "legal_status",
+    
+    # Leadership & Personnel
+    "key_people", "leadership", "ceo", "president", "chairman", "founders",
+    "board_of_directors", "executive_team", "department_heads",
+    
+    # Academic/Healthcare Specific
+    "student_population", "faculty_count", "programs_offered", "degrees_awarded",
+    "research_areas", "departments", "colleges", "schools", "patient_capacity",
+    "medical_specialties", "bed_count", "accreditation_bodies",
+    
+    # Business/Financial Specific
+    "services_offered", "products", "subsidiaries", "divisions", "branches",
+    "employees_worldwide", "headquarters_location", "operating_countries",
+    
+    # Achievements and Recognition
+    "notable_achievements", "rankings", "awards", "certifications", "accreditations",
+    "notable_alumni", "research_achievements", "patents", "publications",
+    
+    # Relationships and Affiliations
+    "affiliations", "partnerships", "parent_organization", "member_organizations",
+    "joint_ventures", "collaborations", "network_memberships",
+    
+    # Financial Information
+    "financial_data", "endowment", "budget", "funding_sources", "grants_received",
+    "tuition_fees", "operating_expenses", "profit_margins",
+    
+    # Infrastructure & Facilities
+    "campus_size", "facilities", "locations", "buildings", "infrastructure",
+    "technology_resources", "library_collections", "research_facilities",
+    
+    # Visual Assets
+    "logo_url", "main_image_url", "campus_images", "facility_images",
+    
+    # Recent Activity & News
+    "recent_news", "latest_updates", "press_releases", "announcements",
+    "upcoming_events", "recent_developments"
+]
 
 # Change this as we wish
 MODEL = "gemini-2.0-flash"
@@ -77,27 +127,78 @@ def extract_structured_data(openai_client, raw_text: str, institution_name: str)
                 "extraction_time": 0,
                 "success": False
             }
-        }    # Instructs the LLM to find specific pieces of information and return them in a JSON format
+        }    # Enhanced research analyst prompt for comprehensive institutional profiling
     keys_string = ", ".join(f'"{key}"' for key in STRUCTURED_INFO_KEYS)
-    structured_data_prompt = f"""
-    From the following text about '{institution_name}', extract the specified information.
-    If a piece of information is not found in the text, use the string "Unknown".
-    
-    Special instructions for images:
-    - For "logo_url": Extract the main logo image URL if mentioned in the content
-    - For "main_image_url": Extract the primary/main image URL representing the institution
-    - Look for image URLs mentioned in the "MEDIA CONTENT SUMMARY" section and "Images found" sections
-    - Convert relative URLs to absolute URLs where possible (e.g., //example.com/image.jpg becomes https://example.com/image.jpg)
-    
-    Return the information strictly as a JSON object with the following keys: {keys_string}.
+    structured_data_prompt = f"""You are a research analyst AI that generates structured, factual institutional profiles using diverse, reputable sources.
 
-    Text:
-    ---
-    {raw_text}
-    ---
+Given the following institution name: "{institution_name}", and the raw web content or extracted data below, your task is to generate a comprehensive profile.
 
-    JSON Output:
-    """
+### Instructions:
+- Prioritize information from official websites, Wikipedia, Wikidata, and reliable news or academic sources.
+- Extract specific, detailed information rather than generic descriptions.
+- For leadership roles, include full names with titles and positions.
+- If data is missing or ambiguous, infer carefully from context or mark as "Unknown".
+- Keep the tone professional, objective, and factual.
+- Extract concrete numbers, dates, and specific details whenever possible.
+
+### Special Instructions for Key Fields:
+
+**Leadership & Personnel:**
+- **key_people**: Extract current leadership with full names and titles (e.g., "Dr. Sarah Johnson, President & CEO")
+- **ceo**, **president**, **chairman**: Extract individual names for these specific roles
+- **founders**: Include founding team members if known
+- **executive_team**: List C-level executives and senior leadership
+- **board_of_directors**: Include board members if publicly available
+
+**Organization Details:**
+- **type**: Be very specific (e.g., "Public Research University", "Private Investment Bank", "Teaching Hospital")
+- **founded**: Extract exact founding year or date
+- **size**: Provide specific numbers (students for universities, employees for companies, beds for hospitals)
+- **annual_revenue**: Include financial figures if publicly available
+- **stock_symbol**: For public companies, include trading symbol
+
+**Academic/Healthcare Specific:**
+- **student_population**: Exact enrollment numbers
+- **faculty_count**: Number of faculty/staff
+- **programs_offered**: List specific degree programs or medical specialties
+- **research_areas**: Key research focus areas
+- **patient_capacity**: For hospitals, bed count and capacity
+
+**Business Specific:**
+- **services_offered**: Detailed list of main services or products
+- **subsidiaries**: List major subsidiary companies
+- **headquarters_location**: Specific address of main headquarters
+- **operating_countries**: Geographic presence
+
+**Achievements:**
+- **notable_achievements**: List 3-5 significant accomplishments with dates
+- **rankings**: Include specific rankings and sources
+- **awards**: Recent awards and recognitions
+- **notable_alumni**: Famous graduates or former employees
+
+**Financial & Infrastructure:**
+- **financial_data**: Revenue, budget, endowment figures
+- **campus_size**: Physical size in acres/hectares
+- **facilities**: Major buildings, campuses, or facilities
+
+**Visual Assets:**
+- **logo_url**: Extract the main institutional logo URL from MEDIA CONTENT SUMMARY
+- **main_image_url**: Primary building/campus image URL
+- **campus_images**: Additional facility or campus images
+
+### Output Format:
+Return the information strictly as a JSON object with these keys: {keys_string}
+
+For array fields, provide actual items as arrays [] or use empty array if not found.
+For object fields, provide structured data or empty object {{}} if not found.
+Use "Unknown" only for simple string fields when information is genuinely not available.
+
+### Data Input:
+---
+{raw_text}
+---
+
+JSON Output:"""
     
     extraction_start_time = time.time()
     

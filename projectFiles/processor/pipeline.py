@@ -192,10 +192,12 @@ class InstitutionPipeline:
                 "phases_completed": sum(1 for phase in final_result["processing_phases"].values() if phase["completed"]),
                 "overall_success": all(phase["success"] for phase in final_result["processing_phases"].values() if phase["completed"])
             }
-            
-            # Record final benchmarking metrics
+              # Record final benchmarking metrics
             if benchmark_ctx:
                 self._record_final_benchmark_metrics(benchmark_ctx, final_result, search_result, crawling_result, extraction_result)
+                # Attach benchmark metrics to final result
+                self._attach_benchmark_metrics(benchmark_ctx, final_result)
+            
             return final_result
             
         except Exception as e:
@@ -749,3 +751,82 @@ class InstitutionPipeline:
         
         # Note: Efficiency metrics (throughput, resource utilization, cache hit rate, error rate) 
         # are automatically calculated and recorded by the benchmarking system
+    
+    def _attach_benchmark_metrics(self, benchmark_ctx, final_result):
+        """
+        Retrieve and attach benchmark metrics to the final result.
+        This makes cost, latency, quality, and efficiency metrics available in the template.
+        """
+        try:
+            # Get the pipeline metrics from the benchmark tracker
+            pipeline_id = benchmark_ctx.benchmark_id
+            if hasattr(benchmark_ctx.manager, 'tracker') and pipeline_id in benchmark_ctx.manager.tracker.active_pipelines:
+                pipeline_metrics = benchmark_ctx.manager.tracker.active_pipelines[pipeline_id]
+                
+                # Attach cost metrics (actual USD costs)
+                final_result['cost_metrics'] = {
+                    'total_cost_usd': pipeline_metrics.cost_metrics.total_cost_usd,
+                    'google_search_cost_usd': pipeline_metrics.cost_metrics.google_search_cost_usd,
+                    'llm_cost_usd': pipeline_metrics.cost_metrics.llm_cost_usd,
+                    'infrastructure_cost_usd': pipeline_metrics.cost_metrics.infrastructure_cost_usd,
+                    'google_search_queries': pipeline_metrics.cost_metrics.google_search_queries,
+                    'llm_model_used': pipeline_metrics.cost_metrics.llm_model_used,
+                    'input_tokens': pipeline_metrics.cost_metrics.input_tokens,
+                    'output_tokens': pipeline_metrics.cost_metrics.output_tokens,
+                    'total_tokens': pipeline_metrics.cost_metrics.total_tokens
+                }
+                
+                # Attach latency metrics (detailed timing)
+                final_result['latency_metrics'] = {
+                    'total_pipeline_time_seconds': pipeline_metrics.latency_metrics.total_pipeline_time_seconds,
+                    'search_time_seconds': pipeline_metrics.latency_metrics.search_time_seconds,
+                    'crawling_time_seconds': pipeline_metrics.latency_metrics.crawling_time_seconds,
+                    'llm_processing_time_seconds': pipeline_metrics.latency_metrics.llm_processing_time_seconds,
+                    'rag_processing_time_seconds': pipeline_metrics.latency_metrics.rag_processing_time_seconds,
+                    'cache_lookup_time_seconds': pipeline_metrics.latency_metrics.cache_lookup_time_seconds,
+                    'api_call_time_seconds': pipeline_metrics.latency_metrics.api_call_time_seconds,
+                    'network_requests': pipeline_metrics.latency_metrics.network_requests,
+                    'total_network_time_seconds': pipeline_metrics.latency_metrics.total_network_time_seconds,
+                    'average_network_latency_ms': pipeline_metrics.latency_metrics.average_network_latency_ms
+                }
+                
+                # Attach quality metrics (completeness and accuracy)
+                final_result['quality_metrics'] = {
+                    'fields_requested': pipeline_metrics.quality_metrics.fields_requested,
+                    'fields_extracted': pipeline_metrics.quality_metrics.fields_extracted,
+                    'completeness_score': pipeline_metrics.quality_metrics.completeness_score,
+                    'accuracy_score': pipeline_metrics.quality_metrics.accuracy_score,
+                    'precision_score': pipeline_metrics.quality_metrics.precision_score,
+                    'recall_score': pipeline_metrics.quality_metrics.recall_score,
+                    'f1_score': pipeline_metrics.quality_metrics.f1_score,
+                    'content_quality_score': pipeline_metrics.quality_metrics.content_quality_score,
+                    'relevance_score': pipeline_metrics.quality_metrics.relevance_score,
+                    'validation_passed': pipeline_metrics.quality_metrics.validation_passed,
+                    'validation_errors': pipeline_metrics.quality_metrics.validation_errors,
+                    'confidence_scores': pipeline_metrics.quality_metrics.confidence_scores
+                }
+                
+                # Attach efficiency metrics (cache and performance)
+                final_result['efficiency_metrics'] = {
+                    'cache_requests': pipeline_metrics.efficiency_metrics.cache_requests,
+                    'cache_hits': pipeline_metrics.efficiency_metrics.cache_hits,
+                    'cache_misses': pipeline_metrics.efficiency_metrics.cache_misses,
+                    'cache_hit_rate': pipeline_metrics.efficiency_metrics.cache_hit_rate,
+                    'memory_usage_mb': pipeline_metrics.efficiency_metrics.memory_usage_mb,
+                    'cpu_usage_percent': pipeline_metrics.efficiency_metrics.cpu_usage_percent,
+                    'items_processed': pipeline_metrics.efficiency_metrics.items_processed,
+                    'processing_rate_per_second': pipeline_metrics.efficiency_metrics.processing_rate_per_second,
+                    'error_rate': pipeline_metrics.efficiency_metrics.error_rate,
+                    'retry_count': pipeline_metrics.efficiency_metrics.retry_count,
+                    'input_data_size_mb': pipeline_metrics.efficiency_metrics.input_data_size_mb,
+                    'output_data_size_mb': pipeline_metrics.efficiency_metrics.output_data_size_mb
+                }
+                
+        except Exception as e:
+            # If benchmark metrics can't be attached, don't fail the pipeline
+            print(f"Warning: Could not attach benchmark metrics: {e}")
+            # Ensure empty metrics exist to prevent template errors
+            final_result.setdefault('cost_metrics', {})
+            final_result.setdefault('latency_metrics', {})
+            final_result.setdefault('quality_metrics', {})
+            final_result.setdefault('efficiency_metrics', {})

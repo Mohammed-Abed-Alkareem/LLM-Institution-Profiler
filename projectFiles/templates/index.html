@@ -3,31 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Institution Search</title>
+  <title>Institution Profiler - AI-Powered Institutional Intelligence</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/autocomplete.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body>  <div class="container-card">    <form method="post" onsubmit="showLoadingIndicator()">      <!-- Main search row -->
-      <div class="d-flex gap-2 align-items-center mb-3">
-        <div class="flex-fill">
-          <input type="text" name="institution_name" id="institution_name" class="form-control form-control-lg" 
-                 placeholder="Institution name (university, bank, hospital, etc.)" required="" autocomplete="off">
-        </div>
-        <div class="flex-shrink-0">
-          <button type="button" class="btn btn-light border btn-lg additional-info-toggle" id="toggle-additional-info">
-            <i class="fas fa-sliders-h me-2" id="toggle-icon"></i>
-            <span id="toggle-text">Refine Search</span>
-          </button>
-        </div>
-        <div class="flex-shrink-0">
-          <button type="submit" class="btn btn-primary btn-lg">
-            <i class="fas fa-search me-2"></i>Search
-          </button>
-        </div>
-      </div>
+<body>
+  <div class="hero-section">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 col-xl-8">
+          
+          <!-- Hero Header -->
+          <div class="hero-header text-center mb-5">
+            <div class="hero-icon mb-4">
+              <div class="icon-wrapper">
+                <i class="fas fa-university"></i>
+              </div>
+            </div>
+            <h1 class="hero-title mb-3">Institution Profiler</h1>
+            <p class="hero-subtitle mb-4">
+              Discover comprehensive profiles of universities, hospitals, banks, and organizations worldwide using advanced AI technology.
+            </p>
+            <div class="hero-stats d-flex justify-content-center gap-4 mb-4">
+              <div class="stat-item">
+                <div class="stat-number">96</div>
+                <div class="stat-label">Data Fields</div>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <div class="stat-number">AI</div>
+                <div class="stat-label">Powered</div>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <div class="stat-number">10-30s</div>
+                <div class="stat-label">Analysis Time</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Search Card -->
+          <div class="search-card">
+            <form method="post" onsubmit="showLoadingIndicator()">              <!-- Search Input Section -->
+              <div class="search-section mb-4">
+                <div class="search-input-group autocomplete-input-container">
+                  <div class="search-icon">
+                    <i class="fas fa-search"></i>
+                  </div>
+                  <input type="text" name="institution_name" id="institution_name" 
+                         class="form-control search-input autocomplete-input" 
+                         placeholder="Search any institution: MIT, Mayo Clinic, JPMorgan Chase..." 
+                         required="" autocomplete="off">
+                  <button type="submit" class="btn btn-primary search-btn">
+                    <i class="fas fa-arrow-right me-1"></i>Analyze
+                  </button>
+                </div>
+              </div>
+
+              <!-- Quick Examples -->
+              <div class="examples-section mb-4">
+                <div class="text-center mb-3">
+                  <small class="text-muted">Try these examples:</small>
+                </div>
+                <div class="examples-grid">
+                  <button type="button" class="example-btn" data-example="Harvard University">
+                    <i class="fas fa-graduation-cap me-2"></i>Harvard University
+                  </button>
+                  <button type="button" class="example-btn" data-example="Mayo Clinic">
+                    <i class="fas fa-hospital me-2"></i>Mayo Clinic
+                  </button>
+                  <button type="button" class="example-btn" data-example="Goldman Sachs">
+                    <i class="fas fa-building me-2"></i>Goldman Sachs
+                  </button>
+                  <button type="button" class="example-btn" data-example="World Health Organization">
+                    <i class="fas fa-globe me-2"></i>WHO
+                  </button>
+                </div>
+              </div>
+
+              <!-- Advanced Options Toggle -->
+              <div class="advanced-toggle-section text-center">
+                <button type="button" class="btn btn-outline-secondary advanced-toggle" id="toggle-additional-info">
+                  <i class="fas fa-sliders-h me-2" id="toggle-icon"></i>
+                  <span id="toggle-text">Advanced Search Options</span>
+                </button>
+              </div>
 
       <!-- Additional search parameters (hidden by default) -->
       <div id="additional-info-panel" class="collapse">
@@ -73,15 +137,81 @@
           </div>
         </div>
       </div>
-    </form>
+            </form>
+          </div>
 
-    <!-- Loading -->
-    <div id="loading-indicator" class="mt-4 text-center">
-      <p>Searching... Please wait.</p>
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
+          <!-- Features Section -->
+          <div class="features-section mt-5">
+            <div class="row g-4">
+              <div class="col-md-4">
+                <div class="feature-card">
+                  <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                  </div>
+                  <h5 class="feature-title">AI-Powered Analysis</h5>
+                  <p class="feature-description">
+                    Advanced language models extract and structure data from multiple sources automatically.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="feature-card">
+                  <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <h5 class="feature-title">Comprehensive Metrics</h5>
+                  <p class="feature-description">
+                    Get detailed performance benchmarks, quality scores, and 96+ structured data fields.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="feature-card">
+                  <div class="feature-icon">
+                    <i class="fas fa-clock"></i>
+                  </div>
+                  <h5 class="feature-title">Real-Time Results</h5>
+                  <p class="feature-description">
+                    Get complete institutional profiles in seconds, not hours of manual research.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
-    </div>    {% if institution_data_str %}
+    </div>
+  </div>  </div>
+
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" style="display: none;">
+    <div class="loading-content">
+      <div class="loading-spinner">
+        <div class="spinner-border text-primary mb-3" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <h5 class="loading-title">Processing Institution Profile</h5>
+      <div class="loading-steps">
+        <div class="step" data-step="search">
+          <i class="fas fa-search step-icon"></i>
+          <span class="step-text">Searching for institution information...</span>
+        </div>
+        <div class="step" data-step="crawl">
+          <i class="fas fa-spider step-icon"></i>
+          <span class="step-text">Crawling institutional websites...</span>
+        </div>
+        <div class="step" data-step="extract">
+          <i class="fas fa-brain step-icon"></i>
+          <span class="step-text">Extracting structured data with AI...</span>
+        </div>
+      </div>
+      <p class="loading-note text-muted mt-3">
+        This process typically takes 10-30 seconds depending on the institution's web presence.
+      </p>
+    </div>
+  </div>    {% if institution_data_str %}
     <div id="results-area" class="alert alert-info mt-4">
       {% if 'Please enter an institution name.' not in institution_data_str and request.form.get('institution_name') %}
       You searched for: <strong>{{ request.form.get('institution_name') }}</strong>
@@ -95,10 +225,21 @@
     </div>
     {% endif %}
 
-  </div>  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   <script src="{{ url_for('static', filename='js/autocomplete-widget.js') }}"></script>
   <script src="{{ url_for('static', filename='js/autocomplete-init.js') }}"></script>
+  
+  <script>
+    // Handle example button clicks
+    document.querySelectorAll('.example-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.getElementById('institution_name').value = this.dataset.example;
+        this.classList.add('selected');
+        setTimeout(() => this.classList.remove('selected'), 200);
+      });
+    });
+  </script>
 </body>
 
 </html>

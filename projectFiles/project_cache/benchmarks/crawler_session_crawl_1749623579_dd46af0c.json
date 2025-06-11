@@ -1,8 +1,8 @@
 {
-  "session_id": "crawl_1749604721_b76aa01d",
+  "session_id": "crawl_1749623579_dd46af0c",
   "institution_name": "Birzeit University",
   "institution_type": "university",
-  "timestamp": 1749604721.027606,
+  "timestamp": 1749623579.2946112,
   "urls_requested": [
     "https://www.birzeit.edu/en",
     "https://fobzu.org/",
@@ -10,7 +10,7 @@
     "https://icph.birzeit.edu/",
     "https://en.wikipedia.org/wiki/Birzeit_University"
   ],
-  "total_crawl_time": 1.2325258255004883,
+  "total_crawl_time": 1.7330858707427979,
   "success": true,
   "urls_successful": 0,
   "urls_failed": 0,
