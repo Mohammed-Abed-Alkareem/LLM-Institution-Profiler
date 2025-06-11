@@ -1,0 +1,127 @@
+{
+  "queries": {
+    "84af5dfa6546350f9e1e72b7d04a78b1": {
+      "query": "MIT",
+      "params": {
+        "institution_type": "university"
+      },
+      "cached_at": 1749575103.5632308
+    },
+    "5cd242d7eff695a8fe1dff4e8c5bc2cc": {
+      "query": "Harvard University",
+      "params": {
+        "institution_type": "university"
+      },
+      "cached_at": 1749574949.4249032
+    },
+    "d7b2ada469dbde2cf9274ad858db7353": {
+      "query": "Mayo Clinic",
+      "params": {
+        "institution_type": "hospital"
+      },
+      "cached_at": 1749539825.2580307
+    },
+    "27138e328df13313244fc21c549dc157": {
+      "query": "JPMorgan Chase",
+      "params": {
+        "institution_type": "bank"
+      },
+      "cached_at": 1749539825.791748
+    },
+    "2c361a116d22fd3935f3637f8aee95be": {
+      "query": "Stanford University",
+      "params": {
+        "institution_type": "university"
+      },
+      "cached_at": 1749539826.2327197
+    },
+    "847c1fa2abc2b75e61062e2df2bb2590": {
+      "query": "Birzeit University",
+      "params": {},
+      "cached_at": 1749540447.3129802
+    },
+    "540f39882aabfe7e1f3fb75bcd9ad078": {
+      "query": "Harvard Medical School",
+      "params": {},
+      "cached_at": 1749542482.513394
+    },
+    "424e822aed61876c6d4fe638f5cb1761": {
+      "query": "Stanford Hospital",
+      "params": {},
+      "cached_at": 1749542499.942626
+    },
+    "01ad4ce194180e2399e612d3aa75be44": {
+      "query": "Birzeit University",
+      "params": {
+        "institution_type": "university",
+        "location": "palestine",
+        "exclude_terms": "admissions"
+      },
+      "cached_at": 1749544817.4451709
+    },
+    "73971897e96ce01fa107640e730f905a": {
+      "query": "Bank of America",
+      "params": {},
+      "cached_at": 1749583896.6843414
+    },
+    "eb13b645c6e596232819e0104bbc5c16": {
+      "query": "Birzeit University",
+      "params": {
+        "institution_type": "university",
+        "location": "palestine"
+      },
+      "cached_at": 1749592490.6829
+    },
+    "0bd992a810ad6e4db7942e20847ba3b6": {
+      "query": "Arab Open University",
+      "params": {},
+      "cached_at": 1749597562.7153442
+    },
+    "b318d29964fe5e0e4ec934beff829bde": {
+      "query": "Hosei University",
+      "params": {},
+      "cached_at": 1749599762.9449768
+    },
+    "ee2bb0d1e29ba7f1cbc87a5fc8e5d1a3": {
+      "query": "Birzeit University",
+      "params": {
+        "institution_type": "university"
+      },
+      "cached_at": 1749602655.9016533
+    },
+    "7be57b2a4f92c9d73d21c33cc70479a6": {
+      "query": "Hospital Luis Lagomaggiore",
+      "params": {},
+      "cached_at": 1749607902.9174788
+    },
+    "79f133da33edd87cd65fbc809b7cb112": {
+      "query": "Bank of America California",
+      "params": {},
+      "cached_at": 1749619435.2531004
+    },
+    "e72a3981c4e05e2e87a6d4d861e4b386": {
+      "query": "arab bank",
+      "params": {
+        "location": "palestine"
+      },
+      "cached_at": 1749619854.883837
+    },
+    "ffde25b566f64ca0be084d083f299b5f": {
+      "query": "World Health Organization",
+      "params": {},
+      "cached_at": 1749640269.3429523
+    },
+    "8b4198d915b0e6aee0ab097a41d93bfc": {
+      "query": "Birzeit University",
+      "params": {
+        "additional_keywords": "courses"
+      },
+      "cached_at": 1749643242.6251173
+    }
+  },
+  "stats": {
+    "hits": 77,
+    "misses": 24,
+    "similar_hits": 41
+  }
+}

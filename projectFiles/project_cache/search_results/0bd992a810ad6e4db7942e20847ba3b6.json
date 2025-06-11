@@ -1,0 +1,64 @@
+{
+  "query": "Arab Open University university education",
+  "params": {},
+  "cached_at": 1749597562.7133327,
+  "timestamp": 1749597562.7133327,
+  "success": true,
+  "results": [
+    {
+      "title": "AOU at a Glance \u2013 American Open University",
+      "link": "https://www.aou.edu/aou-at-a-glance/",
+      "displayLink": "www.aou.edu",
+      "snippet": "We were pioneers in offering distant learning techniques for Islamic Studies at the undergraduate and graduate Degree levels in the Western Hampshire. American\u00a0..."
+    },
+    {
+      "title": "Introduction to Arabic | OpenLearn - Open University",
+      "link": "https://www.open.edu/openlearn/education-development/introduction-arabic",
+      "displayLink": "www.open.edu",
+      "snippet": "Feb 14, 2024 ... This course focuses on the most basic steps in learning Arabic: you will learn the alphabet, vowels, and also learn a bit about different dialects."
+    },
+    {
+      "title": "American Open University \u2013 Better Online Education",
+      "link": "https://www.aou.edu/",
+      "displayLink": "www.aou.edu",
+      "snippet": "Log-in to your bank or bank app then go to transfer money then select Zelle. Here are the Zelle details you should know for the transfer. Zelle Name: AOU Zelle\u00a0..."
+    },
+    {
+      "title": "Kennesaw State University in Georgia",
+      "link": "https://www.kennesaw.edu/",
+      "displayLink": "www.kennesaw.edu",
+      "snippet": "As one of Georgia's most innovative institutions in teaching and learning, Kennesaw State University offers undergraduate, graduate and doctoral degrees\u00a0..."
+    },
+    {
+      "title": "Validation Partnerships - The Arab Open University",
+      "link": "https://university.open.ac.uk/validation-partnerships/become-partner/current-ouvp-partners/arab-open-university",
+      "displayLink": "university.open.ac.uk",
+      "snippet": "The Arab Open University is a non-profit Arab educational and developmental project operating in nine Arab countries."
+    },
+    {
+      "title": "Arab Open University | Open University",
+      "link": "https://business.open.ac.uk/case-studies/education-partnerships/arab-open-university",
+      "displayLink": "business.open.ac.uk",
+      "snippet": "Celebrating 20 years of partnership, The Open University and Arab Open University empower over 48000 graduates through global, flexible education\u00a0..."
+    },
+    {
+      "title": "Education partnerships case studies | Open University",
+      "link": "https://business.open.ac.uk/case-studies/education-partnerships",
+      "displayLink": "business.open.ac.uk",
+      "snippet": "Arab Open University. With over 25,000 students on board, we continue to strengthen our links with the Middle East. We enable students from Saudi Arabia to\u00a0..."
+    },
+    {
+      "title": "Mourad Diouri (SFHEA) | The University of Edinburgh",
+      "link": "https://edwebprofiles.ed.ac.uk/profile/mourad-diouri",
+      "displayLink": "edwebprofiles.ed.ac.uk",
+      "snippet": "Aug 27, 2021 ... ... courses, namely MEd Instructional Technology) taught at the Arab Open University in Jordan, Oman & Kuwait (2010 \u2013 2018). External Advisor\u00a0..."
+    }
+  ],
+  "total_results": "297000",
+  "search_time": 0.223433,
+  "enhancement_info": {
+    "enhanced": true,
+    "detected_type": "university",
+    "strategy_used": "official_sites"
+  }
+}

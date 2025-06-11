@@ -1,0 +1,119 @@
+{
+  "url": "https://core.ac.uk/download/pdf/86433956.pdf",
+  "cached_at": 1749602677.189748,
+  "cache_key": "url_6d7f048823da4fa6",
+  "content": {
+    "success": true,
+    "url": "https://core.ac.uk/download/pdf/86433956.pdf",
+    "title": null,
+    "description": null,
+    "status_code": 200,
+    "crawl_time": 3.7248008251190186,
+    "timestamp": "2025-06-11T03:44:37.189748",
+    "cache_hit": false,
+    "raw_html": "<!DOCTYPE html><html><head></head><body style=\"height: 100%; width: 100%; overflow: hidden; margin:0px; background-color: rgb(40, 40, 40);\"><embed name=\"631537FC9E46B5D3CBC69BD16FD6077E\" style=\"position:absolute; left: 0; top: 0;\" width=\"100%\" height=\"100%\" src=\"about:blank\" type=\"application/pdf\" internalid=\"631537FC9E46B5D3CBC69BD16FD6077E\"></body></html>",
+    "cleaned_content": "",
+    "markdown_content": "\n",
+    "extracted_content": null,
+    "links": [],
+    "images": [],
+    "processed_content": {
+      "success": true,
+      "status_code": 200,
+      "error_message": "",
+      "timestamp": "2025-06-11T03:44:37.189748",
+      "url": "https://core.ac.uk/download/pdf/86433956.pdf",
+      "institution_type": "university",
+      "metadata": {
+        "title": null,
+        "description": null,
+        "keywords": null,
+        "author": null
+      },
+      "title": null,
+      "description": null,
+      "language": "unknown",
+      "keywords": null,
+      "author": null,
+      "charset": "",
+      "viewport": "",
+      "content_formats": {
+        "raw_html": "<!DOCTYPE html><html><head></head><body style=\"height: 100%; width: 100%; overflow: hidden; margin:0px; background-color: rgb(40, 40, 40);\"><embed name=\"631537FC9E46B5D3CBC69BD16FD6077E\" style=\"position:absolute; left: 0; top: 0;\" width=\"100%\" height=\"100%\" src=\"about:blank\" type=\"application/pdf\" internalid=\"631537FC9E46B5D3CBC69BD16FD6077E\"></body></html>",
+        "cleaned_html": "",
+        "markdown": {
+          "raw_markdown": "\n",
+          "fit_markdown": "",
+          "fit_html": "",
+          "primary_content": "\n"
+        },
+        "text_content": ""
+      },
+      "media": {
+        "images": [],
+        "videos": [],
+        "audio": [],
+        "all_media": {
+          "images": [],
+          "videos": [],
+          "audios": []
+        }
+      },
+      "links": {
+        "internal": [],
+        "external": [],
+        "all_links": {
+          "internal": [],
+          "external": []
+        }
+      },
+      "structured_data": {},
+      "json_ld": [],
+      "microdata": {},
+      "rdfa": {},
+      "screenshot": null,
+      "meta_tags": {},
+      "page_title": "",
+      "headers": {},
+      "cookies": [],
+      "performance_metrics": {},
+      "content_analysis": {
+        "sizes": {
+          "raw_html_size": 359,
+          "cleaned_html_size": 0,
+          "markdown_size": 1,
+          "text_length": 0
+        },
+        "counts": {
+          "images_count": 0,
+          "videos_count": 0,
+          "internal_links_count": 0,
+          "external_links_count": 0,
+          "total_links_count": 0
+        },
+        "quality_indicators": {
+          "has_title": false,
+          "has_description": false,
+          "has_images": false,
+          "has_structured_data": false,
+          "content_richness_score": 20
+        }
+      },
+      "logos": [],
+      "institution_hints": {
+        "institution_type": "university",
+        "detected_keywords": [],
+        "contact_indicators": [],
+        "social_media_present": false
+      }
+    },
+    "content_quality_score": 20,
+    "metadata": {
+      "title": null,
+      "description": null,
+      "keywords": null,
+      "author": null
+    },
+    "word_count": 0,
+    "size_bytes": 359
+  }
+}

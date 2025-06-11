@@ -1,0 +1,54 @@
+{
+  "query": "arab bank bank banking palestine",
+  "params": {
+    "location": "palestine"
+  },
+  "cached_at": 1749619854.8825004,
+  "timestamp": 1749619854.8814974,
+  "success": true,
+  "results": [
+    {
+      "title": "Arab Bank - Wikipedia",
+      "link": "https://en.wikipedia.org/wiki/Arab_Bank",
+      "displayLink": "en.wikipedia.org",
+      "snippet": "Arab Bank is a Jordanian bank that is one of the largest financial institutions in the Middle East. It is headquartered today in Amman, Jordan, and operates\u00a0..."
+    },
+    {
+      "title": "Israel's Raid on Arab Banks in the Occupied Palestinian Territories ...",
+      "link": "https://www.alhaq.org/publications/8110.html",
+      "displayLink": "www.alhaq.org",
+      "snippet": "On 25 February 2004, Israeli police, Internal Security Agency (Shabak) officers and Border Police raided branches of the Jordan-based Arab Bank and the\u00a0..."
+    },
+    {
+      "title": "Meltdown Looms for the West Bank's Financial Lifelines ...",
+      "link": "https://www.crisisgroup.org/united-states-israelpalestine/meltdown-looms-west-banks-financial-lifelines",
+      "displayLink": "www.crisisgroup.org",
+      "snippet": "Jun 27, 2024 ... ... Palestinian branch of Arab Bank. If Israel fails to indemnify Israeli banks before 1 July, most Palestinian banking services will be\u00a0..."
+    },
+    {
+      "title": "palquest | abd al ... - interactive encyclopedia of the palestine question",
+      "link": "https://www.palquest.org/en/biography/9827/abd-al-hamid-shuman",
+      "displayLink": "www.palquest.org",
+      "snippet": "The bank is now the most important Palestinian financial institution in the world. Abd al-Hamid Shuman, an intimate friend of many Arab national leaders and\u00a0..."
+    },
+    {
+      "title": "Home - badea",
+      "link": "https://www.badea.org/",
+      "displayLink": "www.badea.org",
+      "snippet": "The Arab Bank for Economic Development in Africa (BADEA) \u00b7 Our Operations \u00b7 About Us \u00b7 The Bank was established to strengthen economic, financial and technical\u00a0..."
+    },
+    {
+      "title": "Note on currency and Banking in Palestine and Transjordan ...",
+      "link": "https://www.un.org/unispal/document/auto-insert-211494/",
+      "displayLink": "www.un.org",
+      "snippet": "Mar 12, 2019 ... The two big Arab banks are the Arab Bank and the Arab National Bank Ltd. Lastly, the five big foreign banks are the Anglo-Palestine Bank;\u00a0..."
+    }
+  ],
+  "total_results": "571000",
+  "search_time": 0.41689,
+  "enhancement_info": {
+    "enhanced": true,
+    "detected_type": "bank",
+    "strategy_used": "official_sites"
+  }
+}

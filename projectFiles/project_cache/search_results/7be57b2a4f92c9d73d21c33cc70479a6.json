@@ -1,0 +1,46 @@
+{
+  "query": "Hospital Luis Lagomaggiore hospital healthcare",
+  "params": {},
+  "cached_at": 1749607902.913763,
+  "timestamp": 1749607902.913763,
+  "success": true,
+  "results": [
+    {
+      "title": "Couvelaire Uterus: Point-of-Care Ultrasonography in the Diagnosis ...",
+      "link": "https://www.sdms.org/docs/default-source/jdmspdf/pdf-of-article-couvelaire-uterus-pocus.pdf?sfvrsn=2",
+      "displayLink": "www.sdms.org",
+      "snippet": "Dec 13, 2023 ... Juan Manuel Pina, Department of Critical Care Medicine, Luis Carlos. Lagomaggiore Hospital, Timoteo Gordillo S/N Capital, Mendoza. 5500\u00a0..."
+    },
+    {
+      "title": "Randomized Controlled Trial of Nonsynchronized Nasal Intermittent ...",
+      "link": "https://doi.org/10.1159/000506164",
+      "displayLink": "doi.org",
+      "snippet": "May 8, 2020 ... Hospital Fern\u00e1ndez, Buenos Aires: Jorge Tavosnaska, Gladys Saa, Debora Sabatelli. Hospital Luis Carlos Lagomaggiore, Mendoza: M\u00f3nica Rinaldi,\u00a0..."
+    },
+    {
+      "title": "Atypical pathogens in hospitalized patients with community-acquired ...",
+      "link": "https://dx.doi.org/10.1186/s12879-018-3565-z?utm_medium=email&utm_source=transaction",
+      "displayLink": "dx.doi.org",
+      "snippet": "Dec 18, 2018 ... ... Lagomaggiore, Mendoza, Argentina); Enrique ... Belgium\u2014Jean Louis Vincent (Department of Intensive Care, Erasme University Hospital\u00a0..."
+    },
+    {
+      "title": "Prevalence and Etiology of Community-acquired Pneumonia in ...",
+      "link": "https://doi.org/10.1093/cid/ciy723",
+      "displayLink": "doi.org",
+      "snippet": "May 1, 2019 ... Levine, Luis F. Angel, and Antonio Anzueto (Divisions of Hospital Medicine and Pulmonary/Critical Care Medicine, South Texas Veterans Health\u00a0..."
+    },
+    {
+      "title": "Microbiological testing of adults hospitalised with community ...",
+      "link": "https://publications.ersnet.org/content/erjor/4/4/00096-2018",
+      "displayLink": "publications.ersnet.org",
+      "snippet": "Levine, Luis F. Angel and Antonio Anzueto, Divisions of Hospital Medicine and Pulmonary/Critical Care Medicine, South Texas Veterans Health Care System\u00a0..."
+    }
+  ],
+  "total_results": "203",
+  "search_time": 0.135918,
+  "enhancement_info": {
+    "enhanced": true,
+    "detected_type": "hospital",
+    "strategy_used": "official_sites"
+  }
+}

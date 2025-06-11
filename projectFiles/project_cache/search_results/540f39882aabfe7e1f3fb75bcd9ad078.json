@@ -1,0 +1,64 @@
+{
+  "query": "Harvard Medical School university education",
+  "params": {},
+  "cached_at": 1749542482.5123966,
+  "timestamp": 1749542482.5123966,
+  "success": true,
+  "results": [
+    {
+      "title": "HMS Postgraduate Education",
+      "link": "https://postgraduateeducation.hms.harvard.edu/",
+      "displayLink": "postgraduateeducation.hms.harvard.edu",
+      "snippet": "Harvard Medical School offers a wide range of postgraduate medical education for physicians, researchers and other health care providers."
+    },
+    {
+      "title": "Harvard Medical School: Medical Education",
+      "link": "https://meded.hms.harvard.edu/",
+      "displayLink": "meded.hms.harvard.edu",
+      "snippet": "Medical Education for those seeking an MD degree at Harvard Medical School."
+    },
+    {
+      "title": "Harvard Medical School",
+      "link": "https://hms.harvard.edu/",
+      "displayLink": "hms.harvard.edu",
+      "snippet": "Since the School was established in 1782, faculty members have improved human health by innovating in their roles as physicians, mentors and scholars."
+    },
+    {
+      "title": "Harvard University",
+      "link": "https://www.harvard.edu/",
+      "displayLink": "www.harvard.edu",
+      "snippet": "Harvard University is devoted to excellence in teaching, learning, and research, and to developing leaders who make a difference globally."
+    },
+    {
+      "title": "Visual Thinking Strategies in medical education: a systematic review ...",
+      "link": "https://0-bmcmededuc-biomedcentral-com.brum.beds.ac.uk/counter/pdf/10.1186/s12909-023-04470-3.pdf",
+      "displayLink": "0-bmcmededuc-biomedcentral-com.brum.beds.ac.uk",
+      "snippet": "Jul 27, 2023 ... Harvard Medical School pioneered the application of VTS within medical education in 2004. ... undergraduate medical education and studies\u00a0..."
+    },
+    {
+      "title": "Review of 'smart drug' shows modafinil does enhance cognition ...",
+      "link": "https://www.ox.ac.uk/news/2015-08-20-review-%E2%80%98smart-drug%E2%80%99-shows-modafinil-does-enhance-cognition",
+      "displayLink": "www.ox.ac.uk",
+      "snippet": "Aug 20, 2015 ... Anna-Katharine Brem, a researcher at both the University of Oxford and Harvard Medical School, said: 'We ended up having two main\u00a0..."
+    },
+    {
+      "title": "Prevalence, Severity, and Comorbidity of Twelve-month DSM-IV ...",
+      "link": "https://0-www-ncbi-nlm-nih-gov.brum.beds.ac.uk/pmc/articles/PMC2847357",
+      "displayLink": "0-www-ncbi-nlm-nih-gov.brum.beds.ac.uk",
+      "snippet": "... Harvard Medical School and the University of Michigan. Measures. Diagnostic ... Rockville, MD: US Department of Health, Education and Welfare, National Centre for\u00a0..."
+    },
+    {
+      "title": "Profile \u2013 Dr Isabel Castanho, Harvard Medical School",
+      "link": "https://www.dementiaresearcher.nihr.ac.uk/podcast-profile-isabel-castanho/",
+      "displayLink": "www.dementiaresearcher.nihr.ac.uk",
+      "snippet": "Jul 21, 2018 ... Name: Dr Isabel Castanho. Job Title: Instructor. Place of work / study: Beth Israel Deaconess Medical Center (BIDMC), Harvard Medical School\u00a0..."
+    }
+  ],
+  "total_results": "294000",
+  "search_time": 0.375611,
+  "enhancement_info": {
+    "enhanced": true,
+    "detected_type": "university",
+    "strategy_used": "official_sites"
+  }
+}

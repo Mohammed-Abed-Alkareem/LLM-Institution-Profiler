@@ -1,0 +1,66 @@
+{
+  "query": "Birzeit University university education",
+  "params": {
+    "institution_type": "university"
+  },
+  "cached_at": 1749602655.9006333,
+  "timestamp": 1749602655.9000263,
+  "success": true,
+  "results": [
+    {
+      "title": "Education | Birzeit University",
+      "link": "https://www.birzeit.edu/en/study/faculties/education",
+      "displayLink": "www.birzeit.edu",
+      "snippet": "\u0627\u0644\u0628\u0631\u0627\u0645\u062c \u0627\u0644\u0623\u0643\u0627\u062f\u064a\u0645\u064a\u0629 \u00b7 Education \u00b7 Physical Education and Sports Sciences \u00b7 Inclusive and Special Education \u00b7 Major Upper Elementary School Teacher Program -\u00a0..."
+    },
+    {
+      "title": "History of Birzeit University | PAS",
+      "link": "https://pas.birzeit.edu/content/history-birzeit-university",
+      "displayLink": "pas.birzeit.edu",
+      "snippet": "... university courses in arts and sciences, in addition to a high school program. By 1961, Birzeit College was offering second-year university classes. The\u00a0..."
+    },
+    {
+      "title": "Birzeit University",
+      "link": "https://www.birzeit.edu/en",
+      "displayLink": "www.birzeit.edu",
+      "snippet": "Founded in 1972, Birzeit University is a leading educational institution and an intellectual hub that attracts top students and faculty."
+    },
+    {
+      "title": "Right to Education rejects repeated arrests of Birzeit University ...",
+      "link": "https://right2edu.birzeit.edu/right-to-education-rejects-repeated-arrests-of-birzeit-university-students/",
+      "displayLink": "right2edu.birzeit.edu",
+      "snippet": "Sep 11, 2019 ... The Right to Education Campaign at Birzeit University expresses grave concern over the repeated Israeli detentions of Birzeit Univ."
+    },
+    {
+      "title": "Update on Legal Education at Birzeit University - School of Law",
+      "link": "https://www.qmul.ac.uk/law/news/2023/items/update-on-legal-education-at-birzeit-university.html",
+      "displayLink": "www.qmul.ac.uk",
+      "snippet": "Dec 11, 2023 ... Dr Chowdhury and Dr MacManus learned how university education is suffering as a result of an intensifying of the Israeli occupation."
+    },
+    {
+      "title": "Edinburgh University Students' Association",
+      "link": "https://www.eusa.ed.ac.uk/about/policy/external/righttoeducation",
+      "displayLink": "www.eusa.ed.ac.uk",
+      "snippet": "Birzeit University strives to promote excellence in higher education by providing quality academic teaching, training, research and relevant community programs."
+    },
+    {
+      "title": "European Journal of Physical Education and Sport Science - 2501 ...",
+      "link": "https://core.ac.uk/download/pdf/86433956.pdf",
+      "displayLink": "core.ac.uk",
+      "snippet": "EDUCATION AT THE UNIVERSITY OF JERUSALEM. Walid Shaheeni,. A. Reem Azriel. Department of Physical Education,. Faculty of arts, Birzeit University,. Birzeit,\u00a0..."
+    },
+    {
+      "title": "Dr Amal Nazzal - St Antony's",
+      "link": "https://www.sant.ox.ac.uk/people/dr-amal-nazzal/",
+      "displayLink": "www.sant.ox.ac.uk",
+      "snippet": "She is an advisory board member at the Institute of Women Studies (IWS), BDS movement, and Right to Education campaign at Birzeit University. Her research\u00a0..."
+    }
+  ],
+  "total_results": "2120",
+  "search_time": 0.144021,
+  "enhancement_info": {
+    "enhanced": true,
+    "detected_type": "university",
+    "strategy_used": "official_sites"
+  }
+}

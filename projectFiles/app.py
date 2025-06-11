@@ -1,103 +1,84 @@
-from flask import Flask, render_template, request, jsonify
-from institution_processor import process_institution_pipeline
-import json
+# -*- coding: utf-8 -*-
+"""
+Main Flask application for the Institution Profiler.
+Refactored for better organization and maintainability.
+"""
 import os
-from service_factory import initialize_autocomplete_with_all_institutions, get_autocomplete_service
-from spell_check import SpellCorrectionService
+from flask import Flask
 
-app = Flask(__name__)
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# Initialize spell checking service
-dictionary_path = os.path.join(BASE_DIR, 'spell_check', 'symspell_dict.txt')
-spell_service = SpellCorrectionService(dictionary_path=dictionary_path)
-
-# Check if spell correction is available
-if not spell_service.is_initialized:
-    print("Warning: Spell checking service is not initialized.")
-    print("Spell checking will be disabled, but autocomplete will still work.")
-
-# Initialize autocomplete service with all institution types
-initialize_autocomplete_with_all_institutions(BASE_DIR)
-autocomplete_service = get_autocomplete_service()
-
-@app.route('/', methods=['GET', 'POST'])
-def index():
-
-    institution_data_str = None
-    corrected = None
-
-    if request.method == 'POST':
-        institution_name = request.form.get('institution_name')
-        if institution_name:
-            # Process the institution name
-            processed_data = process_institution_pipeline(institution_name)
-            # show as pure text for now
-            institution_data_str = json.dumps(processed_data, indent=2)
-        else:
-            institution_data_str = "Please enter an institution name."
-            
-    return render_template('index.html', institution_data_str=institution_data_str)
+# Import route modules
+from api.core_routes import register_core_routes
+from api.search_routes import register_search_routes
+from api.crawler_routes import register_crawler_routes
+from api.benchmark_routes import register_benchmark_routes
+from api.utility_routes import register_utility_routes
+from api.service_init import initialize_services, validate_services
 
 
-@app.route('/autocomplete', methods=['GET'])
-def autocomplete():
-    """
-    Autocomplete endpoint using Trie-based search for fast prefix matching.
-    Returns top 5 university suggestions for the given prefix.
-    Falls back to spell correction if no matches found.
-    """
-    term = request.args.get('term', '').strip()
+def create_app():
+    """Create and configure the Flask application."""
+    app = Flask(__name__)
     
-    if not term:
-        return jsonify([])    # Get suggestions from the Trie-based autocomplete service (includes spell correction)
-    result = autocomplete_service.get_suggestions(term, max_suggestions=5)
+    # Get base directory
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     
-    return jsonify(result)
+    # Initialize all services
+    print("🚀 Initializing Institution Profiler services...")
+    services = initialize_services(BASE_DIR)
+    
+    # Validate services
+    validation = validate_services(services)
+    if not validation['all_services_ok']:
+        print("⚠️ Some services failed to initialize:")
+        for error in validation['errors']:
+            print(f"   ❌ {error}")
+    
+    if validation['warnings']:
+        for warning in validation['warnings']:
+            print(f"   ⚠️ {warning}")
+    
+    if validation['all_services_ok']:
+        print("✅ All critical services initialized successfully")
+    
+    # Register all route modules
+    register_core_routes(app, services)
+    register_search_routes(app, services)
+    register_crawler_routes(app, services)
+    register_benchmark_routes(app, services)
+    register_utility_routes(app, services)
+    
+    # Add a health check endpoint
+    @app.route('/health', methods=['GET'])
+    def health_check():
+        """Health check endpoint for monitoring."""
+        return {
+            'status': 'healthy',
+            'services': validation['service_status'],
+            'all_services_ok': validation['all_services_ok']
+        }
+    
+    # Add service status endpoint
+    @app.route('/services/status', methods=['GET'])
+    def services_status():
+        """Detailed service status endpoint."""
+        return {
+            'validation_results': validation,
+            'service_details': {
+                'autocomplete_stats': services['autocomplete'].get_stats() if services.get('autocomplete') else None,
+                'search_stats': services['search'].get_stats() if services.get('search') else None,
+                'benchmarking_summary': services['benchmarking'].get_session_summary() if services.get('benchmarking') else None
+            }
+        }
+    
+    return app
 
 
-@app.route('/autocomplete/debug', methods=['GET'])
-def autocomplete_debug():
-    """
-    Debug endpoint to check autocomplete service status and statistics.
-    """
-    stats = autocomplete_service.get_stats()
-    sample_suggestions = autocomplete_service.get_suggestions('university', max_suggestions=3)
-    
-    debug_info = {
-        'service_stats': stats,
-        'sample_suggestions_for_university': sample_suggestions,
-        'service_initialized': autocomplete_service.is_initialized
-    }
-    
-    return jsonify(debug_info)
-
-
-@app.route('/spell-check', methods=['GET'])
-def spell_check():
-    """
-    Spell correction endpoint for getting "did you mean" suggestions.
-    Returns spell correction suggestions for misspelled institution names.
-    """
-    term = request.args.get('term', '').strip()
-    
-    if not term:
-        return jsonify({
-            'corrections': [],
-            'original_query': term,
-            'message': 'Empty query'
-        })
-    
-    # Get spell corrections directly
-    corrections = autocomplete_service.get_spell_corrections(term, max_suggestions=5)
-    
-    return jsonify({
-        'corrections': corrections,
-        'original_query': term,
-        'message': f'Found {len(corrections)} suggestions' if corrections else 'No suggestions found'
-    })
+# Create the Flask app instance
+app = create_app()
 
 
 if __name__ == '__main__':
+    print("🌟 Starting Institution Profiler Flask Application")
+    print("📊 Access the application at: http://localhost:5000")
+    print("🔍 API documentation available at various endpoints")
     app.run(debug=True, host='0.0.0.0', port=5000)

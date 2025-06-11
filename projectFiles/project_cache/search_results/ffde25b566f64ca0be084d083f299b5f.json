@@ -1,0 +1,46 @@
+{
+  "query": "World Health Organization",
+  "params": {},
+  "cached_at": 1749640269.3426065,
+  "timestamp": 1749640269.341619,
+  "success": true,
+  "results": [
+    {
+      "title": "World Health Organization (WHO)",
+      "link": "http://www.who.org/",
+      "displayLink": "www.who.org",
+      "snippet": "The United Nations agency working to promote health, keep the world safe and serve the vulnerable."
+    },
+    {
+      "title": "World Health Organization - Wikipedia",
+      "link": "https://en.wikipedia.org/wiki/World_Health_Organization",
+      "displayLink": "en.wikipedia.org",
+      "snippet": "The World Health Organization (WHO) is a specialized agency of the United Nations which coordinates responses to international public health issues and\u00a0..."
+    },
+    {
+      "title": "Mpox",
+      "link": "https://maestro.cuny.edu/trk/click?ref=zqtbwp23f_2-1uc942a-0-245dx38dbfx043913&",
+      "displayLink": "maestro.cuny.edu",
+      "snippet": "Aug 26, 2024 ... Mpox, previously known as monkeypox, is a viral illness caused by the monkeypox virus, a species of the genus Orthopoxvirus."
+    },
+    {
+      "title": "Ageing and health",
+      "link": "https://www.mcmasteroptimalaging.org/full-article/wrr/ageing-health-7902/website",
+      "displayLink": "www.mcmasteroptimalaging.org",
+      "snippet": "Oct 1, 2024 ... By 2050, the world's population of people aged 60 years and older will double (2.1 billion). The number of persons aged 80 years or older is\u00a0..."
+    },
+    {
+      "title": "COVID-19 cases | WHO COVID-19 dashboard",
+      "link": "https://africacheck.org/taxonomy/term/3281",
+      "displayLink": "africacheck.org",
+      "snippet": "Source: World Health Organization. Most recent data submission date: 17th May 2025. Number of countries reported: 90."
+    }
+  ],
+  "total_results": "1040000000",
+  "search_time": 0.430626,
+  "enhancement_info": {
+    "enhanced": false,
+    "detected_type": "",
+    "strategy_used": "official_sites"
+  }
+}

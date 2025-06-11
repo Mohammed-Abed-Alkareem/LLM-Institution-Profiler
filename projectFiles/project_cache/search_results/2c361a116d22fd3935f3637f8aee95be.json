@@ -1,0 +1,43 @@
+{
+  "query": "Stanford University university education academic",
+  "params": {
+    "institution_type": "university"
+  },
+  "cached_at": 1749539826.2316554,
+  "timestamp": 1749539826.2316554,
+  "success": true,
+  "results": [
+    {
+      "title": "Stanford Graduate School of Education: Home",
+      "link": "https://ed.stanford.edu/",
+      "displayLink": "ed.stanford.edu",
+      "snippet": "Stanford Graduate School of Education is dedicated to solving education's greatest challenges. Through rigorous research, model training programs and\u00a0..."
+    },
+    {
+      "title": "Stanford University",
+      "link": "https://www.stanford.edu/",
+      "displayLink": "www.stanford.edu",
+      "snippet": "Academics \u00b7 Undergraduate Education \u00b7 Graduate Education \u00b7 Driving Impact \u00b7 Seven schools in which to pursue your passions."
+    },
+    {
+      "title": "Master's Programs | Stanford Graduate School of Education",
+      "link": "https://ed.stanford.edu/academics/masters",
+      "displayLink": "ed.stanford.edu",
+      "snippet": "The Individually Designed MA in Education is intended for doctoral students at Stanford who would like to earn a master's in education while studying for their\u00a0..."
+    },
+    {
+      "title": "The Educational Opportunity Project at Stanford University",
+      "link": "https://edopportunity.org/",
+      "displayLink": "edopportunity.org",
+      "snippet": "We're measuring educational opportunity in every community in America. The Educational Opportunity Project at Stanford University has built the first national\u00a0..."
+    },
+    {
+      "title": "Doctoral Programs | Stanford Graduate School of Education",
+      "link": "https://ed.stanford.edu/academics/doctoral",
+      "displayLink": "ed.stanford.edu",
+      "snippet": "The cornerstone of the doctoral experience at the Stanford Graduate School of Education ... academic advisor, but often with other Stanford faculty as well."
+    }
+  ],
+  "total_results": "62900000",
+  "search_time": 0.148866
+}

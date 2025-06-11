@@ -1,0 +1,64 @@
+{
+  "query": "Hosei University university education",
+  "params": {},
+  "cached_at": 1749599762.9430547,
+  "timestamp": 1749599762.9430547,
+  "success": true,
+  "results": [
+    {
+      "title": "Hosei International Fund (HIF) Foreign Scholars Fellowship ...",
+      "link": "https://grad.uchicago.edu/fellowship/hosei-international-fund-hif-foreign-scholars-fellowship/",
+      "displayLink": "grad.uchicago.edu",
+      "snippet": "It is expected that joint cooperation and coordination with Hosei faculty will contribute much to the development of the university's research capabilities."
+    },
+    {
+      "title": "Direct Exchange in Tokyo, Japan - Global Learning",
+      "link": "https://www.boisestate.edu/global-gl/exchange-in-tokyo-japan/",
+      "displayLink": "www.boisestate.edu",
+      "snippet": "With its size it offers plenty to see and do. Boise State students study at Hosei University at their Ichigaya campus."
+    },
+    {
+      "title": "Funding | UCLA Graduate Programs",
+      "link": "https://grad.ucla.edu/funding/#/view-record/653/0",
+      "displayLink": "grad.ucla.edu",
+      "snippet": "Oct 28, 2024 ... The Hosei International Fund (HIF) offers 2-3 fellowships for up to 1 year to PhD scholars who will do non-degree research at Hosei University in Tokyo."
+    },
+    {
+      "title": "Hosei Fall Study Abroad \u00bb Center for English Language ...",
+      "link": "https://www.bu.edu/celop/hosei/",
+      "displayLink": "www.bu.edu",
+      "snippet": "3 Week Pre-Course. In the Pre-Course, you will study with other Hosei University students. This is a time for you to get used to communicating in English and\u00a0..."
+    },
+    {
+      "title": "Japanese Studies | Global Opportunities | The University of Sheffield",
+      "link": "https://www.sheffield.ac.uk/globalopps/outbound/study-abroad/where/japanese",
+      "displayLink": "www.sheffield.ac.uk",
+      "snippet": "Study at Hosei University. International Christian University. Fall foliage at ... higher education and academic research since it was founded in 1949."
+    },
+    {
+      "title": "Centre for Language Education Research (CLER) Workshop ...",
+      "link": "https://essl.leeds.ac.uk/education-social-sciences-law/events/event/1494/centre-for-language-education-research-cler-workshop",
+      "displayLink": "essl.leeds.ac.uk",
+      "snippet": "Light refreshments will be served from 3.30pm. Noriko Ishihara is Professor of Applied Linguistics and (T)ESOL at Hosei University, Japan. She holds a PhD in\u00a0..."
+    },
+    {
+      "title": "Centre for Language Education Research (CLER) Distinguished ...",
+      "link": "https://essl.leeds.ac.uk/events0/events/event/1495/centre-for-language-education-research-cler-distinguished-lecture",
+      "displayLink": "essl.leeds.ac.uk",
+      "snippet": "Noriko Ishihara is Professor of Applied Linguistics and (T)ESOL at Hosei University, Japan. She holds a PhD in curriculum and instruction from the University of\u00a0..."
+    },
+    {
+      "title": "Study abroad partnerships | SOAS",
+      "link": "https://www.soas.ac.uk/study/study-abroad-and-exchange/outbound-soas-students-abroad/study-abroad-partnerships",
+      "displayLink": "www.soas.ac.uk",
+      "snippet": "SOAS holds partnerships with a number of universities across the world, allowing SOAS students to study abroad as part of their degree."
+    }
+  ],
+  "total_results": "2270",
+  "search_time": 0.142869,
+  "enhancement_info": {
+    "enhanced": true,
+    "detected_type": "university",
+    "strategy_used": "official_sites"
+  }
+}

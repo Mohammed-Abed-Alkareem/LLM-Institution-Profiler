@@ -16,6 +16,10 @@ class AutocompleteWidget {
             maxSuggestions: 5,
             delay: 300,
             endpoint: '/autocomplete',
+            // Preview text positioning adjustments (in pixels)
+            previewOffsetX: 5, // Horizontal offset from left (icon width)
+            previewOffsetY: 5,  // Vertical offset adjustment
+            previewSpacing: 2,  // Space between typed text and preview
             ...options
         };
 
@@ -49,9 +53,7 @@ class AutocompleteWidget {
         // Position dropdown relative to input
         this.input.parentNode.style.position = 'relative';
         this.input.parentNode.appendChild(this.dropdown);
-    }
-
-    /**
+    }    /**
      * Create preview text overlay for autocomplete suggestions
      */
     createPreviewText() {
@@ -115,15 +117,28 @@ class AutocompleteWidget {
 
         // Document click to close dropdown
         document.addEventListener('click', (e) => {
-            if (!this.input.parentNode.contains(e.target)) {
+            if (this.input.parentNode && !this.input.parentNode.contains(e.target)) {
                 this.close();
+            }
+        });
+
+        // Adjust dropdown on window resize
+        window.addEventListener('resize', () => {
+            if (this.isOpen) {
+                const inputEl = this.input;
+                const dropdownEl = this.dropdown;
+                // Recalculate position and width
+                dropdownEl.style.left = `${inputEl.offsetLeft}px`;
+                dropdownEl.style.width = `${inputEl.offsetWidth}px`;
+                dropdownEl.style.top = `${inputEl.offsetTop + inputEl.offsetHeight}px`;
+                dropdownEl.style.right = 'auto';
             }
         });
     }    /**
      * Handle input changes with debouncing
-     */
-    handleInput(e) {
-        const value = e.target.value.trim();
+     */    handleInput(e) {
+        const value = e.target.value;
+        const trimmedValue = value.trim();
 
         // Clear preview text when input changes
         this.clearPreviewText();
@@ -136,10 +151,10 @@ class AutocompleteWidget {
             clearTimeout(this.debounceTimer);
         }
 
-        // Debounce the search
+        // Debounce the search - use trimmed value for search but pass actual value for preview
         this.debounceTimer = setTimeout(() => {
-            if (value.length >= this.options.minLength) {
-                this.search(value);
+            if (trimmedValue.length >= this.options.minLength) {
+                this.search(trimmedValue, value); // Pass both trimmed and actual value
             } else {
                 this.close();
             }
@@ -209,8 +224,7 @@ class AutocompleteWidget {
 
     /**
      * Perform search and handle response
-     */
-    async search(query) {
+     */    async search(query, actualInputValue = null) {
         try {
             const response = await fetch(`${this.options.endpoint}?term=${encodeURIComponent(query)}`);
             const data = await response.json();
@@ -236,7 +250,18 @@ class AutocompleteWidget {
             this.isSpellCorrection = isSpellCorrection;
 
             // Update preview text with first suggestion
-            this.updatePreviewText();
+            const firstSuggestion = this.suggestions[0];
+            let firstSuggestionText = '';
+            if (firstSuggestion) {
+                if (typeof firstSuggestion === 'object') {
+                    firstSuggestionText = firstSuggestion.name || firstSuggestion.full_name || firstSuggestion.term || '';
+                } else if (typeof firstSuggestion === 'string') {
+                    firstSuggestionText = firstSuggestion;
+                }
+            }
+            // Use actual input value for preview positioning if provided
+            const valueForPreview = actualInputValue || query;
+            this.updatePreviewText(valueForPreview, firstSuggestionText);
 
             if (suggestions.length > 0) {
                 this.render();
@@ -250,78 +275,92 @@ class AutocompleteWidget {
         }
     }    /**
      * Update preview text showing completion
-     */
-    updatePreviewText() {
+     */    updatePreviewText(query = null, suggestionText = null) {
         if (!this.previewText) return;
 
-        const currentValue = this.input.value;
-        this.clearPreviewText();
+        const currentValue = query || this.input.value;
+        this.clearPreviewText();        if (this.suggestions.length > 0 && currentValue.length > 0) {
+            // Use provided suggestion text or find the first suggestion that's an actual institution
+            let finalSuggestionText = suggestionText;
+            
+            if (!finalSuggestionText) {
+                // Find the first suggestion that's an actual institution (not spell correction metadata)
+                let suggestionToUse = null;
 
-        if (this.suggestions.length > 0 && currentValue.length > 0) {
-            // Find the first suggestion that's an actual institution (not spell correction metadata)
-            let suggestionToUse = null;
+                for (const suggestion of this.suggestions) {
+                    // Skip suggestions that are spell correction metadata (have corrected_query but no institution data)
+                    if (typeof suggestion === 'object' && suggestion.corrected_query && 
+                        !suggestion.name && !suggestion.full_name && !suggestion.term) {
+                        continue;
+                    }
 
-            for (const suggestion of this.suggestions) {
-                // Skip suggestions that are spell correction metadata (have corrected_query but no institution data)
-                if (typeof suggestion === 'object' && suggestion.corrected_query && 
-                    !suggestion.name && !suggestion.full_name && !suggestion.term) {
-                    continue;
+                    suggestionToUse = suggestion;
+                    break;
                 }
 
-                suggestionToUse = suggestion;
-                break;
+                if (suggestionToUse) {
+                    if (typeof suggestionToUse === 'object') {
+                        finalSuggestionText = suggestionToUse.name || suggestionToUse.full_name || suggestionToUse.term || '';
+                    } else {
+                        finalSuggestionText = suggestionToUse;
+                    }
+                }
             }
 
-            if (suggestionToUse) {
-                let suggestionText = '';
-                
-                if (typeof suggestionToUse === 'object') {
-                    suggestionText = suggestionToUse.full_name || suggestionToUse.name || suggestionToUse.term || '';
-                } else {
-                    suggestionText = suggestionToUse;
-                }
-
-                // For spell corrections, we need to be more flexible about matching
+            if (finalSuggestionText) {// For spell corrections, we need to be more flexible about matching
                 // The suggestion might match the corrected query rather than the original input
                 let shouldShowPreview = false;
-                let previewContent = '';
-
-                if (suggestionText.toLowerCase().startsWith(currentValue.toLowerCase())) {
-                    // Direct match with current input
-                    const completionPart = suggestionText.substring(currentValue.length);
-                    if (completionPart.length > 0) {
-                        previewContent = `<span style="color: transparent; user-select: none;">${currentValue}</span><span style="color: #aaa;">${completionPart}</span>`;
+                let remainingText = '';                if (finalSuggestionText.toLowerCase().startsWith(currentValue.toLowerCase())) {
+                    // Direct match - show remaining text including any space
+                    remainingText = finalSuggestionText.substring(currentValue.length);
+                    
+                    // Ensure we show the space if there should be one
+                    if (remainingText && !remainingText.startsWith(' ') && 
+                        currentValue.length < finalSuggestionText.length &&
+                        finalSuggestionText.charAt(currentValue.length) === ' ') {
+                        // Add the space that was cut off
+                        remainingText = ' ' + remainingText;
+                    }
+                    
+                    shouldShowPreview = remainingText.length > 0;
+                } else if (this.isSpellCorrection && this.suggestions[0] && this.suggestions[0].corrected_query) {
+                    // For spell corrections, check if the suggestion matches the corrected query
+                    const correctedQuery = this.suggestions[0].corrected_query;
+                    if (finalSuggestionText.toLowerCase().startsWith(correctedQuery.toLowerCase())) {
+                        remainingText = finalSuggestionText.substring(correctedQuery.length);
                         shouldShowPreview = true;
                     }
-                } else if (this.isSpellCorrection) {
-                    // For spell corrections, check if the suggestion matches a corrected query
-                    const spellCorrectionData = this.suggestions.find(s => 
-                        typeof s === 'object' && s.corrected_query
-                    );
-                    
-                    if (spellCorrectionData && spellCorrectionData.corrected_query) {
-                        const correctedQuery = spellCorrectionData.corrected_query;
-                        if (suggestionText.toLowerCase().startsWith(correctedQuery.toLowerCase())) {
-                            const completionPart = suggestionText.substring(correctedQuery.length);
-                            if (completionPart.length > 0) {
-                                // Show current input (transparent) + what was corrected (grey) + completion (grey)
-                                const correctedPart = correctedQuery.substring(currentValue.length);
-                                previewContent = `<span style="color: transparent; user-select: none;">${currentValue}</span><span style="color: #aaa;">${correctedPart}${completionPart}</span>`;
-                                shouldShowPreview = true;
-                            }
-                        }
-                    }
-                }
-
-                if (shouldShowPreview) {
+                }                if (shouldShowPreview && remainingText) {
+                    // Use HTML approach to preserve spaces properly with custom 65px padding
+                    const previewContent = `<span style="color: transparent; user-select: none; padding-right: 65px;">${currentValue}</span><span style="color: #aaa;">${remainingText}</span>`;
                     this.previewText.innerHTML = previewContent;
+                    this.previewText.style.textIndent = '0px'; // Reset text indent
                     this.previewText.style.display = 'block';
-                    
-                    console.log('DEBUG: Preview text set:', this.previewText.innerHTML);
-                    console.log('DEBUG: Preview display:', this.previewText.style.display);
-                    console.log('DEBUG: Used suggestion:', suggestionToUse);
                 }
             }
+        }
+    }
+
+    /**
+     * Update preview positioning (for external adjustment)
+     */
+    adjustPreviewPosition(offsetX = null, offsetY = null, spacing = null) {
+        if (offsetX !== null) this.options.previewOffsetX = offsetX;
+        if (offsetY !== null) this.options.previewOffsetY = offsetY;
+        if (spacing !== null) this.options.previewSpacing = spacing;
+          // Re-update the preview if it's currently showing
+        if (this.previewText && this.previewText.style.display === 'block') {
+            const currentQuery = this.input.value; // Don't trim here - we need exact value
+            const firstSuggestion = this.suggestions[0];
+            let firstSuggestionText = '';
+            if (firstSuggestion) {
+                if (typeof firstSuggestion === 'object') {
+                    firstSuggestionText = firstSuggestion.name || firstSuggestion.full_name || firstSuggestion.term || '';
+                } else if (typeof firstSuggestion === 'string') {
+                    firstSuggestionText = firstSuggestion;
+                }
+            }
+            this.updatePreviewText(currentQuery, firstSuggestionText);
         }
     }
 
@@ -484,8 +523,18 @@ class AutocompleteWidget {
             this.dropdown.appendChild(item);
         });
 
-        // Update preview text based on current input
-        this.updatePreviewText();
+        // Update preview text based on current input and first suggestion
+        const currentQuery = this.input.value.trim();
+        const firstSuggestionForRender = this.suggestions[0];
+        let firstSuggestionTextForRender = '';
+        if (firstSuggestionForRender) {
+            if (typeof firstSuggestionForRender === 'object') {
+                firstSuggestionTextForRender = firstSuggestionForRender.name || firstSuggestionForRender.full_name || firstSuggestionForRender.term || '';
+            } else if (typeof firstSuggestionForRender === 'string') {
+                firstSuggestionTextForRender = firstSuggestionForRender;
+            }
+        }
+        this.updatePreviewText(currentQuery, firstSuggestionTextForRender);
     }
 
     /**
@@ -547,8 +596,29 @@ class AutocompleteWidget {
      * Open the dropdown
      */
     open() {
+        if (!this.suggestions || this.suggestions.length === 0) {
+            this.close();
+            return;
+        }
         this.isOpen = true;
         this.dropdown.style.display = 'block';
+
+        // Adjust dropdown position and width to match the input field
+        const inputEl = this.input;
+        const dropdownEl = this.dropdown;
+
+        // Ensure parentNode is the offset parent for correct offsetLeft/Top
+        // createDropdown already sets parentNode to relative, but double-check is fine.
+        if (inputEl.parentNode && getComputedStyle(inputEl.parentNode).position === 'static') {
+            inputEl.parentNode.style.position = 'relative';
+        }
+        
+        if (inputEl.parentNode) { // Check if parentNode exists
+            dropdownEl.style.left = `${inputEl.offsetLeft}px`;
+            dropdownEl.style.width = `${inputEl.offsetWidth}px`;
+            dropdownEl.style.top = `${inputEl.offsetTop + inputEl.offsetHeight}px`;
+            dropdownEl.style.right = 'auto'; // Important to override CSS if it sets 'right'
+        }
     }    /**
      * Close the dropdown
      */

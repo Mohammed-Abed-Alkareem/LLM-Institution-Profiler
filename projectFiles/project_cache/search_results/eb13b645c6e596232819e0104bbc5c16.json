@@ -1,0 +1,55 @@
+{
+  "query": "Birzeit University university education palestine",
+  "params": {
+    "institution_type": "university",
+    "location": "palestine"
+  },
+  "cached_at": 1749592490.6817372,
+  "timestamp": 1749592490.6817372,
+  "success": true,
+  "results": [
+    {
+      "title": "Birzeit University",
+      "link": "https://www.birzeit.edu/en",
+      "displayLink": "www.birzeit.edu",
+      "snippet": "Founded in 1972, Birzeit University is a leading educational institution and an intellectual hub that attracts top students and faculty."
+    },
+    {
+      "title": "Palestine Program for Health and Human Rights \u2013 FXB Center for ...",
+      "link": "https://fxb.harvard.edu/racial-justice/palestine-program/",
+      "displayLink": "fxb.harvard.edu",
+      "snippet": "Seated woman speaking to group of four seated students in a hallway at Birzeit University Institute ... Social Medicine Education towards Structural\u00a0..."
+    },
+    {
+      "title": "The Right to Education Campaign | Birzeit University",
+      "link": "https://www.birzeit.edu/en/right2edu",
+      "displayLink": "www.birzeit.edu",
+      "snippet": "The systematic obstruction of Palestinian education in the West Bank and Gaza Strip by the illegal Israeli occupation not only violates the human rights of\u00a0..."
+    },
+    {
+      "title": "History of Birzeit University | PAS",
+      "link": "https://pas.birzeit.edu/content/history-birzeit-university",
+      "displayLink": "pas.birzeit.edu",
+      "snippet": "... university to be established in Palestine. The first graduation ceremony ... Palestinian institutions of higher education. During this prolonged period\u00a0..."
+    },
+    {
+      "title": "Education | Birzeit University",
+      "link": "https://www.birzeit.edu/en/study/faculties/education",
+      "displayLink": "www.birzeit.edu",
+      "snippet": "At that time it was called a teaching certificate program. It was the first Palestinian university to offer such a program. More \u00b7 Where Theory, Practice\u00a0..."
+    },
+    {
+      "title": "icph@birzeit.edu",
+      "link": "https://icph.birzeit.edu/",
+      "displayLink": "icph.birzeit.edu",
+      "snippet": "ICPH research is integrally linked to training, teaching and advocacy, with a special focus on current and emerging Palestinian need for evidence."
+    }
+  ],
+  "total_results": "538000",
+  "search_time": 0.223552,
+  "enhancement_info": {
+    "enhanced": true,
+    "detected_type": "university",
+    "strategy_used": "official_sites"
+  }
+}

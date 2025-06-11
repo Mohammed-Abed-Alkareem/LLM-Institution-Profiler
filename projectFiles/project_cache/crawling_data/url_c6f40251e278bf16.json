@@ -1,0 +1,658 @@
+{
+  "url": "https://pas.birzeit.edu/content/history-birzeit-university",
+  "cached_at": 1749592507.4334002,
+  "cache_key": "url_c6f40251e278bf16",
+  "content": {
+    "success": true,
+    "url": "https://pas.birzeit.edu/content/history-birzeit-university",
+    "title": "History of Birzeit University | PAS",
+    "description": null,
+    "status_code": 200,
+    "crawl_time": 6.908641338348389,
+    "timestamp": "2025-06-11T00:55:07.432403",
+    "cache_hit": false,
+    "raw_html": "<!DOCTYPE html><html lang=\"en\" dir=\"ltr\" prefix=\"content: http://purl.org/rss/1.0/modules/content/ dc: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/ og: http://ogp.me/ns# rdfs: http://www.w3.org/2000/01/rdf-schema# sioc: http://rdfs.org/sioc/ns# sioct: http://rdfs.org/sioc/types# skos: http://www.w3.org/2004/02/skos/core# xsd: http://www.w3.org/2001/XMLSchema#\" class=\"js js \"><!--<![endif]--><head>\n  <meta charset=\"utf-8\">\n<meta name=\"Generator\" content=\"Drupal 7 (http://drupal.org)\">\n<link rel=\"canonical\" href=\"/content/history-birzeit-university\">\n<link rel=\"shortlink\" href=\"/node/151\">\n<link rel=\"shortcut icon\" href=\"https://pas.birzeit.edu/sites/default/files/pas-favicon_0.jpg\" type=\"image/jpeg\">\n  <title>History of Birzeit University | PAS</title>\n\n      <meta name=\"MobileOptimized\" content=\"width\">\n    <meta name=\"HandheldFriendly\" content=\"true\">\n    <meta name=\"viewport\" content=\"width=device-width\">\n    <!--[if IEMobile]><meta http-equiv=\"cleartype\" content=\"on\"><![endif]-->\n\n  <style>\n@import url(\"https://pas.birzeit.edu/modules/system/system.base.css?sdxqqi\");\n</style>\n<style>\n@import url(\"https://pas.birzeit.edu/modules/comment/comment.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/date/date_api/date.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/date/date_popup/themes/datepicker.1.7.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/modules/field/theme/field.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/fitvids/fitvids.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/modules/node/node.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/modules/search/search.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/modules/user/user.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/modules/forum/forum.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/views/css/views.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/ckeditor/css/ckeditor.css?sdxqqi\");\n</style>\n<style>\n@import url(\"https://pas.birzeit.edu/sites/all/modules/colorbox/styles/default/colorbox_style.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/ctools/css/ctools.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/content_type_extras/css/content_type_extras.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/responsive_menus/styles/meanMenu/meanmenu.min.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/libraries/superfish/css/superfish.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/libraries/superfish/style/simple/simple-centre-aligned.css?sdxqqi\");\n</style>\n<style>\n@import url(\"https://pas.birzeit.edu/sites/all/themes/pas/css/styles.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/themes/pas/css/responsive.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/themes/pas/css/sb/component.css?sdxqqi\");\n</style>\n  <script src=\"https://pas.birzeit.edu/sites/all/modules/jquery_update/replace/jquery/1.7/jquery.min.js?v=1.7.2\"></script>\n<script src=\"https://pas.birzeit.edu/misc/jquery-extend-3.4.0.js?v=1.7.2\"></script>\n<script src=\"https://pas.birzeit.edu/misc/jquery-html-prefilter-3.5.0-backport.js?v=1.7.2\"></script>\n<script src=\"https://pas.birzeit.edu/misc/jquery.once.js?v=1.2\"></script>\n<script src=\"https://pas.birzeit.edu/misc/drupal.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/libraries/fitvids/jquery.fitvids.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/modules/fitvids/fitvids.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/modules/colorbox/js/colorbox.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/modules/colorbox/styles/default/colorbox_style.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/modules/responsive_menus/styles/meanMenu/jquery.meanmenu.min.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/modules/responsive_menus/styles/meanMenu/responsive_menus_mean_menu.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/modules/google_analytics/googleanalytics.js?sdxqqi\"></script>\n<script src=\"https://www.googletagmanager.com/gtag/js?id=G-SN8HBKWSX0\"></script>\n<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag(\"js\", new Date());gtag(\"set\", \"developer_id.dMDhkMT\", true);gtag(\"config\", \"G-SN8HBKWSX0\", {\"groups\":\"default\"});</script>\n<script src=\"https://pas.birzeit.edu/sites/all/libraries/superfish/jquery.hoverIntent.minified.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/libraries/superfish/sfsmallscreen.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/libraries/superfish/supposition.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/libraries/superfish/superfish.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/libraries/superfish/supersubs.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/modules/superfish/superfish.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/themes/pas/js/jquery.autofill.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/themes/pas/js/sb/modernizr.custom.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/themes/pas/js/sb/classie.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/themes/pas/js/sb/uisearch.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/themes/pas/js/script.js?sdxqqi\"></script>\n<script>jQuery.extend(Drupal.settings, {\"basePath\":\"\\/\",\"pathPrefix\":\"\",\"setHasJsCookie\":0,\"ajaxPageState\":{\"theme\":\"pas\",\"theme_token\":\"bQFrXWnaNr5BPkgIBZeZrJSFTJtyLsES8Y8WXz1Vwj8\",\"js\":{\"sites\\/all\\/modules\\/jquery_update\\/replace\\/jquery\\/1.7\\/jquery.min.js\":1,\"misc\\/jquery-extend-3.4.0.js\":1,\"misc\\/jquery-html-prefilter-3.5.0-backport.js\":1,\"misc\\/jquery.once.js\":1,\"misc\\/drupal.js\":1,\"sites\\/all\\/libraries\\/fitvids\\/jquery.fitvids.js\":1,\"sites\\/all\\/modules\\/fitvids\\/fitvids.js\":1,\"sites\\/all\\/modules\\/colorbox\\/js\\/colorbox.js\":1,\"sites\\/all\\/modules\\/colorbox\\/styles\\/default\\/colorbox_style.js\":1,\"sites\\/all\\/modules\\/responsive_menus\\/styles\\/meanMenu\\/jquery.meanmenu.min.js\":1,\"sites\\/all\\/modules\\/responsive_menus\\/styles\\/meanMenu\\/responsive_menus_mean_menu.js\":1,\"sites\\/all\\/modules\\/google_analytics\\/googleanalytics.js\":1,\"https:\\/\\/www.googletagmanager.com\\/gtag\\/js?id=G-SN8HBKWSX0\":1,\"0\":1,\"sites\\/all\\/libraries\\/superfish\\/jquery.hoverIntent.minified.js\":1,\"sites\\/all\\/libraries\\/superfish\\/sfsmallscreen.js\":1,\"sites\\/all\\/libraries\\/superfish\\/supposition.js\":1,\"sites\\/all\\/libraries\\/superfish\\/superfish.js\":1,\"sites\\/all\\/libraries\\/superfish\\/supersubs.js\":1,\"sites\\/all\\/modules\\/superfish\\/superfish.js\":1,\"sites\\/all\\/themes\\/pas\\/js\\/jquery.autofill.js\":1,\"sites\\/all\\/themes\\/pas\\/js\\/sb\\/modernizr.custom.js\":1,\"sites\\/all\\/themes\\/pas\\/js\\/sb\\/classie.js\":1,\"sites\\/all\\/themes\\/pas\\/js\\/sb\\/uisearch.js\":1,\"sites\\/all\\/themes\\/pas\\/js\\/script.js\":1},\"css\":{\"modules\\/system\\/system.base.css\":1,\"modules\\/system\\/system.menus.css\":1,\"modules\\/system\\/system.messages.css\":1,\"modules\\/system\\/system.theme.css\":1,\"modules\\/comment\\/comment.css\":1,\"sites\\/all\\/modules\\/date\\/date_api\\/date.css\":1,\"sites\\/all\\/modules\\/date\\/date_popup\\/themes\\/datepicker.1.7.css\":1,\"modules\\/field\\/theme\\/field.css\":1,\"sites\\/all\\/modules\\/fitvids\\/fitvids.css\":1,\"modules\\/node\\/node.css\":1,\"modules\\/search\\/search.css\":1,\"modules\\/user\\/user.css\":1,\"modules\\/forum\\/forum.css\":1,\"sites\\/all\\/modules\\/views\\/css\\/views.css\":1,\"sites\\/all\\/modules\\/ckeditor\\/css\\/ckeditor.css\":1,\"sites\\/all\\/modules\\/colorbox\\/styles\\/default\\/colorbox_style.css\":1,\"sites\\/all\\/modules\\/ctools\\/css\\/ctools.css\":1,\"sites\\/all\\/modules\\/content_type_extras\\/css\\/content_type_extras.css\":1,\"sites\\/all\\/modules\\/responsive_menus\\/styles\\/meanMenu\\/meanmenu.min.css\":1,\"sites\\/all\\/libraries\\/superfish\\/css\\/superfish.css\":1,\"sites\\/all\\/libraries\\/superfish\\/style\\/simple\\/simple-centre-aligned.css\":1,\"sites\\/all\\/themes\\/pas\\/system.menus.css\":1,\"sites\\/all\\/themes\\/pas\\/system.messages.css\":1,\"sites\\/all\\/themes\\/pas\\/system.theme.css\":1,\"sites\\/all\\/themes\\/pas\\/css\\/styles.css\":1,\"sites\\/all\\/themes\\/pas\\/css\\/responsive.css\":1,\"sites\\/all\\/themes\\/pas\\/css\\/sb\\/sdefault.css\":1,\"sites\\/all\\/themes\\/pas\\/css\\/sb\\/component.css\":1}},\"colorbox\":{\"opacity\":\"0.85\",\"current\":\"{current} of {total}\",\"previous\":\"\\u00ab Prev\",\"next\":\"Next \\u00bb\",\"close\":\"Close\",\"maxWidth\":\"98%\",\"maxHeight\":\"98%\",\"fixed\":true,\"mobiledetect\":true,\"mobiledevicewidth\":\"480px\",\"file_public_path\":\"\\/sites\\/default\\/files\",\"specificPagesDefaultValue\":\"admin*\\nimagebrowser*\\nimg_assist*\\nimce*\\nnode\\/add\\/*\\nnode\\/*\\/edit\\nprint\\/*\\nprintpdf\\/*\\nsystem\\/ajax\\nsystem\\/ajax\\/*\"},\"fitvids\":{\"custom_domains\":[],\"selectors\":[\".player\"],\"simplifymarkup\":1},\"responsive_menus\":[{\"selectors\":\"#block-superfish-1\",\"container\":\"#header .mobile-nav\",\"trigger_txt\":\"\\u003Cspan \\/\\u003E\\u003Cspan \\/\\u003E\\u003Cspan \\/\\u003E\",\"close_txt\":\"X\",\"close_size\":\"18px\",\"position\":\"right\",\"media_size\":\"980\",\"show_children\":\"1\",\"expand_children\":\"1\",\"expand_txt\":\"+\",\"contract_txt\":\"-\",\"remove_attrs\":\"1\",\"responsive_menus_style\":\"mean_menu\"}],\"googleanalytics\":{\"account\":[\"G-SN8HBKWSX0\"],\"trackOutbound\":1,\"trackMailto\":1,\"trackDownload\":1,\"trackDownloadExtensions\":\"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip\",\"trackColorbox\":1},\"urlIsAjaxTrusted\":{\"\\/content\\/history-birzeit-university\":true},\"superfish\":{\"1\":{\"id\":\"1\",\"sf\":{\"delay\":\"200\",\"animation\":{\"opacity\":\"show\",\"height\":\"show\",\"width\":\"show\"},\"speed\":100,\"autoArrows\":true,\"dropShadows\":false,\"disableHI\":false},\"plugins\":{\"smallscreen\":{\"mode\":\"window_width\",\"addSelected\":false,\"menuClasses\":false,\"hyperlinkClasses\":false,\"title\":\"Main menu\"},\"supposition\":true,\"bgiframe\":false,\"supersubs\":{\"minWidth\":\"12\",\"maxWidth\":\"27\",\"extraWidth\":1}}}}});</script>\n      <!--[if lt IE 9]>\n    <script src=\"/sites/all/themes/zen/js/html5-respond.js\"></script>\n    <![endif]-->\n  <style id=\"fit-vids-style\">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>\n<body class=\"html not-front not-logged-in two-sidebars page-node page-node- page-node-151 node-type-page i18n-en section-content\">\n      <p id=\"skip-link\">\n      <a href=\"#main-menu\" class=\"element-invisible element-focusable\">Jump to navigation</a>\n    </p>\n      \n\n<div id=\"top-bar\">\n    <div class=\"container\">\n        <div class=\"region region-top-bar\">\n    <div id=\"block-search-form\" class=\"block block-search first odd sb-search\" role=\"search\">\n\n      \n  <form action=\"/content/history-birzeit-university\" method=\"post\" id=\"search-block-form\" accept-charset=\"UTF-8\"><div><div class=\"container-inline\">\n      <h2 class=\"element-invisible\">Search form</h2>\n    <div class=\"form-item form-type-textfield form-item-search-block-form\">\n  <label class=\"element-invisible\" for=\"edit-search-block-form--2\">Search </label>\n <input class=\"sb-search-input form-text\" placeholder=\"Enter search term...\" type=\"text\" id=\"edit-search-block-form--2\" name=\"search_block_form\" value=\"\" size=\"15\" maxlength=\"128\">\n</div>\n<div class=\"form-actions form-wrapper\" id=\"edit-actions\"><input class=\"sb-search-submit form-submit\" type=\"submit\" id=\"edit-submit\" name=\"op\" value=\"Search\"><span class=\"sb-icon-search\"></span></div><input type=\"hidden\" name=\"form_build_id\" value=\"form-SInm7tgOdc4kmuVdbPzNGVY9BQgDI4P6mPWWg6fr_tg\">\n<input type=\"hidden\" name=\"form_id\" value=\"search_block_form\">\n</div>\n</div></form>\n</div>\n<div id=\"block-block-1\" class=\"block block-block last even\">\n\n      \n  <p><a class=\"bzu-home\" href=\"http://www.birzeit.edu\">WWW.BIRZEIT.EDU</a></p>\n\n</div>\n  </div>\n    </div>\n</div>\n\n<header class=\"header\" id=\"header\" role=\"banner\">\n<div class=\"container\">\n  <div class=\"mobile-nav\"></div>\n          <a href=\"/\" title=\"Home\" rel=\"home\" class=\"header__logo\" id=\"logo\"><img src=\"https://pas.birzeit.edu/sites/default/files/pas-logo-web_2_0.png\" alt=\"Home\" class=\"header__logo-image\" width=\"180\" height=\"180\"></a>\n    \n    \n    \n      <div class=\"header__region region region-header\">\n    <div id=\"block-superfish-1\" class=\"block block-superfish first last odd responsive-menus-mean-menu-processed\" style=\"display: block;\">\n\n      \n  <ul id=\"superfish-1\" class=\"menu sf-menu sf-main-menu sf-horizontal sf-style-simple-centre-aligned sf-total-items-7 sf-parent-items-3 sf-single-items-4 superfish-processed sf-js-enabled\"><li id=\"menu-1708-1\" class=\"active-trail first odd sf-item-1 sf-depth-1 sf-total-children-8 sf-parent-children-2 sf-single-children-6 menuparent\"><a href=\"/about\" class=\"sf-depth-1 menuparent sf-with-ul\">About<span class=\"sf-sub-indicator\"> »</span></a><ul class=\"sf-hidden\" style=\"float: none; width: 17.2143em;\"><li id=\"menu-1867-1\" class=\"first odd sf-item-1 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/history-pas\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">History of PAS</a></li><li id=\"menu-1773-1\" class=\"middle even sf-item-2 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/about/why-pas\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Why PAS?</a></li><li id=\"menu-1783-1\" class=\"middle odd sf-item-3 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/content/pas-academics\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">PAS Academics</a></li><li id=\"menu-1792-1\" class=\"middle even sf-item-4 sf-depth-2\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/cultural-life\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Cultural Life</a></li><li id=\"menu-1798-1\" class=\"middle odd sf-item-5 sf-depth-2\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/about/faculty-staff\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Faculty/Staff</a></li><li id=\"menu-1785-1\" class=\"middle even sf-item-6 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/content/birzeit-university-mission-statement\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Birzeit University Mission Statement</a></li><li id=\"menu-1784-1\" class=\"active-trail middle odd sf-item-7 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/content/history-birzeit-university\" class=\"sf-depth-2 active\" style=\"float: none; width: auto;\">History of Birzeit University</a></li><li id=\"menu-2015-1\" class=\"last even sf-item-8 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Articles / مقالات</a></li></ul></li><li id=\"menu-1709-1\" class=\"middle even sf-item-2 sf-depth-1 sf-total-children-3 sf-parent-children-0 sf-single-children-3 menuparent\"><a href=\"/programs\" class=\"sf-depth-1 menuparent sf-with-ul\">Programs<span class=\"sf-sub-indicator\"> »</span></a><ul class=\"sf-hidden\" style=\"float: none; width: 12.0714em;\"><li id=\"menu-1724-1\" class=\"first odd sf-item-1 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/courses\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Courses</a></li><li id=\"menu-1786-1\" class=\"middle even sf-item-2 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/content/special-short-courses\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Special Short Courses</a></li><li id=\"menu-1794-1\" class=\"last odd sf-item-3 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/conversation-partners\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Conversation Partners</a></li></ul></li><li id=\"menu-1710-1\" class=\"middle odd sf-item-3 sf-depth-1 sf-total-children-2 sf-parent-children-0 sf-single-children-2 menuparent\"><a href=\"/how-to-apply\" class=\"sf-depth-1 menuparent sf-with-ul\">How to apply<span class=\"sf-sub-indicator\"> »</span></a><ul class=\"sf-hidden\" style=\"float: none; width: 12em;\"><li id=\"menu-3238-1\" class=\"first odd sf-item-1 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/application\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Application</a></li><li id=\"menu-1866-1\" class=\"last even sf-item-2 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/fees-and-tuition\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Fees and Tuition</a></li></ul></li><li id=\"menu-2014-1\" class=\"middle even sf-item-4 sf-depth-1 sf-no-children\"><a href=\"/academic-calendar\" class=\"sf-depth-1\">Calendar</a></li><li id=\"menu-1778-1\" class=\"middle odd sf-item-5 sf-depth-1 sf-no-children\"><a href=\"/news-events\" class=\"sf-depth-1\">Blog</a></li><li id=\"menu-2027-1\" class=\"middle even sf-item-6 sf-depth-1 sf-no-children\"><a href=\"/watch-us\" class=\"sf-depth-1\">Watch Us</a></li><li id=\"menu-3536-1\" class=\"last odd sf-item-7 sf-depth-1 sf-no-children\"><a href=\"/announcements\" class=\"sf-depth-1\">News &amp; Events</a></li></ul>\n</div>\n  </div>\n</div>\n  </header>\n    <div id=\"page-image\" style=\" margin-bottom:-150px;\n      background: url(https://pas.birzeit.edu/sites/default/files/BZU-History.jpg) center top no-repeat\">\n      <div id=\"overlay\"></div>\n\n      \n  </div>\n\n<div id=\"page\">\n<div class=\"container\">\n  <div id=\"main\">\n\n    <div id=\"content\" class=\"column\" role=\"main\">\n      <nav class=\"breadcrumb\" role=\"navigation\"><h2 class=\"element-invisible\">You are here</h2><ol><li><a href=\"/\">Home</a> › </li><li><a href=\"/about\">About</a> › </li><li>History of Birzeit University</li></ol></nav>            \n      <a id=\"main-content\"></a>\n                    <h1 class=\"page__title title\" id=\"page-title\">History of Birzeit University</h1>\n                                          \n\n\n<article class=\"node-151 node node-page view-mode-full clearfix\" about=\"/content/history-birzeit-university\" typeof=\"foaf:Document\">\n\n      <header>\n                  <span property=\"dc:title\" content=\"History of Birzeit University\" class=\"rdf-meta element-hidden\"></span><span property=\"sioc:num_replies\" content=\"0\" datatype=\"xsd:integer\" class=\"rdf-meta element-hidden\"></span>\n      \n          </header>\n  \n  <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\" property=\"content:encoded\"><p>Birzeit University was initially established as a school in 1924 by Ms. Nabiha Nasir (1891– 1951), a member of a pioneering family of Palestinian educators. In 1953, it started offering first-year university courses in arts and sciences, in addition to a high school program. By 1961, Birzeit College was offering second-year university classes. The following year, associate degrees were granted for the two-year program enabling students to transfer to other universities in the Arab world and elsewhere to complete their bachelor’s degrees.</p>\n<p>In 1967, the West Bank and Gaza Strip fell under Israeli military occupation, which resulted in travel restrictions imposed on Palestinians residing in these areas. As a result, students were less able to travel to neighboring Arab countries to continue their education. This new political environment prompted Birzeit to gradually eliminate its high school program and concentrate on a higher education. By 1972, the college began a four-year program leading to bachelor’s degrees awarded from the Faculty of Arts and the Faculty of Sciences.</p>\n<p>In 1975, the name, Birzeit University was officially adopted, and Birzeit became the first Arab university to be established in Palestine. The first graduation ceremony was held on July 11, 1976. In 1978, the Faculties of Commerce and Economics were established, followed by the Faculty of Engineering a year later. The university began to offer graduate programs in 1977. In 1996, the Faculty of Graduate Studies was formally established.</p>\n<p>In 1973, just as Birzeit’s development into a full-fledged university approached completion, Israel closed the campus by military order for two weeks. This was the first of many repressive measures against the university community. Less than a year later, the Israeli military authorities deported the university president, Dr. Hanna Nasir, who remained in exile for nineteen years. From 1979-1992, the university was closed by the Israeli occupation authorities several times. For the fifteenth and final time, the Israeli military closed the university from January 8, 1988 to April 29, 1992, as was the case with all Palestinian institutions of higher education. During this prolonged period of closure, the university continued to operate underground with small study groups in makeshift arrangements outside the campus. Under such conditions, many students took more than the usual time to graduate.</p>\n<p>\nToday, Birzeit University is a thriving institution, with more than 900 faculty and staff members and around 10,103 students, of which 64 percent are female (6,497 students) and 36 percent are male (3,606 students), coming from all regions of the West Bank. The university is located on the outskirts of the town of Birzeit, 10 kilometers north of Ramallah and 26 kilometers north of Jerusalem. Committed to firm principles of academic freedom, the university aims to prepare the young Palestinian generation to become responsible leaders and citizens. As it encourages its students along the path of academic excellence, it also emphasizes the need for social awareness and national commitment.</p>\n</div></div></div>\n  \n  \n</article>          </div>\n\n    <div id=\"navigation\">\n\n            \n    </div>\n\n    \n          <aside class=\"sidebars\">\n          <section class=\"region region-sidebar-first column sidebar\">\n    <div id=\"block-menu-block-1\" class=\"block block-menu-block first last odd\" role=\"navigation\">\n\n      \n  <div class=\"menu-block-wrapper menu-block-1 menu-name-main-menu parent-mlid-0 menu-level-1\">\n  <ul class=\"menu\"><li class=\"menu__item is-expanded is-active-trail first expanded active-trail menu-mlid-1708\"><a href=\"/about\" class=\"menu__link is-active-trail active-trail\">About</a><ul class=\"menu\"><li class=\"menu__item is-leaf first leaf menu-mlid-1867\"><a href=\"/history-pas\" class=\"menu__link\">History of PAS</a></li>\n<li class=\"menu__item is-leaf leaf menu-mlid-1773\"><a href=\"/about/why-pas\" class=\"menu__link\">Why PAS?</a></li>\n<li class=\"menu__item is-leaf leaf menu-mlid-1783\"><a href=\"/content/pas-academics\" class=\"menu__link\">PAS Academics</a></li>\n<li class=\"menu__item is-collapsed collapsed menu-mlid-1792\"><a href=\"/cultural-life\" class=\"menu__link\">Cultural Life</a></li>\n<li class=\"menu__item is-collapsed collapsed menu-mlid-1798\"><a href=\"/about/faculty-staff\" class=\"menu__link\">Faculty/Staff</a></li>\n<li class=\"menu__item is-leaf leaf menu-mlid-1785\"><a href=\"/content/birzeit-university-mission-statement\" class=\"menu__link\">Birzeit University Mission Statement</a></li>\n<li class=\"menu__item is-leaf is-active-trail is-active leaf active-trail active menu-mlid-1784\"><a href=\"/content/history-birzeit-university\" class=\"menu__link is-active-trail active-trail active\">History of Birzeit University</a></li>\n<li class=\"menu__item is-leaf last leaf menu-mlid-2015\"><a href=\"/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA\" class=\"menu__link\">Articles / مقالات</a></li>\n</ul></li>\n<li class=\"menu__item is-collapsed collapsed menu-mlid-1709\"><a href=\"/programs\" class=\"menu__link\">Programs</a></li>\n<li class=\"menu__item is-collapsed collapsed menu-mlid-1710\"><a href=\"/how-to-apply\" class=\"menu__link\">How to apply</a></li>\n<li class=\"menu__item is-leaf leaf menu-mlid-2014\"><a href=\"/academic-calendar\" class=\"menu__link\">Calendar</a></li>\n<li class=\"menu__item is-leaf leaf menu-mlid-1778\"><a href=\"/news-events\" class=\"menu__link\">Blog</a></li>\n<li class=\"menu__item is-leaf leaf menu-mlid-2027\"><a href=\"/watch-us\" class=\"menu__link\">Watch Us</a></li>\n<li class=\"menu__item is-leaf last leaf menu-mlid-3536\"><a href=\"/announcements\" class=\"menu__link\">News &amp; Events</a></li>\n</ul></div>\n\n</div>\n  </section>\n          <section class=\"region region-sidebar-second column sidebar\">\n    <div id=\"block-views-news-and-events-block-1\" class=\"block block-views first last odd\">\n\n        <h2 class=\"block__title block-title\"><a href=\"/news-events\" class=\"block-title-link\">Blog</a></h2>\n    \n  <div class=\"view view-news-and-events view-id-news_and_events view-display-id-block_1 view-dom-id-3cfe1e8e7a43798ec7f0afc1c8827b9d\">\n        \n  \n  \n      <div class=\"view-content\">\n        <div class=\"views-row views-row-1 views-row-odd views-row-first\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/accepting-application-spring-semester-2024-2025\">Accepting application for the spring semester 2024-2025</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">6 months 2 weeks</span>  </div>  </div>\n  <div class=\"views-row views-row-2 views-row-even\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/welcoming-our-new-students\">Welcoming Our New Students</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">1 year 3 months</span>  </div>  </div>\n  <div class=\"views-row views-row-3 views-row-odd\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/welcoming-fall-2023-2024-students\">Welcoming the Fall 2023-2024 Students </a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">1 year 8 months</span>  </div>  </div>\n  <div class=\"views-row views-row-4 views-row-even\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/call-applications-spring-2023-2024\">Call for Applications: Spring 2023-2024</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">1 year 8 months</span>  </div>  </div>\n  <div class=\"views-row views-row-5 views-row-odd\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/rigorous-education-and-space-solidarity\">A Rigorous Education and a Space for Solidarity </a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">1 year 10 months</span>  </div>  </div>\n  <div class=\"views-row views-row-6 views-row-even\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/nicaraguan-ambassadors-visit\">The Nicaraguan Ambassador's Visit</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">2 years 4 months</span>  </div>  </div>\n  <div class=\"views-row views-row-7 views-row-odd\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/press-release-arabic\">Press Release (Arabic)</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">3 years 7 months</span>  </div>  </div>\n  <div class=\"views-row views-row-8 views-row-even\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/why-pas-program\">Why PAS Program?</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">5 years 4 months</span>  </div>  </div>\n  <div class=\"views-row views-row-9 views-row-odd\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/pas-faculty-and-students-come-together-ramadan-iftar\">PAS Faculty and Students Come Together for Ramadan Iftar</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">9 years 11 months</span>  </div>  </div>\n  <div class=\"views-row views-row-10 views-row-even views-row-last\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/may-11-2015-birzeit-world\">May 11, 2015 - From Birzeit to the World</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">10 years 2 months</span>  </div>  </div>\n    </div>\n  \n  \n  \n  \n  \n  \n</div>\n</div>\n  </section>\n      </aside>\n    \n  </div>\n  </div>\n</div>\n\n<div id=\"region-bottom-container\">\n  <div class=\"container\">\n      <div class=\"region region-bottom\">\n    <div id=\"block-block-4\" class=\"block block-block first last odd\">\n\n      \n  <p style=\"font-size: 1.8em;\">Follow Birzeit on:</p>\n<ul class=\"social-links\">\n<li class=\"facebook\"><a href=\"https://www.facebook.com/PASatBZU\" target=\"_blank\">facebook</a></li>\n<li class=\"youtube\"><a href=\"http://www.youtube.com/universitybirzeit\" target=\"_blank\">youtube</a></li>\n<li class=\"rss\"><a href=\"http://www.birzeit.edu/feeds/news\" target=\"_blank\">rss</a></li>\n</ul>\n\n</div>\n  </div>\n  </div>\n</div>\n\n<div id=\"footer-container\">\n  <div class=\"container\">  <footer id=\"footer\" class=\"region region-footer\">\n    <div id=\"block-block-3\" class=\"block block-block first odd\">\n\n      \n  <p><a href=\"http://www.birzeit.edu\"><img alt=\"\" src=\"/sites/default/files/BZU-logo-white.png\" style=\"height: 72px; width: 166px;\" width=\"166\" height=\"72\"></a></p>\n\n</div>\n<div id=\"block-block-11\" class=\"block block-block even\">\n\n      \n  <h4>Contact us:</h4>\n<dl>\n<dt>Email: <a href=\"mailto:pas-isp@birzeit.edu\">pas-isp@birzeit.edu</a></dt>\n<dt>Telephone: 02-2982153/5</dt>\n<dt>WhatsApp: +970-592-299105</dt>\n</dl>\n\n</div>\n<div id=\"block-block-2\" class=\"block block-block last odd\">\n\n      \n  <p>Copyright © 2025 - Birzeit University - PAS</p>\n</div>\n  </footer>\n</div>\n\n<script>\n  new UISearch( document.getElementById( 'block-search-form' ) );\n</script>  \n\n</div></body></html>",
+    "cleaned_content": "\n<p>\n<a href=\"#main-menu\">Jump to navigation</a>\n</p>\n<div>\n<div>\n<div>\n<div>\n<form><div><div>\n<h2>Search form</h2>\n<div>\n<label>Search </label>\n</div>\n\n</div>\n</div></form>\n</div>\n<div>\n<p><a href=\"http://www.birzeit.edu\">WWW.BIRZEIT.EDU</a></p>\n</div>\n</div>\n</div>\n</div>\n<header>\n<div>\n<a href=\"/\" title=\"Home\"><img alt=\"Home\" class=\"header__logo-image\" height=\"180\" src=\"https://pas.birzeit.edu/sites/default/files/pas-logo-web_2_0.png\" width=\"180\"/></a>\n<div>\n<div>\n<ul><li><a href=\"/about\">About<span> »</span></a><ul><li><a href=\"/history-pas\">History of PAS</a></li><li><a href=\"/about/why-pas\">Why PAS?</a></li><li><a href=\"/content/pas-academics\">PAS Academics</a></li><li><a href=\"/cultural-life\">Cultural Life</a></li><li><a href=\"/about/faculty-staff\">Faculty/Staff</a></li><li><a href=\"/content/birzeit-university-mission-statement\">Birzeit University Mission Statement</a></li><li><a href=\"/content/history-birzeit-university\">History of Birzeit University</a></li><li><a href=\"/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA\">Articles / مقالات</a></li></ul></li><li><a href=\"/programs\">Programs<span> »</span></a><ul><li><a href=\"/courses\">Courses</a></li><li><a href=\"/content/special-short-courses\">Special Short Courses</a></li><li><a href=\"/conversation-partners\">Conversation Partners</a></li></ul></li><li><a href=\"/how-to-apply\">How to apply<span> »</span></a><ul><li><a href=\"/application\">Application</a></li><li><a href=\"/fees-and-tuition\">Fees and Tuition</a></li></ul></li><li><a href=\"/academic-calendar\">Calendar</a></li><li><a href=\"/news-events\">Blog</a></li><li><a href=\"/watch-us\">Watch Us</a></li><li><a href=\"/announcements\">News &amp; Events</a></li></ul>\n</div>\n</div>\n</div>\n</header>\n<div>\n<div>\n<div>\n<div>\n<nav><h2>You are here</h2><ol><li><a href=\"/\">Home</a> › </li><li><a href=\"/about\">About</a> › </li><li>History of Birzeit University</li></ol></nav>\n<h1>History of Birzeit University</h1>\n<article>\n<div><div><div><p>Birzeit University was initially established as a school in 1924 by Ms. Nabiha Nasir (1891– 1951), a member of a pioneering family of Palestinian educators. In 1953, it started offering first-year university courses in arts and sciences, in addition to a high school program. By 1961, Birzeit College was offering second-year university classes. The following year, associate degrees were granted for the two-year program enabling students to transfer to other universities in the Arab world and elsewhere to complete their bachelor’s degrees.</p>\n<p>In 1967, the West Bank and Gaza Strip fell under Israeli military occupation, which resulted in travel restrictions imposed on Palestinians residing in these areas. As a result, students were less able to travel to neighboring Arab countries to continue their education. This new political environment prompted Birzeit to gradually eliminate its high school program and concentrate on a higher education. By 1972, the college began a four-year program leading to bachelor’s degrees awarded from the Faculty of Arts and the Faculty of Sciences.</p>\n<p>In 1975, the name, Birzeit University was officially adopted, and Birzeit became the first Arab university to be established in Palestine. The first graduation ceremony was held on July 11, 1976. In 1978, the Faculties of Commerce and Economics were established, followed by the Faculty of Engineering a year later. The university began to offer graduate programs in 1977. In 1996, the Faculty of Graduate Studies was formally established.</p>\n<p>In 1973, just as Birzeit’s development into a full-fledged university approached completion, Israel closed the campus by military order for two weeks. This was the first of many repressive measures against the university community. Less than a year later, the Israeli military authorities deported the university president, Dr. Hanna Nasir, who remained in exile for nineteen years. From 1979-1992, the university was closed by the Israeli occupation authorities several times. For the fifteenth and final time, the Israeli military closed the university from January 8, 1988 to April 29, 1992, as was the case with all Palestinian institutions of higher education. During this prolonged period of closure, the university continued to operate underground with small study groups in makeshift arrangements outside the campus. Under such conditions, many students took more than the usual time to graduate.</p>\n<p>\nToday, Birzeit University is a thriving institution, with more than 900 faculty and staff members and around 10,103 students, of which 64 percent are female (6,497 students) and 36 percent are male (3,606 students), coming from all regions of the West Bank. The university is located on the outskirts of the town of Birzeit, 10 kilometers north of Ramallah and 26 kilometers north of Jerusalem. Committed to firm principles of academic freedom, the university aims to prepare the young Palestinian generation to become responsible leaders and citizens. As it encourages its students along the path of academic excellence, it also emphasizes the need for social awareness and national commitment.</p>\n</div></div></div>\n</article> </div>\n<aside>\n<section>\n<div>\n<div>\n<ul><li><a href=\"/about\">About</a><ul><li><a href=\"/history-pas\">History of PAS</a></li>\n<li><a href=\"/about/why-pas\">Why PAS?</a></li>\n<li><a href=\"/content/pas-academics\">PAS Academics</a></li>\n<li><a href=\"/cultural-life\">Cultural Life</a></li>\n<li><a href=\"/about/faculty-staff\">Faculty/Staff</a></li>\n<li><a href=\"/content/birzeit-university-mission-statement\">Birzeit University Mission Statement</a></li>\n<li><a href=\"/content/history-birzeit-university\">History of Birzeit University</a></li>\n<li><a href=\"/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA\">Articles / مقالات</a></li>\n</ul></li>\n<li><a href=\"/programs\">Programs</a></li>\n<li><a href=\"/how-to-apply\">How to apply</a></li>\n<li><a href=\"/academic-calendar\">Calendar</a></li>\n<li><a href=\"/news-events\">Blog</a></li>\n<li><a href=\"/watch-us\">Watch Us</a></li>\n<li><a href=\"/announcements\">News &amp; Events</a></li>\n</ul></div>\n</div>\n</section>\n<section>\n<div>\n<h2><a href=\"/news-events\">Blog</a></h2>\n<div>\n<div>\n<div>\n<div> <span><a href=\"/news-events/accepting-application-spring-semester-2024-2025\">Accepting application for the spring semester 2024-2025</a></span> </div>\n<div> <span>6 months 2 weeks</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/welcoming-our-new-students\">Welcoming Our New Students</a></span> </div>\n<div> <span>1 year 3 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/welcoming-fall-2023-2024-students\">Welcoming the Fall 2023-2024 Students </a></span> </div>\n<div> <span>1 year 8 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/call-applications-spring-2023-2024\">Call for Applications: Spring 2023-2024</a></span> </div>\n<div> <span>1 year 8 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/rigorous-education-and-space-solidarity\">A Rigorous Education and a Space for Solidarity </a></span> </div>\n<div> <span>1 year 10 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/nicaraguan-ambassadors-visit\">The Nicaraguan Ambassador's Visit</a></span> </div>\n<div> <span>2 years 4 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/press-release-arabic\">Press Release (Arabic)</a></span> </div>\n<div> <span>3 years 7 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/why-pas-program\">Why PAS Program?</a></span> </div>\n<div> <span>5 years 4 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/pas-faculty-and-students-come-together-ramadan-iftar\">PAS Faculty and Students Come Together for Ramadan Iftar</a></span> </div>\n<div> <span>9 years 11 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/may-11-2015-birzeit-world\">May 11, 2015 - From Birzeit to the World</a></span> </div>\n<div> <span>10 years 2 months</span> </div> </div>\n</div>\n</div>\n</div>\n</section>\n</aside>\n</div>\n</div>\n</div>\n<div>\n<div>\n<div>\n<div>\n<p>Follow Birzeit on:</p>\n<ul>\n\n<li><a href=\"http://www.birzeit.edu/feeds/news\">rss</a></li>\n</ul>\n</div>\n</div>\n</div>\n</div>\n<div>\n<div> <footer>\n<div>\n<p><a href=\"http://www.birzeit.edu\"><img alt=\"\" height=\"72\" src=\"/sites/default/files/BZU-logo-white.png\" style=\"height: 72px; width: 166px;\" width=\"166\"/></a></p>\n</div>\n<div>\n<h4>Contact us:</h4>\n<dl>\n<dt>Email: </dt>\n<dt>Telephone: 02-2982153/5</dt>\n<dt>WhatsApp: +970-592-299105</dt>\n</dl>\n</div>\n<div>\n<p>Copyright © 2025 - Birzeit University - PAS</p>\n</div>\n</footer>\n</div>\n</div>",
+    "markdown_content": "[Jump to navigation](https://pas.birzeit.edu/content/history-birzeit-university#main-menu)\n## Search form\nSearch \n[WWW.BIRZEIT.EDU](http://www.birzeit.edu)\n[![Home](https://pas.birzeit.edu/sites/default/files/pas-logo-web_2_0.png)](https://pas.birzeit.edu/ \"Home\")\n  * [About »](https://pas.birzeit.edu/about)\n    * [History of PAS](https://pas.birzeit.edu/history-pas)\n    * [Why PAS?](https://pas.birzeit.edu/about/why-pas)\n    * [PAS Academics](https://pas.birzeit.edu/content/pas-academics)\n    * [Cultural Life](https://pas.birzeit.edu/cultural-life)\n    * [Faculty/Staff](https://pas.birzeit.edu/about/faculty-staff)\n    * [Birzeit University Mission Statement](https://pas.birzeit.edu/content/birzeit-university-mission-statement)\n    * [History of Birzeit University](https://pas.birzeit.edu/content/history-birzeit-university)\n    * [Articles / مقالات](https://pas.birzeit.edu/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA)\n  * [Programs »](https://pas.birzeit.edu/programs)\n    * [Courses](https://pas.birzeit.edu/courses)\n    * [Special Short Courses](https://pas.birzeit.edu/content/special-short-courses)\n    * [Conversation Partners](https://pas.birzeit.edu/conversation-partners)\n  * [How to apply »](https://pas.birzeit.edu/how-to-apply)\n    * [Application](https://pas.birzeit.edu/application)\n    * [Fees and Tuition](https://pas.birzeit.edu/fees-and-tuition)\n  * [Calendar](https://pas.birzeit.edu/academic-calendar)\n  * [Blog](https://pas.birzeit.edu/news-events)\n  * [Watch Us](https://pas.birzeit.edu/watch-us)\n  * [News & Events](https://pas.birzeit.edu/announcements)\n\n\n## You are here\n  1. [Home](https://pas.birzeit.edu/) › \n  2. [About](https://pas.birzeit.edu/about) › \n  3. History of Birzeit University\n\n\n# History of Birzeit University\nBirzeit University was initially established as a school in 1924 by Ms. Nabiha Nasir (1891– 1951), a member of a pioneering family of Palestinian educators. In 1953, it started offering first-year university courses in arts and sciences, in addition to a high school program. By 1961, Birzeit College was offering second-year university classes. The following year, associate degrees were granted for the two-year program enabling students to transfer to other universities in the Arab world and elsewhere to complete their bachelor’s degrees.\nIn 1967, the West Bank and Gaza Strip fell under Israeli military occupation, which resulted in travel restrictions imposed on Palestinians residing in these areas. As a result, students were less able to travel to neighboring Arab countries to continue their education. This new political environment prompted Birzeit to gradually eliminate its high school program and concentrate on a higher education. By 1972, the college began a four-year program leading to bachelor’s degrees awarded from the Faculty of Arts and the Faculty of Sciences.\nIn 1975, the name, Birzeit University was officially adopted, and Birzeit became the first Arab university to be established in Palestine. The first graduation ceremony was held on July 11, 1976. In 1978, the Faculties of Commerce and Economics were established, followed by the Faculty of Engineering a year later. The university began to offer graduate programs in 1977. In 1996, the Faculty of Graduate Studies was formally established.\nIn 1973, just as Birzeit’s development into a full-fledged university approached completion, Israel closed the campus by military order for two weeks. This was the first of many repressive measures against the university community. Less than a year later, the Israeli military authorities deported the university president, Dr. Hanna Nasir, who remained in exile for nineteen years. From 1979-1992, the university was closed by the Israeli occupation authorities several times. For the fifteenth and final time, the Israeli military closed the university from January 8, 1988 to April 29, 1992, as was the case with all Palestinian institutions of higher education. During this prolonged period of closure, the university continued to operate underground with small study groups in makeshift arrangements outside the campus. Under such conditions, many students took more than the usual time to graduate.\nToday, Birzeit University is a thriving institution, with more than 900 faculty and staff members and around 10,103 students, of which 64 percent are female (6,497 students) and 36 percent are male (3,606 students), coming from all regions of the West Bank. The university is located on the outskirts of the town of Birzeit, 10 kilometers north of Ramallah and 26 kilometers north of Jerusalem. Committed to firm principles of academic freedom, the university aims to prepare the young Palestinian generation to become responsible leaders and citizens. As it encourages its students along the path of academic excellence, it also emphasizes the need for social awareness and national commitment.\n  * [About](https://pas.birzeit.edu/about)\n    * [History of PAS](https://pas.birzeit.edu/history-pas)\n    * [Why PAS?](https://pas.birzeit.edu/about/why-pas)\n    * [PAS Academics](https://pas.birzeit.edu/content/pas-academics)\n    * [Cultural Life](https://pas.birzeit.edu/cultural-life)\n    * [Faculty/Staff](https://pas.birzeit.edu/about/faculty-staff)\n    * [Birzeit University Mission Statement](https://pas.birzeit.edu/content/birzeit-university-mission-statement)\n    * [History of Birzeit University](https://pas.birzeit.edu/content/history-birzeit-university)\n    * [Articles / مقالات](https://pas.birzeit.edu/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA)\n  * [Programs](https://pas.birzeit.edu/programs)\n  * [How to apply](https://pas.birzeit.edu/how-to-apply)\n  * [Calendar](https://pas.birzeit.edu/academic-calendar)\n  * [Blog](https://pas.birzeit.edu/news-events)\n  * [Watch Us](https://pas.birzeit.edu/watch-us)\n  * [News & Events](https://pas.birzeit.edu/announcements)\n\n\n## [Blog](https://pas.birzeit.edu/news-events)\n[Accepting application for the spring semester 2024-2025](https://pas.birzeit.edu/news-events/accepting-application-spring-semester-2024-2025)\n6 months 2 weeks\n[Welcoming Our New Students](https://pas.birzeit.edu/news-events/welcoming-our-new-students)\n1 year 3 months\n[Welcoming the Fall 2023-2024 Students ](https://pas.birzeit.edu/news-events/welcoming-fall-2023-2024-students)\n1 year 8 months\n[Call for Applications: Spring 2023-2024](https://pas.birzeit.edu/news-events/call-applications-spring-2023-2024)\n1 year 8 months\n[A Rigorous Education and a Space for Solidarity ](https://pas.birzeit.edu/news-events/rigorous-education-and-space-solidarity)\n1 year 10 months\n[The Nicaraguan Ambassador's Visit](https://pas.birzeit.edu/news-events/nicaraguan-ambassadors-visit)\n2 years 4 months\n[Press Release (Arabic)](https://pas.birzeit.edu/news-events/press-release-arabic)\n3 years 7 months\n[Why PAS Program?](https://pas.birzeit.edu/news-events/why-pas-program)\n5 years 4 months\n[PAS Faculty and Students Come Together for Ramadan Iftar](https://pas.birzeit.edu/news-events/pas-faculty-and-students-come-together-ramadan-iftar)\n9 years 11 months\n[May 11, 2015 - From Birzeit to the World](https://pas.birzeit.edu/news-events/may-11-2015-birzeit-world)\n10 years 2 months\nFollow Birzeit on:\n  * [rss](http://www.birzeit.edu/feeds/news)\n\n\n[![](https://pas.birzeit.edu/sites/default/files/BZU-logo-white.png)](http://www.birzeit.edu)\n#### Contact us: \n\nEmail: \n\n\nTelephone: 02-2982153/5\n\n\nWhatsApp: +970-592-299105\n\nCopyright © 2025 - Birzeit University - PAS\n",
+    "extracted_content": null,
+    "links": [
+      {
+        "href": "https://pas.birzeit.edu/content/history-birzeit-university/#main-menu",
+        "text": "Jump to navigation",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "http://www.birzeit.edu",
+        "text": "WWW.BIRZEIT.EDU",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/",
+        "text": "",
+        "title": "Home",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/about",
+        "text": "About »",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/history-pas",
+        "text": "History of PAS",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/about/why-pas",
+        "text": "Why PAS?",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/content/pas-academics",
+        "text": "PAS Academics",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/cultural-life",
+        "text": "Cultural Life",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/about/faculty-staff",
+        "text": "Faculty/Staff",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/content/birzeit-university-mission-statement",
+        "text": "Birzeit University Mission Statement",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/content/history-birzeit-university",
+        "text": "History of Birzeit University",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA",
+        "text": "Articles / مقالات",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/programs",
+        "text": "Programs »",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/courses",
+        "text": "Courses",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/content/special-short-courses",
+        "text": "Special Short Courses",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/conversation-partners",
+        "text": "Conversation Partners",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/how-to-apply",
+        "text": "How to apply »",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/application",
+        "text": "Application",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/fees-and-tuition",
+        "text": "Fees and Tuition",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      },
+      {
+        "href": "https://pas.birzeit.edu/academic-calendar",
+        "text": "Calendar",
+        "title": "",
+        "base_domain": "birzeit.edu"
+      }
+    ],
+    "images": [],
+    "processed_content": {
+      "success": true,
+      "status_code": 200,
+      "error_message": "",
+      "timestamp": "2025-06-11T00:55:07.428402",
+      "url": "https://pas.birzeit.edu/content/history-birzeit-university",
+      "institution_type": "university",
+      "metadata": {
+        "title": "History of Birzeit University | PAS",
+        "description": null,
+        "keywords": null,
+        "author": null
+      },
+      "title": "History of Birzeit University | PAS",
+      "description": null,
+      "language": "unknown",
+      "keywords": null,
+      "author": null,
+      "charset": "",
+      "viewport": "",
+      "content_formats": {
+        "raw_html": "<!DOCTYPE html><html lang=\"en\" dir=\"ltr\" prefix=\"content: http://purl.org/rss/1.0/modules/content/ dc: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/ og: http://ogp.me/ns# rdfs: http://www.w3.org/2000/01/rdf-schema# sioc: http://rdfs.org/sioc/ns# sioct: http://rdfs.org/sioc/types# skos: http://www.w3.org/2004/02/skos/core# xsd: http://www.w3.org/2001/XMLSchema#\" class=\"js js \"><!--<![endif]--><head>\n  <meta charset=\"utf-8\">\n<meta name=\"Generator\" content=\"Drupal 7 (http://drupal.org)\">\n<link rel=\"canonical\" href=\"/content/history-birzeit-university\">\n<link rel=\"shortlink\" href=\"/node/151\">\n<link rel=\"shortcut icon\" href=\"https://pas.birzeit.edu/sites/default/files/pas-favicon_0.jpg\" type=\"image/jpeg\">\n  <title>History of Birzeit University | PAS</title>\n\n      <meta name=\"MobileOptimized\" content=\"width\">\n    <meta name=\"HandheldFriendly\" content=\"true\">\n    <meta name=\"viewport\" content=\"width=device-width\">\n    <!--[if IEMobile]><meta http-equiv=\"cleartype\" content=\"on\"><![endif]-->\n\n  <style>\n@import url(\"https://pas.birzeit.edu/modules/system/system.base.css?sdxqqi\");\n</style>\n<style>\n@import url(\"https://pas.birzeit.edu/modules/comment/comment.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/date/date_api/date.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/date/date_popup/themes/datepicker.1.7.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/modules/field/theme/field.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/fitvids/fitvids.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/modules/node/node.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/modules/search/search.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/modules/user/user.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/modules/forum/forum.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/views/css/views.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/ckeditor/css/ckeditor.css?sdxqqi\");\n</style>\n<style>\n@import url(\"https://pas.birzeit.edu/sites/all/modules/colorbox/styles/default/colorbox_style.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/ctools/css/ctools.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/content_type_extras/css/content_type_extras.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/modules/responsive_menus/styles/meanMenu/meanmenu.min.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/libraries/superfish/css/superfish.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/libraries/superfish/style/simple/simple-centre-aligned.css?sdxqqi\");\n</style>\n<style>\n@import url(\"https://pas.birzeit.edu/sites/all/themes/pas/css/styles.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/themes/pas/css/responsive.css?sdxqqi\");\n@import url(\"https://pas.birzeit.edu/sites/all/themes/pas/css/sb/component.css?sdxqqi\");\n</style>\n  <script src=\"https://pas.birzeit.edu/sites/all/modules/jquery_update/replace/jquery/1.7/jquery.min.js?v=1.7.2\"></script>\n<script src=\"https://pas.birzeit.edu/misc/jquery-extend-3.4.0.js?v=1.7.2\"></script>\n<script src=\"https://pas.birzeit.edu/misc/jquery-html-prefilter-3.5.0-backport.js?v=1.7.2\"></script>\n<script src=\"https://pas.birzeit.edu/misc/jquery.once.js?v=1.2\"></script>\n<script src=\"https://pas.birzeit.edu/misc/drupal.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/libraries/fitvids/jquery.fitvids.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/modules/fitvids/fitvids.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/modules/colorbox/js/colorbox.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/modules/colorbox/styles/default/colorbox_style.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/modules/responsive_menus/styles/meanMenu/jquery.meanmenu.min.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/modules/responsive_menus/styles/meanMenu/responsive_menus_mean_menu.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/modules/google_analytics/googleanalytics.js?sdxqqi\"></script>\n<script src=\"https://www.googletagmanager.com/gtag/js?id=G-SN8HBKWSX0\"></script>\n<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag(\"js\", new Date());gtag(\"set\", \"developer_id.dMDhkMT\", true);gtag(\"config\", \"G-SN8HBKWSX0\", {\"groups\":\"default\"});</script>\n<script src=\"https://pas.birzeit.edu/sites/all/libraries/superfish/jquery.hoverIntent.minified.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/libraries/superfish/sfsmallscreen.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/libraries/superfish/supposition.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/libraries/superfish/superfish.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/libraries/superfish/supersubs.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/modules/superfish/superfish.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/themes/pas/js/jquery.autofill.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/themes/pas/js/sb/modernizr.custom.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/themes/pas/js/sb/classie.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/themes/pas/js/sb/uisearch.js?sdxqqi\"></script>\n<script src=\"https://pas.birzeit.edu/sites/all/themes/pas/js/script.js?sdxqqi\"></script>\n<script>jQuery.extend(Drupal.settings, {\"basePath\":\"\\/\",\"pathPrefix\":\"\",\"setHasJsCookie\":0,\"ajaxPageState\":{\"theme\":\"pas\",\"theme_token\":\"bQFrXWnaNr5BPkgIBZeZrJSFTJtyLsES8Y8WXz1Vwj8\",\"js\":{\"sites\\/all\\/modules\\/jquery_update\\/replace\\/jquery\\/1.7\\/jquery.min.js\":1,\"misc\\/jquery-extend-3.4.0.js\":1,\"misc\\/jquery-html-prefilter-3.5.0-backport.js\":1,\"misc\\/jquery.once.js\":1,\"misc\\/drupal.js\":1,\"sites\\/all\\/libraries\\/fitvids\\/jquery.fitvids.js\":1,\"sites\\/all\\/modules\\/fitvids\\/fitvids.js\":1,\"sites\\/all\\/modules\\/colorbox\\/js\\/colorbox.js\":1,\"sites\\/all\\/modules\\/colorbox\\/styles\\/default\\/colorbox_style.js\":1,\"sites\\/all\\/modules\\/responsive_menus\\/styles\\/meanMenu\\/jquery.meanmenu.min.js\":1,\"sites\\/all\\/modules\\/responsive_menus\\/styles\\/meanMenu\\/responsive_menus_mean_menu.js\":1,\"sites\\/all\\/modules\\/google_analytics\\/googleanalytics.js\":1,\"https:\\/\\/www.googletagmanager.com\\/gtag\\/js?id=G-SN8HBKWSX0\":1,\"0\":1,\"sites\\/all\\/libraries\\/superfish\\/jquery.hoverIntent.minified.js\":1,\"sites\\/all\\/libraries\\/superfish\\/sfsmallscreen.js\":1,\"sites\\/all\\/libraries\\/superfish\\/supposition.js\":1,\"sites\\/all\\/libraries\\/superfish\\/superfish.js\":1,\"sites\\/all\\/libraries\\/superfish\\/supersubs.js\":1,\"sites\\/all\\/modules\\/superfish\\/superfish.js\":1,\"sites\\/all\\/themes\\/pas\\/js\\/jquery.autofill.js\":1,\"sites\\/all\\/themes\\/pas\\/js\\/sb\\/modernizr.custom.js\":1,\"sites\\/all\\/themes\\/pas\\/js\\/sb\\/classie.js\":1,\"sites\\/all\\/themes\\/pas\\/js\\/sb\\/uisearch.js\":1,\"sites\\/all\\/themes\\/pas\\/js\\/script.js\":1},\"css\":{\"modules\\/system\\/system.base.css\":1,\"modules\\/system\\/system.menus.css\":1,\"modules\\/system\\/system.messages.css\":1,\"modules\\/system\\/system.theme.css\":1,\"modules\\/comment\\/comment.css\":1,\"sites\\/all\\/modules\\/date\\/date_api\\/date.css\":1,\"sites\\/all\\/modules\\/date\\/date_popup\\/themes\\/datepicker.1.7.css\":1,\"modules\\/field\\/theme\\/field.css\":1,\"sites\\/all\\/modules\\/fitvids\\/fitvids.css\":1,\"modules\\/node\\/node.css\":1,\"modules\\/search\\/search.css\":1,\"modules\\/user\\/user.css\":1,\"modules\\/forum\\/forum.css\":1,\"sites\\/all\\/modules\\/views\\/css\\/views.css\":1,\"sites\\/all\\/modules\\/ckeditor\\/css\\/ckeditor.css\":1,\"sites\\/all\\/modules\\/colorbox\\/styles\\/default\\/colorbox_style.css\":1,\"sites\\/all\\/modules\\/ctools\\/css\\/ctools.css\":1,\"sites\\/all\\/modules\\/content_type_extras\\/css\\/content_type_extras.css\":1,\"sites\\/all\\/modules\\/responsive_menus\\/styles\\/meanMenu\\/meanmenu.min.css\":1,\"sites\\/all\\/libraries\\/superfish\\/css\\/superfish.css\":1,\"sites\\/all\\/libraries\\/superfish\\/style\\/simple\\/simple-centre-aligned.css\":1,\"sites\\/all\\/themes\\/pas\\/system.menus.css\":1,\"sites\\/all\\/themes\\/pas\\/system.messages.css\":1,\"sites\\/all\\/themes\\/pas\\/system.theme.css\":1,\"sites\\/all\\/themes\\/pas\\/css\\/styles.css\":1,\"sites\\/all\\/themes\\/pas\\/css\\/responsive.css\":1,\"sites\\/all\\/themes\\/pas\\/css\\/sb\\/sdefault.css\":1,\"sites\\/all\\/themes\\/pas\\/css\\/sb\\/component.css\":1}},\"colorbox\":{\"opacity\":\"0.85\",\"current\":\"{current} of {total}\",\"previous\":\"\\u00ab Prev\",\"next\":\"Next \\u00bb\",\"close\":\"Close\",\"maxWidth\":\"98%\",\"maxHeight\":\"98%\",\"fixed\":true,\"mobiledetect\":true,\"mobiledevicewidth\":\"480px\",\"file_public_path\":\"\\/sites\\/default\\/files\",\"specificPagesDefaultValue\":\"admin*\\nimagebrowser*\\nimg_assist*\\nimce*\\nnode\\/add\\/*\\nnode\\/*\\/edit\\nprint\\/*\\nprintpdf\\/*\\nsystem\\/ajax\\nsystem\\/ajax\\/*\"},\"fitvids\":{\"custom_domains\":[],\"selectors\":[\".player\"],\"simplifymarkup\":1},\"responsive_menus\":[{\"selectors\":\"#block-superfish-1\",\"container\":\"#header .mobile-nav\",\"trigger_txt\":\"\\u003Cspan \\/\\u003E\\u003Cspan \\/\\u003E\\u003Cspan \\/\\u003E\",\"close_txt\":\"X\",\"close_size\":\"18px\",\"position\":\"right\",\"media_size\":\"980\",\"show_children\":\"1\",\"expand_children\":\"1\",\"expand_txt\":\"+\",\"contract_txt\":\"-\",\"remove_attrs\":\"1\",\"responsive_menus_style\":\"mean_menu\"}],\"googleanalytics\":{\"account\":[\"G-SN8HBKWSX0\"],\"trackOutbound\":1,\"trackMailto\":1,\"trackDownload\":1,\"trackDownloadExtensions\":\"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip\",\"trackColorbox\":1},\"urlIsAjaxTrusted\":{\"\\/content\\/history-birzeit-university\":true},\"superfish\":{\"1\":{\"id\":\"1\",\"sf\":{\"delay\":\"200\",\"animation\":{\"opacity\":\"show\",\"height\":\"show\",\"width\":\"show\"},\"speed\":100,\"autoArrows\":true,\"dropShadows\":false,\"disableHI\":false},\"plugins\":{\"smallscreen\":{\"mode\":\"window_width\",\"addSelected\":false,\"menuClasses\":false,\"hyperlinkClasses\":false,\"title\":\"Main menu\"},\"supposition\":true,\"bgiframe\":false,\"supersubs\":{\"minWidth\":\"12\",\"maxWidth\":\"27\",\"extraWidth\":1}}}}});</script>\n      <!--[if lt IE 9]>\n    <script src=\"/sites/all/themes/zen/js/html5-respond.js\"></script>\n    <![endif]-->\n  <style id=\"fit-vids-style\">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>\n<body class=\"html not-front not-logged-in two-sidebars page-node page-node- page-node-151 node-type-page i18n-en section-content\">\n      <p id=\"skip-link\">\n      <a href=\"#main-menu\" class=\"element-invisible element-focusable\">Jump to navigation</a>\n    </p>\n      \n\n<div id=\"top-bar\">\n    <div class=\"container\">\n        <div class=\"region region-top-bar\">\n    <div id=\"block-search-form\" class=\"block block-search first odd sb-search\" role=\"search\">\n\n      \n  <form action=\"/content/history-birzeit-university\" method=\"post\" id=\"search-block-form\" accept-charset=\"UTF-8\"><div><div class=\"container-inline\">\n      <h2 class=\"element-invisible\">Search form</h2>\n    <div class=\"form-item form-type-textfield form-item-search-block-form\">\n  <label class=\"element-invisible\" for=\"edit-search-block-form--2\">Search </label>\n <input class=\"sb-search-input form-text\" placeholder=\"Enter search term...\" type=\"text\" id=\"edit-search-block-form--2\" name=\"search_block_form\" value=\"\" size=\"15\" maxlength=\"128\">\n</div>\n<div class=\"form-actions form-wrapper\" id=\"edit-actions\"><input class=\"sb-search-submit form-submit\" type=\"submit\" id=\"edit-submit\" name=\"op\" value=\"Search\"><span class=\"sb-icon-search\"></span></div><input type=\"hidden\" name=\"form_build_id\" value=\"form-SInm7tgOdc4kmuVdbPzNGVY9BQgDI4P6mPWWg6fr_tg\">\n<input type=\"hidden\" name=\"form_id\" value=\"search_block_form\">\n</div>\n</div></form>\n</div>\n<div id=\"block-block-1\" class=\"block block-block last even\">\n\n      \n  <p><a class=\"bzu-home\" href=\"http://www.birzeit.edu\">WWW.BIRZEIT.EDU</a></p>\n\n</div>\n  </div>\n    </div>\n</div>\n\n<header class=\"header\" id=\"header\" role=\"banner\">\n<div class=\"container\">\n  <div class=\"mobile-nav\"></div>\n          <a href=\"/\" title=\"Home\" rel=\"home\" class=\"header__logo\" id=\"logo\"><img src=\"https://pas.birzeit.edu/sites/default/files/pas-logo-web_2_0.png\" alt=\"Home\" class=\"header__logo-image\" width=\"180\" height=\"180\"></a>\n    \n    \n    \n      <div class=\"header__region region region-header\">\n    <div id=\"block-superfish-1\" class=\"block block-superfish first last odd responsive-menus-mean-menu-processed\" style=\"display: block;\">\n\n      \n  <ul id=\"superfish-1\" class=\"menu sf-menu sf-main-menu sf-horizontal sf-style-simple-centre-aligned sf-total-items-7 sf-parent-items-3 sf-single-items-4 superfish-processed sf-js-enabled\"><li id=\"menu-1708-1\" class=\"active-trail first odd sf-item-1 sf-depth-1 sf-total-children-8 sf-parent-children-2 sf-single-children-6 menuparent\"><a href=\"/about\" class=\"sf-depth-1 menuparent sf-with-ul\">About<span class=\"sf-sub-indicator\"> »</span></a><ul class=\"sf-hidden\" style=\"float: none; width: 17.2143em;\"><li id=\"menu-1867-1\" class=\"first odd sf-item-1 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/history-pas\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">History of PAS</a></li><li id=\"menu-1773-1\" class=\"middle even sf-item-2 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/about/why-pas\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Why PAS?</a></li><li id=\"menu-1783-1\" class=\"middle odd sf-item-3 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/content/pas-academics\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">PAS Academics</a></li><li id=\"menu-1792-1\" class=\"middle even sf-item-4 sf-depth-2\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/cultural-life\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Cultural Life</a></li><li id=\"menu-1798-1\" class=\"middle odd sf-item-5 sf-depth-2\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/about/faculty-staff\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Faculty/Staff</a></li><li id=\"menu-1785-1\" class=\"middle even sf-item-6 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/content/birzeit-university-mission-statement\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Birzeit University Mission Statement</a></li><li id=\"menu-1784-1\" class=\"active-trail middle odd sf-item-7 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/content/history-birzeit-university\" class=\"sf-depth-2 active\" style=\"float: none; width: auto;\">History of Birzeit University</a></li><li id=\"menu-2015-1\" class=\"last even sf-item-8 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Articles / مقالات</a></li></ul></li><li id=\"menu-1709-1\" class=\"middle even sf-item-2 sf-depth-1 sf-total-children-3 sf-parent-children-0 sf-single-children-3 menuparent\"><a href=\"/programs\" class=\"sf-depth-1 menuparent sf-with-ul\">Programs<span class=\"sf-sub-indicator\"> »</span></a><ul class=\"sf-hidden\" style=\"float: none; width: 12.0714em;\"><li id=\"menu-1724-1\" class=\"first odd sf-item-1 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/courses\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Courses</a></li><li id=\"menu-1786-1\" class=\"middle even sf-item-2 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/content/special-short-courses\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Special Short Courses</a></li><li id=\"menu-1794-1\" class=\"last odd sf-item-3 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/conversation-partners\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Conversation Partners</a></li></ul></li><li id=\"menu-1710-1\" class=\"middle odd sf-item-3 sf-depth-1 sf-total-children-2 sf-parent-children-0 sf-single-children-2 menuparent\"><a href=\"/how-to-apply\" class=\"sf-depth-1 menuparent sf-with-ul\">How to apply<span class=\"sf-sub-indicator\"> »</span></a><ul class=\"sf-hidden\" style=\"float: none; width: 12em;\"><li id=\"menu-3238-1\" class=\"first odd sf-item-1 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/application\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Application</a></li><li id=\"menu-1866-1\" class=\"last even sf-item-2 sf-depth-2 sf-no-children\" style=\"white-space: normal; float: left; width: 100%;\"><a href=\"/fees-and-tuition\" class=\"sf-depth-2\" style=\"float: none; width: auto;\">Fees and Tuition</a></li></ul></li><li id=\"menu-2014-1\" class=\"middle even sf-item-4 sf-depth-1 sf-no-children\"><a href=\"/academic-calendar\" class=\"sf-depth-1\">Calendar</a></li><li id=\"menu-1778-1\" class=\"middle odd sf-item-5 sf-depth-1 sf-no-children\"><a href=\"/news-events\" class=\"sf-depth-1\">Blog</a></li><li id=\"menu-2027-1\" class=\"middle even sf-item-6 sf-depth-1 sf-no-children\"><a href=\"/watch-us\" class=\"sf-depth-1\">Watch Us</a></li><li id=\"menu-3536-1\" class=\"last odd sf-item-7 sf-depth-1 sf-no-children\"><a href=\"/announcements\" class=\"sf-depth-1\">News &amp; Events</a></li></ul>\n</div>\n  </div>\n</div>\n  </header>\n    <div id=\"page-image\" style=\" margin-bottom:-150px;\n      background: url(https://pas.birzeit.edu/sites/default/files/BZU-History.jpg) center top no-repeat\">\n      <div id=\"overlay\"></div>\n\n      \n  </div>\n\n<div id=\"page\">\n<div class=\"container\">\n  <div id=\"main\">\n\n    <div id=\"content\" class=\"column\" role=\"main\">\n      <nav class=\"breadcrumb\" role=\"navigation\"><h2 class=\"element-invisible\">You are here</h2><ol><li><a href=\"/\">Home</a> › </li><li><a href=\"/about\">About</a> › </li><li>History of Birzeit University</li></ol></nav>            \n      <a id=\"main-content\"></a>\n                    <h1 class=\"page__title title\" id=\"page-title\">History of Birzeit University</h1>\n                                          \n\n\n<article class=\"node-151 node node-page view-mode-full clearfix\" about=\"/content/history-birzeit-university\" typeof=\"foaf:Document\">\n\n      <header>\n                  <span property=\"dc:title\" content=\"History of Birzeit University\" class=\"rdf-meta element-hidden\"></span><span property=\"sioc:num_replies\" content=\"0\" datatype=\"xsd:integer\" class=\"rdf-meta element-hidden\"></span>\n      \n          </header>\n  \n  <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\" property=\"content:encoded\"><p>Birzeit University was initially established as a school in 1924 by Ms. Nabiha Nasir (1891– 1951), a member of a pioneering family of Palestinian educators. In 1953, it started offering first-year university courses in arts and sciences, in addition to a high school program. By 1961, Birzeit College was offering second-year university classes. The following year, associate degrees were granted for the two-year program enabling students to transfer to other universities in the Arab world and elsewhere to complete their bachelor’s degrees.</p>\n<p>In 1967, the West Bank and Gaza Strip fell under Israeli military occupation, which resulted in travel restrictions imposed on Palestinians residing in these areas. As a result, students were less able to travel to neighboring Arab countries to continue their education. This new political environment prompted Birzeit to gradually eliminate its high school program and concentrate on a higher education. By 1972, the college began a four-year program leading to bachelor’s degrees awarded from the Faculty of Arts and the Faculty of Sciences.</p>\n<p>In 1975, the name, Birzeit University was officially adopted, and Birzeit became the first Arab university to be established in Palestine. The first graduation ceremony was held on July 11, 1976. In 1978, the Faculties of Commerce and Economics were established, followed by the Faculty of Engineering a year later. The university began to offer graduate programs in 1977. In 1996, the Faculty of Graduate Studies was formally established.</p>\n<p>In 1973, just as Birzeit’s development into a full-fledged university approached completion, Israel closed the campus by military order for two weeks. This was the first of many repressive measures against the university community. Less than a year later, the Israeli military authorities deported the university president, Dr. Hanna Nasir, who remained in exile for nineteen years. From 1979-1992, the university was closed by the Israeli occupation authorities several times. For the fifteenth and final time, the Israeli military closed the university from January 8, 1988 to April 29, 1992, as was the case with all Palestinian institutions of higher education. During this prolonged period of closure, the university continued to operate underground with small study groups in makeshift arrangements outside the campus. Under such conditions, many students took more than the usual time to graduate.</p>\n<p>\nToday, Birzeit University is a thriving institution, with more than 900 faculty and staff members and around 10,103 students, of which 64 percent are female (6,497 students) and 36 percent are male (3,606 students), coming from all regions of the West Bank. The university is located on the outskirts of the town of Birzeit, 10 kilometers north of Ramallah and 26 kilometers north of Jerusalem. Committed to firm principles of academic freedom, the university aims to prepare the young Palestinian generation to become responsible leaders and citizens. As it encourages its students along the path of academic excellence, it also emphasizes the need for social awareness and national commitment.</p>\n</div></div></div>\n  \n  \n</article>          </div>\n\n    <div id=\"navigation\">\n\n            \n    </div>\n\n    \n          <aside class=\"sidebars\">\n          <section class=\"region region-sidebar-first column sidebar\">\n    <div id=\"block-menu-block-1\" class=\"block block-menu-block first last odd\" role=\"navigation\">\n\n      \n  <div class=\"menu-block-wrapper menu-block-1 menu-name-main-menu parent-mlid-0 menu-level-1\">\n  <ul class=\"menu\"><li class=\"menu__item is-expanded is-active-trail first expanded active-trail menu-mlid-1708\"><a href=\"/about\" class=\"menu__link is-active-trail active-trail\">About</a><ul class=\"menu\"><li class=\"menu__item is-leaf first leaf menu-mlid-1867\"><a href=\"/history-pas\" class=\"menu__link\">History of PAS</a></li>\n<li class=\"menu__item is-leaf leaf menu-mlid-1773\"><a href=\"/about/why-pas\" class=\"menu__link\">Why PAS?</a></li>\n<li class=\"menu__item is-leaf leaf menu-mlid-1783\"><a href=\"/content/pas-academics\" class=\"menu__link\">PAS Academics</a></li>\n<li class=\"menu__item is-collapsed collapsed menu-mlid-1792\"><a href=\"/cultural-life\" class=\"menu__link\">Cultural Life</a></li>\n<li class=\"menu__item is-collapsed collapsed menu-mlid-1798\"><a href=\"/about/faculty-staff\" class=\"menu__link\">Faculty/Staff</a></li>\n<li class=\"menu__item is-leaf leaf menu-mlid-1785\"><a href=\"/content/birzeit-university-mission-statement\" class=\"menu__link\">Birzeit University Mission Statement</a></li>\n<li class=\"menu__item is-leaf is-active-trail is-active leaf active-trail active menu-mlid-1784\"><a href=\"/content/history-birzeit-university\" class=\"menu__link is-active-trail active-trail active\">History of Birzeit University</a></li>\n<li class=\"menu__item is-leaf last leaf menu-mlid-2015\"><a href=\"/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA\" class=\"menu__link\">Articles / مقالات</a></li>\n</ul></li>\n<li class=\"menu__item is-collapsed collapsed menu-mlid-1709\"><a href=\"/programs\" class=\"menu__link\">Programs</a></li>\n<li class=\"menu__item is-collapsed collapsed menu-mlid-1710\"><a href=\"/how-to-apply\" class=\"menu__link\">How to apply</a></li>\n<li class=\"menu__item is-leaf leaf menu-mlid-2014\"><a href=\"/academic-calendar\" class=\"menu__link\">Calendar</a></li>\n<li class=\"menu__item is-leaf leaf menu-mlid-1778\"><a href=\"/news-events\" class=\"menu__link\">Blog</a></li>\n<li class=\"menu__item is-leaf leaf menu-mlid-2027\"><a href=\"/watch-us\" class=\"menu__link\">Watch Us</a></li>\n<li class=\"menu__item is-leaf last leaf menu-mlid-3536\"><a href=\"/announcements\" class=\"menu__link\">News &amp; Events</a></li>\n</ul></div>\n\n</div>\n  </section>\n          <section class=\"region region-sidebar-second column sidebar\">\n    <div id=\"block-views-news-and-events-block-1\" class=\"block block-views first last odd\">\n\n        <h2 class=\"block__title block-title\"><a href=\"/news-events\" class=\"block-title-link\">Blog</a></h2>\n    \n  <div class=\"view view-news-and-events view-id-news_and_events view-display-id-block_1 view-dom-id-3cfe1e8e7a43798ec7f0afc1c8827b9d\">\n        \n  \n  \n      <div class=\"view-content\">\n        <div class=\"views-row views-row-1 views-row-odd views-row-first\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/accepting-application-spring-semester-2024-2025\">Accepting application for the spring semester 2024-2025</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">6 months 2 weeks</span>  </div>  </div>\n  <div class=\"views-row views-row-2 views-row-even\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/welcoming-our-new-students\">Welcoming Our New Students</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">1 year 3 months</span>  </div>  </div>\n  <div class=\"views-row views-row-3 views-row-odd\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/welcoming-fall-2023-2024-students\">Welcoming the Fall 2023-2024 Students </a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">1 year 8 months</span>  </div>  </div>\n  <div class=\"views-row views-row-4 views-row-even\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/call-applications-spring-2023-2024\">Call for Applications: Spring 2023-2024</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">1 year 8 months</span>  </div>  </div>\n  <div class=\"views-row views-row-5 views-row-odd\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/rigorous-education-and-space-solidarity\">A Rigorous Education and a Space for Solidarity </a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">1 year 10 months</span>  </div>  </div>\n  <div class=\"views-row views-row-6 views-row-even\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/nicaraguan-ambassadors-visit\">The Nicaraguan Ambassador's Visit</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">2 years 4 months</span>  </div>  </div>\n  <div class=\"views-row views-row-7 views-row-odd\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/press-release-arabic\">Press Release (Arabic)</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">3 years 7 months</span>  </div>  </div>\n  <div class=\"views-row views-row-8 views-row-even\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/why-pas-program\">Why PAS Program?</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">5 years 4 months</span>  </div>  </div>\n  <div class=\"views-row views-row-9 views-row-odd\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/pas-faculty-and-students-come-together-ramadan-iftar\">PAS Faculty and Students Come Together for Ramadan Iftar</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">9 years 11 months</span>  </div>  </div>\n  <div class=\"views-row views-row-10 views-row-even views-row-last\">\n      \n  <div class=\"views-field views-field-title\">        <span class=\"field-content\"><a href=\"/news-events/may-11-2015-birzeit-world\">May 11, 2015 - From Birzeit to the World</a></span>  </div>  \n  <div class=\"views-field views-field-created\">        <span class=\"field-content\">10 years 2 months</span>  </div>  </div>\n    </div>\n  \n  \n  \n  \n  \n  \n</div>\n</div>\n  </section>\n      </aside>\n    \n  </div>\n  </div>\n</div>\n\n<div id=\"region-bottom-container\">\n  <div class=\"container\">\n      <div class=\"region region-bottom\">\n    <div id=\"block-block-4\" class=\"block block-block first last odd\">\n\n      \n  <p style=\"font-size: 1.8em;\">Follow Birzeit on:</p>\n<ul class=\"social-links\">\n<li class=\"facebook\"><a href=\"https://www.facebook.com/PASatBZU\" target=\"_blank\">facebook</a></li>\n<li class=\"youtube\"><a href=\"http://www.youtube.com/universitybirzeit\" target=\"_blank\">youtube</a></li>\n<li class=\"rss\"><a href=\"http://www.birzeit.edu/feeds/news\" target=\"_blank\">rss</a></li>\n</ul>\n\n</div>\n  </div>\n  </div>\n</div>\n\n<div id=\"footer-container\">\n  <div class=\"container\">  <footer id=\"footer\" class=\"region region-footer\">\n    <div id=\"block-block-3\" class=\"block block-block first odd\">\n\n      \n  <p><a href=\"http://www.birzeit.edu\"><img alt=\"\" src=\"/sites/default/files/BZU-logo-white.png\" style=\"height: 72px; width: 166px;\" width=\"166\" height=\"72\"></a></p>\n\n</div>\n<div id=\"block-block-11\" class=\"block block-block even\">\n\n      \n  <h4>Contact us:</h4>\n<dl>\n<dt>Email: <a href=\"mailto:pas-isp@birzeit.edu\">pas-isp@birzeit.edu</a></dt>\n<dt>Telephone: 02-2982153/5</dt>\n<dt>WhatsApp: +970-592-299105</dt>\n</dl>\n\n</div>\n<div id=\"block-block-2\" class=\"block block-block last odd\">\n\n      \n  <p>Copyright © 2025 - Birzeit University - PAS</p>\n</div>\n  </footer>\n</div>\n\n<script>\n  new UISearch( document.getElementById( 'block-search-form' ) );\n</script>  \n\n</div></body></html>",
+        "cleaned_html": "\n<p>\n<a href=\"#main-menu\">Jump to navigation</a>\n</p>\n<div>\n<div>\n<div>\n<div>\n<form><div><div>\n<h2>Search form</h2>\n<div>\n<label>Search </label>\n</div>\n\n</div>\n</div></form>\n</div>\n<div>\n<p><a href=\"http://www.birzeit.edu\">WWW.BIRZEIT.EDU</a></p>\n</div>\n</div>\n</div>\n</div>\n<header>\n<div>\n<a href=\"/\" title=\"Home\"><img alt=\"Home\" class=\"header__logo-image\" height=\"180\" src=\"https://pas.birzeit.edu/sites/default/files/pas-logo-web_2_0.png\" width=\"180\"/></a>\n<div>\n<div>\n<ul><li><a href=\"/about\">About<span> »</span></a><ul><li><a href=\"/history-pas\">History of PAS</a></li><li><a href=\"/about/why-pas\">Why PAS?</a></li><li><a href=\"/content/pas-academics\">PAS Academics</a></li><li><a href=\"/cultural-life\">Cultural Life</a></li><li><a href=\"/about/faculty-staff\">Faculty/Staff</a></li><li><a href=\"/content/birzeit-university-mission-statement\">Birzeit University Mission Statement</a></li><li><a href=\"/content/history-birzeit-university\">History of Birzeit University</a></li><li><a href=\"/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA\">Articles / مقالات</a></li></ul></li><li><a href=\"/programs\">Programs<span> »</span></a><ul><li><a href=\"/courses\">Courses</a></li><li><a href=\"/content/special-short-courses\">Special Short Courses</a></li><li><a href=\"/conversation-partners\">Conversation Partners</a></li></ul></li><li><a href=\"/how-to-apply\">How to apply<span> »</span></a><ul><li><a href=\"/application\">Application</a></li><li><a href=\"/fees-and-tuition\">Fees and Tuition</a></li></ul></li><li><a href=\"/academic-calendar\">Calendar</a></li><li><a href=\"/news-events\">Blog</a></li><li><a href=\"/watch-us\">Watch Us</a></li><li><a href=\"/announcements\">News &amp; Events</a></li></ul>\n</div>\n</div>\n</div>\n</header>\n<div>\n<div>\n<div>\n<div>\n<nav><h2>You are here</h2><ol><li><a href=\"/\">Home</a> › </li><li><a href=\"/about\">About</a> › </li><li>History of Birzeit University</li></ol></nav>\n<h1>History of Birzeit University</h1>\n<article>\n<div><div><div><p>Birzeit University was initially established as a school in 1924 by Ms. Nabiha Nasir (1891– 1951), a member of a pioneering family of Palestinian educators. In 1953, it started offering first-year university courses in arts and sciences, in addition to a high school program. By 1961, Birzeit College was offering second-year university classes. The following year, associate degrees were granted for the two-year program enabling students to transfer to other universities in the Arab world and elsewhere to complete their bachelor’s degrees.</p>\n<p>In 1967, the West Bank and Gaza Strip fell under Israeli military occupation, which resulted in travel restrictions imposed on Palestinians residing in these areas. As a result, students were less able to travel to neighboring Arab countries to continue their education. This new political environment prompted Birzeit to gradually eliminate its high school program and concentrate on a higher education. By 1972, the college began a four-year program leading to bachelor’s degrees awarded from the Faculty of Arts and the Faculty of Sciences.</p>\n<p>In 1975, the name, Birzeit University was officially adopted, and Birzeit became the first Arab university to be established in Palestine. The first graduation ceremony was held on July 11, 1976. In 1978, the Faculties of Commerce and Economics were established, followed by the Faculty of Engineering a year later. The university began to offer graduate programs in 1977. In 1996, the Faculty of Graduate Studies was formally established.</p>\n<p>In 1973, just as Birzeit’s development into a full-fledged university approached completion, Israel closed the campus by military order for two weeks. This was the first of many repressive measures against the university community. Less than a year later, the Israeli military authorities deported the university president, Dr. Hanna Nasir, who remained in exile for nineteen years. From 1979-1992, the university was closed by the Israeli occupation authorities several times. For the fifteenth and final time, the Israeli military closed the university from January 8, 1988 to April 29, 1992, as was the case with all Palestinian institutions of higher education. During this prolonged period of closure, the university continued to operate underground with small study groups in makeshift arrangements outside the campus. Under such conditions, many students took more than the usual time to graduate.</p>\n<p>\nToday, Birzeit University is a thriving institution, with more than 900 faculty and staff members and around 10,103 students, of which 64 percent are female (6,497 students) and 36 percent are male (3,606 students), coming from all regions of the West Bank. The university is located on the outskirts of the town of Birzeit, 10 kilometers north of Ramallah and 26 kilometers north of Jerusalem. Committed to firm principles of academic freedom, the university aims to prepare the young Palestinian generation to become responsible leaders and citizens. As it encourages its students along the path of academic excellence, it also emphasizes the need for social awareness and national commitment.</p>\n</div></div></div>\n</article> </div>\n<aside>\n<section>\n<div>\n<div>\n<ul><li><a href=\"/about\">About</a><ul><li><a href=\"/history-pas\">History of PAS</a></li>\n<li><a href=\"/about/why-pas\">Why PAS?</a></li>\n<li><a href=\"/content/pas-academics\">PAS Academics</a></li>\n<li><a href=\"/cultural-life\">Cultural Life</a></li>\n<li><a href=\"/about/faculty-staff\">Faculty/Staff</a></li>\n<li><a href=\"/content/birzeit-university-mission-statement\">Birzeit University Mission Statement</a></li>\n<li><a href=\"/content/history-birzeit-university\">History of Birzeit University</a></li>\n<li><a href=\"/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA\">Articles / مقالات</a></li>\n</ul></li>\n<li><a href=\"/programs\">Programs</a></li>\n<li><a href=\"/how-to-apply\">How to apply</a></li>\n<li><a href=\"/academic-calendar\">Calendar</a></li>\n<li><a href=\"/news-events\">Blog</a></li>\n<li><a href=\"/watch-us\">Watch Us</a></li>\n<li><a href=\"/announcements\">News &amp; Events</a></li>\n</ul></div>\n</div>\n</section>\n<section>\n<div>\n<h2><a href=\"/news-events\">Blog</a></h2>\n<div>\n<div>\n<div>\n<div> <span><a href=\"/news-events/accepting-application-spring-semester-2024-2025\">Accepting application for the spring semester 2024-2025</a></span> </div>\n<div> <span>6 months 2 weeks</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/welcoming-our-new-students\">Welcoming Our New Students</a></span> </div>\n<div> <span>1 year 3 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/welcoming-fall-2023-2024-students\">Welcoming the Fall 2023-2024 Students </a></span> </div>\n<div> <span>1 year 8 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/call-applications-spring-2023-2024\">Call for Applications: Spring 2023-2024</a></span> </div>\n<div> <span>1 year 8 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/rigorous-education-and-space-solidarity\">A Rigorous Education and a Space for Solidarity </a></span> </div>\n<div> <span>1 year 10 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/nicaraguan-ambassadors-visit\">The Nicaraguan Ambassador's Visit</a></span> </div>\n<div> <span>2 years 4 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/press-release-arabic\">Press Release (Arabic)</a></span> </div>\n<div> <span>3 years 7 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/why-pas-program\">Why PAS Program?</a></span> </div>\n<div> <span>5 years 4 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/pas-faculty-and-students-come-together-ramadan-iftar\">PAS Faculty and Students Come Together for Ramadan Iftar</a></span> </div>\n<div> <span>9 years 11 months</span> </div> </div>\n<div>\n<div> <span><a href=\"/news-events/may-11-2015-birzeit-world\">May 11, 2015 - From Birzeit to the World</a></span> </div>\n<div> <span>10 years 2 months</span> </div> </div>\n</div>\n</div>\n</div>\n</section>\n</aside>\n</div>\n</div>\n</div>\n<div>\n<div>\n<div>\n<div>\n<p>Follow Birzeit on:</p>\n<ul>\n\n<li><a href=\"http://www.birzeit.edu/feeds/news\">rss</a></li>\n</ul>\n</div>\n</div>\n</div>\n</div>\n<div>\n<div> <footer>\n<div>\n<p><a href=\"http://www.birzeit.edu\"><img alt=\"\" height=\"72\" src=\"/sites/default/files/BZU-logo-white.png\" style=\"height: 72px; width: 166px;\" width=\"166\"/></a></p>\n</div>\n<div>\n<h4>Contact us:</h4>\n<dl>\n<dt>Email: </dt>\n<dt>Telephone: 02-2982153/5</dt>\n<dt>WhatsApp: +970-592-299105</dt>\n</dl>\n</div>\n<div>\n<p>Copyright © 2025 - Birzeit University - PAS</p>\n</div>\n</footer>\n</div>\n</div>",
+        "markdown": {
+          "raw_markdown": "[Jump to navigation](https://pas.birzeit.edu/content/history-birzeit-university#main-menu)\n## Search form\nSearch \n[WWW.BIRZEIT.EDU](http://www.birzeit.edu)\n[![Home](https://pas.birzeit.edu/sites/default/files/pas-logo-web_2_0.png)](https://pas.birzeit.edu/ \"Home\")\n  * [About »](https://pas.birzeit.edu/about)\n    * [History of PAS](https://pas.birzeit.edu/history-pas)\n    * [Why PAS?](https://pas.birzeit.edu/about/why-pas)\n    * [PAS Academics](https://pas.birzeit.edu/content/pas-academics)\n    * [Cultural Life](https://pas.birzeit.edu/cultural-life)\n    * [Faculty/Staff](https://pas.birzeit.edu/about/faculty-staff)\n    * [Birzeit University Mission Statement](https://pas.birzeit.edu/content/birzeit-university-mission-statement)\n    * [History of Birzeit University](https://pas.birzeit.edu/content/history-birzeit-university)\n    * [Articles / مقالات](https://pas.birzeit.edu/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA)\n  * [Programs »](https://pas.birzeit.edu/programs)\n    * [Courses](https://pas.birzeit.edu/courses)\n    * [Special Short Courses](https://pas.birzeit.edu/content/special-short-courses)\n    * [Conversation Partners](https://pas.birzeit.edu/conversation-partners)\n  * [How to apply »](https://pas.birzeit.edu/how-to-apply)\n    * [Application](https://pas.birzeit.edu/application)\n    * [Fees and Tuition](https://pas.birzeit.edu/fees-and-tuition)\n  * [Calendar](https://pas.birzeit.edu/academic-calendar)\n  * [Blog](https://pas.birzeit.edu/news-events)\n  * [Watch Us](https://pas.birzeit.edu/watch-us)\n  * [News & Events](https://pas.birzeit.edu/announcements)\n\n\n## You are here\n  1. [Home](https://pas.birzeit.edu/) › \n  2. [About](https://pas.birzeit.edu/about) › \n  3. History of Birzeit University\n\n\n# History of Birzeit University\nBirzeit University was initially established as a school in 1924 by Ms. Nabiha Nasir (1891– 1951), a member of a pioneering family of Palestinian educators. In 1953, it started offering first-year university courses in arts and sciences, in addition to a high school program. By 1961, Birzeit College was offering second-year university classes. The following year, associate degrees were granted for the two-year program enabling students to transfer to other universities in the Arab world and elsewhere to complete their bachelor’s degrees.\nIn 1967, the West Bank and Gaza Strip fell under Israeli military occupation, which resulted in travel restrictions imposed on Palestinians residing in these areas. As a result, students were less able to travel to neighboring Arab countries to continue their education. This new political environment prompted Birzeit to gradually eliminate its high school program and concentrate on a higher education. By 1972, the college began a four-year program leading to bachelor’s degrees awarded from the Faculty of Arts and the Faculty of Sciences.\nIn 1975, the name, Birzeit University was officially adopted, and Birzeit became the first Arab university to be established in Palestine. The first graduation ceremony was held on July 11, 1976. In 1978, the Faculties of Commerce and Economics were established, followed by the Faculty of Engineering a year later. The university began to offer graduate programs in 1977. In 1996, the Faculty of Graduate Studies was formally established.\nIn 1973, just as Birzeit’s development into a full-fledged university approached completion, Israel closed the campus by military order for two weeks. This was the first of many repressive measures against the university community. Less than a year later, the Israeli military authorities deported the university president, Dr. Hanna Nasir, who remained in exile for nineteen years. From 1979-1992, the university was closed by the Israeli occupation authorities several times. For the fifteenth and final time, the Israeli military closed the university from January 8, 1988 to April 29, 1992, as was the case with all Palestinian institutions of higher education. During this prolonged period of closure, the university continued to operate underground with small study groups in makeshift arrangements outside the campus. Under such conditions, many students took more than the usual time to graduate.\nToday, Birzeit University is a thriving institution, with more than 900 faculty and staff members and around 10,103 students, of which 64 percent are female (6,497 students) and 36 percent are male (3,606 students), coming from all regions of the West Bank. The university is located on the outskirts of the town of Birzeit, 10 kilometers north of Ramallah and 26 kilometers north of Jerusalem. Committed to firm principles of academic freedom, the university aims to prepare the young Palestinian generation to become responsible leaders and citizens. As it encourages its students along the path of academic excellence, it also emphasizes the need for social awareness and national commitment.\n  * [About](https://pas.birzeit.edu/about)\n    * [History of PAS](https://pas.birzeit.edu/history-pas)\n    * [Why PAS?](https://pas.birzeit.edu/about/why-pas)\n    * [PAS Academics](https://pas.birzeit.edu/content/pas-academics)\n    * [Cultural Life](https://pas.birzeit.edu/cultural-life)\n    * [Faculty/Staff](https://pas.birzeit.edu/about/faculty-staff)\n    * [Birzeit University Mission Statement](https://pas.birzeit.edu/content/birzeit-university-mission-statement)\n    * [History of Birzeit University](https://pas.birzeit.edu/content/history-birzeit-university)\n    * [Articles / مقالات](https://pas.birzeit.edu/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA)\n  * [Programs](https://pas.birzeit.edu/programs)\n  * [How to apply](https://pas.birzeit.edu/how-to-apply)\n  * [Calendar](https://pas.birzeit.edu/academic-calendar)\n  * [Blog](https://pas.birzeit.edu/news-events)\n  * [Watch Us](https://pas.birzeit.edu/watch-us)\n  * [News & Events](https://pas.birzeit.edu/announcements)\n\n\n## [Blog](https://pas.birzeit.edu/news-events)\n[Accepting application for the spring semester 2024-2025](https://pas.birzeit.edu/news-events/accepting-application-spring-semester-2024-2025)\n6 months 2 weeks\n[Welcoming Our New Students](https://pas.birzeit.edu/news-events/welcoming-our-new-students)\n1 year 3 months\n[Welcoming the Fall 2023-2024 Students ](https://pas.birzeit.edu/news-events/welcoming-fall-2023-2024-students)\n1 year 8 months\n[Call for Applications: Spring 2023-2024](https://pas.birzeit.edu/news-events/call-applications-spring-2023-2024)\n1 year 8 months\n[A Rigorous Education and a Space for Solidarity ](https://pas.birzeit.edu/news-events/rigorous-education-and-space-solidarity)\n1 year 10 months\n[The Nicaraguan Ambassador's Visit](https://pas.birzeit.edu/news-events/nicaraguan-ambassadors-visit)\n2 years 4 months\n[Press Release (Arabic)](https://pas.birzeit.edu/news-events/press-release-arabic)\n3 years 7 months\n[Why PAS Program?](https://pas.birzeit.edu/news-events/why-pas-program)\n5 years 4 months\n[PAS Faculty and Students Come Together for Ramadan Iftar](https://pas.birzeit.edu/news-events/pas-faculty-and-students-come-together-ramadan-iftar)\n9 years 11 months\n[May 11, 2015 - From Birzeit to the World](https://pas.birzeit.edu/news-events/may-11-2015-birzeit-world)\n10 years 2 months\nFollow Birzeit on:\n  * [rss](http://www.birzeit.edu/feeds/news)\n\n\n[![](https://pas.birzeit.edu/sites/default/files/BZU-logo-white.png)](http://www.birzeit.edu)\n#### Contact us: \n\nEmail: \n\n\nTelephone: 02-2982153/5\n\n\nWhatsApp: +970-592-299105\n\nCopyright © 2025 - Birzeit University - PAS\n",
+          "fit_markdown": "",
+          "fit_html": "",
+          "primary_content": "[Jump to navigation](https://pas.birzeit.edu/content/history-birzeit-university#main-menu)\n## Search form\nSearch \n[WWW.BIRZEIT.EDU](http://www.birzeit.edu)\n[![Home](https://pas.birzeit.edu/sites/default/files/pas-logo-web_2_0.png)](https://pas.birzeit.edu/ \"Home\")\n  * [About »](https://pas.birzeit.edu/about)\n    * [History of PAS](https://pas.birzeit.edu/history-pas)\n    * [Why PAS?](https://pas.birzeit.edu/about/why-pas)\n    * [PAS Academics](https://pas.birzeit.edu/content/pas-academics)\n    * [Cultural Life](https://pas.birzeit.edu/cultural-life)\n    * [Faculty/Staff](https://pas.birzeit.edu/about/faculty-staff)\n    * [Birzeit University Mission Statement](https://pas.birzeit.edu/content/birzeit-university-mission-statement)\n    * [History of Birzeit University](https://pas.birzeit.edu/content/history-birzeit-university)\n    * [Articles / مقالات](https://pas.birzeit.edu/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA)\n  * [Programs »](https://pas.birzeit.edu/programs)\n    * [Courses](https://pas.birzeit.edu/courses)\n    * [Special Short Courses](https://pas.birzeit.edu/content/special-short-courses)\n    * [Conversation Partners](https://pas.birzeit.edu/conversation-partners)\n  * [How to apply »](https://pas.birzeit.edu/how-to-apply)\n    * [Application](https://pas.birzeit.edu/application)\n    * [Fees and Tuition](https://pas.birzeit.edu/fees-and-tuition)\n  * [Calendar](https://pas.birzeit.edu/academic-calendar)\n  * [Blog](https://pas.birzeit.edu/news-events)\n  * [Watch Us](https://pas.birzeit.edu/watch-us)\n  * [News & Events](https://pas.birzeit.edu/announcements)\n\n\n## You are here\n  1. [Home](https://pas.birzeit.edu/) › \n  2. [About](https://pas.birzeit.edu/about) › \n  3. History of Birzeit University\n\n\n# History of Birzeit University\nBirzeit University was initially established as a school in 1924 by Ms. Nabiha Nasir (1891– 1951), a member of a pioneering family of Palestinian educators. In 1953, it started offering first-year university courses in arts and sciences, in addition to a high school program. By 1961, Birzeit College was offering second-year university classes. The following year, associate degrees were granted for the two-year program enabling students to transfer to other universities in the Arab world and elsewhere to complete their bachelor’s degrees.\nIn 1967, the West Bank and Gaza Strip fell under Israeli military occupation, which resulted in travel restrictions imposed on Palestinians residing in these areas. As a result, students were less able to travel to neighboring Arab countries to continue their education. This new political environment prompted Birzeit to gradually eliminate its high school program and concentrate on a higher education. By 1972, the college began a four-year program leading to bachelor’s degrees awarded from the Faculty of Arts and the Faculty of Sciences.\nIn 1975, the name, Birzeit University was officially adopted, and Birzeit became the first Arab university to be established in Palestine. The first graduation ceremony was held on July 11, 1976. In 1978, the Faculties of Commerce and Economics were established, followed by the Faculty of Engineering a year later. The university began to offer graduate programs in 1977. In 1996, the Faculty of Graduate Studies was formally established.\nIn 1973, just as Birzeit’s development into a full-fledged university approached completion, Israel closed the campus by military order for two weeks. This was the first of many repressive measures against the university community. Less than a year later, the Israeli military authorities deported the university president, Dr. Hanna Nasir, who remained in exile for nineteen years. From 1979-1992, the university was closed by the Israeli occupation authorities several times. For the fifteenth and final time, the Israeli military closed the university from January 8, 1988 to April 29, 1992, as was the case with all Palestinian institutions of higher education. During this prolonged period of closure, the university continued to operate underground with small study groups in makeshift arrangements outside the campus. Under such conditions, many students took more than the usual time to graduate.\nToday, Birzeit University is a thriving institution, with more than 900 faculty and staff members and around 10,103 students, of which 64 percent are female (6,497 students) and 36 percent are male (3,606 students), coming from all regions of the West Bank. The university is located on the outskirts of the town of Birzeit, 10 kilometers north of Ramallah and 26 kilometers north of Jerusalem. Committed to firm principles of academic freedom, the university aims to prepare the young Palestinian generation to become responsible leaders and citizens. As it encourages its students along the path of academic excellence, it also emphasizes the need for social awareness and national commitment.\n  * [About](https://pas.birzeit.edu/about)\n    * [History of PAS](https://pas.birzeit.edu/history-pas)\n    * [Why PAS?](https://pas.birzeit.edu/about/why-pas)\n    * [PAS Academics](https://pas.birzeit.edu/content/pas-academics)\n    * [Cultural Life](https://pas.birzeit.edu/cultural-life)\n    * [Faculty/Staff](https://pas.birzeit.edu/about/faculty-staff)\n    * [Birzeit University Mission Statement](https://pas.birzeit.edu/content/birzeit-university-mission-statement)\n    * [History of Birzeit University](https://pas.birzeit.edu/content/history-birzeit-university)\n    * [Articles / مقالات](https://pas.birzeit.edu/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA)\n  * [Programs](https://pas.birzeit.edu/programs)\n  * [How to apply](https://pas.birzeit.edu/how-to-apply)\n  * [Calendar](https://pas.birzeit.edu/academic-calendar)\n  * [Blog](https://pas.birzeit.edu/news-events)\n  * [Watch Us](https://pas.birzeit.edu/watch-us)\n  * [News & Events](https://pas.birzeit.edu/announcements)\n\n\n## [Blog](https://pas.birzeit.edu/news-events)\n[Accepting application for the spring semester 2024-2025](https://pas.birzeit.edu/news-events/accepting-application-spring-semester-2024-2025)\n6 months 2 weeks\n[Welcoming Our New Students](https://pas.birzeit.edu/news-events/welcoming-our-new-students)\n1 year 3 months\n[Welcoming the Fall 2023-2024 Students ](https://pas.birzeit.edu/news-events/welcoming-fall-2023-2024-students)\n1 year 8 months\n[Call for Applications: Spring 2023-2024](https://pas.birzeit.edu/news-events/call-applications-spring-2023-2024)\n1 year 8 months\n[A Rigorous Education and a Space for Solidarity ](https://pas.birzeit.edu/news-events/rigorous-education-and-space-solidarity)\n1 year 10 months\n[The Nicaraguan Ambassador's Visit](https://pas.birzeit.edu/news-events/nicaraguan-ambassadors-visit)\n2 years 4 months\n[Press Release (Arabic)](https://pas.birzeit.edu/news-events/press-release-arabic)\n3 years 7 months\n[Why PAS Program?](https://pas.birzeit.edu/news-events/why-pas-program)\n5 years 4 months\n[PAS Faculty and Students Come Together for Ramadan Iftar](https://pas.birzeit.edu/news-events/pas-faculty-and-students-come-together-ramadan-iftar)\n9 years 11 months\n[May 11, 2015 - From Birzeit to the World](https://pas.birzeit.edu/news-events/may-11-2015-birzeit-world)\n10 years 2 months\nFollow Birzeit on:\n  * [rss](http://www.birzeit.edu/feeds/news)\n\n\n[![](https://pas.birzeit.edu/sites/default/files/BZU-logo-white.png)](http://www.birzeit.edu)\n#### Contact us: \n\nEmail: \n\n\nTelephone: 02-2982153/5\n\n\nWhatsApp: +970-592-299105\n\nCopyright © 2025 - Birzeit University - PAS\n"
+        },
+        "text_content": "Jump to navigation Search form Search WWW.BIRZEIT.EDU About » History of PAS Why PAS? PAS Academics Cultural Life Faculty/Staff Birzeit University Mission Statement History of Birzeit University Articles / مقالات Programs » Courses Special Short Courses Conversation Partners How to apply » Application Fees and Tuition Calendar Blog Watch Us News &amp; Events You are here Home › About › History of Birzeit University History of Birzeit University Birzeit University was initially established as a school in 1924 by Ms. Nabiha Nasir (1891– 1951), a member of a pioneering family of Palestinian educators. In 1953, it started offering first-year university courses in arts and sciences, in addition to a high school program. By 1961, Birzeit College was offering second-year university classes. The following year, associate degrees were granted for the two-year program enabling students to transfer to other universities in the Arab world and elsewhere to complete their bachelor’s degrees. In 1967, the West Bank and Gaza Strip fell under Israeli military occupation, which resulted in travel restrictions imposed on Palestinians residing in these areas. As a result, students were less able to travel to neighboring Arab countries to continue their education. This new political environment prompted Birzeit to gradually eliminate its high school program and concentrate on a higher education. By 1972, the college began a four-year program leading to bachelor’s degrees awarded from the Faculty of Arts and the Faculty of Sciences. In 1975, the name, Birzeit University was officially adopted, and Birzeit became the first Arab university to be established in Palestine. The first graduation ceremony was held on July 11, 1976. In 1978, the Faculties of Commerce and Economics were established, followed by the Faculty of Engineering a year later. The university began to offer graduate programs in 1977. In 1996, the Faculty of Graduate Studies was formally established. In 1973, just as Birzeit’s development into a full-fledged university approached completion, Israel closed the campus by military order for two weeks. This was the first of many repressive measures against the university community. Less than a year later, the Israeli military authorities deported the university president, Dr. Hanna Nasir, who remained in exile for nineteen years. From 1979-1992, the university was closed by the Israeli occupation authorities several times. For the fifteenth and final time, the Israeli military closed the university from January 8, 1988 to April 29, 1992, as was the case with all Palestinian institutions of higher education. During this prolonged period of closure, the university continued to operate underground with small study groups in makeshift arrangements outside the campus. Under such conditions, many students took more than the usual time to graduate. Today, Birzeit University is a thriving institution, with more than 900 faculty and staff members and around 10,103 students, of which 64 percent are female (6,497 students) and 36 percent are male (3,606 students), coming from all regions of the West Bank. The university is located on the outskirts of the town of Birzeit, 10 kilometers north of Ramallah and 26 kilometers north of Jerusalem. Committed to firm principles of academic freedom, the university aims to prepare the young Palestinian generation to become responsible leaders and citizens. As it encourages its students along the path of academic excellence, it also emphasizes the need for social awareness and national commitment. About History of PAS Why PAS? PAS Academics Cultural Life Faculty/Staff Birzeit University Mission Statement History of Birzeit University Articles / مقالات Programs How to apply Calendar Blog Watch Us News &amp; Events Blog Accepting application for the spring semester 2024-2025 6 months 2 weeks Welcoming Our New Students 1 year 3 months Welcoming the Fall 2023-2024 Students 1 year 8 months Call for Applications: Spring 2023-2024 1 year 8 months A Rigorous Education and a Space for Solidarity 1 year 10 months The Nicaraguan Ambassador's Visit 2 years 4 months Press Release (Arabic) 3 years 7 months Why PAS Program? 5 years 4 months PAS Faculty and Students Come Together for Ramadan Iftar 9 years 11 months May 11, 2015 - From Birzeit to the World 10 years 2 months Follow Birzeit on: rss Contact us: Email: Telephone: 02-2982153/5 WhatsApp: +970-592-299105 Copyright © 2025 - Birzeit University - PAS"
+      },
+      "media": {
+        "images": [],
+        "videos": [],
+        "audio": [],
+        "all_media": {
+          "images": [],
+          "videos": [],
+          "audios": []
+        }
+      },
+      "links": {
+        "internal": [
+          {
+            "href": "https://pas.birzeit.edu/content/history-birzeit-university/#main-menu",
+            "text": "Jump to navigation",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "http://www.birzeit.edu",
+            "text": "WWW.BIRZEIT.EDU",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/",
+            "text": "",
+            "title": "Home",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/about",
+            "text": "About »",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/history-pas",
+            "text": "History of PAS",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/about/why-pas",
+            "text": "Why PAS?",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/content/pas-academics",
+            "text": "PAS Academics",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/cultural-life",
+            "text": "Cultural Life",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/about/faculty-staff",
+            "text": "Faculty/Staff",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/content/birzeit-university-mission-statement",
+            "text": "Birzeit University Mission Statement",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/content/history-birzeit-university",
+            "text": "History of Birzeit University",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA",
+            "text": "Articles / مقالات",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/programs",
+            "text": "Programs »",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/courses",
+            "text": "Courses",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/content/special-short-courses",
+            "text": "Special Short Courses",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/conversation-partners",
+            "text": "Conversation Partners",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/how-to-apply",
+            "text": "How to apply »",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/application",
+            "text": "Application",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/fees-and-tuition",
+            "text": "Fees and Tuition",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/academic-calendar",
+            "text": "Calendar",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/news-events",
+            "text": "Blog",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/watch-us",
+            "text": "Watch Us",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/announcements",
+            "text": "News & Events",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/news-events/accepting-application-spring-semester-2024-2025",
+            "text": "Accepting application for the spring semester 2024-2025",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/news-events/welcoming-our-new-students",
+            "text": "Welcoming Our New Students",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/news-events/welcoming-fall-2023-2024-students",
+            "text": "Welcoming the Fall 2023-2024 Students",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/news-events/call-applications-spring-2023-2024",
+            "text": "Call for Applications: Spring 2023-2024",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/news-events/rigorous-education-and-space-solidarity",
+            "text": "A Rigorous Education and a Space for Solidarity",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/news-events/nicaraguan-ambassadors-visit",
+            "text": "The Nicaraguan Ambassador's Visit",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/news-events/press-release-arabic",
+            "text": "Press Release (Arabic)",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/news-events/why-pas-program",
+            "text": "Why PAS Program?",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/news-events/pas-faculty-and-students-come-together-ramadan-iftar",
+            "text": "PAS Faculty and Students Come Together for Ramadan Iftar",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "https://pas.birzeit.edu/news-events/may-11-2015-birzeit-world",
+            "text": "May 11, 2015 - From Birzeit to the World",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          },
+          {
+            "href": "http://www.birzeit.edu/feeds/news",
+            "text": "rss",
+            "title": "",
+            "base_domain": "birzeit.edu"
+          }
+        ],
+        "external": [],
+        "all_links": {
+          "internal": [
+            {
+              "href": "https://pas.birzeit.edu/content/history-birzeit-university/#main-menu",
+              "text": "Jump to navigation",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "http://www.birzeit.edu",
+              "text": "WWW.BIRZEIT.EDU",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/",
+              "text": "",
+              "title": "Home",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/about",
+              "text": "About »",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/history-pas",
+              "text": "History of PAS",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/about/why-pas",
+              "text": "Why PAS?",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/content/pas-academics",
+              "text": "PAS Academics",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/cultural-life",
+              "text": "Cultural Life",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/about/faculty-staff",
+              "text": "Faculty/Staff",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/content/birzeit-university-mission-statement",
+              "text": "Birzeit University Mission Statement",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/content/history-birzeit-university",
+              "text": "History of Birzeit University",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/articles-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA",
+              "text": "Articles / مقالات",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/programs",
+              "text": "Programs »",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/courses",
+              "text": "Courses",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/content/special-short-courses",
+              "text": "Special Short Courses",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/conversation-partners",
+              "text": "Conversation Partners",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/how-to-apply",
+              "text": "How to apply »",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/application",
+              "text": "Application",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/fees-and-tuition",
+              "text": "Fees and Tuition",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/academic-calendar",
+              "text": "Calendar",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/news-events",
+              "text": "Blog",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/watch-us",
+              "text": "Watch Us",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/announcements",
+              "text": "News & Events",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/news-events/accepting-application-spring-semester-2024-2025",
+              "text": "Accepting application for the spring semester 2024-2025",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/news-events/welcoming-our-new-students",
+              "text": "Welcoming Our New Students",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/news-events/welcoming-fall-2023-2024-students",
+              "text": "Welcoming the Fall 2023-2024 Students",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/news-events/call-applications-spring-2023-2024",
+              "text": "Call for Applications: Spring 2023-2024",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/news-events/rigorous-education-and-space-solidarity",
+              "text": "A Rigorous Education and a Space for Solidarity",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/news-events/nicaraguan-ambassadors-visit",
+              "text": "The Nicaraguan Ambassador's Visit",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/news-events/press-release-arabic",
+              "text": "Press Release (Arabic)",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/news-events/why-pas-program",
+              "text": "Why PAS Program?",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/news-events/pas-faculty-and-students-come-together-ramadan-iftar",
+              "text": "PAS Faculty and Students Come Together for Ramadan Iftar",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "https://pas.birzeit.edu/news-events/may-11-2015-birzeit-world",
+              "text": "May 11, 2015 - From Birzeit to the World",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            },
+            {
+              "href": "http://www.birzeit.edu/feeds/news",
+              "text": "rss",
+              "title": "",
+              "base_domain": "birzeit.edu"
+            }
+          ],
+          "external": []
+        }
+      },
+      "structured_data": {},
+      "json_ld": [],
+      "microdata": {},
+      "rdfa": {},
+      "screenshot": null,
+      "meta_tags": {},
+      "page_title": "",
+      "headers": {},
+      "cookies": [],
+      "performance_metrics": {},
+      "content_analysis": {
+        "sizes": {
+          "raw_html_size": 30484,
+          "cleaned_html_size": 8604,
+          "markdown_size": 7488,
+          "text_length": 4488
+        },
+        "counts": {
+          "images_count": 0,
+          "videos_count": 0,
+          "internal_links_count": 34,
+          "external_links_count": 0,
+          "total_links_count": 34
+        },
+        "quality_indicators": {
+          "has_title": true,
+          "has_description": false,
+          "has_images": false,
+          "has_structured_data": false,
+          "content_richness_score": 45
+        }
+      },
+      "logos": [],
+      "institution_hints": {
+        "institution_type": "university",
+        "detected_keywords": [
+          "university",
+          "college",
+          "students",
+          "faculty",
+          "academic",
+          "degree",
+          "campus"
+        ],
+        "contact_indicators": [],
+        "social_media_present": false
+      }
+    },
+    "content_quality_score": 45,
+    "metadata": {
+      "title": "History of Birzeit University | PAS",
+      "description": null,
+      "keywords": null,
+      "author": null
+    },
+    "word_count": 888,
+    "size_bytes": 30484
+  }
+}

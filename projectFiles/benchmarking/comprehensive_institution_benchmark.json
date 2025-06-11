@@ -1,0 +1,494 @@
+{
+  "test_suite_name": "Comprehensive Institution Benchmark Test Suite",
+  "description": "Large-scale benchmarking across 60 institutions in 4 categories with quality score integration",
+  "version": "2.0",
+  "created_date": "2025-06-11",
+  "test_configurations": [
+    {
+      "test_name": "university_benchmark_suite",
+      "test_description": "Performance testing across 15 universities with various output types",
+      "category": "pipeline",
+      "institution_type": "university",
+      "institutions": [
+        {
+          "institution_name": "Harvard University",
+          "institution_type": "university",
+          "expected_min_quality": 0.8,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Stanford University", 
+          "institution_type": "university",
+          "expected_min_quality": 0.8,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "MIT",
+          "institution_type": "university", 
+          "expected_min_quality": 0.8,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "University of California Berkeley",
+          "institution_type": "university",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Yale University",
+          "institution_type": "university",
+          "expected_min_quality": 0.8,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Princeton University",
+          "institution_type": "university",
+          "expected_min_quality": 0.8,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Columbia University",
+          "institution_type": "university",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "University of Chicago",
+          "institution_type": "university",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Northwestern University",
+          "institution_type": "university",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Cornell University",
+          "institution_type": "university",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "University of Pennsylvania",
+          "institution_type": "university",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Duke University",
+          "institution_type": "university",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Vanderbilt University",
+          "institution_type": "university",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Carnegie Mellon University",
+          "institution_type": "university",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Georgia Institute of Technology",
+          "institution_type": "university",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        }
+      ],
+      "output_types": ["json", "structured", "comprehensive"],
+      "iterations": 2,
+      "parallel_execution": false
+    },
+    {
+      "test_name": "medical_institution_benchmark_suite", 
+      "test_description": "Performance testing across 15 medical institutions with quality scoring",
+      "category": "pipeline",
+      "institution_type": "hospital",
+      "institutions": [
+        {
+          "institution_name": "Mayo Clinic",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.8,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Cleveland Clinic",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.8,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Johns Hopkins Hospital",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.8,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Massachusetts General Hospital",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "UCSF Medical Center",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Cedars-Sinai Medical Center",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "New York-Presbyterian Hospital",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Houston Methodist Hospital",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Kaiser Permanente",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Tampa General Hospital",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Mount Sinai Health System",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Presbyterian Healthcare Services",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Intermountain Healthcare",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Scripps Health",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Banner Health",
+          "institution_type": "hospital",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        }
+      ],
+      "output_types": ["json", "structured", "comprehensive"],
+      "iterations": 2,
+      "parallel_execution": false
+    },
+    {
+      "test_name": "financial_institution_benchmark_suite",
+      "test_description": "Performance testing across 15 financial institutions", 
+      "category": "pipeline",
+      "institution_type": "bank",
+      "institutions": [
+        {
+          "institution_name": "JPMorgan Chase",
+          "institution_type": "bank",
+          "expected_min_quality": 0.8,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Bank of America",
+          "institution_type": "bank",
+          "expected_min_quality": 0.8,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Wells Fargo",
+          "institution_type": "bank",
+          "expected_min_quality": 0.8,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Citigroup",
+          "institution_type": "bank",
+          "expected_min_quality": 0.8,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Goldman Sachs",
+          "institution_type": "bank",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Morgan Stanley",
+          "institution_type": "bank",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "PNC Financial Services",
+          "institution_type": "bank",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "U.S. Bancorp",
+          "institution_type": "bank",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Truist Financial",
+          "institution_type": "bank",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Capital One Financial",
+          "institution_type": "bank",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Charles Schwab Corporation",
+          "institution_type": "bank",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "American Express",
+          "institution_type": "bank",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "TD Bank",
+          "institution_type": "bank",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "State Street Corporation",
+          "institution_type": "bank",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Fifth Third Bank",
+          "institution_type": "bank",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        }
+      ],
+      "output_types": ["json", "structured", "comprehensive"],
+      "iterations": 2,
+      "parallel_execution": false
+    },
+    {
+      "test_name": "unsupported_institution_benchmark_suite",
+      "test_description": "Performance testing across 15 random/unsupported institution types",
+      "category": "pipeline", 
+      "institution_type": "general",
+      "institutions": [
+        {
+          "institution_name": "Tesla Inc",
+          "institution_type": "general",
+          "expected_min_quality": 0.5,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Apple Inc",
+          "institution_type": "general",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Google LLC",
+          "institution_type": "general",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Microsoft Corporation",
+          "institution_type": "general",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Amazon.com Inc",
+          "institution_type": "general",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "National Geographic Society",
+          "institution_type": "general",
+          "expected_min_quality": 0.5,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Red Cross",
+          "institution_type": "general",
+          "expected_min_quality": 0.5,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Walmart Inc",
+          "institution_type": "general",
+          "expected_min_quality": 0.5,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "The Coca-Cola Company",
+          "institution_type": "general",
+          "expected_min_quality": 0.5,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Ford Motor Company",
+          "institution_type": "general",
+          "expected_min_quality": 0.5,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "United Nations",
+          "institution_type": "general",
+          "expected_min_quality": 0.5,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "World Health Organization",
+          "institution_type": "general",
+          "expected_min_quality": 0.5,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "International Olympic Committee",
+          "institution_type": "general",
+          "expected_min_quality": 0.4,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Greenpeace",
+          "institution_type": "general",
+          "expected_min_quality": 0.4,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Doctors Without Borders",
+          "institution_type": "general",
+          "expected_min_quality": 0.4,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        }
+      ],
+      "output_types": ["json", "structured", "comprehensive"],
+      "iterations": 2,
+      "parallel_execution": false
+    }
+  ],
+  "test_parameters": {
+    "enable_quality_score_integration": true,
+    "use_core_routes_quality_calc": true,
+    "enable_crawling": true,
+    "skip_extraction": false,
+    "force_api": false,
+    "enable_caching": true,
+    "max_pages": 12,
+    "content_extraction": "comprehensive",
+    "generate_tables": true,
+    "output_formats": ["json", "csv", "html"],
+    "detailed_analysis": true
+  },
+  "analysis_requirements": {
+    "quality_score_analysis": true,
+    "field_population_analysis": true,
+    "cost_analysis": true,
+    "performance_analysis": true,
+    "output_type_comparison": true,
+    "institution_type_comparison": true,
+    "cache_efficiency_analysis": true
+  }
+}

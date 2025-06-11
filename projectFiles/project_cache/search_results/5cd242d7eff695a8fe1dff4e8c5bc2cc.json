@@ -1,0 +1,66 @@
+{
+  "query": "Harvard University university education",
+  "params": {
+    "institution_type": "university"
+  },
+  "cached_at": 1749574949.4239023,
+  "timestamp": 1749574949.4228952,
+  "success": true,
+  "results": [
+    {
+      "title": "Harvard Graduate School of Education: Homepage",
+      "link": "https://www.gse.harvard.edu/",
+      "displayLink": "www.gse.harvard.edu",
+      "snippet": "The mission of the Harvard Graduate School of Education is to prepare education leaders and innovators who will change the world by expanding opportunities\u00a0..."
+    },
+    {
+      "title": "Harvard University",
+      "link": "https://www.harvard.edu/",
+      "displayLink": "www.harvard.edu",
+      "snippet": "Harvard University is devoted to excellence in teaching, learning, and research, and to developing leaders who make a difference globally."
+    },
+    {
+      "title": "Master's Programs in Education | Harvard Graduate School of ...",
+      "link": "https://www.gse.harvard.edu/degrees/masters",
+      "displayLink": "www.gse.harvard.edu",
+      "snippet": "Whether you seek to make an impact in early education, in K\u201312 districts and networks, or in higher education \u2014 or whether you want to drive educational change\u00a0..."
+    },
+    {
+      "title": "Programs - Harvard University",
+      "link": "https://www.harvard.edu/programs/",
+      "displayLink": "www.harvard.edu",
+      "snippet": "Browse the graduate and undergraduate degrees and majors offered by Harvard's 13 Schools and learn more about admissions requirements, scholarship, and\u00a0..."
+    },
+    {
+      "title": "Harvard President on Ukraine, climate threat and diversity in education",
+      "link": "https://www.imperial.ac.uk/news/234774/harvard-president-ukraine-climate-threat-diversity/",
+      "displayLink": "www.imperial.ac.uk",
+      "snippet": "Mar 16, 2022 ... On the importance of internationalism for universities President Bacow added: \u201cInstitutions like ours influence the world largely though our\u00a0..."
+    },
+    {
+      "title": "Leeds Harvard referencing examples | Study and research support ...",
+      "link": "https://library.leeds.ac.uk/referencing-examples//9/leeds-harvard",
+      "displayLink": "library.leeds.ac.uk",
+      "snippet": "Examples of how to reference and how to cite a wide range of information sources using the Leeds referencing styles."
+    },
+    {
+      "title": "Mortality in Puerto Rico after Hurricane Maria | New England Journal ...",
+      "link": "https://0-doi-org.brum.beds.ac.uk/10.1056%2FNEJMsa1803972",
+      "displayLink": "0-doi-org.brum.beds.ac.uk",
+      "snippet": "May 29, 2018 ... This study was granted a human subjects research ... Leaning, S.B.), Harvard T.H. Chan School of Public Health, Harvard University\u00a0..."
+    },
+    {
+      "title": "Fossil fuel air pollution responsible for 1 in 5 deaths worldwide ...",
+      "link": "https://www.ucl.ac.uk/news/2021/feb/fossil-fuel-air-pollution-responsible-1-5-deaths-worldwide",
+      "displayLink": "www.ucl.ac.uk",
+      "snippet": "Feb 9, 2021 ... The research, led by Harvard University in collaboration with UCL, the University ... Until now, the Global Burden of Disease Study, which is the\u00a0..."
+    }
+  ],
+  "total_results": "1520000",
+  "search_time": 0.369044,
+  "enhancement_info": {
+    "enhanced": true,
+    "detected_type": "university",
+    "strategy_used": "official_sites"
+  }
+}

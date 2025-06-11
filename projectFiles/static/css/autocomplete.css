@@ -1,9 +1,6 @@
 /* Autocomplete dropdown container */
 .autocomplete-dropdown {
     position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
     background: white;
     border: 1px solid #ced4da;
     border-top: none;
@@ -193,26 +190,72 @@
     cursor: help;
 }
 
-/* Preview text for autocomplete */
+/* Preview text for autocomplete - updated for search input group */
 .autocomplete-preview {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    color: #999 !important;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    pointer-events: none !important;
-    z-index: 1 !important;
-    background: transparent !important;
-    border: none !important;
-    outline: none !important;
-    overflow: hidden !important;
-    white-space: nowrap !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  color: #999 !important;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
+
+/* Special positioning for search input group */
+.search-input-group .autocomplete-preview {
+  position: absolute !important;
+  top: calc(1.25rem + 30px) !important; /* Nudged down further */
+  left: 60px !important; /* Start after search icon */
+  width: calc(100% - 60px - 100px - 1rem - 10px) !important; /* Account for icon, button, input's right padding, and increased buffer */
+  font-size: 1.1rem !important; /* Match input font size */
+  line-height: 1.4 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Force dropdown to match container width */
+/* .search-input-group .autocomplete-dropdown { */
+  /* left: 0 !important; */ /* Will be set by JS */
+  /* right: 0 !important; */ /* Will be set by JS */
+  /* width: 100% !important; */ /* Will be set by JS based on input.search-input */
+/* } */
+
+/* Force autocomplete items to have proper text alignment */
+.search-input-group .autocomplete-item {
+  padding-left: 1rem !important; /* Reset to a standard padding */
+  padding-right: 1rem !important; /* Reset to a standard padding */
 }
 
 /* Input container for preview text positioning */
 .autocomplete-input-container {
     position: relative !important;
+}
+
+/* OVERRIDE FOR SEARCH INPUT GROUP ALIGNMENT */
+/* When autocomplete is inside search-input-group, align text properly */
+.search-input-group .autocomplete-item {
+  padding-left: 1rem !important; /* Align with input text after search icon */
+}
+
+.search-input-group .autocomplete-item-content {
+  padding-left: 0 !important; /* Remove any inherited padding */
+  margin-left: 0 !important;
+}
+
+.search-input-group .institution-name {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+.search-input-group .institution-type {
+  margin-right: 0 !important; /* Remove specific margin */
+  padding-left: 0 !important;
 }

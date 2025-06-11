@@ -1,0 +1,66 @@
+{
+  "query": "Birzeit University university education courses",
+  "params": {
+    "additional_keywords": "courses"
+  },
+  "cached_at": 1749643242.6231163,
+  "timestamp": 1749643242.6216767,
+  "success": true,
+  "results": [
+    {
+      "title": "Education | Birzeit University",
+      "link": "https://www.birzeit.edu/en/study/faculties/education",
+      "displayLink": "www.birzeit.edu",
+      "snippet": "Birzeit University first offered a teacher education program in the 1970s. At that time it was called a teaching certificate program."
+    },
+    {
+      "title": "History of Birzeit University | PAS",
+      "link": "https://pas.birzeit.edu/content/history-birzeit-university",
+      "displayLink": "pas.birzeit.edu",
+      "snippet": "This new political environment prompted Birzeit to gradually eliminate its high school program and concentrate on a higher education. By 1972, the college began\u00a0..."
+    },
+    {
+      "title": "Birzeit University",
+      "link": "https://www.birzeit.edu/en",
+      "displayLink": "www.birzeit.edu",
+      "snippet": "Founded in 1972, Birzeit University is a leading educational institution and an intellectual hub that attracts top students and faculty."
+    },
+    {
+      "title": "Palestine Program for Health and Human Rights \u2013 FXB Center for ...",
+      "link": "https://fxb.harvard.edu/racial-justice/palestine-program/",
+      "displayLink": "fxb.harvard.edu",
+      "snippet": "... Birzeit University Institute. Education. Education transects the work of the program and seeks to provide opportunities and educate the next generation of\u00a0..."
+    },
+    {
+      "title": "Right to education/Birzeit twinning (Nov 2005)",
+      "link": "https://www.eusa.ed.ac.uk/about/policy/external/righttoeducation",
+      "displayLink": "www.eusa.ed.ac.uk",
+      "snippet": "Birzeit University strives to promote excellence in higher education by providing quality academic teaching, training, research and relevant community programs."
+    },
+    {
+      "title": "Update on Legal Education at Birzeit University - School of Law",
+      "link": "https://www.qmul.ac.uk/law/news/2023/items/update-on-legal-education-at-birzeit-university.html",
+      "displayLink": "www.qmul.ac.uk",
+      "snippet": "Dec 11, 2023 ... Update on Legal Education at Birzeit University. In summer of this year, a delegation of academics from British universities, including the\u00a0..."
+    },
+    {
+      "title": "European Journal of Physical Education and Sport Science - 2501 ...",
+      "link": "https://core.ac.uk/download/pdf/86433956.pdf",
+      "displayLink": "core.ac.uk",
+      "snippet": "Faculty of arts, Birzeit University,. Birzeit, Palestine. Abstract: The study ... swimming in the Department of Physical Education - University of Jerusalem."
+    },
+    {
+      "title": "Dr Amal Nazzal - St Antony's",
+      "link": "https://www.sant.ox.ac.uk/people/dr-amal-nazzal/",
+      "displayLink": "www.sant.ox.ac.uk",
+      "snippet": "Dr. Amal Nazzal is an Assistant Professor at the Faculty of Business and Economics at Birzeit University. She holds a Ph.D. in organizational studies."
+    }
+  ],
+  "total_results": "1600",
+  "search_time": 0.320667,
+  "enhancement_info": {
+    "enhanced": true,
+    "detected_type": "university",
+    "strategy_used": "official_sites"
+  }
+}
