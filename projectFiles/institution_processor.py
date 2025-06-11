@@ -9,8 +9,6 @@ from processor.pipeline import InstitutionPipeline
 from processor.config import ProcessorConfig
 from search.search_service import SearchService
 from crawler.crawler_service import CrawlerService
-from google import genai
-from google.genai.types import Tool, GoogleSearch, GenerateContentConfig
 
 
 # Global instances (initialized once)
@@ -96,23 +94,19 @@ def get_institution_profile(institution_name: str, document_text: Optional[str] 
         Dictionary containing institution profile or None if failed
     """
     if not institution_name:
-        return None
-
-    # Get the processor config
+        return None    # Get the processor config
     pipeline = _get_pipeline_instance()
-    genai_client = pipeline.config.get_client()
+    openai_client = pipeline.config.get_client()
     
-    if not genai_client: 
+    if not openai_client: 
         return {
             "name": institution_name,
-            "description": "Generative AI client not available or not configured.", 
+            "description": "OpenAI client not available or not configured.", 
             "details": "Please ensure GOOGLE_API_KEY is set and client is initialized." 
-        }
-
+        }    
     try:
         prompt: str
         details_source: str
-        api_config = None
 
         if document_text:
             prompt = (
@@ -121,7 +115,7 @@ def get_institution_profile(institution_name: str, document_text: Optional[str] 
                 f"If the document does not provide sufficient information for a profile, or if the information is contradictory or unclear, please state that. "
                 f"Document text:\n\n{document_text}\n\nProfile:"
             )
-            details_source = "Profile based on provided document text (Google Generative AI)."
+            details_source = "Profile based on provided document text (OpenAI-compatible Gemini)."
         else:
             prompt = (
                 f"Provide a concise profile for the institution: '{institution_name}'. "
@@ -129,29 +123,22 @@ def get_institution_profile(institution_name: str, document_text: Optional[str] 
                 f"If specific information is unavailable or the institution is unknown/fictional, please indicate this in your response. "
                 f"Keep the response to a few sentences."
             )
-            details_source = "Profile based on general knowledge (Google Generative AI with Search)."
-            google_search_tool = Tool(google_search=GoogleSearch())
-            api_config = GenerateContentConfig(tools=[google_search_tool])
+            details_source = "Profile based on general knowledge (OpenAI-compatible Gemini)."
             
-        response = genai_client.models.generate_content(
-            model="gemini-2.0-flash", 
-            contents=prompt,
-            config=api_config 
+        response = openai_client.chat.completions.create(
+            model="gemini-2.0-flash",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant that provides concise institutional profiles."},
+                {"role": "user", "content": prompt}
+            ]
         )
         
         generated_description = "No information generated."
-        if response:
-            # Check for prompt_feedback and then block_reason
-            if response.prompt_feedback and hasattr(response.prompt_feedback, 'block_reason') and response.prompt_feedback.block_reason:
-                generated_description = f"Content generation blocked. Reason: {response.prompt_feedback.block_reason}"
-            elif response.candidates and response.candidates[0].content and response.candidates[0].content.parts:
-                text_parts = [part.text for part in response.candidates[0].content.parts if hasattr(part, 'text')]
-                generated_description = "".join(text_parts).strip() if text_parts else "No text in response parts."
-            elif hasattr(response, 'text') and response.text:
-                generated_description = response.text.strip()
+        if response and response.choices and response.choices[0].message:
+            generated_description = response.choices[0].message.content.strip()
             
-            if not generated_description or generated_description == "No information generated.":
-                generated_description = "AI returned an empty response or no relevant text."
+            if not generated_description:
+                generated_description = "AI returned an empty response."
         else: 
             generated_description = "No response received from AI."
 

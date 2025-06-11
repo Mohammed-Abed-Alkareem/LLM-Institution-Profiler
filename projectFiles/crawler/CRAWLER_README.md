@@ -1,12 +1,13 @@
 # Institution Profiler Web Crawler Module
 
-This module provides comprehensive web crawling capabilities for the Institution Profiler project using [crawl4ai](https://github.com/unclecode/crawl4ai). It integrates seamlessly with the existing search, caching, and benchmarking infrastructure.
+This module provides comprehensive web crawling capabilities for the Institution Profiler project using [crawl4ai](https://github.com/unclecode/crawl4ai). It integrates seamlessly with the existing search, caching, and benchmarking infrastructure with advanced image scoring, logo detection, and universal content processing.
 
 ## 🚀 Features
 
 ### **Comprehensive Data Collection**
 - **ALL Content Formats**: Raw HTML, cleaned HTML, markdown (raw, fit_markdown, fit_html), and clean text extraction
-- **Complete Media Capture**: Images, videos, audio with full metadata and intelligent logo detection
+- **Complete Media Capture**: Images, videos, audio with full metadata and **intelligent image scoring system**
+- **Advanced Logo Detection**: Multi-heuristic logo identification with confidence scoring and institutional context analysis
 - **Full Link Preservation**: Internal, external links with complete details for analysis
 - **Structured Data Extraction**: JSON-LD, microdata, RDFa, and all available structured formats
 - **Rich Metadata**: Title, description, language, keywords, author, charset, viewport, and comprehensive page info
@@ -16,7 +17,8 @@ This module provides comprehensive web crawling capabilities for the Institution
 ### **Institution-Specific Intelligence**
 - **Smart Type Detection**: Automatic institution recognition (university, hospital, bank, general)
 - **Relevant Content Hints**: Institution-specific keyword detection and contact information extraction
-- **Logo Detection**: Intelligent logo identification using multiple heuristics and image analysis
+- **Advanced Logo Detection**: Intelligent logo identification using multiple heuristics and image analysis with confidence scoring
+- **Image Quality Scoring**: Content relevance scoring (0-6 scale) for all images based on institutional context and metadata
 - **Quality Scoring**: Content richness assessment (0-100 scale) for benchmarking and comparison
 
 ### **Performance & Integration**
@@ -24,6 +26,7 @@ This module provides comprehensive web crawling capabilities for the Institution
 - **Central Cache Integration**: Uses system-wide cache_config.py for consistency across modules
 - **Comprehensive Benchmarking**: Detailed performance tracking integrated with main benchmark system
 - **Flask API Integration**: RESTful endpoints for all crawling operations and cache management
+- **Universal Input Processing**: Designed to handle any content format for seamless integration with extraction pipeline
 
 ### **Data Preservation Philosophy**
 - **Maximum Data Retention**: Collect ALL valuable data formats for future analysis and benchmarking
@@ -146,11 +149,36 @@ The crawler uses a comprehensive scoring algorithm to evaluate content quality:
 - **JSON-LD Data** (5 pts): Rich structured data available
 - **Microdata/RDFa** (5 pts): Additional structured markup
 
+### **Advanced Image Scoring System (0-6 Scale)**
+Every image is evaluated for institutional relevance and quality:
+
+#### **Scoring Criteria:**
+- **6 Points**: Highly relevant (logos, institutional photos, branding)
+- **5 Points**: Very relevant (campus/facility images, key personnel)
+- **4 Points**: Moderately relevant (academic/professional content)
+- **3 Points**: Somewhat relevant (general institutional context)
+- **2 Points**: Low relevance (decorative elements)
+- **1 Point**: Minimal relevance (navigation elements)
+- **0 Points**: Not relevant (advertisements, unrelated content)
+
+#### **Evaluation Factors:**
+- **Alt text analysis**: Institutional keywords and context
+- **URL patterns**: Logo/brand/institutional path indicators
+- **Size and format**: Professional image dimensions and formats
+- **Placement context**: Header, navigation, or content positioning
+- **Institutional keywords**: University, college, hospital, bank terms
+
+#### **Logo Detection Confidence Levels:**
+- **High Confidence**: Multiple indicators (logo keywords, institutional context, proper sizing)
+- **Medium Confidence**: Some indicators present (institutional keywords or sizing)
+- **Low Confidence**: Minimal indicators (single keyword or context clue)
+
 ### **Institution-Specific Quality Indicators**
-- **Logo Detection Score**: Confidence level in identified logos
+- **Logo Detection Score**: Confidence level in identified logos with detailed heuristics
 - **Contact Information**: Availability of institution contact details
 - **Navigation Quality**: Link structure and internal organization
 - **Content Relevance**: Institution-type specific keyword presence
+- **Image Quality Distribution**: Analysis of image relevance scores across the site
 
 ### **Performance Scoring**
 - **Crawl Speed**: Time efficiency vs. content quality ratio

@@ -1,34 +1,23 @@
 # Institution Profiler - Application Structure
 
-This document provides a comprehensive overview of the Institution Profiler application architecture, detailing the modular structure and organization of all components.
+This document provides a comprehensive overview of the Institution Profiler application architecture, detailing the modular structure and organization of all components with recent enhancements.
 
-## 📁 Project Structure
+## 🚀 Recent Enhancements (June 2025)
 
-### Root Directory
-```
-LLM-Institution-Profiler/
-├── projectFiles/           # Main application code
-├── nlp/                   # Python virtual environment
-└── README.md             # Project overview
-```
+### **Major System Improvements**
+- ✅ **Fixed Cache Hit Tracking**: Resolved issue where cache hits were incorrectly recorded as misses
+- ✅ **Advanced Image Scoring**: Implemented 0-6 scale image relevance scoring system
+- ✅ **Universal Content Processing**: Extraction pipeline now accepts any text input format
+- ✅ **Modular Pipeline Architecture**: Complete separation of search, crawling, and extraction phases
+- ✅ **Enhanced Logo Detection**: Multi-heuristic logo identification with confidence scoring
+- ✅ **Comprehensive Benchmarking**: Accurate performance tracking with cost analysis
 
-### Core Application (`projectFiles/`)
-```
-projectFiles/
-├── app.py                      # Main Flask application entry point
-├── institution_processor.py   # Main processing pipeline
-├── cache_config.py            # Centralized cache configuration
-├── crawling_prep.py           # Link preparation for crawling
-├── extraction_logic.py        # Data extraction utilities
-├── pipeline_config.py         # Pipeline configuration constants
-├── service_factory.py         # Service creation and management
-├── requirements.txt           # Python dependencies
-└── STRUCTURE_README.md        # This file
-```
-
-# Institution Profiler - Application Structure
-
-This document provides a comprehensive overview of the Institution Profiler application architecture, detailing the modular structure and organization of all components.
+### **New Capabilities**
+- **Flexible Input Processing**: Extraction works with search results, crawled content, or direct text
+- **Intelligent Content Combination**: Smart merging of HTML, markdown, and structured data
+- **Institution-Specific Intelligence**: Context-aware content evaluation and scoring
+- **Cache-Aware Operations**: Accurate monitoring of search and crawler cache performance
+- **Quality Assessment**: Content completeness and confidence scoring across all phases
 
 ## 📁 Project Structure
 
@@ -79,46 +68,60 @@ api/
 - **Utility Routes**: Cache management, health checks
 
 ### Processor Module (`processor/`)
-Institution processing pipeline modularized into phases:
+Institution processing pipeline modularized into phases with universal content processing:
 
 ```
 processor/
 ├── __init__.py             # Package initialization
 ├── config.py               # Configuration and constants
-├── pipeline.py             # Main pipeline orchestrator
-├── search_phase.py         # Search phase handler
-├── crawling_phase.py       # Crawling phase handler
-└── extraction_phase.py     # LLM extraction phase handler
+├── pipeline.py             # Main pipeline orchestrator with universal processing
+├── search_phase.py         # Search phase handler with cache tracking
+├── crawling_phase.py       # Crawling phase handler with image scoring
+└── extraction_phase.py     # LLM extraction phase handler (universal input)
 ```
 
-**Phase Responsibilities:**
-- **Search Phase**: Find institution URLs and basic information
-- **Crawling Phase**: Extract detailed content from websites
-- **Extraction Phase**: Process content with LLM for structured data
+**Enhanced Phase Responsibilities:**
+- **Search Phase**: Find institution URLs with accurate cache hit tracking
+- **Crawling Phase**: Extract detailed content with advanced image scoring (0-6 scale)
+- **Extraction Phase**: Universal LLM processing accepting any text input format
+
+**Key Features:**
+- **Universal Content Processing**: Extraction accepts content from any source
+- **Modular Architecture**: Each phase can run independently or be skipped
+- **Intelligent Fallbacks**: Graceful degradation when services unavailable
+- **Comprehensive Benchmarking**: Accurate performance tracking across all phases
 
 ### Search Module (`search/`)
-Enhanced search functionality with Google Custom Search integration:
+Enhanced search functionality with Google Custom Search integration and cache optimization:
 
 ```
 search/
 ├── __init__.py             # Package initialization
-├── search_service.py       # Main search service
+├── search_service.py       # Main search service with cache hit tracking
 ├── search_backup_logic.py  # Fallback search methods
 ├── search_config.py        # Search configuration
 └── SEARCH_DOCUMENTATION.md # Search system documentation
 ```
 
 ### Crawler Module (`crawler/`)
-Comprehensive web crawling using crawl4ai:
+Comprehensive web crawling using crawl4ai with advanced image analysis:
 
 ```
 crawler/
 ├── __init__.py             # Package initialization
 ├── crawler_service.py      # Main crawler service
 ├── crawler_config.py       # Crawler configuration and types
-├── content_processor.py    # Content processing utilities
+├── content_processor.py    # Content processing with image scoring system
 ├── cache.py               # Crawler-specific caching
 ├── benchmark.py           # Crawler benchmarking
+└── CRAWLER_README.md      # Comprehensive crawler documentation
+```
+
+**Enhanced Features:**
+- **Advanced Image Scoring**: 0-6 scale relevance scoring for all images
+- **Logo Detection**: Multi-heuristic logo identification with confidence levels
+- **Universal Data Collection**: All content formats preserved for analysis
+- **Institution-Specific Intelligence**: Context-aware content evaluation
 └── CRAWLER_README.md      # Crawler documentation
 ```
 
@@ -156,7 +159,7 @@ spell_check/
 ```
 
 ### Benchmarking Module (`benchmarking/`)
-Comprehensive performance tracking and analytics:
+Comprehensive performance tracking and analytics with accurate cache monitoring:
 
 ```
 benchmarking/
@@ -165,6 +168,18 @@ benchmarking/
 ├── benchmark_session.py   # Session management
 ├── benchmark_tracker.py   # Main tracking service
 ├── benchmark_utils.py     # Utility functions
+├── integration.py          # Pipeline integration with cache hit tracking
+├── benchmark_metrics.py   # Core metrics and data structures
+└── BENCHMARK_README.md    # Comprehensive benchmarking documentation
+```
+
+**Enhanced Benchmarking Features:**
+- **Accurate Cache Tracking**: Fixed cache hit monitoring across all services
+- **Real-time Metrics**: Live performance dashboards and monitoring
+- **Cost Analysis**: Comprehensive API and token cost tracking
+- **Quality Assessment**: Content completeness and confidence scoring
+- **Pipeline Integration**: Seamless integration with modular processor pipeline
+- **PowerShell Management**: CLI tools for system administration
 └── benchmark_config.py    # Benchmarking configuration
 ```
 

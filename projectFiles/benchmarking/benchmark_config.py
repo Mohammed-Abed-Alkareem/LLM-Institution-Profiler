@@ -51,13 +51,15 @@ class BenchmarkConfig:
     test_batch_size: int = 10
     parallel_tests: bool = True
     max_concurrent_tests: int = 3
-    
     # Cost tracking settings
     google_search_cost_per_1000: float = 5.00  # USD
     openai_gpt4_input_cost_per_1k_tokens: float = 0.03  # USD
     openai_gpt4_output_cost_per_1k_tokens: float = 0.06  # USD
     openai_gpt35_input_cost_per_1k_tokens: float = 0.0015  # USD
     openai_gpt35_output_cost_per_1k_tokens: float = 0.002  # USD
+    # Gemini pricing (using Gemini 2.0 Flash pricing)
+    gemini_flash_input_cost_per_1k_tokens: float = 0.000010  # USD (free tier: $0.10 per 1M tokens)
+    gemini_flash_output_cost_per_1k_tokens: float = 0.00040  # USD (free tier: $0.40 per 1M tokens)
     
     # Quality thresholds
     min_quality_score: float = 0.7
@@ -109,12 +111,17 @@ class BenchmarkConfig:
             output_tokens = usage.get('output_tokens', 0)
             cost = ((input_tokens / 1000) * self.openai_gpt4_input_cost_per_1k_tokens +
                    (output_tokens / 1000) * self.openai_gpt4_output_cost_per_1k_tokens)
-            
         elif service == 'openai_gpt35':
             input_tokens = usage.get('input_tokens', 0)
             output_tokens = usage.get('output_tokens', 0)
             cost = ((input_tokens / 1000) * self.openai_gpt35_input_cost_per_1k_tokens +
                    (output_tokens / 1000) * self.openai_gpt35_output_cost_per_1k_tokens)
+                   
+        elif service == 'gemini_flash':
+            input_tokens = usage.get('input_tokens', 0)
+            output_tokens = usage.get('output_tokens', 0)
+            cost = ((input_tokens / 1000) * self.gemini_flash_input_cost_per_1k_tokens +
+                   (output_tokens / 1000) * self.gemini_flash_output_cost_per_1k_tokens)
         
         return round(cost, 6)
     

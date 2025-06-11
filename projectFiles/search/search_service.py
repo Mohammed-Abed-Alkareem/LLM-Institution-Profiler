@@ -31,7 +31,7 @@ class SearchService:
         except ValueError as e:
             print(f"Warning: Google Search not configured: {e}")
             self.google_client = None
-            self.is_configured = False
+            self.is_configured = False    
     def search_institution(self, institution_name: str, institution_type: str = None, 
                           force_api: bool = False, search_params: Dict = None) -> Dict:
         """
@@ -57,6 +57,10 @@ class SearchService:
         # Create cache key that includes all search parameters
         cache_params = search_params if search_params else None
         
+        # Track API cost and usage for benchmarking
+        api_calls_made = 0
+        cache_hit = False
+        
         # Try cache first (unless forced to use API)
         cached_result = None
         source = 'api'
@@ -66,52 +70,66 @@ class SearchService:
             if cached_result:
                 source = 'similar_cache' if cached_result.get('cache_similarity', 0) > 0 else 'cache'
                 cache_similarity = cached_result.get('cache_similarity', 0)
-          # If cache hit, return cached result
+                cache_hit = True        # If cache hit, return cached result
         if cached_result and not force_api:
             response_time = time.time() - start_time
-            
-            # Legacy benchmark recording disabled - now handled by enhanced system
-            # benchmark = SearchBenchmark(...)
-            # self.benchmark_tracker.record_search(benchmark)
             
             return {
                 **cached_result,
                 'cache_hit': True,
                 'source': source,
-                'response_time': response_time
-            }
-          # Make API call
+                'response_time': response_time,
+                'api_calls_made': 0,
+                'cache_similarity': cache_similarity,
+                'search_latency': response_time
+            }          # Make API call
         if not self.is_configured:
             error_result = {
                 'success': False,
                 'error': 'Google Search API not configured',
                 'cache_hit': False,
-                'source': 'error'
+                'source': 'error',
+                'response_time': time.time() - start_time,
+                'api_calls_made': 0,
+                'search_latency': time.time() - start_time
             }
-            
-            # Legacy benchmark recording disabled - now handled by enhanced system
-            # benchmark = SearchBenchmark(...)
-            # self.benchmark_tracker.record_search(benchmark)
-            
-            return error_result
-          # Make the API call with enhanced parameters
+            return error_result# Make the API call with enhanced parameters
+        api_start_time = time.time()
         api_result = self.google_client.search_institution(institution_name, institution_type, search_params)
+        api_call_time = time.time() - api_start_time
         response_time = time.time() - start_time
+        
+        # Track API usage for benchmarking
+        api_calls_made = 1 if api_result.get('success', False) else 0
         
         # Cache the result if successful
         if api_result.get('success', False):
             self.cache.put(institution_name, api_result, cache_params)
         
-        # Record benchmark        # Legacy benchmark recording disabled - now handled by enhanced system
-        # benchmark = SearchBenchmark(...)
-        # self.benchmark_tracker.record_search(benchmark)
-        
-        return {
+        # Enhanced metrics for benchmarking
+        final_result = {
             **api_result,
             'cache_hit': False,
             'source': 'api',
-            'response_time': response_time
+            'response_time': response_time,
+            'api_call_time': api_call_time,
+            'api_calls_made': api_calls_made,
+            'search_latency': response_time
         }
+        
+        # Add quality metrics based on search results
+        if api_result.get('success', False):
+            results_count = len(api_result.get('results', []))
+            total_results = int(api_result.get('total_results', '0').replace(',', ''))
+            
+            final_result.update({
+                'results_quality_score': min(results_count / 10.0, 1.0),  # Quality based on result count
+                'search_coverage_score': min(total_results / 100000, 1.0),  # Coverage based on total results
+                'results_count': results_count,
+                'total_results_numeric': total_results
+            })
+        
+        return final_result
     
     def get_search_links(self, institution_name: str, institution_type: str = None, 
                         max_links: int = 10) -> List[str]:

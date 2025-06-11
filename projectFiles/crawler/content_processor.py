@@ -231,8 +231,7 @@ class ContentProcessor:
             return min(score, 100)  # Cap at 100
             
         except Exception:
-            return 0
-
+            return 0    
     def _detect_logos(self, images: List[Dict]) -> List[Dict]:
         """Detect potential logos from image list using simple heuristics."""
         try:
@@ -243,25 +242,57 @@ class ContentProcessor:
                 img_alt = img.get('alt', '').lower()
                 img_class = img.get('class', '').lower()
                 img_id = img.get('id', '').lower()
+                img_desc = img.get('desc', '').lower()
                 
-                # Simple logo detection heuristics
+                # Enhanced logo detection heuristics
                 logo_indicators = [
-                    'logo' in img_url or 'logo' in img_alt or 'logo' in img_class or 'logo' in img_id,
-                    'brand' in img_url or 'brand' in img_alt or 'brand' in img_class,
-                    'header' in img_class or 'nav' in img_class,
-                    img_url.endswith('.svg'),  # SVGs often used for logos
-                    any(dim in img for dim in ['width', 'height']) and 
+                    # Direct logo keywords
+                    'logo' in img_url or 'logo' in img_alt or 'logo' in img_class or 'logo' in img_id or 'logo' in img_desc,
+                    'brand' in img_url or 'brand' in img_alt or 'brand' in img_class or 'brand' in img_desc,
+                    'emblem' in img_url or 'emblem' in img_alt or 'emblem' in img_class,
+                    'seal' in img_url or 'seal' in img_alt or 'seal' in img_class,
+                    
+                    # Header/navigation context
+                    'header' in img_class or 'nav' in img_class or 'navbar' in img_class,
+                    'banner' in img_class or 'top' in img_class,
+                    
+                    # File format indicators
+                    img_url.endswith('.svg') or img_url.endswith('.png'),  # Common logo formats
+                    
+                    # Size indicators (logos are often small or specific sizes)
                     (img.get('width', '0').replace('px', '').isdigit() and 
-                     int(img.get('width', '0').replace('px', '')) < 300)  # Small images often logos
+                     50 <= int(img.get('width', '0').replace('px', '')) <= 400),  # Typical logo size range
+                    
+                    # University/institution specific indicators
+                    'university' in img_alt or 'college' in img_alt or 'institution' in img_alt,
+                    'crest' in img_alt or 'shield' in img_alt,
+                    
+                    # Common logo-related URLs
+                    '/logo' in img_url or '/brand' in img_url or '/assets/logo' in img_url,
+                    'cent-logo' in img_url,  # Based on the Birzeit example
+                    
+                    # High-scoring images (crawler's own scoring)
+                    img.get('score', 0) >= 4
                 ]
                 
-                if any(logo_indicators):
+                # Calculate confidence based on number of indicators
+                indicator_count = sum(logo_indicators)
+                if indicator_count >= 1:  # At least one indicator
+                    confidence = 'high' if indicator_count >= 3 else ('medium' if indicator_count >= 2 else 'low')
+                    
                     logos.append({
                         'src': img.get('src', ''),
                         'alt': img.get('alt', ''),
-                        'confidence': 'medium',  # Simple confidence level
+                        'confidence': confidence,
+                        'indicator_count': indicator_count,
                         'detected_by': [i for i, indicator in enumerate(logo_indicators) if indicator]
                     })
+            
+            # Sort by confidence and indicator count
+            logos.sort(key=lambda x: (
+                {'high': 3, 'medium': 2, 'low': 1}[x['confidence']], 
+                x['indicator_count']
+            ), reverse=True)
             
             return logos[:5]  # Return top 5 logo candidates
             

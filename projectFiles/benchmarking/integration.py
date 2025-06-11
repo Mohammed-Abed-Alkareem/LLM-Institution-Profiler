@@ -127,10 +127,9 @@ class BenchmarkingManager:
                 results_count=10,  # Estimate
                 results_quality=0.8
             )
-        
-        # For LLM costs, use LLM metrics
+          # For LLM costs, use LLM metrics
         if input_tokens > 0 or output_tokens > 0:
-            model_name = service_type if service_type in ["openai_gpt4", "openai_gpt35"] else "general"
+            model_name = service_type if service_type in ["openai_gpt4", "openai_gpt35", "gemini_flash"] else "general"
             self.tracker.add_llm_metrics(
                 pipeline_id=benchmark_id,
                 llm_time=0.0,  # Time tracked separately
@@ -139,25 +138,29 @@ class BenchmarkingManager:
                 output_tokens=output_tokens,
                 fields_requested=1,
                 fields_extracted=1
-            )
+            )    
     def record_latency(
         self,
         benchmark_id: str,
         operation_type: str,
         duration: float,
         network_time: float = 0.0,
-        processing_time: float = 0.0
+        processing_time: float = 0.0,
+        cache_hit: Optional[bool] = None
     ):
         """Record latency metrics for an operation."""        
         if operation_type == "search":
-            self.tracker.add_search_metrics(
-                pipeline_id=benchmark_id,
-                search_time=duration,
-                cache_hit=False,  # Default assumption
-                api_queries=1,
-                results_count=10,
-                results_quality=0.8
-            )        
+            # Only call add_search_metrics if cache_hit is provided
+            # This avoids double-counting when cache metrics are handled separately
+            if cache_hit is not None:
+                self.tracker.add_search_metrics(
+                    pipeline_id=benchmark_id,
+                    search_time=duration,
+                    cache_hit=cache_hit,
+                    api_queries=1,
+                    results_count=10,
+                    results_quality=0.8
+                )
         elif operation_type == "crawling":
             self.tracker.add_crawling_metrics(
                 pipeline_id=benchmark_id,

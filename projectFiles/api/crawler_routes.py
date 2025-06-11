@@ -104,30 +104,41 @@ def register_crawler_routes(app, services):
                     )
                     crawl_time = time.time() - start_time
                     loop.close()
-                    
-                    # Record detailed metrics
+                      # Record detailed metrics based on actual crawler output
                     if result and result.get('success'):
                         crawl_results = result.get('crawl_results', {})
                         results_list = crawl_results.get('results', [])
+                        crawl_summary = result.get('crawl_summary', {})
                         
-                        total_content_size = sum(r.get('content_size', 0) for r in results_list)
+                        # Calculate actual content metrics from crawler data
+                        total_content_size = sum(r.get('size_bytes', 0) for r in results_list)
                         total_words = sum(r.get('word_count', 0) for r in results_list)
                         successful_crawls = sum(1 for r in results_list if r.get('success', False))
+                        total_quality_score = sum(r.get('content_quality_score', 0) for r in results_list)
+                        avg_quality = total_quality_score / len(results_list) if results_list else 0
                         
+                        # Record content metrics with actual data
                         ctx.record_content(
                             content_size=total_content_size,
                             word_count=total_words,
-                            structured_data_size=len(str(result))
+                            structured_data_size=len(str(result)),
+                            media_count=sum(len(r.get('images', [])) for r in results_list)
                         )
                         
+                        # Record quality metrics based on crawler analysis
+                        success_rate = successful_crawls / len(urls) if urls else 0.0
                         ctx.record_quality(
-                            completeness_score=successful_crawls / len(urls) if urls else 0.0,
-                            accuracy_score=0.8,  # Based on content extraction quality
+                            completeness_score=success_rate * 100,  # Convert to percentage
+                            accuracy_score=avg_quality,  # Use actual quality scores from crawler
                             confidence_scores={
-                                'crawl_success_rate': successful_crawls / len(urls) if urls else 0.0,
-                                'content_quality': 0.8 if total_words > 100 else 0.4
+                                'crawl_success_rate': success_rate,
+                                'content_quality': avg_quality / 100.0,
+                                'cache_efficiency': result.get('cache_hits', 0) / len(urls) if urls else 0.0,
+                                'data_richness': min(total_content_size / 100000, 1.0)  # Normalized content size
                             }
                         )
+                          # Note: Latency is automatically recorded by the benchmark context
+                        # Crawl time stored in metadata: {crawl_time}
             else:
                 # Run without benchmarking
                 loop = asyncio.new_event_loop()

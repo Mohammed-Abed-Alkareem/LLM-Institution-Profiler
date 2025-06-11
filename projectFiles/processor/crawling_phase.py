@@ -123,7 +123,7 @@ class CrawlingPhaseHandler:
     def _convert_to_institution_type_enum(self, type_str: str) -> InstitutionType:
         """Convert string type to InstitutionType enum."""
         try:
-            return InstitutionType(type_str.lower())
+                    return InstitutionType(type_str.lower())
         except ValueError:
             return InstitutionType.GENERAL
     
@@ -143,47 +143,92 @@ class CrawlingPhaseHandler:
                 
             processed = page['processed_content']
             
-            # Extract comprehensive image data
-            images_and_logos = processed.get('images_and_logos', {})
+            # Extract image data from the actual crawler structure
+            # Check for images in the media section
+            page_images = processed.get('media', {}).get('images', [])
             
-            for category in ['logos', 'facility_images', 'people_images', 'general_images']:
-                for img in images_and_logos.get(category, []):
-                    img_with_source = img.copy()
-                    img_with_source.update({
+            # Also get logos detected by the crawler
+            page_logos = processed.get('logos', [])
+            
+            # Process regular images
+            for img in page_images:
+                img_with_source = {
+                    'url': img.get('src', ''),
+                    'alt': img.get('alt', ''),
+                    'type': img.get('type', 'image'),
+                    'score': img.get('score', 0),
+                    'source_page': page.get('url', ''),
+                    'page_title': page.get('title', ''),
+                    'category': 'general_image'
+                }
+                all_images.append(img_with_source)
+            
+            # Process detected logos
+            for logo in page_logos:
+                logo_with_source = {
+                    'url': logo.get('src', ''),
+                    'alt': logo.get('alt', ''),
+                    'confidence': logo.get('confidence', 'medium'),
+                    'detected_by': logo.get('detected_by', []),
+                    'source_page': page.get('url', ''),
+                    'page_title': page.get('title', ''),
+                    'category': 'logo'
+                }
+                logos_found.append(logo_with_source)
+                all_images.append(logo_with_source)  # Also add to all images
+            
+            # Check for facility images (images with certain keywords)
+            for img in page_images:
+                img_alt = (img.get('alt', '') or '').lower()
+                img_desc = (img.get('desc', '') or '').lower()
+                if any(keyword in f"{img_alt} {img_desc}" for keyword in ['building', 'campus', 'facility', 'office', 'hospital', 'bank', 'center']):
+                    facility_img = {
+                        'url': img.get('src', ''),
+                        'alt': img.get('alt', ''),
+                        'type': img.get('type', 'image'),
+                        'score': img.get('score', 0),
                         'source_page': page.get('url', ''),
                         'page_title': page.get('title', ''),
-                        'category': category
-                    })
-                    all_images.append(img_with_source)
+                        'category': 'facility_image'
+                    }
+                    facility_images.append(facility_img)
+            
+            # Aggregate social media links from links section
+            page_links = processed.get('links', {})
+            for link_type in ['internal', 'external']:
+                for link in page_links.get(link_type, []):
+                    link_url = link.get('href', '') if isinstance(link, dict) else str(link)
+                    link_url_lower = link_url.lower()
                     
-                    # Separate logos and facility images for easy access
-                    if category == 'logos':
-                        logos_found.append(img_with_source)
-                    elif category == 'facility_images':
-                        facility_images.append(img_with_source)
+                    # Detect social media platforms
+                    for platform in ['facebook', 'twitter', 'linkedin', 'instagram', 'youtube']:
+                        if platform in link_url_lower:
+                            if platform not in social_media_links:
+                                social_media_links[platform] = []
+                            social_media_links[platform].append(link_url)
             
-            # Aggregate social media links
-            page_social = processed.get('social_media_links', {})
-            for platform, links in page_social.items():
-                if platform not in social_media_links:
-                    social_media_links[platform] = []
-                social_media_links[platform].extend(links)
-            
-            # Collect important documents
-            page_docs = processed.get('documents_and_files', {})
-            for doc_type, docs in page_docs.items():
-                for doc in docs:
-                    documents_found.append({
-                        'url': doc,
-                        'type': doc_type,
-                        'source_page': page.get('url', ''),
-                        'page_title': page.get('title', '')
-                    })
+            # Collect important documents from links
+            page_links = processed.get('links', {})
+            for link_type in ['internal', 'external']:
+                for link in page_links.get(link_type, []):
+                    link_url = link.get('href', '') if isinstance(link, dict) else str(link)
+                    link_text = link.get('text', '') if isinstance(link, dict) else ''
+                    
+                    # Check for document extensions or keywords
+                    if any(ext in link_url.lower() for ext in ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx']):
+                        documents_found.append({
+                            'url': link_url,
+                            'text': link_text,
+                            'type': 'document',
+                            'source_page': page.get('url', ''),
+                            'page_title': page.get('title', '')
+                        })
             
             # Add cleaned text content
-            if processed.get('cleaned_text'):
+            text_content = processed.get('content_formats', {}).get('text_content', '')
+            if text_content and len(text_content.strip()) > 100:
                 total_content += f"\n\n--- Content from {page.get('url', 'Unknown URL')} ---\n"
-                total_content += processed['cleaned_text'][:2000]  # Limit per page
+                total_content += text_content[:2000]  # Limit per page
             
             # Store page summary
             page_summaries.append({
@@ -191,8 +236,12 @@ class CrawlingPhaseHandler:
                 'title': page.get('title', ''),
                 'quality_score': page.get('content_quality_score', 0),
                 'word_count': page.get('word_count', 0),
-                'key_info': processed.get('key_information', {}),
-                'content_sections': processed.get('content_sections', {})
+                'key_info': processed.get('institution_hints', {}),
+                'content_sections': {
+                    'images_count': len(page_images),
+                    'logos_count': len(page_logos),
+                    'text_length': len(text_content)
+                }
             })
         
         # Remove duplicates and apply limits

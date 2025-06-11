@@ -71,11 +71,28 @@
         "location": "palestine"
       },
       "cached_at": 1749592490.6829
+    },
+    "0bd992a810ad6e4db7942e20847ba3b6": {
+      "query": "Arab Open University",
+      "params": {},
+      "cached_at": 1749597562.7153442
+    },
+    "b318d29964fe5e0e4ec934beff829bde": {
+      "query": "Hosei University",
+      "params": {},
+      "cached_at": 1749599762.9449768
+    },
+    "ee2bb0d1e29ba7f1cbc87a5fc8e5d1a3": {
+      "query": "Birzeit University",
+      "params": {
+        "institution_type": "university"
+      },
+      "cached_at": 1749602655.9016533
     }
   },
   "stats": {
-    "hits": 28,
-    "misses": 16,
+    "hits": 57,
+    "misses": 19,
     "similar_hits": 5
   }
 }

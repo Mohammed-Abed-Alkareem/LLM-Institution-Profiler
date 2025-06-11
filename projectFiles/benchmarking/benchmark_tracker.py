@@ -195,8 +195,7 @@ class BenchmarkTracker:
         
         # Latency
         pipeline.latency_metrics.llm_processing_time_seconds = llm_time
-        
-        # Cost
+          # Cost
         if 'gpt-4' in model_name.lower():
             pipeline.cost_metrics.add_llm_cost(
                 model_name, input_tokens, output_tokens,
@@ -208,6 +207,12 @@ class BenchmarkTracker:
                 model_name, input_tokens, output_tokens,
                 self.config.openai_gpt35_input_cost_per_1k_tokens,
                 self.config.openai_gpt35_output_cost_per_1k_tokens
+            )
+        elif 'gemini' in model_name.lower() or 'flash' in model_name.lower():
+            pipeline.cost_metrics.add_llm_cost(
+                model_name, input_tokens, output_tokens,
+                self.config.gemini_flash_input_cost_per_1k_tokens,
+                self.config.gemini_flash_output_cost_per_1k_tokens
             )
         
         # Quality

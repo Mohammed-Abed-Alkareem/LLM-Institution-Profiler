@@ -27,33 +27,53 @@ def register_search_routes(app, services):
                 'success': False,
                 'error': 'Institution name is required'
             })
-        
-        # Benchmarking integration
+          # Benchmarking integration
         if benchmarking_manager:
             with benchmark_context(BenchmarkCategory.SEARCH, institution_name, institution_type or 'general') as ctx:
-                # Record API cost if making external call
-                if force_api:
-                    ctx.record_cost(api_calls=1, service_type="google_search")
-                
                 # Perform search
                 result = search_service.search_institution(institution_name, institution_type, force_api)
                 
-                # Record quality metrics
+                # Record cost metrics based on actual API usage
+                api_calls_made = result.get('api_calls_made', 0)
+                if api_calls_made > 0:
+                    ctx.record_cost(api_calls=api_calls_made, service_type="google_search")
+                
+                # Record latency metrics with actual timings
+                if 'api_call_time' in result:
+                    ctx.record_latency(
+                        operation_type="search",
+                        duration=result.get('response_time', 0),
+                        network_time=result.get('api_call_time', 0)
+                    )
+                
+                # Record quality metrics based on search results
                 if result.get('success'):
                     cache_hit = result.get('source') == 'cache'
+                    results_count = result.get('results_count', 0)
+                    total_results = result.get('total_results_numeric', 0)
+                    
+                    # Calculate quality scores based on actual data
+                    completeness_score = min(results_count / 10.0, 1.0) if results_count else 0.0
+                    coverage_score = min(total_results / 100000, 1.0) if total_results else 0.0
+                    quality_score = (completeness_score + coverage_score) / 2.0
+                    
                     ctx.record_quality(
-                        completeness_score=0.9 if result.get('links') else 0.5,
+                        completeness_score=quality_score,
                         confidence_scores={
                             'cache_efficiency': 1.0 if cache_hit else 0.0,
-                            'api_success': 1.0
+                            'api_success': 1.0,
+                            'results_quality': result.get('results_quality_score', 0.0),
+                            'search_coverage': result.get('search_coverage_score', 0.0)
                         }
                     )
                     
-                    # Record content metrics
-                    links_count = len(result.get('links', []))
+                    # Record content metrics based on actual search results
+                    content_size = len(str(result.get('results', [])))
+                    links_count = len(result.get('results', []))
                     ctx.record_content(
-                        content_size=len(str(result)),
-                        structured_data_size=links_count * 100  # Estimate
+                        content_size=content_size,
+                        structured_data_size=links_count * 100,  # Estimate based on links
+                        word_count=content_size // 6  # Rough estimate of word count
                     )
         else:
             result = search_service.search_institution(institution_name, institution_type, force_api)

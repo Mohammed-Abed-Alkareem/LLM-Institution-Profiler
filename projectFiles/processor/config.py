@@ -5,7 +5,7 @@ Centralizes settings and data structures used throughout the processing flow.
 """
 import os
 from typing import Dict, List
-from google import genai
+from openai import OpenAI
 
 
 # Pipeline configuration constants
@@ -33,28 +33,30 @@ CONTENT_LIMITS = {
 
 class ProcessorConfig:
     """Configuration class for the institution processor."""
-    
     def __init__(self, base_dir: str):
         self.base_dir = base_dir
         self.google_api_key = os.getenv('GOOGLE_API_KEY')
-        self.genai_client = self._initialize_genai_client()
+        self.openai_client = self._initialize_openai_client()
         
-    def _initialize_genai_client(self):
-        """Initialize the Google Generative AI client."""
+    def _initialize_openai_client(self):
+        """Initialize the OpenAI client configured for Gemini API."""
         try:
             if not self.google_api_key:
                 print("Warning: GOOGLE_API_KEY environment variable not set. AI features will be limited.")
                 return None
             else:
-                return genai.Client(api_key=self.google_api_key)
+                return OpenAI(
+                    api_key=self.google_api_key,
+                    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+                )
         except Exception as e:
-            print(f"Fatal Error: Could not configure Google Generative AI Client: {e}")
+            print(f"Fatal Error: Could not configure OpenAI client for Gemini: {e}")
             return None
     
     def is_ai_available(self) -> bool:
         """Check if AI client is available."""
-        return self.genai_client is not None
+        return self.openai_client is not None
     
     def get_client(self):
         """Get the AI client."""
-        return self.genai_client
+        return self.openai_client
