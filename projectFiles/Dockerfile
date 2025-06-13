@@ -1,44 +1,39 @@
-# ---- Stage 1: Build dependencies ----
+# --- Stage 1: Build dependencies ---
 FROM python:3.11-slim AS builder
-
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# Install build dependencies
+# Install build tools temporarily
 RUN apt-get update && \
     apt-get install -y --no-install-recommends gcc build-essential && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Python packages into a temporary directory
 COPY requirements.txt .
 RUN pip install --upgrade pip && \
     pip install --prefix=/install --no-cache-dir -r requirements.txt
 
 
-# ---- Stage 2: Final minimal image ----
-FROM python:3.11-slim
+# --- Stage 2: Runtime environment ---
+FROM python:3.11-slim AS runtime
+
+WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-WORKDIR /app
-
-# Copy installed packages from builder stage
+# Copy Python dependencies only
 COPY --from=builder /install /usr/local
 
-# Copy only what's needed from project
+# Copy app source code
 COPY . .
 
-# Create a non-root user and use it
-RUN adduser --disabled-password --gecos '' flaskuser && \
+# Use non-root user for security
+RUN adduser --disabled-password flaskuser && \
     chown -R flaskuser /app
 USER flaskuser
 
-# Expose the port Flask runs on
+# Expose port
 EXPOSE 5000
 
-# Run using Gunicorn (production WSGI server)
+# Start the app using gunicorn
 CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:5000", "wsgi:app"]
