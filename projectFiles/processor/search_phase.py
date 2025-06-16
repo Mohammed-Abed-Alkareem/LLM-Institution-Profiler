@@ -11,10 +11,9 @@ from crawling_prep import get_institution_links_for_crawling, InstitutionLinkMan
 
 class SearchPhaseHandler:
     """Handles the search phase of institution processing."""
-    
-    def __init__(self, base_dir: str):
+    def __init__(self, base_dir: str, search_service=None):
         self.base_dir = base_dir
-        self.link_manager = InstitutionLinkManager(base_dir)
+        self.link_manager = InstitutionLinkManager(base_dir, search_service)
     
     def execute_search_phase(
         self, 

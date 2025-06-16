@@ -14,17 +14,35 @@ from crawler.crawler_service import CrawlerService
 # Global instances (initialized once)
 _pipeline_instance = None
 _processor_config = None
+_crawler_service = None
+_search_service = None
+
+
+def set_global_crawler_service(crawler_service):
+    """Set the global crawler service instance for use by the pipeline."""
+    global _crawler_service
+    _crawler_service = crawler_service
+
+
+def set_global_search_service(search_service):
+    """Set the global search service instance for use by the pipeline."""
+    global _search_service
+    _search_service = search_service
 
 
 def _get_pipeline_instance():
     """Get or create the global pipeline instance."""
-    global _pipeline_instance, _processor_config
+    global _pipeline_instance, _processor_config, _crawler_service, _search_service
     
     if _pipeline_instance is None:
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         
-        # Initialize services
-        crawler_service = CrawlerService(BASE_DIR)
+        # Use global crawler service if available, otherwise create new one
+        if _crawler_service is not None:
+            crawler_service = _crawler_service
+        else:
+            # Initialize services
+            crawler_service = CrawlerService(BASE_DIR)
         
         # Create pipeline
         _pipeline_instance = InstitutionPipeline(BASE_DIR, crawler_service)
@@ -40,7 +58,8 @@ def process_institution_pipeline(
     institution_type: Optional[str] = None, 
     search_params: Optional[Dict] = None, 
     skip_extraction: bool = False, 
-    enable_crawling: bool = True
+    enable_crawling: bool = True,
+    output_type: str = "json"
 ) -> Dict:
     """
     Main entry point for comprehensive institution processing.
@@ -68,13 +87,13 @@ def process_institution_pipeline(
         including crawled content, images, links, extracted data, and benchmarks.
     """
     pipeline = _get_pipeline_instance()
-    
     return pipeline.process_institution(
         institution_name=institution_name,
         institution_type=institution_type,
         search_params=search_params or {},
         skip_extraction=skip_extraction,
-        enable_crawling=enable_crawling
+        enable_crawling=enable_crawling,
+        output_type=output_type
     )
 
 
@@ -170,6 +189,12 @@ def get_pipeline_stats() -> Dict:
             "extraction_handler": pipeline.extraction_handler is not None
         }
     }
+
+
+def reset_pipeline_instance():
+    """Reset the pipeline instance (for testing purposes)."""
+    global _pipeline_instance
+    _pipeline_instance = None
 
 
 # For backward compatibility and testing

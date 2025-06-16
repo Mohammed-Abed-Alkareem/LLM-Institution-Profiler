@@ -16,14 +16,12 @@ from benchmarking.quality_score_integration import quality_integrator
 
 class InstitutionPipeline:
     """Main pipeline orchestrator for comprehensive institution processing."""
-    
-    def __init__(self, base_dir: str, crawler_service):
+    def __init__(self, base_dir: str, crawler_service, search_service=None):
         self.base_dir = base_dir
         self.config = ProcessorConfig(base_dir)
         self.benchmarking_manager = get_benchmarking_manager()
-        
         # Initialize phase handlers
-        self.search_handler = SearchPhaseHandler(base_dir)
+        self.search_handler = SearchPhaseHandler(base_dir, search_service)
         self.crawling_handler = CrawlingPhaseHandler(base_dir, crawler_service)
         self.extraction_handler = ExtractionPhaseHandler(self.config)
     
@@ -33,8 +31,9 @@ class InstitutionPipeline:
         institution_type: Optional[str] = None,
         search_params: Optional[Dict] = None,
         skip_extraction: bool = False,
-        enable_crawling: bool = True
-    ) -> Dict:
+        enable_crawling: bool = True,
+        output_type: str = "markdown"
+    ) -> Dict:        
         """
         Execute the complete institution processing pipeline.
         
@@ -44,10 +43,10 @@ class InstitutionPipeline:
             search_params: Search parameters
             skip_extraction: If True, skip LLM extraction
             enable_crawling: If True, perform comprehensive web crawling
+            output_type: Content format to use ("markdown", "raw_html", "cleaned_html", "text")
             
         Returns:
-            Complete structured data about the institution
-        """
+            Complete structured data about the institution        """
         # Initialize result structure
         final_result = self._initialize_result_structure(institution_name)
         
@@ -60,13 +59,14 @@ class InstitutionPipeline:
         if self.benchmarking_manager:
             return self._execute_with_benchmarking(
                 institution_name, institution_type, search_params,
-                skip_extraction, enable_crawling, final_result
+                skip_extraction, enable_crawling, final_result, output_type
             )
         else:
             return self._execute_without_benchmarking(
                 institution_name, institution_type, search_params,
-                skip_extraction, enable_crawling, final_result
+                skip_extraction, enable_crawling, final_result, output_type
             )
+    
     def _initialize_result_structure(self, institution_name: str) -> Dict:
         """Initialize the comprehensive result structure."""
         result = {key: "Unknown" for key in STRUCTURED_INFO_KEYS}
@@ -91,13 +91,12 @@ class InstitutionPipeline:
             },
             "performance_metrics": {},
             "extraction_metrics": {},  # Add extraction metrics to final result
-            "error": None
-        })
+            "error": None        })
         return result
     
     def _execute_with_benchmarking(
         self, institution_name, institution_type, search_params,
-        skip_extraction, enable_crawling, final_result
+        skip_extraction, enable_crawling, final_result, output_type
     ):
         """Execute pipeline with benchmarking integration."""
         with benchmark_context(
@@ -107,22 +106,20 @@ class InstitutionPipeline:
         ) as ctx:
             return self._execute_pipeline_phases(
                 institution_name, institution_type, search_params,
-                skip_extraction, enable_crawling, final_result, ctx
+                skip_extraction, enable_crawling, final_result, ctx, output_type
             )
-    
     def _execute_without_benchmarking(
         self, institution_name, institution_type, search_params,
-        skip_extraction, enable_crawling, final_result
+        skip_extraction, enable_crawling, final_result, output_type
     ):
         """Execute pipeline without benchmarking (fallback mode)."""
         return self._execute_pipeline_phases(
             institution_name, institution_type, search_params,
-            skip_extraction, enable_crawling, final_result, None
-        )
+            skip_extraction, enable_crawling, final_result, None, output_type        )
     
     def _execute_pipeline_phases(
         self, institution_name, institution_type, search_params,
-        skip_extraction, enable_crawling, final_result, benchmark_ctx
+        skip_extraction, enable_crawling, final_result, benchmark_ctx, output_type
     ):
         """Execute all pipeline phases with comprehensive error handling."""
         try:
@@ -165,13 +162,12 @@ class InstitutionPipeline:
                 
                 if crawling_result["success"]:
                     self._merge_crawling_results(final_result, crawling_result)
-            
             # Phase 3: Extraction
-            raw_text = self._prepare_text_for_extraction(final_result, crawling_result)
+            raw_text = self._prepare_text_for_extraction(final_result, crawling_result, output_type)
             extraction_result = self._execute_extraction_phase(
                 institution_name, raw_text, skip_extraction, benchmark_ctx
             )
-              # Get extraction time from extraction_metrics if available
+            # Get extraction time from extraction_metrics if available
             extraction_time = extraction_result.get("extraction_time", 0)
             if not extraction_time and extraction_result.get("structured_data", {}).get("extraction_metrics"):
                 extraction_time = extraction_result["structured_data"]["extraction_metrics"].get("extraction_time", 0)
@@ -534,14 +530,19 @@ class InstitutionPipeline:
                 final_result['quality_details'] = details
             except Exception as fallback_e:
                 print(f"Warning: Fallback quality calculation also failed: {fallback_e}")
-                final_result['quality_score'] = 0
+                final_result['quality_score'] = 0                
                 final_result['quality_rating'] = 'Error'
                 final_result['quality_details'] = {'error': str(e), 'fallback_error': str(fallback_e)}
     
-    def _prepare_text_for_extraction(self, final_result, crawling_result):
+    def _prepare_text_for_extraction(self, final_result, crawling_result, output_type="markdown"):
         """
-        Prepare comprehensive text for extraction using the best available content formats.
+        Prepare comprehensive text for extraction using the specified content format.
         Leverages the crawler's rich content formats for optimal LLM processing.
+        
+        Args:
+            final_result: Current pipeline results
+            crawling_result: Results from crawling phase
+            output_type: Content format to use ("markdown", "raw_html", "cleaned_html", "text")
         """
         # Use crawled content if available
         if crawling_result and crawling_result.get("success"):
@@ -606,7 +607,7 @@ class InstitutionPipeline:
             for page in crawled_data.get("crawled_pages", []):
                 if not page.get("success") or not page.get("processed_content"):
                     continue
-                    
+                
                 processed = page["processed_content"]
                 content_formats = processed.get("content_formats", {})
                 
@@ -651,7 +652,7 @@ class InstitutionPipeline:
             for page in crawled_data.get("crawled_pages", []):
                 if not page.get("success"):
                     continue
-                    
+                
                 processed = page["processed_content"]
                 
                 # Add valuable metadata
@@ -890,7 +891,7 @@ class InstitutionPipeline:
         """Calculate and attach information quality score to final result."""
         try:
             # Use the quality integrator to calculate enhanced score
-            enhanced_score = quality_integrator.calculate_enhanced_quality_score(final_result)
+            enhanced_score = quality_integrator.calculate_enhanced_quality_metrics(final_result, final_result)
             
             # Attach all quality scoring data to final result
             final_result.update(enhanced_score)
@@ -904,3 +905,85 @@ class InstitutionPipeline:
             final_result.setdefault('quality_score', 0.0)
             final_result.setdefault('quality_rating', 'Unknown')
             final_result.setdefault('quality_details', {})
+    
+    def _extract_content_by_format(self, crawled_data, content_summary, output_type: str):
+        """Extract content in the specified format from crawled data."""
+        content_parts = []
+        
+        # Get crawled pages
+        crawled_pages = crawled_data.get("crawled_pages", [])
+        
+        if output_type == "raw_xml":
+            # Use raw HTML content
+            for page in crawled_pages:
+                content_formats = page.get("content_formats", {})
+                raw_html = content_formats.get("raw_html", "")
+                if raw_html:
+                    content_parts.append(f"=== RAW HTML from {page.get('url', 'Unknown')} ===")
+                    content_parts.append(raw_html)
+                    
+        elif output_type == "cleaned_xml":
+            # Use cleaned HTML content
+            for page in crawled_pages:
+                content_formats = page.get("content_formats", {})
+                cleaned_html = content_formats.get("cleaned_html", "")
+                if cleaned_html:
+                    content_parts.append(f"=== CLEANED HTML from {page.get('url', 'Unknown')} ===")
+                    content_parts.append(cleaned_html)
+                    
+        elif output_type == "markdown":
+            # Use markdown content
+            for page in crawled_pages:
+                content_formats = page.get("content_formats", {})
+                markdown_formats = content_formats.get("markdown", {})
+                # Prefer fit_markdown, then standard markdown
+                markdown_content = (markdown_formats.get("fit_markdown") or 
+                                  markdown_formats.get("markdown") or "")
+                if markdown_content:
+                    content_parts.append(f"=== MARKDOWN from {page.get('url', 'Unknown')} ===")
+                    content_parts.append(markdown_content)
+                    
+        else:  # default to "json" format - use comprehensive structured content
+            # Add comprehensive media summary
+            all_images = content_summary.get("all_images", [])
+            logos_found = content_summary.get("logos_found", [])
+            if all_images or logos_found:
+                content_parts.append("=== MEDIA CONTENT SUMMARY ===")
+                if all_images:
+                    content_parts.append(f"Total Images Found: {len(all_images)}")
+                    for img in all_images[:10]:
+                        img_info = f"- {img.get('src', 'Unknown source')}"
+                        if img.get('alt'):
+                            img_info += f" | Alt: {img['alt']}"
+                        if img.get('title'):
+                            img_info += f" | Title: {img['title']}"
+                        content_parts.append(img_info)
+                
+                if logos_found:
+                    content_parts.append(f"\nLogos Identified: {len(logos_found)}")
+            
+            # Add structured content from each page
+            for page in crawled_pages:
+                url = page.get('url', 'Unknown')
+                content_parts.append(f"\n=== STRUCTURED CONTENT from {url} ===")
+                
+                # Use the best available structured content
+                content_formats = page.get("content_formats", {})
+                if content_formats.get("text_content"):
+                    content_parts.append(content_formats["text_content"])
+                elif content_formats.get("cleaned_html"):
+                    content_parts.append(content_formats["cleaned_html"])
+        
+        # Combine all content
+        comprehensive_text = "\n".join(content_parts)
+        
+        # If we have substantial content, use it
+        if len(comprehensive_text.strip()) > 500:
+            return comprehensive_text
+        
+        # Fall back to total_text if format-specific extraction didn't work
+        total_text = content_summary.get("total_text", "")
+        if total_text.strip():
+            return total_text
+            
+        return ""

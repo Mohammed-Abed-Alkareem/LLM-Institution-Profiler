@@ -112,16 +112,15 @@
           "institution_name": "Georgia Institute of Technology",
           "institution_type": "university",
           "expected_min_quality": 0.7,
-          "expected_max_cost": 0.02,
-          "expected_max_time": 15.0
+          "expected_max_cost": 0.02,          "expected_max_time": 15.0
         }
       ],
-      "output_types": ["json", "structured", "comprehensive"],
+      "output_types": ["json", "raw_xml", "cleaned_xml", "markdown"],
       "iterations": 2,
       "parallel_execution": false
     },
     {
-      "test_name": "medical_institution_benchmark_suite", 
+      "test_name": "medical_institution_benchmark_suite",
       "test_description": "Performance testing across 15 medical institutions with quality scoring",
       "category": "pipeline",
       "institution_type": "hospital",
@@ -228,11 +227,10 @@
           "institution_name": "Banner Health",
           "institution_type": "hospital",
           "expected_min_quality": 0.6,
-          "expected_max_cost": 0.02,
-          "expected_max_time": 15.0
+          "expected_max_cost": 0.02,          "expected_max_time": 15.0
         }
       ],
-      "output_types": ["json", "structured", "comprehensive"],
+      "output_types": ["json", "raw_xml", "cleaned_xml", "markdown"],
       "iterations": 2,
       "parallel_execution": false
     },
@@ -344,11 +342,10 @@
           "institution_name": "Fifth Third Bank",
           "institution_type": "bank",
           "expected_min_quality": 0.6,
-          "expected_max_cost": 0.02,
-          "expected_max_time": 15.0
+          "expected_max_cost": 0.02,          "expected_max_time": 15.0
         }
       ],
-      "output_types": ["json", "structured", "comprehensive"],
+      "output_types": ["json", "raw_xml", "cleaned_xml", "markdown"],
       "iterations": 2,
       "parallel_execution": false
     },
@@ -461,10 +458,9 @@
           "institution_type": "general",
           "expected_min_quality": 0.4,
           "expected_max_cost": 0.02,
-          "expected_max_time": 15.0
-        }
+          "expected_max_time": 15.0        }
       ],
-      "output_types": ["json", "structured", "comprehensive"],
+      "output_types": ["json", "raw_xml", "cleaned_xml", "markdown"],
       "iterations": 2,
       "parallel_execution": false
     }

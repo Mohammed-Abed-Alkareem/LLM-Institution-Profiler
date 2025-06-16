@@ -8,10 +8,9 @@ from search.search_service import SearchService
 
 class InstitutionLinkManager:
     """Manages links for institution crawling and data extraction."""
-    
-    def __init__(self, base_dir: str = None):
+    def __init__(self, base_dir: str = None, search_service=None):
         self.base_dir = base_dir or os.getcwd()
-        self.search_service = SearchService(base_dir)
+        self.search_service = search_service if search_service else SearchService(base_dir)
     def get_crawling_links(self, institution_name: str, institution_type: str = None, 
                           max_links: int = 10, include_search_metadata: bool = True, search_params: dict = None) -> Dict:
         """

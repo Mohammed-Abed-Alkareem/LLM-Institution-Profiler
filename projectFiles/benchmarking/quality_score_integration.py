@@ -64,10 +64,12 @@ class QualityScoreIntegrator:
         
         # Calculate crawler and pipeline success metrics
         pipeline_metrics = self._calculate_pipeline_metrics(institution_data)
-        
-        # Combine all metrics
+          # Combine all metrics
         enhanced_metrics = {
             # Core quality metrics (from web interface)
+            'quality_score': quality_score,  # Primary quality score for pipeline compatibility
+            'quality_rating': quality_rating,  # Primary quality rating for pipeline compatibility
+            'quality_details': quality_details,  # Primary quality details for pipeline compatibility
             'core_quality_score': quality_score,
             'core_quality_rating': quality_rating,
             'core_quality_details': quality_details,
@@ -107,14 +109,16 @@ class QualityScoreIntegrator:
             'search_success': pipeline_metrics.get('search_success', False),
             'crawling_success': pipeline_metrics.get('crawling_success', False),
             'extraction_success': pipeline_metrics.get('extraction_success', False),
-            'overall_pipeline_success': pipeline_metrics.get('overall_success', False)
-        }
+            'overall_pipeline_success': pipeline_metrics.get('overall_success', False)        }
         
         return enhanced_metrics
     
     def _empty_quality_metrics(self) -> Dict[str, Any]:
         """Return empty quality metrics for failed operations."""
         return {
+            'quality_score': 0,  # Primary quality score for pipeline compatibility
+            'quality_rating': 'No Data',  # Primary quality rating for pipeline compatibility
+            'quality_details': {},  # Primary quality details for pipeline compatibility
             'core_quality_score': 0,
             'core_quality_rating': 'No Data',
             'core_quality_details': {},

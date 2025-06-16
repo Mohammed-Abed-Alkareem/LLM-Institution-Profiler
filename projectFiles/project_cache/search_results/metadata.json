@@ -117,11 +117,32 @@
         "additional_keywords": "courses"
       },
       "cached_at": 1749643242.6251173
+    },
+    "a68ddd5d3aa83c3173bca3ce382b58dd": {
+      "query": "University of California Berkeley",
+      "params": {
+        "institution_type": "university"
+      },
+      "cached_at": 1749646618.505812
+    },
+    "2d0bc39bebdc9186f3abdbfcf8cd21f6": {
+      "query": "Yale University",
+      "params": {
+        "institution_type": "university"
+      },
+      "cached_at": 1749646708.3126264
+    },
+    "70aa313909e156f0bb157786851c1e69": {
+      "query": "Princeton University",
+      "params": {
+        "institution_type": "university"
+      },
+      "cached_at": 1749646797.3784268
     }
   },
   "stats": {
-    "hits": 77,
-    "misses": 24,
-    "similar_hits": 41
+    "hits": 155,
+    "misses": 27,
+    "similar_hits": 42
   }
 }
