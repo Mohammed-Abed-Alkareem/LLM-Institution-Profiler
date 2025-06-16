@@ -37,36 +37,22 @@ function toggleRawData() {
 function handleImageLoad(img) {
     loadedImagesCount++;
     updateImageCount();
-    // Mark container as successfully loaded and remove loading indicator
+    // Simply remove loading indicator when image loads
     const container = img.closest('[data-image-container], .logo-container, .image-container');
     if (container) {
-        container.setAttribute('data-loaded', 'true');
         container.classList.remove('image-loading');
-        // Remove timeout attribute if it was set
-        container.removeAttribute('data-timeout');
+        container.setAttribute('data-loaded', 'true');
     }
 }
 
 function handleImageError(img) {
     const container = img.closest('[data-image-container], .logo-container, .image-container');
     if (container) {
-        // Only hide and mark as failed if this is an actual error event
         container.style.display = 'none';
         container.setAttribute('data-failed', 'true');
         container.classList.remove('image-loading');
     }
-    
     updateImageCount();
-}
-
-function handleImageTimeout(container) {
-    // Handle timeout - remove loading indicator but don't hide the container
-    // since the image might still load eventually
-    if (container && !container.hasAttribute('data-loaded') && !container.hasAttribute('data-failed')) {
-        container.classList.remove('image-loading');
-        container.setAttribute('data-timeout', 'true');
-        // Don't increment failed count or hide container for timeouts
-    }
 }
 
 function updateImageCount() {
@@ -95,15 +81,14 @@ function preValidateImages() {
     
     imageContainers.forEach((container, index) => {
         const img = container.querySelector('img');
-        if (img && img.src) {
-            // Add loading indicator
+        if (img && img.src) {            // Add loading indicator
             container.classList.add('image-loading');
-              // Set a timeout to handle very slow loading images
+            
+            // Simple timeout - just remove loading indicator after 3 seconds
+            // Don't try to determine success/failure, let the actual load/error events handle that
             setTimeout(() => {
-                if (!container.hasAttribute('data-loaded') && !container.hasAttribute('data-failed')) {
-                    handleImageTimeout(container);
-                }
-            }, 10000); // 10 second timeout
+                container.classList.remove('image-loading');
+            }, 3000); // 3 second timeout - much shorter and simpler
         }
     });
 }
