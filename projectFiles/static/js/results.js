@@ -37,20 +37,36 @@ function toggleRawData() {
 function handleImageLoad(img) {
     loadedImagesCount++;
     updateImageCount();
-    // Mark container as successfully loaded
-    const container = img.closest('[data-image-container]');
+    // Mark container as successfully loaded and remove loading indicator
+    const container = img.closest('[data-image-container], .logo-container, .image-container');
     if (container) {
         container.setAttribute('data-loaded', 'true');
+        container.classList.remove('image-loading');
+        // Remove timeout attribute if it was set
+        container.removeAttribute('data-timeout');
     }
 }
 
 function handleImageError(img) {
-    const container = img.closest('[data-image-container]');
+    const container = img.closest('[data-image-container], .logo-container, .image-container');
     if (container) {
+        // Only hide and mark as failed if this is an actual error event
         container.style.display = 'none';
         container.setAttribute('data-failed', 'true');
+        container.classList.remove('image-loading');
     }
+    
     updateImageCount();
+}
+
+function handleImageTimeout(container) {
+    // Handle timeout - remove loading indicator but don't hide the container
+    // since the image might still load eventually
+    if (container && !container.hasAttribute('data-loaded') && !container.hasAttribute('data-failed')) {
+        container.classList.remove('image-loading');
+        container.setAttribute('data-timeout', 'true');
+        // Don't increment failed count or hide container for timeouts
+    }
 }
 
 function updateImageCount() {
@@ -74,19 +90,18 @@ function updateImageCount() {
 
 // Pre-validate image URLs before display
 function preValidateImages() {
-    const imageContainers = document.querySelectorAll('[data-image-container]');
+    // Handle both data-image-container and other image containers like logos
+    const imageContainers = document.querySelectorAll('[data-image-container], .logo-container, .image-container');
     
     imageContainers.forEach((container, index) => {
         const img = container.querySelector('img');
         if (img && img.src) {
             // Add loading indicator
             container.classList.add('image-loading');
-            
-            // Set a timeout to handle very slow loading images
+              // Set a timeout to handle very slow loading images
             setTimeout(() => {
                 if (!container.hasAttribute('data-loaded') && !container.hasAttribute('data-failed')) {
-                    handleImageError(img);
-                    container.classList.add('image-timeout');
+                    handleImageTimeout(container);
                 }
             }, 10000); // 10 second timeout
         }
@@ -296,9 +311,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update sector-specific icons
     updateSectorIcons();
-    
-    // Initialize image counter and pre-validation
-    const imageContainers = document.querySelectorAll('[data-image-container]');
+      // Initialize image counter and pre-validation
+    const imageContainers = document.querySelectorAll('[data-image-container], .logo-container, .image-container');
     totalImagesAttempted = imageContainers.length;
     if (totalImagesAttempted > 0) {
         preValidateImages();
