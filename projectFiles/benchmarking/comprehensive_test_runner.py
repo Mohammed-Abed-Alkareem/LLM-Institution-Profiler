@@ -25,7 +25,7 @@ if project_dir not in sys.path:
 from benchmarking.quality_score_integration import QualityScoreIntegrator
 from benchmarking.benchmark_config import BenchmarkCategory
 from benchmarking.integration import get_benchmarking_manager, initialize_benchmarking
-from institution_processor import process_institution_pipeline, set_global_crawler_service, set_global_search_service
+# Remove institution_processor import to avoid circular dependency - import inside functions where needed
 from api.service_init import initialize_services
 
 
@@ -131,11 +131,13 @@ class ComprehensiveTestRunner:
         print("🔧 Initializing benchmarking system...")
         self.benchmarking_manager = initialize_benchmarking(base_dir)
         print("✅ Benchmarking system initialized")
-          # Initialize crawler service with proper caching (same as main app)
-        print("🔧 Initializing crawler service with caching...")        
+          # Initialize crawler service with proper caching (same as main app)        print("🔧 Initializing crawler service with caching...")        
         services = initialize_services(base_dir)
         self.crawler_service = services.get('crawler')
         self.search_service = services.get('search')
+        
+        # Import here to avoid circular dependency
+        from institution_processor import set_global_crawler_service, set_global_search_service
         
         if self.crawler_service:
             # Set the global crawler service so the pipeline uses it
@@ -294,8 +296,7 @@ class ComprehensiveTestRunner:
                     self._run_single_test(
                         institution, 
                         output_type, 
-                        test_config.get('category', 'pipeline'),
-                        iteration + 1,
+                        test_config.get('category', 'pipeline'),                        iteration + 1,
                         iterations
                     )
     
@@ -308,6 +309,9 @@ class ComprehensiveTestRunner:
         total_iterations: int
     ):
         """Run a single test case with comprehensive metrics collection."""
+        # Import here to avoid circular dependency
+        from institution_processor import process_institution_pipeline
+        
         institution_name = institution.get('institution_name', 'Unknown')
         institution_type = institution.get('institution_type', 'general')
         
