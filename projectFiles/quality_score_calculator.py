@@ -22,11 +22,12 @@ def is_field_populated(value):
 def calculate_information_quality_score(institution_data):
     """
     Calculate a comprehensive information quality score based on field population.
-    Uses a sophisticated weighted system that categorizes all 96 structured fields
-    by importance and assigns appropriate scoring weights.
+    Uses a sophisticated weighted system that categorizes fields by importance and
+    institution relevance. Only counts institution-specific fields for relevant types.
     Returns a score from 0-100 and a quality rating with detailed breakdown.
     """
     from extraction_logic import STRUCTURED_INFO_KEYS
+    from field_categorization import detect_institution_type, get_field_relevance_score
     
     if not institution_data:
         return 0, "No Data", {
@@ -38,7 +39,12 @@ def calculate_information_quality_score(institution_data):
             'institution_type': 'unknown'
         }
     
+    # Detect institution type for relevance filtering
+    institution_type = detect_institution_type(institution_data)
+
+
     # Field categories with different scoring weights
+    # Only fields relevant to the institution type will contribute to the score
     field_categories = {
         # Critical Fields (40% of score) - Essential identification info
         'critical': {
@@ -68,13 +74,25 @@ def calculate_information_quality_score(institution_data):
             ]
         },
         
-        # Specialized Fields (10% of score) - Domain-specific details
+        # Specialized Fields (10% of score) - Institution-specific details
+        # These only count if relevant to the institution type
         'specialized': {
             'weight': 10,
             'fields': [
                 'student_population', 'faculty_count', 'programs_offered',
                 'medical_specialties', 'patient_capacity', 'bed_count',
-                'departments', 'research_areas', 'accreditation_bodies'
+                'departments', 'research_areas', 'accreditation_bodies',
+                # New university-specific fields
+                'course_catalog', 'professors', 'academic_staff', 'administrative_staff',
+                'undergraduate_programs', 'graduate_programs', 'doctoral_programs',
+                'professional_programs', 'online_programs', 'continuing_education',
+                'admission_requirements', 'tuition_costs', 'scholarship_programs',
+                'academic_calendar', 'semester_system', 'graduation_rate',
+                'student_faculty_ratio', 'campus_housing', 'dormitories',
+                'libraries', 'laboratory_facilities', 'sports_facilities',
+                'student_organizations', 'fraternities_sororities', 'athletics_programs',
+                'research_centers', 'institutes', 'academic_rankings',
+                'notable_faculty', 'distinguished_alumni', 'university_press'
             ]
         },
         
@@ -90,47 +108,41 @@ def calculate_information_quality_score(institution_data):
         }
     }
     
-    # Calculate scores for each category
+    # Calculate scores for each category with institution-type awareness
     category_scores = {}
     total_populated = 0
-    total_fields = len(STRUCTURED_INFO_KEYS)
+    total_relevant_fields = 0
     
     for category_name, category_info in field_categories.items():
         category_fields = category_info['fields']
         category_populated = 0
+        category_relevant_count = 0
         
         for field in category_fields:
             if field in STRUCTURED_INFO_KEYS:
-                value = institution_data.get(field)
-                if is_field_populated(value):
-                    category_populated += 1
-                    total_populated += 1
+                # Check if field is relevant for this institution type
+                relevance = get_field_relevance_score(field, institution_data)
+                
+                if relevance > 0:  # Field is relevant
+                    category_relevant_count += 1
+                    total_relevant_fields += 1
+                    
+                    value = institution_data.get(field)
+                    if is_field_populated(value):
+                        category_populated += 1
+                        total_populated += 1
         
-        # Calculate category score (0-1 range)
-        category_completion = category_populated / len(category_fields) if category_fields else 0
+        # Calculate category score (0-1 range) based on relevant fields only
+        category_completion = category_populated / category_relevant_count if category_relevant_count > 0 else 0
         category_scores[category_name] = {
             'completion_rate': category_completion,
             'populated_count': category_populated,
-            'total_count': len(category_fields),
+            'total_count': category_relevant_count,
             'weighted_score': category_completion * category_info['weight']
         }
     
-    # Calculate remaining fields not in any category
-    categorized_fields = set()
-    for category_info in field_categories.values():
-        categorized_fields.update(category_info['fields'])
-    
-    remaining_fields = [f for f in STRUCTURED_INFO_KEYS if f not in categorized_fields]
-    remaining_populated = 0
-    for field in remaining_fields:
-        value = institution_data.get(field)
-        if is_field_populated(value):
-            remaining_populated += 1
-            total_populated += 1
-    
     # Base score from weighted categories
-    base_score = sum(cat['weighted_score'] for cat in category_scores.values())
-    
+    base_score = sum(cat['weighted_score'] for cat in category_scores.values())    
     # Bonus scoring for additional content richness (up to 25 points)
     bonus_score = 0
     
@@ -195,15 +207,17 @@ def calculate_information_quality_score(institution_data):
         rating = "Minimal"
     
     # Get institution type for context
-    institution_type = institution_data.get('type', 'Unknown')
-    if institution_type == 'Unknown':
-        institution_type = institution_data.get('entity_type', 'Unknown')
+    if institution_type == 'general':
+        institution_type = institution_data.get('type', 'Unknown')
+        if institution_type == 'Unknown':
+            institution_type = institution_data.get('entity_type', 'Unknown')
     
     # Detailed breakdown for transparency
     details = {
-        'total_fields': total_fields,
+        'total_fields': len(STRUCTURED_INFO_KEYS),
+        'relevant_fields': total_relevant_fields,
         'populated_fields': total_populated,
-        'completion_percentage': round((total_populated / total_fields) * 100, 1),
+        'completion_percentage': round((total_populated / total_relevant_fields) * 100, 1) if total_relevant_fields > 0 else 0,
         'critical_fields_populated': category_scores['critical']['populated_count'],
         'critical_fields_total': category_scores['critical']['total_count'],
         'important_fields_populated': category_scores['important']['populated_count'],
@@ -211,6 +225,7 @@ def calculate_information_quality_score(institution_data):
         'bonus_points': round(bonus_score, 1),
         'base_score': round(base_score, 1),
         'institution_type': institution_type,
+        'scoring_method': 'institution_aware',
         'category_breakdown': {
             cat_name: {
                 'completion_rate': round(cat_data['completion_rate'] * 100, 1),

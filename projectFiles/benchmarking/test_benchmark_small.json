@@ -1,0 +1,40 @@
+{
+  "test_suite_name": "Small Test Benchmark Suite",
+  "description": "Quick test with 4 institutions to validate benchmark functionality",
+  "test_configurations": [
+    {
+      "name": "small_test_suite",
+      "category": "mixed",      "institutions": [
+        {
+          "institution_name": "Harvard University",
+          "institution_type": "university",
+          "expected_min_quality": 0.7,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "Mayo Clinic",
+          "institution_type": "medical",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },
+        {
+          "institution_name": "JPMorgan Chase",
+          "institution_type": "financial",
+          "expected_min_quality": 0.6,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        },        {
+          "institution_name": "World Health Organization",
+          "institution_type": "international",
+          "expected_min_quality": 0.3,
+          "expected_max_cost": 0.02,
+          "expected_max_time": 15.0
+        }
+      ],
+      "output_types": ["json", "markdown"],
+      "iterations": 1
+    }
+  ]
+}

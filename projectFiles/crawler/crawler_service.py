@@ -161,30 +161,41 @@ class CrawlerService:
                     if i >= max_pages:
                         break
                     
-                    try:
-                        # Check cache first (unless force refresh)
+                    try:                        # Check cache first (unless force refresh)
                         cached_result = None
                         if not force_refresh:
                             cached_result = self.cache.get_cached_content(url)
-                        
                         if cached_result and not force_refresh:
-                            # Use cached content
+                            # Use cached content (successful or cached failure)
                             results['cache_hits'] += 1
                             page_result = cached_result
                             
                             # Add cache metadata
                             page_result['cache_hit'] = True
                             page_result['crawl_time'] = 0.0
+                            
+                            # If it's a cached failure, mark it appropriately
+                            if cached_result.get('cached_failure'):
+                                print(f"[CACHED FAIL] {url} - Skipping known timeout")
                         else:
                             # Crawl the URL
                             results['api_calls'] += 1
                             page_result = await self._crawl_single_url(
                                 crawler, url, crawler_config, crawl_session_id
                             )
-                            
-                            # Cache the result if successful
+                              # Cache the result (both successful and failed to avoid retrying timeouts)
                             if page_result.get('success', False):
                                 self.cache.cache_content(url, page_result)
+                            elif page_result.get('error') and 'timeout' in str(page_result.get('error', '')).lower():
+                                # Cache timeout errors to avoid repeated timeout delays
+                                timeout_result = {
+                                    'success': False, 
+                                    'error': page_result.get('error', 'Timeout error'),
+                                    'url': url,
+                                    'cached_failure': True,
+                                    'timestamp': page_result.get('timestamp')
+                                }
+                                self.cache.cache_content(url, timeout_result)
                         
                         # Process and add to results
                         if page_result.get('success', False):
@@ -196,10 +207,22 @@ class CrawlerService:
                                 'url': url,
                                 'error': page_result.get('error', 'Unknown error')
                             })
-                    
                     except Exception as e:
                         # Handle individual URL errors
                         error_msg = f"Error crawling {url}: {str(e)}"
+                        
+                        # Create failed result for caching
+                        failed_result = {
+                            'success': False,
+                            'error': error_msg,
+                            'url': url,
+                            'cached_failure': True,
+                            'timestamp': time.time()
+                        }
+                        
+                        # Cache the failure to avoid retrying the same error
+                        self.cache.cache_content(url, failed_result)
+                        
                         results['failed_urls'].append({
                             'url': url,
                             'error': error_msg

@@ -117,11 +117,74 @@
         "additional_keywords": "courses"
       },
       "cached_at": 1749643242.6251173
+    },
+    "a68ddd5d3aa83c3173bca3ce382b58dd": {
+      "query": "University of California Berkeley",
+      "params": {
+        "institution_type": "university"
+      },
+      "cached_at": 1749646618.505812
+    },
+    "2d0bc39bebdc9186f3abdbfcf8cd21f6": {
+      "query": "Yale University",
+      "params": {
+        "institution_type": "university"
+      },
+      "cached_at": 1749646708.3126264
+    },
+    "70aa313909e156f0bb157786851c1e69": {
+      "query": "Princeton University",
+      "params": {
+        "institution_type": "university"
+      },
+      "cached_at": 1749646797.3784268
+    },
+    "ef60ccf3569aeb32c2f213bb8cc2216b": {
+      "query": "Unknown",
+      "params": {
+        "institution_type": "general"
+      },
+      "cached_at": 1750045947.2759113
+    },
+    "29e2d40336af59298637d783801b5507": {
+      "query": "Mayo Clinic",
+      "params": {
+        "institution_type": "medical"
+      },
+      "cached_at": 1750046225.8168762
+    },
+    "bdd15d68328fb0c59aadb367b1d9411a": {
+      "query": "JPMorgan Chase",
+      "params": {
+        "institution_type": "financial"
+      },
+      "cached_at": 1750046259.8143046
+    },
+    "467d72c81a5cf380bede2e73973247d6": {
+      "query": "Random Non-Institution Test",
+      "params": {
+        "institution_type": "invalid"
+      },
+      "cached_at": 1750046337.6689126
+    },
+    "468bfbb675ffa0ddfc341c1ef0baea3e": {
+      "query": "World Health Organization",
+      "params": {
+        "institution_type": "international"
+      },
+      "cached_at": 1750046584.8784947
+    },
+    "01a14deaaec1e06faf5c9e960dd2ca6d": {
+      "query": "Microsoft Corporation",
+      "params": {
+        "institution_type": "corporate"
+      },
+      "cached_at": 1750057269.772381
     }
   },
   "stats": {
-    "hits": 77,
-    "misses": 24,
-    "similar_hits": 41
+    "hits": 229,
+    "misses": 33,
+    "similar_hits": 43
   }
 }

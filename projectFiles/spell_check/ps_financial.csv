@@ -1,0 +1,31 @@
+Type,Name,Category,Headquarters
+Bank,Bank of Palestine,Local Commercial,Ramallah
+Bank,Palestine Islamic Bank,Local Islamic,Ramallah
+Bank,Palestine Investment Bank,Local Commercial,Ramallah
+Bank,Al Quds Bank,Local Commercial,Ramallah
+Bank,The National Bank (TNB),Local Commercial,Ramallah
+Bank,Safa Bank,Local Islamic,Ramallah
+Bank,Arab Bank,Foreign (Jordanian),Ramallah
+Bank,Cairo Amman Bank,Foreign (Jordanian),Ramallah
+Bank,Bank of Jordan,Foreign (Jordanian),Ramallah
+Bank,Housing Bank,Foreign (Jordanian),Ramallah
+Bank,Egyptian Arab Land Bank,Foreign (Egyptian),Ramallah
+Bank,Jordan Ahli Bank,Foreign (Jordanian),Ramallah
+Bank,Commercial Bank of Jordan,Foreign (Jordanian),Ramallah
+Bank,Jordan Kuwait Bank,Foreign (Jordanian),Ramallah
+Microfinance,Palestine for Credit & Development (FATEN),MFI,Ramallah
+Microfinance,Asala for Credit & Development,MFI,Ramallah
+Microfinance,Vitas Palestine,MFI,Ramallah
+Microfinance,Reef Finance,MFI,Ramallah
+Microfinance,UNRWA Microfinance,MFI,Gaza/Ramallah
+Microfinance,CHF Palestine,MFI,Ramallah
+Microfinance,ACAD Finance,MFI,Ramallah
+Insurance,National Insurance Company,Insurance,Ramallah
+Insurance,Al-Takaful Palestinian Insurance,Insurance,Ramallah
+Insurance,Palestine Insurance Company,Insurance,Ramallah
+Insurance,Al-Mashreq Insurance Company,Insurance,Ramallah
+Insurance,Trust International Insurance Company,Insurance,Ramallah
+Insurance,Tamkeen Palestinian Insurance Company,Insurance,Ramallah
+Regulator,Palestinian Monetary Authority (PMA),Central Bank,Ramallah
+Regulator,Palestine Capital Market Authority (PCMA),Securities & Insurance Regulator,El‑Bireh
+Stock Exchange,Palestine Exchange (PEX),Stock Exchange,Ramallah

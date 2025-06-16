@@ -15,6 +15,7 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass, asdict
 import pandas as pd
+import numpy as np
 
 # Add project directory to path
 project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,8 +24,23 @@ if project_dir not in sys.path:
 
 from benchmarking.quality_score_integration import QualityScoreIntegrator
 from benchmarking.benchmark_config import BenchmarkCategory
-from benchmarking.integration import get_benchmarking_manager
-from institution_processor import process_institution_pipeline
+from benchmarking.integration import initialize_benchmarking
+# Remove institution_processor import to avoid circular dependency - import inside functions where needed
+from api.service_init import initialize_services
+
+
+class NumpyJSONEncoder(json.JSONEncoder):
+    """Custom JSON encoder to handle numpy types."""
+    def default(self, obj):
+        if isinstance(obj, np.integer):
+            return int(obj)
+        elif isinstance(obj, np.floating):
+            return float(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif isinstance(obj, pd.Timestamp):
+            return obj.isoformat()
+        return super().default(obj)
 
 # Create fresh quality integrator instance
 quality_integrator = QualityScoreIntegrator()
@@ -32,7 +48,7 @@ quality_integrator = QualityScoreIntegrator()
 
 @dataclass
 class ComprehensiveTestResult:
-    """Enhanced test result with quality score integration."""
+    """Enhanced test result with comprehensive metrics from pipeline."""
     institution_name: str
     institution_type: str
     output_type: str
@@ -69,9 +85,34 @@ class ComprehensiveTestResult:
     cache_hit_rate: float
     network_requests: int
     processing_phases_completed: int
+    total_pipeline_time: float
+    search_time: float
+    crawling_time: float
+    extraction_time: float
+      # Crawling metrics
+    success_rate: float
+    total_urls_requested: int
+    successful_crawls: int
+    failed_crawls: int
+    content_size_mb: float
+    compression_ratio: float
     
-    # Error information
-    error_message: Optional[str] = None
+    # Crawler strategy information
+    crawler_strategy: str = "default"
+    crawler_config_used: bool = False
+    priority_based_crawling: bool = False
+    force_refresh_used: bool = False
+      # Cost breakdown
+    google_search_cost: float = 0.0
+    llm_cost: float = 0.0
+    infrastructure_cost: float = 0.0
+    google_search_queries: int = 0
+    llm_model_used: str = "unknown"
+    input_tokens: int = 0
+    output_tokens: int = 0
+    total_tokens: int = 0
+      # Error information
+    error_message: str = ""
     validation_errors: List[str] = None
     
     def to_dict(self) -> Dict[str, Any]:
@@ -83,12 +124,87 @@ class ComprehensiveTestResult:
 
 class ComprehensiveTestRunner:
     """Enhanced test runner with quality score integration and output type testing."""
-    
     def __init__(self, base_dir: str):
         self.base_dir = base_dir
-        self.benchmarking_manager = get_benchmarking_manager()
-        self.results: List[ComprehensiveTestResult] = []
         
+        # Initialize benchmarking system
+        print("🔧 Initializing benchmarking system...")
+        self.benchmarking_manager = initialize_benchmarking(base_dir)
+        print("✅ Benchmarking system initialized")
+          # Initialize crawler service with proper caching (same as main app)        print("🔧 Initializing crawler service with caching...")        
+        services = initialize_services(base_dir)
+        self.crawler_service = services.get('crawler')
+        self.search_service = services.get('search')
+        
+        # Import here to avoid circular dependency
+        from institution_processor import set_global_crawler_service, set_global_search_service
+        
+        if self.crawler_service:
+            # Set the global crawler service so the pipeline uses it
+            set_global_crawler_service(self.crawler_service)
+            print("✅ Crawler service initialized with caching enabled")
+        else:
+            print("⚠️ Warning: Crawler service initialization failed")
+        if self.search_service:
+            # Set the global search service so the pipeline uses it
+            set_global_search_service(self.search_service)
+            print("✅ Search service initialized with caching enabled")
+        else:
+            print("⚠️ Warning: Search service initialization failed")
+            
+        # Pre-initialize the pipeline to ensure it uses the cached services
+        print("🔧 Pre-initializing pipeline with cached services...")
+        from institution_processor import _get_pipeline_instance
+        pipeline = _get_pipeline_instance()
+        print("✅ Pipeline pre-initialized with cached services")
+        
+        self.results: List[ComprehensiveTestResult] = []
+        self.test_counter = 0
+        self.live_table_interval = 5  # Update table every 5 tests
+        
+        # Initialize live table headers
+        self._print_table_header()
+    def _print_table_header(self):
+        """Print the header for the live results table."""
+        print("\n" + "="*150)
+        print("🔥 LIVE BENCHMARK RESULTS TABLE")
+        print("="*150)
+        header = f"{'Institution':<25} {'Type':<12} {'Format':<12} {'Strategy':<15} {'Quality':<8} {'Rating':<12} {'Time(s)':<8} {'Cost($)':<10} {'Fields':<8} {'Status':<10}"
+        print(header)
+        print("-"*150)
+    def _print_table_row(self, result: ComprehensiveTestResult):
+        """Print a single row in the live results table."""
+        status = "✅ SUCCESS" if result.success else "❌ FAILED"
+        strategy = result.crawler_strategy[:14] if result.crawler_strategy else "default"
+        row = f"{result.institution_name[:24]:<25} {result.institution_type[:11]:<12} {result.output_type:<12} {strategy:<15} {result.core_quality_score:<8.1f} {result.core_quality_rating[:11]:<12} {result.execution_time:<8.1f} ${result.cost_usd:<9.4f} {result.fields_extracted:<8} {status:<10}"
+        print(row)
+    
+    def _print_summary_stats(self):
+        """Print current summary statistics."""
+        if not self.results:
+            return
+            
+        total_tests = len(self.results)
+        successful_tests = sum(1 for r in self.results if r.success)
+        avg_quality = sum(r.core_quality_score for r in self.results) / total_tests
+        total_cost = sum(r.cost_usd for r in self.results)
+        avg_time = sum(r.execution_time for r in self.results) / total_tests
+        
+        print(f"\n📊 RUNNING STATS: {successful_tests}/{total_tests} successful | Avg Quality: {avg_quality:.1f} | Total Cost: ${total_cost:.4f} | Avg Time: {avg_time:.1f}s")
+        print("-"*120)
+    
+    def _add_result_and_update_table(self, result: ComprehensiveTestResult):
+        """Add result and update live table if needed."""
+        self.results.append(result)
+        self.test_counter += 1
+        
+        # Always print the current result
+        self._print_table_row(result)
+        
+        # Print summary every N tests
+        if self.test_counter % self.live_table_interval == 0:
+            self._print_summary_stats()
+    
     def run_comprehensive_test_suite(self, config_file: str) -> Dict[str, Any]:
         """
         Run the comprehensive test suite with enhanced metrics and analysis.
@@ -108,15 +224,39 @@ class ComprehensiveTestRunner:
         
         print(f"📋 Test Suite: {config.get('test_suite_name', 'Unknown')}")
         print(f"📝 Description: {config.get('description', 'No description')}")
-        
-        # Run all test configurations
-        for test_config in config.get('test_configurations', []):
-            print(f"\n🧪 Running Test: {test_config.get('test_name', 'Unknown')}")
+          # Run all test configurations
+        total_configs = len(config.get('test_configurations', []))
+        for i, test_config in enumerate(config.get('test_configurations', []), 1):
+            print(f"\n{'='*80}")
+            print(f"🧪 Running Test Configuration {i}/{total_configs}: {test_config.get('test_name', 'Unknown')}")
+            print(f"📝 Description: {test_config.get('test_description', 'No description')}")
+            
+            # Extract and display strategy info
+            crawler_config = test_config.get('crawler_config', {})
+            if crawler_config:
+                strategy = crawler_config.get('benchmark_config', {}).get('strategy', 'unknown')
+                print(f"🚀 Crawler Strategy: {strategy}")
+                if test_config.get('force_refresh'):
+                    print(f"🔄 Cache: Disabled (force refresh)")
+                else:
+                    print(f"💾 Cache: Enabled")
+            
+            print(f"{'='*80}")
+            
             self._run_test_configuration(test_config)
-        
-        # Generate comprehensive analysis
+            
+            # Add longer pause between test configurations
+            if i < total_configs:
+                print(f"\n⏸️  Pausing 5 seconds between test configurations to avoid rate limits...")
+                time.sleep(5)# Generate comprehensive analysis
         total_time = time.time() - start_time
         analysis = self._generate_comprehensive_analysis()
+        
+        # Display final summary
+        print(f"\n{'='*140}")
+        print("🏆 COMPREHENSIVE BENCHMARK RESULTS SUMMARY")
+        print(f"{'='*140}")
+        self._print_summary_stats()
         
         # Generate output files
         output_files = self._generate_output_files(config, analysis)
@@ -125,7 +265,29 @@ class ComprehensiveTestRunner:
         print(f"📊 Total Tests: {len(self.results)}")
         print(f"✅ Successful: {sum(1 for r in self.results if r.success)}")
         print(f"❌ Failed: {sum(1 for r in self.results if not r.success)}")
-        print(f"📁 Output Files: {', '.join(output_files)}")
+        
+        print(f"\n📁 Generated Output Files:")
+        for i, file_path in enumerate(output_files, 1):
+            file_name = os.path.basename(file_path)
+            if 'comprehensive_benchmark_results_' in file_name and file_name.endswith('.json'):
+                print(f"   {i}. {file_name} - Complete results data (JSON)")
+            elif 'comprehensive_benchmark_results_' in file_name and file_name.endswith('.csv'):
+                print(f"   {i}. {file_name} - Detailed results table (CSV)")
+            elif 'comprehensive_benchmark_analysis_' in file_name:
+                print(f"   {i}. {file_name} - Interactive analysis report (HTML)")
+            elif 'comprehensive_benchmark_report_' in file_name:
+                print(f"   {i}. {file_name} - Formatted report (Markdown)")
+            elif 'benchmark_summary_table_' in file_name:
+                print(f"   {i}. {file_name} - Summary table (Text)")
+            elif 'benchmark_summary_' in file_name:
+                print(f"   {i}. {file_name} - Analysis summary (JSON)")
+            else:
+                print(f"   {i}. {file_name}")
+        
+        print(f"\n💡 Open the HTML file in a browser for interactive analysis")
+        print(f"📊 Use the CSV file for data analysis in Excel/Pandas")
+        print(f"📝 Read the Markdown file for formatted report")
+        print(f"📋 Check the text file for quick summary table")
         
         return {
             'summary': {
@@ -138,39 +300,64 @@ class ComprehensiveTestRunner:
             'analysis': analysis,
             'results': [r.to_dict() for r in self.results]
         }
-    
     def _run_test_configuration(self, test_config: Dict[str, Any]):
         """Run a single test configuration with multiple institutions and output types."""
         institutions = test_config.get('institutions', [])
         output_types = test_config.get('output_types', ['json'])
         iterations = test_config.get('iterations', 1)
         
-        print(f"   📈 Testing {len(institutions)} institutions x {len(output_types)} output types x {iterations} iterations")
+        total_tests = len(institutions) * len(output_types) * iterations
+        print(f"   📈 Testing {len(institutions)} institutions x {len(output_types)} output types x {iterations} iterations = {total_tests} total tests")
         
+        test_counter = 0        
         for institution in institutions:
             for output_type in output_types:
                 for iteration in range(iterations):
+                    test_counter += 1
+                    
+                    # Print detailed test info with progress
+                    print(f"\n      🧪 Test {test_counter}/{total_tests}: {institution.get('institution_name')} | {output_type} | iteration {iteration + 1}/{iterations}")
+                    
                     self._run_single_test(
                         institution, 
                         output_type, 
                         test_config.get('category', 'pipeline'),
                         iteration + 1,
-                        iterations
+                        iterations,
+                        test_config
                     )
-    
+                    
+                    # Add pause between tests to avoid rate limits
+                    if test_counter < total_tests:
+                        print(f"      ⏸️  Pausing 3 seconds to avoid rate limits...")
+                        time.sleep(3)
+        
+        print(f"\n   ✅ Test configuration completed: {test_counter}/{total_tests} tests finished")
     def _run_single_test(
         self, 
         institution: Dict[str, Any], 
         output_type: str, 
         category: str,
         iteration: int,
-        total_iterations: int
+        total_iterations: int,
+        config: Dict[str, Any] = None
     ):
         """Run a single test case with comprehensive metrics collection."""
+        # Import here to avoid circular dependency
+        from institution_processor import process_institution_pipeline
         institution_name = institution.get('institution_name', 'Unknown')
         institution_type = institution.get('institution_type', 'general')
         
+        # Extract crawler strategy info for logging
+        crawler_strategy = "default"
+        if config and config.get('crawler_config'):
+            benchmark_config = config.get('crawler_config', {}).get('benchmark_config', {})
+            crawler_strategy = benchmark_config.get('strategy', 'unknown')
+        
         print(f"      🏛️  {institution_name} ({institution_type}) - {output_type} format - iteration {iteration}/{total_iterations}")
+        print(f"         📊 Strategy: {crawler_strategy} | Force Refresh: {config.get('force_refresh', False)}")
+        print(f"         🚀 Starting pipeline execution...")
+        
         start_time = time.time()
         success = False
         error_message = None
@@ -178,56 +365,99 @@ class ComprehensiveTestRunner:
         try:
             # Enable benchmarking context for proper cost tracking
             from benchmarking.integration import get_benchmarking_manager, benchmark_context, BenchmarkCategory
+              # Get benchmarking manager
+            benchmarking_manager = get_benchmarking_manager()            # Get crawler config and cache settings from test configuration
+            config = config or {}
+            crawler_config = config.get('crawler_config')
+            force_refresh = config.get('force_refresh', False)
             
-            # Get benchmarking manager
-            benchmarking_manager = get_benchmarking_manager()
-            
-            if benchmarking_manager:
-                # Use benchmarking context for proper cost tracking
+            if benchmarking_manager:                # Use benchmarking context for proper cost tracking
                 with benchmark_context(
+                    category=BenchmarkCategory.PIPELINE,
                     institution_name=institution_name,
-                    institution_type=institution_type or "unknown",
-                    category=BenchmarkCategory.COMPREHENSIVE_TEST,
-                    test_iteration=iteration
-                ):
+                    institution_type=institution_type or "unknown"                ):
                     processed_data = process_institution_pipeline(
                         institution_name=institution_name,
                         institution_type=institution_type,
-                        search_params=None
+                        search_params=None,
+                        output_type=output_type,
+                        crawler_config=crawler_config,
+                        force_refresh=force_refresh
                     )
-            else:
-                # Fallback without benchmarking context
+            else:                # Fallback without benchmarking context
                 print(f"⚠️ Warning: Benchmarking manager not available, cost tracking will be limited")
                 processed_data = process_institution_pipeline(
                     institution_name=institution_name,
                     institution_type=institution_type,
-                    search_params=None
+                    search_params=None,
+                    output_type=output_type,
+                    crawler_config=crawler_config,
+                    force_refresh=force_refresh
                 )
-            
             if processed_data and not processed_data.get('error'):
                 success = True
+                print(f"         ✅ Pipeline completed successfully in {time.time() - start_time:.2f}s")
+                
+                # Log phase completion details
+                processing_phases = processed_data.get('processing_phases', {})
+                if processing_phases:
+                    print(f"         📋 Phase results:")
+                    for phase_name, phase_data in processing_phases.items():
+                        status = "✅" if phase_data.get('success', False) else "❌"
+                        phase_time = phase_data.get('time', 0)
+                        print(f"            {status} {phase_name}: {phase_time:.2f}s")
+                
+                # Log crawling summary if available
+                crawl_summary = processed_data.get('crawl_summary', {})
+                if crawl_summary:
+                    print(f"         🕷️  Crawl summary: {crawl_summary.get('successful_crawls', 0)}/{crawl_summary.get('total_urls_requested', 0)} URLs")
+                
             else:
                 error_message = processed_data.get('error', 'Unknown processing error') if processed_data else 'No data returned'
+                print(f"         ❌ Pipeline failed: {error_message}")
                 
         except Exception as e:
             error_message = str(e)
             success = False
+            print(f"         💥 Exception occurred: {error_message}")
         
         execution_time = time.time() - start_time
-        
-        # Calculate comprehensive metrics using quality score integration
+        print(f"         ⏱️  Total execution time: {execution_time:.2f}s")
+          # Calculate comprehensive metrics using quality score integration
         if success and processed_data:
-            quality_metrics = quality_integrator.get_output_type_metrics(processed_data, output_type)
+            try:
+                quality_metrics = quality_integrator.get_output_type_metrics(processed_data, output_type)
+            except AttributeError as e:
+                print(f"⚠️ Quality integration error: {e}")
+                # Fallback to basic quality metrics
+                quality_metrics = {'core_quality_score': processed_data.get('quality_score', 0), 'output_type': output_type}
             cost_metrics = self._extract_cost_metrics(processed_data)
             performance_metrics = self._extract_performance_metrics(processed_data)
         else:
-            quality_metrics = quality_integrator.calculate_enhanced_quality_metrics({})
+            try:
+                quality_metrics = quality_integrator.calculate_enhanced_quality_metrics({})
+            except AttributeError:
+                quality_metrics = {'core_quality_score': 0, 'output_type': output_type}
             cost_metrics = {'total_cost': 0.0, 'api_calls': 0}
             performance_metrics = {
                 'cache_hit_rate': 0.0,
                 'network_requests': 0,
                 'processing_phases_completed': 0
-            }
+            }        # Extract crawler strategy information from config
+        crawler_strategy = "default"
+        crawler_config_used = False
+        force_refresh_used = False
+        priority_based_crawling = False
+        
+        if config and config.get('crawler_config'):
+            crawler_config_used = True
+            benchmark_config = config.get('crawler_config', {}).get('benchmark_config', {})
+            crawler_strategy = benchmark_config.get('strategy', 'unknown')
+            if crawler_strategy == 'priority_based':
+                priority_based_crawling = True
+        
+        if config and config.get('force_refresh'):
+            force_refresh_used = True
         
         # Create comprehensive test result
         result = ComprehensiveTestResult(
@@ -240,7 +470,7 @@ class ComprehensiveTestRunner:
             
             # Core quality metrics
             core_quality_score=quality_metrics.get('core_quality_score', 0),
-            core_quality_rating=quality_metrics.get('core_quality_rating', 'No Data'),
+            core_quality_rating=quality_metrics.get('core_quality_rating', 'Unknown'),
             completeness_score=quality_metrics.get('completeness_score', 0.0),
             fields_extracted=quality_metrics.get('fields_extracted', 0),
             fields_requested=quality_metrics.get('fields_requested', 97),
@@ -267,43 +497,86 @@ class ComprehensiveTestRunner:
             cache_hit_rate=performance_metrics.get('cache_hit_rate', 0.0),
             network_requests=performance_metrics.get('network_requests', 0),
             processing_phases_completed=performance_metrics.get('processing_phases_completed', 0),
+            total_pipeline_time=performance_metrics.get('total_pipeline_time', 0.0),
+            search_time=performance_metrics.get('search_time', 0.0),
+            crawling_time=performance_metrics.get('crawling_time', 0.0),
+            extraction_time=performance_metrics.get('extraction_time', 0.0),
+            
+            # Crawling metrics
+            success_rate=performance_metrics.get('success_rate', 0.0),
+            total_urls_requested=performance_metrics.get('total_urls_requested', 0),
+            successful_crawls=performance_metrics.get('successful_crawls', 0),
+            failed_crawls=performance_metrics.get('failed_crawls', 0),
+            content_size_mb=performance_metrics.get('content_size_mb', 0.0),
+            compression_ratio=performance_metrics.get('compression_ratio', 0.0),
+            
+            # Cost breakdown
+            google_search_cost=cost_metrics.get('google_search_cost', 0.0),
+            llm_cost=cost_metrics.get('llm_cost', 0.0),
+            infrastructure_cost=cost_metrics.get('infrastructure_cost', 0.0),
+            google_search_queries=cost_metrics.get('google_search_queries', 0),
+            llm_model_used=cost_metrics.get('llm_model_used', 'unknown'),
+            input_tokens=cost_metrics.get('input_tokens', 0),            output_tokens=cost_metrics.get('output_tokens', 0),
+            total_tokens=cost_metrics.get('total_tokens', 0),
+            
+            # Crawler strategy information
+            crawler_strategy=crawler_strategy,
+            crawler_config_used=crawler_config_used,
+            priority_based_crawling=priority_based_crawling,
+            force_refresh_used=force_refresh_used,
             
             # Error information
-            error_message=error_message,
-            validation_errors=quality_metrics.get('validation_errors', [])
-        )
+            error_message=error_message or "")
         
-        self.results.append(result)
+        # Add result to collection and update live table
+        self._add_result_and_update_table(result)
         
-        # Print result summary
-        status = "✅" if success else "❌"
-        print(f"         {status} Quality: {result.core_quality_score:.1f} | Time: {execution_time:.2f}s | Cost: ${result.cost_usd:.4f}")
-        
+        # Print any error details
         if not success and error_message:
             print(f"         ⚠️  Error: {error_message}")
     
     def _extract_cost_metrics(self, processed_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Extract cost metrics from processed data."""
+        """Extract comprehensive cost metrics from processed data."""
         cost_metrics = processed_data.get('cost_metrics', {})
+        extraction_metrics = processed_data.get('extraction_metrics', {})
+        
         return {
             'total_cost': cost_metrics.get('total_cost_usd', 0.0),
-            'api_calls': cost_metrics.get('api_calls', 0),
-            'input_tokens': cost_metrics.get('input_tokens', 0),
-            'output_tokens': cost_metrics.get('output_tokens', 0)
+            'google_search_cost': cost_metrics.get('google_search_cost_usd', 0.0),
+            'llm_cost': cost_metrics.get('llm_cost_usd', 0.0),
+            'infrastructure_cost': cost_metrics.get('infrastructure_cost_usd', 0.0),
+            'google_search_queries': cost_metrics.get('google_search_queries', 0),
+            'llm_model_used': cost_metrics.get('llm_model_used', extraction_metrics.get('model_used', 'unknown')),
+            'input_tokens': cost_metrics.get('input_tokens', extraction_metrics.get('input_tokens', 0)),
+            'output_tokens': cost_metrics.get('output_tokens', extraction_metrics.get('output_tokens', 0)),
+            'total_tokens': cost_metrics.get('total_tokens', extraction_metrics.get('total_tokens', 0))
         }
-    
     def _extract_performance_metrics(self, processed_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Extract performance metrics from processed data."""
+        """Extract comprehensive performance metrics from processed data."""
         crawl_summary = processed_data.get('crawl_summary', {})
         processing_phases = processed_data.get('processing_phases', {})
+        performance_metrics = processed_data.get('performance_metrics', {})
+        latency_metrics = processed_data.get('latency_metrics', {})
+        efficiency_metrics = processed_data.get('efficiency_metrics', {})
         
         # Count completed phases
         completed_phases = sum(1 for phase in processing_phases.values() if phase.get('success', False))
         
         return {
-            'cache_hit_rate': crawl_summary.get('cache_hit_rate', 0.0),
-            'network_requests': crawl_summary.get('total_urls_requested', 0),
-            'processing_phases_completed': completed_phases
+            'cache_hit_rate': crawl_summary.get('cache_hit_rate', efficiency_metrics.get('cache_hit_rate', 0.0)),
+            'network_requests': latency_metrics.get('network_requests', 0),
+            'processing_phases_completed': completed_phases,
+            'total_pipeline_time': performance_metrics.get('total_pipeline_time', latency_metrics.get('total_pipeline_time_seconds', 0.0)),
+            'search_time': processing_phases.get('search', {}).get('time', latency_metrics.get('search_time_seconds', 0.0)),
+            'crawling_time': processing_phases.get('crawling', {}).get('time', latency_metrics.get('crawling_time_seconds', 0.0)),
+            'extraction_time': processing_phases.get('extraction', {}).get('time', latency_metrics.get('llm_processing_time_seconds', 0.0)),
+            'success_rate': crawl_summary.get('success_rate', 0.0),
+            'total_urls_requested': crawl_summary.get('total_urls_requested', 0),
+            'successful_crawls': crawl_summary.get('successful_crawls', 0),
+            'failed_crawls': crawl_summary.get('failed_crawls', 0),
+            'content_size_mb': crawl_summary.get('total_content_size_mb', 0.0),
+            'compression_ratio': crawl_summary.get('compression_ratio', 0.0),
+            'overall_success': performance_metrics.get('overall_success', False)
         }
     
     def _generate_comprehensive_analysis(self) -> Dict[str, Any]:
@@ -338,8 +611,7 @@ class ComprehensiveTestRunner:
                 'critical_fields_completion': type_df['critical_fields_completion'].mean(),
                 'important_fields_completion': type_df['important_fields_completion'].mean()
             }
-        
-        # Output type analysis
+          # Output type analysis
         output_type_analysis = {}
         for output_type in df['output_type'].unique():
             output_df = df[df['output_type'] == output_type]
@@ -350,6 +622,22 @@ class ComprehensiveTestRunner:
                 'avg_complexity': output_df['serialization_complexity'].mean(),
                 'avg_information_density': output_df['information_density'].mean(),
                 'avg_execution_time': output_df['execution_time'].mean()
+            }
+        
+        # Crawler strategy analysis
+        crawler_strategy_analysis = {}
+        for strategy in df['crawler_strategy'].unique():
+            strategy_df = df[df['crawler_strategy'] == strategy]
+            crawler_strategy_analysis[strategy] = {
+                'count': len(strategy_df),
+                'success_rate': strategy_df['success'].mean(),
+                'avg_quality_score': strategy_df['core_quality_score'].mean(),
+                'avg_execution_time': strategy_df['execution_time'].mean(),
+                'avg_cost': strategy_df['cost_usd'].mean(),
+                'avg_crawling_time': strategy_df['crawling_time'].mean(),
+                'avg_successful_crawls': strategy_df['successful_crawls'].mean(),
+                'avg_content_size_mb': strategy_df['content_size_mb'].mean(),
+                'force_refresh_usage': strategy_df['force_refresh_used'].mean()
             }
         
         # Quality score distribution
@@ -391,11 +679,11 @@ class ComprehensiveTestRunner:
         else:
             top_performers = []
             bottom_performers = []
-        
         return {
             'overall_statistics': overall_stats,
             'institution_type_analysis': institution_type_analysis,
             'output_type_analysis': output_type_analysis,
+            'crawler_strategy_analysis': crawler_strategy_analysis,
             'quality_distribution': quality_distribution,
             'field_completion_analysis': field_completion_analysis,
             'performance_analysis': performance_analysis,
@@ -416,28 +704,40 @@ class ComprehensiveTestRunner:
         # 1. JSON results file
         json_file = os.path.join(output_dir, f'comprehensive_benchmark_results_{timestamp}.json')
         with open(json_file, 'w', encoding='utf-8') as f:
-            json.dump({
+            # Sanitize data before JSON serialization
+            sanitized_data = self._sanitize_for_json({
                 'test_config': config,
                 'analysis': analysis,
                 'results': [r.to_dict() for r in self.results]
-            }, f, indent=2, ensure_ascii=False)
+            })
+            json.dump(sanitized_data, f, indent=2, ensure_ascii=False, cls=NumpyJSONEncoder)
         output_files.append(json_file)
         
-        # 2. CSV results file
+        # 2. CSV results file (detailed)
         csv_file = os.path.join(output_dir, f'comprehensive_benchmark_results_{timestamp}.csv')
         df = pd.DataFrame([asdict(r) for r in self.results])
         df.to_csv(csv_file, index=False)
         output_files.append(csv_file)
         
-        # 3. HTML analysis report
+        # 3. Enhanced HTML analysis report with detailed tables
         html_file = os.path.join(output_dir, f'comprehensive_benchmark_analysis_{timestamp}.html')
         self._generate_html_report(analysis, html_file)
         output_files.append(html_file)
         
-        # 4. Summary analysis JSON
+        # 4. Markdown detailed report
+        markdown_file = os.path.join(output_dir, f'comprehensive_benchmark_report_{timestamp}.md')
+        self._generate_markdown_report(analysis, markdown_file)
+        output_files.append(markdown_file)
+        
+        # 5. Formatted text summary table
+        text_file = os.path.join(output_dir, f'benchmark_summary_table_{timestamp}.txt')
+        self._generate_text_summary_table(text_file)
+        output_files.append(text_file)
+        # 6. Summary analysis JSON
         summary_file = os.path.join(output_dir, f'benchmark_summary_{timestamp}.json')
         with open(summary_file, 'w', encoding='utf-8') as f:
-            json.dump(analysis, f, indent=2, ensure_ascii=False)
+            sanitized_analysis = self._sanitize_for_json(analysis)
+            json.dump(sanitized_analysis, f, indent=2, ensure_ascii=False, cls=NumpyJSONEncoder)
         output_files.append(summary_file)
         
         return output_files
@@ -505,8 +805,8 @@ class ComprehensiveTestRunner:
                 <th>Count</th>
                 <th>Success Rate</th>
                 <th>Avg Quality Score</th>
-                <th>Avg Time (s)</th>
-                <th>Avg Cost ($)</th>
+                <th>Avg Execution Time</th>
+                <th>Avg Cost</th>
                 <th>Critical Fields</th>
                 <th>Important Fields</th>
             </tr>
@@ -540,7 +840,7 @@ class ComprehensiveTestRunner:
                 <th>Avg Data Size</th>
                 <th>Complexity</th>
                 <th>Information Density</th>
-                <th>Avg Time (s)</th>
+                <th>Avg Execution Time</th>
             </tr>
 """
         
@@ -641,8 +941,7 @@ class ComprehensiveTestRunner:
         
         for performer in analysis['top_performers']:
             html_content += f"""
-            <tr>
-                <td>{performer['institution_name']}</td>
+            <tr>                <td>{performer['institution_name']}</td>
                 <td>{performer['institution_type']}</td>
                 <td class="success">{performer['core_quality_score']:.1f}</td>
                 <td>{performer['execution_time']:.2f}</td>
@@ -660,13 +959,308 @@ class ComprehensiveTestRunner:
         <p><strong>Cost per Test:</strong> ${(analysis['total_cost'] / analysis['overall_statistics']['total_tests']):.4f}</p>
         <p><strong>Time per Test:</strong> {(analysis['total_execution_time'] / analysis['overall_statistics']['total_tests']):.2f} seconds</p>
     </div>
-    
+"""
+
+        # Add detailed results table if we have results
+        if self.results:
+            df = pd.DataFrame([asdict(r) for r in self.results])
+            html_content += """
+    <div class="section">
+        <h2>📊 Detailed Results by Institution Type</h2>
+"""
+            
+            for inst_type in df['institution_type'].unique():
+                type_df = df[df['institution_type'] == inst_type]
+                html_content += f"""
+        <h3>{inst_type.title()} Institutions ({len(type_df)} tests)</h3>
+        <table>
+            <tr>
+                <th>Institution</th>
+                <th>Format</th>
+                <th>Quality</th>
+                <th>Rating</th>
+                <th>Time (s)</th>
+                <th>Cost ($)</th>
+                <th>Fields</th>
+                <th>Tokens</th>
+                <th>Model</th>
+                <th>Status</th>
+            </tr>
+"""
+                
+                for _, result in type_df.sort_values('core_quality_score', ascending=False).iterrows():
+                    status = "✅ SUCCESS" if result['success'] else "❌ FAILED"
+                    status_class = "success" if result['success'] else "error"
+                    quality_class = "success" if result['core_quality_score'] >= 70 else "warning" if result['core_quality_score'] >= 50 else "error"
+                    
+                    html_content += f"""
+            <tr>
+                <td>{result['institution_name']}</td>
+                <td>{result['output_type']}</td>
+                <td class="{quality_class}">{result['core_quality_score']:.1f}</td>
+                <td>{result['core_quality_rating']}</td>
+                <td>{result['execution_time']:.1f}</td>
+                <td>${result['cost_usd']:.4f}</td>
+                <td>{result['fields_extracted']}</td>
+                <td>{result['total_tokens']}</td>
+                <td>{result['llm_model_used']}</td>
+                <td class="{status_class}">{status}</td>
+            </tr>
+"""
+                
+                # Type summary
+                html_content += f"""
+        </table>
+        <p><strong>{inst_type.title()} Summary:</strong> Avg Quality: {type_df['core_quality_score'].mean():.1f} | Avg Cost: ${type_df['cost_usd'].mean():.4f} | Success Rate: {type_df['success'].mean()*100:.1f}%</p>
+"""
+            
+            html_content += """
+    </div>
+"""
+
+        html_content += """
 </body>
 </html>
 """
         
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(html_content)
+    
+    def _generate_markdown_report(self, analysis: Dict[str, Any], output_file: str):
+        """Generate a comprehensive Markdown analysis report with detailed tables."""
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        
+        markdown_content = f"""# 🏛️ Comprehensive Institution Benchmark Analysis
+
+**Generated on:** {timestamp}
+
+## 📊 Executive Summary
+
+| Metric | Value |
+|--------|-------|
+| Total Tests | {analysis['overall_statistics']['total_tests']} |
+| Success Rate | {analysis['overall_statistics']['success_rate']:.1%} |
+| Average Quality Score | {analysis['overall_statistics']['avg_quality_score']:.1f} |
+| Average Execution Time | {analysis['overall_statistics']['avg_execution_time']:.2f}s |
+| Average Cost | ${analysis['overall_statistics']['avg_cost']:.4f} |
+| Total Cost | ${analysis['total_cost']:.4f} |
+| Total Execution Time | {analysis['total_execution_time']:.2f}s |
+
+## 🏛️ Institution Type Performance Analysis
+
+| Institution Type | Count | Success Rate | Avg Quality | Avg Time (s) | Avg Cost ($) | Critical Fields | Important Fields |
+|------------------|-------|--------------|-------------|--------------|---------------|----------------|------------------|
+"""
+
+        for inst_type, data in analysis['institution_type_analysis'].items():
+            markdown_content += f"| {inst_type.title()} | {data['count']} | {data['success_rate']:.1%} | {data['avg_quality_score']:.1f} | {data['avg_execution_time']:.2f} | ${data['avg_cost']:.4f} | {data['critical_fields_completion']:.1%} | {data['important_fields_completion']:.1%} |\n"
+
+        markdown_content += f"""
+## 📄 Output Format Performance Analysis
+
+| Output Type | Count | Success Rate | Avg Data Size | Complexity | Information Density | Avg Time (s) |
+|-------------|-------|--------------|---------------|------------|-------------------|--------------|
+"""
+
+        for output_type, data in analysis['output_type_analysis'].items():
+            markdown_content += f"| {output_type.upper()} | {data['count']} | {data['success_rate']:.1%} | {data['avg_data_size']:.0f} bytes | {data['avg_complexity']:.2f} | {data['avg_information_density']:.2f} | {data['avg_execution_time']:.2f} |\n"
+
+        markdown_content += f"""
+## 🎯 Quality Score Distribution
+
+| Quality Range | Count | Percentage |
+|---------------|-------|------------|
+| Excellent (90+) | {analysis['quality_distribution']['excellent_90_plus']} | {(analysis['quality_distribution']['excellent_90_plus'] / analysis['overall_statistics']['total_tests'] * 100):.1f}% |
+| Good (70-89) | {analysis['quality_distribution']['good_70_to_89']} | {(analysis['quality_distribution']['good_70_to_89'] / analysis['overall_statistics']['total_tests'] * 100):.1f}% |
+| Fair (50-69) | {analysis['quality_distribution']['fair_50_to_69']} | {(analysis['quality_distribution']['fair_50_to_69'] / analysis['overall_statistics']['total_tests'] * 100):.1f}% |
+| Poor (<50) | {analysis['quality_distribution']['poor_below_50']} | {(analysis['quality_distribution']['poor_below_50'] / analysis['overall_statistics']['total_tests'] * 100):.1f}% |
+
+## 📋 Field Completion Analysis
+
+| Field Category | Completion Rate |
+|----------------|-----------------|
+| Critical Fields | {analysis['field_completion_analysis']['avg_critical_completion']:.1%} |
+| Important Fields | {analysis['field_completion_analysis']['avg_important_completion']:.1%} |
+| Specialized Fields | {analysis['field_completion_analysis']['avg_specialized_completion']:.1%} |
+
+**Field Extraction Statistics:**
+- Average Fields Extracted: {analysis['field_completion_analysis']['avg_fields_extracted']:.0f}
+- Maximum Fields Extracted: {analysis['field_completion_analysis']['max_fields_extracted']}
+- Minimum Fields Extracted: {analysis['field_completion_analysis']['min_fields_extracted']}
+
+## 🚀 Performance Metrics
+
+| Metric | Value |
+|--------|-------|
+| Average Cache Hit Rate | {analysis['performance_analysis']['avg_cache_hit_rate']:.1%} |
+| Average Network Requests | {analysis['performance_analysis']['avg_network_requests']:.0f} |
+| Pipeline Success Rate | {analysis['performance_analysis']['pipeline_success_rate']:.1%} |
+| Average Processing Phases Completed | {analysis['performance_analysis']['avg_processing_phases_completed']:.1f} |
+
+## 🏆 Top Performers
+
+| Rank | Institution | Type | Quality Score | Execution Time (s) |
+|------|-------------|------|---------------|--------------------|
+"""
+
+        for i, performer in enumerate(analysis['top_performers'], 1):
+            markdown_content += f"| {i} | {performer['institution_name']} | {performer['institution_type']} | {performer['core_quality_score']:.1f} | {performer['execution_time']:.2f} |\n"
+
+        # Add detailed results table
+        if self.results:
+            df = pd.DataFrame([asdict(r) for r in self.results])
+            markdown_content += f"""
+## 📊 Detailed Results by Institution Type
+
+"""
+            for inst_type in df['institution_type'].unique():
+                type_df = df[df['institution_type'] == inst_type]
+                markdown_content += f"""
+### {inst_type.title()} Institutions
+
+| Institution | Format | Quality | Rating | Time (s) | Cost ($) | Fields | Tokens | Model | Status |
+|-------------|--------|---------|--------|----------|----------|--------|--------|-------|--------|
+"""
+                for _, result in type_df.sort_values('core_quality_score', ascending=False).iterrows():
+                    status = "✅ SUCCESS" if result['success'] else "❌ FAILED"
+                    markdown_content += f"| {result['institution_name']} | {result['output_type']} | {result['core_quality_score']:.1f} | {result['core_quality_rating']} | {result['execution_time']:.1f} | ${result['cost_usd']:.4f} | {result['fields_extracted']} | {result['total_tokens']} | {result['llm_model_used']} | {status} |\n"
+                
+                # Type summary
+                markdown_content += f"""
+**{inst_type.title()} Summary:** Avg Quality: {type_df['core_quality_score'].mean():.1f} | Avg Cost: ${type_df['cost_usd'].mean():.4f} | Success Rate: {type_df['success'].mean()*100:.1f}%
+
+"""
+
+        markdown_content += f"""
+## 💰 Cost Analysis
+
+- **Total Cost:** ${analysis['total_cost']:.4f}
+- **Cost per Test:** ${(analysis['total_cost'] / analysis['overall_statistics']['total_tests']):.4f}
+- **Time per Test:** {(analysis['total_execution_time'] / analysis['overall_statistics']['total_tests']):.2f} seconds
+
+## 📈 Recommendations
+
+Based on the benchmark results:
+
+1. **Performance Optimization:** Focus on improving cache hit rates and reducing network requests
+2. **Quality Improvement:** Target institutions with low quality scores for enhanced data extraction
+3. **Cost Efficiency:** Consider output format optimization for better cost-performance ratios
+4. **Field Completion:** Enhance extraction logic for critical and important fields
+
+---
+*Report generated by Comprehensive Institution Benchmark Suite*
+"""
+
+        with open(output_file, 'w', encoding='utf-8') as f:
+            f.write(markdown_content)
+    
+    def _generate_text_summary_table(self, output_file: str):
+        """Generate a formatted text table summarizing all benchmark results."""
+        if not self.results:
+            with open(output_file, 'w', encoding='utf-8') as f:
+                f.write("No benchmark results available.\n")
+            return
+
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        df = pd.DataFrame([asdict(r) for r in self.results])
+        
+        content = f"""COMPREHENSIVE INSTITUTION BENCHMARK RESULTS
+Generated: {timestamp}
+{'='*140}
+
+EXECUTIVE SUMMARY
+{'-'*50}
+Total Tests Run: {len(df)}
+Successful Tests: {df['success'].sum()} ({df['success'].mean()*100:.1f}%)
+Average Quality Score: {df['core_quality_score'].mean():.1f}
+Total Cost: ${df['cost_usd'].sum():.4f}
+Average Execution Time: {df['execution_time'].mean():.1f} seconds
+
+"""
+
+        # Results by institution type
+        for inst_type in df['institution_type'].unique():
+            type_df = df[df['institution_type'] == inst_type]
+            content += f"""
+{inst_type.upper()} INSTITUTIONS ({len(type_df)} tests)
+{'-'*140}
+{'Institution':<30} {'Format':<12} {'Quality':<8} {'Rating':<15} {'Time(s)':<8} {'Cost($)':<12} {'Fields':<8} {'Tokens':<8} {'Model':<15} {'Status':<10}
+{'-'*140}
+"""
+            
+            for _, result in type_df.sort_values('core_quality_score', ascending=False).iterrows():
+                status = "SUCCESS" if result['success'] else "FAILED"
+                line = f"{result['institution_name'][:29]:<30} {result['output_type']:<12} {result['core_quality_score']:<8.1f} {result['core_quality_rating'][:14]:<15} {result['execution_time']:<8.1f} ${result['cost_usd']:<11.4f} {result['fields_extracted']:<8} {result['total_tokens']:<8} {result['llm_model_used'][:14]:<15} {status:<10}"
+                content += line + "\n"
+            
+            # Type summary
+            content += f"""
+Summary: Avg Quality: {type_df['core_quality_score'].mean():.1f} | Avg Cost: ${type_df['cost_usd'].mean():.4f} | Success Rate: {type_df['success'].mean()*100:.1f}%
+"""
+
+        # Overall analysis
+        content += f"""
+{'='*140}
+OVERALL ANALYSIS
+{'='*140}
+
+TOP 5 PERFORMERS BY QUALITY:
+{'-'*50}
+"""
+        
+        top_5 = df.nlargest(5, 'core_quality_score')
+        for i, (_, result) in enumerate(top_5.iterrows(), 1):
+            content += f"{i}. {result['institution_name']} ({result['institution_type']}) - Quality: {result['core_quality_score']:.1f}\n"
+
+        content += f"""
+MOST COST EFFICIENT (Successful tests only):
+{'-'*50}
+"""
+        
+        cost_efficient = df[df['success'] == True].nsmallest(5, 'cost_usd')
+        for i, (_, result) in enumerate(cost_efficient.iterrows(), 1):
+            content += f"{i}. {result['institution_name']} - Cost: ${result['cost_usd']:.4f} (Quality: {result['core_quality_score']:.1f})\n"
+
+        content += f"""
+OUTPUT FORMAT ANALYSIS:
+{'-'*50}
+"""
+        
+        for output_type in df['output_type'].unique():
+            output_df = df[df['output_type'] == output_type]
+            content += f"{output_type.upper()}: {len(output_df)} tests, {output_df['success'].mean()*100:.1f}% success, avg quality: {output_df['core_quality_score'].mean():.1f}\n"
+
+        content += f"""
+QUALITY DISTRIBUTION:
+{'-'*50}
+Excellent (90+): {(df['core_quality_score'] >= 90).sum()} tests ({(df['core_quality_score'] >= 90).sum()/len(df)*100:.1f}%)
+Good (70-89): {((df['core_quality_score'] >= 70) & (df['core_quality_score'] < 90)).sum()} tests ({((df['core_quality_score'] >= 70) & (df['core_quality_score'] < 90)).sum()/len(df)*100:.1f}%)
+Fair (50-69): {((df['core_quality_score'] >= 50) & (df['core_quality_score'] < 70)).sum()} tests ({((df['core_quality_score'] >= 50) & (df['core_quality_score'] < 70)).sum()/len(df)*100:.1f}%)
+Poor (<50): {(df['core_quality_score'] < 50).sum()} tests ({(df['core_quality_score'] < 50).sum()/len(df)*100:.1f}%)
+
+{'='*140}
+End of Report
+"""
+
+        with open(output_file, 'w', encoding='utf-8') as f:
+            f.write(content)
+    
+    def _sanitize_for_json(self, obj):
+        """Convert numpy/pandas types to JSON-serializable Python types."""
+        if isinstance(obj, dict):
+            return {k: self._sanitize_for_json(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [self._sanitize_for_json(item) for item in obj]
+        elif isinstance(obj, np.integer):
+            return int(obj)
+        elif isinstance(obj, np.floating):
+            return float(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif isinstance(obj, pd.Timestamp):
+            return obj.isoformat()
+        else:
+            return obj
 
 
 # CLI interface for easy execution

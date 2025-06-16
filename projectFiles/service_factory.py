@@ -66,8 +66,7 @@ def initialize_autocomplete_with_all_institutions(base_dir):
             'path': os.path.join(spell_check_dir, 'list_of_univs.csv'),
             'name_column': 'name',
             'institution_type': 'Edu'
-        },
-        {
+        },        {
             'path': os.path.join(spell_check_dir, 'national-by-name.csv'),
             'name_column': 'NAME',
             'institution_type': 'Fin'
@@ -80,6 +79,16 @@ def initialize_autocomplete_with_all_institutions(base_dir):
         {
             'path': os.path.join(spell_check_dir, 'trust-by-name.csv'),
             'name_column': 'NAME',
+            'institution_type': 'Fin'
+        },
+        {
+            'path': os.path.join(spell_check_dir, 'ps_banks.csv'),
+            'name_column': 'Name',
+            'institution_type': 'Fin'
+        },
+        {
+            'path': os.path.join(spell_check_dir, 'ps_financial.csv'),
+            'name_column': 'Name',
             'institution_type': 'Fin'
         },
         {
