@@ -88,7 +88,7 @@ function preValidateImages() {
             // Don't try to determine success/failure, let the actual load/error events handle that
             setTimeout(() => {
                 container.classList.remove('image-loading');
-            }, 3000); // 3 second timeout - much shorter and simpler
+            }, 5000);
         }
     });
 }
@@ -166,66 +166,24 @@ function updateSectorIcons() {
 
 // Hide empty sections for cleaner display
 function hideEmptySections() {
+    // Only hide .content-card sections that are completely empty
     const contentCards = document.querySelectorAll('.content-card');
-    
     contentCards.forEach(section => {
-        // Check for leadership cards
-        const hasLeadershipCards = section.querySelectorAll('.leadership-card').length > 0 &&
-            Array.from(section.querySelectorAll('.leadership-name')).some(el => el.textContent.trim() !== '' && el.textContent.trim() !== 'Unknown');
-        
-        // Check for fact cards
-        const hasFactCards = section.querySelectorAll('.fact-card').length > 0 &&
-            Array.from(section.querySelectorAll('.fact-number')).some(el => el.textContent.trim() !== '' && el.textContent.trim() !== 'Unknown');
-          // Check for lists with content
-        const hasListItems = section.querySelectorAll('.enhanced-list li, .program-item, .affiliation-item, .programs-list li, .services-list li, .specialties-list li, .departments-list li, .degrees-list li, .products-list li').length > 0 &&
-            Array.from(section.querySelectorAll('.enhanced-list li, .program-item, .affiliation-item, .programs-list li, .services-list li, .specialties-list li, .departments-list li, .degrees-list li, .products-list li')).some(el => el.textContent.trim() !== '' && el.textContent.trim() !== 'Unknown');
-        
-        const hasImages = section.querySelectorAll('img:not([style*="display: none"])').length > 0;
-        
-        const hasInfoItems = section.querySelectorAll('dl dd').length > 0 &&
-            Array.from(section.querySelectorAll('dl dd')).some(el => el.textContent.trim() !== '' && el.textContent.trim() !== 'Unknown');        // Check for benchmark items (allow 0 values as they can be legitimate)
-        const hasBenchmarkItems = section.querySelectorAll('.benchmark-item').length > 0 &&
-            Array.from(section.querySelectorAll('.benchmark-value')).some(el => el.textContent.trim() !== '' && el.textContent.trim() !== 'Unknown');
-        
-        // Check if section has any meaningful content
-        const hasContent = hasLeadershipCards || hasFactCards || hasListItems || hasImages || hasInfoItems || hasBenchmarkItems;
-        
-        if (!hasContent) {
-            // More lenient check - only hide if section is truly empty or only contains placeholders
-            const textContent = section.textContent.trim().replace(/\s+/g, ' ');
-            const onlyUnknownContent = textContent.length < 50 || 
-                (textContent.toLowerCase().includes('no information available') && textContent.length < 200) ||
-                (textContent.split(' ').filter(word => word !== 'Unknown' && word.length > 2).length < 5);
-            
-            if (onlyUnknownContent) {
-                section.style.display = 'none';
-            }
+        // Skip benchmark cards and header cards
+        if (section.id === 'benchmarks-card' || section.classList.contains('header-card')) {
+            return;
         }
-    });
-      // Also hide empty subsections within cards (but be more lenient)
-    const infoSections = document.querySelectorAll('.info-section');
-    infoSections.forEach(section => {
-        const ddElements = section.querySelectorAll('dd');
-        const listElements = section.querySelectorAll('ul li, ol li');
-        const paragraphs = section.querySelectorAll('p');
         
-        const hasValidDDContent = Array.from(ddElements).some(dd => 
-            dd.textContent.trim() !== '' && 
-            dd.textContent.trim() !== 'Unknown'
-        );
+        // Get all text content and check for meaningful content
+        const allText = section.innerText.trim();
         
-        const hasValidListContent = Array.from(listElements).some(li => 
-            li.textContent.trim() !== '' && 
-            li.textContent.trim() !== 'Unknown'
-        );
+        // Only hide if completely empty or only contains "Unknown"/"N/A"
+        const isCompletelyEmpty = !allText || 
+                                  allText === 'Unknown' || 
+                                  allText === 'N/A' || 
+                                  allText.match(/^(Unknown|N\/A|\s)*$/);
         
-        const hasValidParagraphs = Array.from(paragraphs).some(p => 
-            p.textContent.trim() !== '' && 
-            p.textContent.trim() !== 'Unknown' &&
-            p.textContent.trim().length > 10
-        );
-        
-        if (!hasValidDDContent && !hasValidListContent && !hasValidParagraphs) {
+        if (isCompletelyEmpty) {
             section.style.display = 'none';
         }
     });
@@ -279,8 +237,7 @@ function updateBenchmarkDisplay() {
         const rawTokens = parseInt(element.dataset.benchmarkTokens);
         if (!isNaN(rawTokens)) {
             element.textContent = rawTokens.toLocaleString();
-        }
-    });
+        }    });
 }
 
 // Initialize page functionality
@@ -327,5 +284,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         images.forEach(img => imageObserver.observe(img));
-    }
+    }    // Make URLs clickable - safe version
+    makeUrlsClickable();
 });
+
+// Make URLs clickable throughout the page - simple and safe
+function makeUrlsClickable() {
+    // Simple approach: only target paragraphs in info-sections
+    const paragraphs = document.querySelectorAll('.info-section p, .course-catalog-content');
+    
+    paragraphs.forEach(p => {
+        if (p.innerHTML.includes('http') && !p.innerHTML.includes('<a')) {
+            const text = p.textContent;
+            const urlRegex = /(https?:\/\/[^\s\)]+)/g;
+            if (urlRegex.test(text)) {
+                p.innerHTML = text.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+            }
+        }
+    });
+}

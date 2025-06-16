@@ -24,11 +24,22 @@ STRUCTURED_INFO_KEYS = [
     # Leadership & Personnel
     "key_people", "leadership", "ceo", "president", "chairman", "founders",
     "board_of_directors", "executive_team", "department_heads",
-    
     # Academic/Healthcare Specific
     "student_population", "faculty_count", "programs_offered", "degrees_awarded",
     "research_areas", "departments", "colleges", "schools", "patient_capacity",
     "medical_specialties", "bed_count", "accreditation_bodies",
+    
+    # Enhanced University Specific Fields
+    "course_catalog", "professors", "academic_staff", "administrative_staff",
+    "undergraduate_programs", "graduate_programs", "doctoral_programs",
+    "professional_programs", "online_programs", "continuing_education",
+    "admission_requirements", "tuition_costs", "scholarship_programs",
+    "academic_calendar", "semester_system", "graduation_rate",
+    "student_faculty_ratio", "campus_housing", "dormitories",
+    "libraries", "laboratory_facilities", "sports_facilities",
+    "student_organizations", "fraternities_sororities", "athletics_programs",
+    "research_centers", "institutes", "academic_rankings",
+    "notable_faculty", "distinguished_alumni", "university_press",
     
     # Business/Financial Specific
     "services_offered", "products", "subsidiaries", "divisions", "branches",
@@ -164,6 +175,29 @@ Given the following institution name: "{institution_name}", and the raw web cont
 - **programs_offered**: List specific degree programs or medical specialties
 - **research_areas**: Key research focus areas
 - **patient_capacity**: For hospitals, bed count and capacity
+
+**Enhanced University Specific:**
+- **course_catalog**: Available courses and curricula
+- **professors**: Notable professors and their specializations
+- **academic_staff**: Number of academic personnel by category
+- **undergraduate_programs**: Specific undergraduate degree programs
+- **graduate_programs**: Master's and graduate programs offered
+- **doctoral_programs**: PhD and doctoral programs
+- **professional_programs**: Professional certification programs
+- **admission_requirements**: Entry requirements and criteria
+- **tuition_costs**: Tuition fees and associated costs
+- **graduation_rate**: Percentage of students who graduate
+- **student_faculty_ratio**: Ratio of students to faculty
+- **campus_housing**: Dormitory and housing information
+- **libraries**: Library facilities and collections
+- **laboratory_facilities**: Research and teaching labs
+- **sports_facilities**: Athletic and recreational facilities
+- **student_organizations**: Clubs and student groups
+- **athletics_programs**: Sports teams and competitions
+- **research_centers**: Specialized research institutes
+- **academic_rankings**: University rankings and recognition
+- **notable_faculty**: Distinguished faculty members
+- **distinguished_alumni**: Famous graduates
 
 **Business Specific:**
 - **services_offered**: Detailed list of main services or products

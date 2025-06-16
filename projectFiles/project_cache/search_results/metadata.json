@@ -176,8 +176,8 @@
     }
   },
   "stats": {
-    "hits": 185,
+    "hits": 209,
     "misses": 32,
-    "similar_hits": 42
+    "similar_hits": 43
   }
 }
