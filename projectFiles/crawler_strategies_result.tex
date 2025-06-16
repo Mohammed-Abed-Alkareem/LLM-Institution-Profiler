@@ -1,0 +1,27 @@
+\begin{table}[h!]
+\centering
+\caption{Benchmark Results with Crawler Strategies}
+\label{tab:crawler_strategies}
+\begin{tabular}{|l|l|l|l|r|r|r|r|r|l|}
+\hline
+Institution & Type & Strategy & Refresh & Quality & Time(s) & Cost & Fields & Tokens & Status \\
+\hline
+Harvard University & university & priority\_ba & True & 70.2 & 78.4 & 0.0069 & 15 & 20382 & Success \\
+Mayo Clinic & hospital & priority\_ba & True & 69.5 & 42.3 & 0.0072 & 14 & 21846 & Success \\
+JPMorgan Chase & financial & priority\_ba & True & 67.0 & 55.3 & 0.0070 & 14 & 20637 & Success \\
+Microsoft Corporatio & corporate & priority\_ba & True & 52.0 & 79.1 & 0.0068 & 10 & 20646 & Success \\
+Harvard University & university & equal & True & 70.2 & 81.6 & 0.0070 & 15 & 20565 & Success \\
+Mayo Clinic & hospital & equal & True & 52.0 & 39.7 & 0.0070 & 9 & 21546 & Success \\
+JPMorgan Chase & financial & equal & True & 72.0 & 71.7 & 0.0068 & 16 & 20184 & Success \\
+Microsoft Corporatio & corporate & equal & True & 68.8 & 65.6 & 0.0068 & 15 & 20733 & Success \\
+Harvard University & university & high\_links & True & 70.2 & 67.0 & 0.0069 & 15 & 20355 & Success \\
+Mayo Clinic & hospital & high\_links & True & 47.0 & 34.2 & 0.0070 & 8 & 21537 & Success \\
+JPMorgan Chase & financial & high\_links & True & 68.8 & 67.8 & 0.0069 & 15 & 20550 & Success \\
+Microsoft Corporatio & corporate & high\_links & True & 52.0 & 45.0 & 0.0068 & 10 & 20649 & Success \\
+Harvard University & university & high\_depth & True & 70.2 & 70.6 & 0.0070 & 15 & 20538 & Success \\
+Mayo Clinic & hospital & high\_depth & True & 52.0 & 36.2 & 0.0069 & 9 & 21243 & Success \\
+JPMorgan Chase & financial & high\_depth & True & 67.0 & 66.0 & 0.0070 & 14 & 20589 & Success \\
+Microsoft Corporatio & corporate & high\_depth & True & 68.8 & 70.0 & 0.0068 & 15 & 20733 & Success \\
+\hline
+\end{tabular}
+\end{table}
