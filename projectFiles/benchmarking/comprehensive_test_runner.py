@@ -227,14 +227,17 @@ class ComprehensiveTestRunner:
         # Run all test configurations
         for test_config in config.get('test_configurations', []):
             print(f"\n🧪 Running Test: {test_config.get('test_name', 'Unknown')}")
-            self._run_test_configuration(test_config)
-          # Generate comprehensive analysis
+            self._run_test_configuration(test_config)        # Generate comprehensive analysis
         total_time = time.time() - start_time
         analysis = self._generate_comprehensive_analysis()
         
-        # Display final comprehensive results table
-        self._generate_final_results_table()
-          # Generate output files
+        # Display final summary
+        print(f"\n{'='*140}")
+        print("🏆 COMPREHENSIVE BENCHMARK RESULTS SUMMARY")
+        print(f"{'='*140}")
+        self._print_summary_stats()
+        
+        # Generate output files
         output_files = self._generate_output_files(config, analysis)
         
         print(f"\n✅ Test Suite Completed in {total_time:.2f} seconds")
@@ -601,7 +604,7 @@ class ComprehensiveTestRunner:
                 'analysis': analysis,
                 'results': [r.to_dict() for r in self.results]
             })
-            json.dump(sanitized_data, f, indent=2, ensure_ascii=False)
+            json.dump(sanitized_data, f, indent=2, ensure_ascii=False, cls=NumpyJSONEncoder)
         output_files.append(json_file)
         
         # 2. CSV results file (detailed)
@@ -624,11 +627,11 @@ class ComprehensiveTestRunner:
         text_file = os.path.join(output_dir, f'benchmark_summary_table_{timestamp}.txt')
         self._generate_text_summary_table(text_file)
         output_files.append(text_file)
-        
         # 6. Summary analysis JSON
         summary_file = os.path.join(output_dir, f'benchmark_summary_{timestamp}.json')
         with open(summary_file, 'w', encoding='utf-8') as f:
-            json.dump(analysis, f, indent=2, ensure_ascii=False)
+            sanitized_analysis = self._sanitize_for_json(analysis)
+            json.dump(sanitized_analysis, f, indent=2, ensure_ascii=False, cls=NumpyJSONEncoder)
         output_files.append(summary_file)
         
         return output_files

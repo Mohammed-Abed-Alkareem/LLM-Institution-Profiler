@@ -17,7 +17,7 @@ from .benchmark_metrics import (
 )
 from .benchmark_analyzer import BenchmarkAnalyzer
 from .benchmark_reporter import BenchmarkReporter
-from .test_runner import BenchmarkTestRunner
+from .comprehensive_test_runner import ComprehensiveTestRunner
 
 __all__ = [
     'BenchmarkTracker',
@@ -31,5 +31,5 @@ __all__ = [
     'ComparisonMetrics',
     'BenchmarkAnalyzer',
     'BenchmarkReporter',
-    'BenchmarkTestRunner'
+    'ComprehensiveTestRunner'
 ]
