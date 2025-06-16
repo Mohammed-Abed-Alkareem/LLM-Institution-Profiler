@@ -24,7 +24,7 @@ if project_dir not in sys.path:
 
 from benchmarking.quality_score_integration import QualityScoreIntegrator
 from benchmarking.benchmark_config import BenchmarkCategory
-from benchmarking.integration import get_benchmarking_manager, initialize_benchmarking
+from benchmarking.integration import initialize_benchmarking
 # Remove institution_processor import to avoid circular dependency - import inside functions where needed
 from api.service_init import initialize_services
 
@@ -89,8 +89,7 @@ class ComprehensiveTestResult:
     search_time: float
     crawling_time: float
     extraction_time: float
-    
-    # Crawling metrics
+      # Crawling metrics
     success_rate: float
     total_urls_requested: int
     successful_crawls: int
@@ -98,21 +97,22 @@ class ComprehensiveTestResult:
     content_size_mb: float
     compression_ratio: float
     
-    # Cost breakdown
-    google_search_cost: float
-    llm_cost: float
-    infrastructure_cost: float
-    google_search_queries: int
-    llm_model_used: str
-    input_tokens: int
-    output_tokens: int
-    total_tokens: int
-    
-    # Error information
+    # Crawler strategy information
+    crawler_strategy: str = "default"
+    crawler_config_used: bool = False
+    priority_based_crawling: bool = False
+    force_refresh_used: bool = False
+      # Cost breakdown
+    google_search_cost: float = 0.0
+    llm_cost: float = 0.0
+    infrastructure_cost: float = 0.0
+    google_search_queries: int = 0
+    llm_model_used: str = "unknown"
+    input_tokens: int = 0
+    output_tokens: int = 0
+    total_tokens: int = 0
+      # Error information
     error_message: str = ""
-    
-    # Error information
-    error_message: Optional[str] = None
     validation_errors: List[str] = None
     
     def to_dict(self) -> Dict[str, Any]:
@@ -164,20 +164,19 @@ class ComprehensiveTestRunner:
         
         # Initialize live table headers
         self._print_table_header()
-        
     def _print_table_header(self):
         """Print the header for the live results table."""
-        print("\n" + "="*120)
+        print("\n" + "="*150)
         print("🔥 LIVE BENCHMARK RESULTS TABLE")
-        print("="*120)
-        header = f"{'Institution':<25} {'Type':<12} {'Format':<12} {'Quality':<8} {'Rating':<12} {'Time(s)':<8} {'Cost($)':<10} {'Fields':<8} {'Status':<10}"
+        print("="*150)
+        header = f"{'Institution':<25} {'Type':<12} {'Format':<12} {'Strategy':<15} {'Quality':<8} {'Rating':<12} {'Time(s)':<8} {'Cost($)':<10} {'Fields':<8} {'Status':<10}"
         print(header)
-        print("-"*120)
-    
+        print("-"*150)
     def _print_table_row(self, result: ComprehensiveTestResult):
         """Print a single row in the live results table."""
         status = "✅ SUCCESS" if result.success else "❌ FAILED"
-        row = f"{result.institution_name[:24]:<25} {result.institution_type[:11]:<12} {result.output_type:<12} {result.core_quality_score:<8.1f} {result.core_quality_rating[:11]:<12} {result.execution_time:<8.1f} ${result.cost_usd:<9.4f} {result.fields_extracted:<8} {status:<10}"
+        strategy = result.crawler_strategy[:14] if result.crawler_strategy else "default"
+        row = f"{result.institution_name[:24]:<25} {result.institution_type[:11]:<12} {result.output_type:<12} {strategy:<15} {result.core_quality_score:<8.1f} {result.core_quality_rating[:11]:<12} {result.execution_time:<8.1f} ${result.cost_usd:<9.4f} {result.fields_extracted:<8} {status:<10}"
         print(row)
     
     def _print_summary_stats(self):
@@ -385,8 +384,23 @@ class ComprehensiveTestRunner:
                 'cache_hit_rate': 0.0,
                 'network_requests': 0,
                 'processing_phases_completed': 0
-            }
-          # Create comprehensive test result
+            }        # Extract crawler strategy information from config
+        crawler_strategy = "default"
+        crawler_config_used = False
+        force_refresh_used = False
+        priority_based_crawling = False
+        
+        if config and config.get('crawler_config'):
+            crawler_config_used = True
+            benchmark_config = config.get('crawler_config', {}).get('benchmark_config', {})
+            crawler_strategy = benchmark_config.get('strategy', 'unknown')
+            if crawler_strategy == 'priority_based':
+                priority_based_crawling = True
+        
+        if config and config.get('force_refresh'):
+            force_refresh_used = True
+        
+        # Create comprehensive test result
         result = ComprehensiveTestResult(
             institution_name=institution_name,
             institution_type=institution_type,
@@ -443,12 +457,17 @@ class ComprehensiveTestRunner:
             infrastructure_cost=cost_metrics.get('infrastructure_cost', 0.0),
             google_search_queries=cost_metrics.get('google_search_queries', 0),
             llm_model_used=cost_metrics.get('llm_model_used', 'unknown'),
-            input_tokens=cost_metrics.get('input_tokens', 0),
-            output_tokens=cost_metrics.get('output_tokens', 0),
+            input_tokens=cost_metrics.get('input_tokens', 0),            output_tokens=cost_metrics.get('output_tokens', 0),
             total_tokens=cost_metrics.get('total_tokens', 0),
             
+            # Crawler strategy information
+            crawler_strategy=crawler_strategy,
+            crawler_config_used=crawler_config_used,
+            priority_based_crawling=priority_based_crawling,
+            force_refresh_used=force_refresh_used,
+            
             # Error information
-            error_message=error_message or ""        )
+            error_message=error_message or "")
         
         # Add result to collection and update live table
         self._add_result_and_update_table(result)
@@ -533,8 +552,7 @@ class ComprehensiveTestRunner:
                 'critical_fields_completion': type_df['critical_fields_completion'].mean(),
                 'important_fields_completion': type_df['important_fields_completion'].mean()
             }
-        
-        # Output type analysis
+          # Output type analysis
         output_type_analysis = {}
         for output_type in df['output_type'].unique():
             output_df = df[df['output_type'] == output_type]
@@ -545,6 +563,22 @@ class ComprehensiveTestRunner:
                 'avg_complexity': output_df['serialization_complexity'].mean(),
                 'avg_information_density': output_df['information_density'].mean(),
                 'avg_execution_time': output_df['execution_time'].mean()
+            }
+        
+        # Crawler strategy analysis
+        crawler_strategy_analysis = {}
+        for strategy in df['crawler_strategy'].unique():
+            strategy_df = df[df['crawler_strategy'] == strategy]
+            crawler_strategy_analysis[strategy] = {
+                'count': len(strategy_df),
+                'success_rate': strategy_df['success'].mean(),
+                'avg_quality_score': strategy_df['core_quality_score'].mean(),
+                'avg_execution_time': strategy_df['execution_time'].mean(),
+                'avg_cost': strategy_df['cost_usd'].mean(),
+                'avg_crawling_time': strategy_df['crawling_time'].mean(),
+                'avg_successful_crawls': strategy_df['successful_crawls'].mean(),
+                'avg_content_size_mb': strategy_df['content_size_mb'].mean(),
+                'force_refresh_usage': strategy_df['force_refresh_used'].mean()
             }
         
         # Quality score distribution
@@ -586,13 +620,14 @@ class ComprehensiveTestRunner:
         else:
             top_performers = []
             bottom_performers = []
-        
         return {
             'overall_statistics': overall_stats,
             'institution_type_analysis': institution_type_analysis,
             'output_type_analysis': output_type_analysis,
+            'crawler_strategy_analysis': crawler_strategy_analysis,
             'quality_distribution': quality_distribution,
-            'field_completion_analysis': field_completion_analysis,            'performance_analysis': performance_analysis,
+            'field_completion_analysis': field_completion_analysis,
+            'performance_analysis': performance_analysis,
             'top_performers': top_performers,
             'bottom_performers': bottom_performers,
             'total_cost': df['cost_usd'].sum(),
