@@ -224,11 +224,31 @@ class ComprehensiveTestRunner:
         
         print(f"📋 Test Suite: {config.get('test_suite_name', 'Unknown')}")
         print(f"📝 Description: {config.get('description', 'No description')}")
-        
-        # Run all test configurations
-        for test_config in config.get('test_configurations', []):
-            print(f"\n🧪 Running Test: {test_config.get('test_name', 'Unknown')}")
-            self._run_test_configuration(test_config)        # Generate comprehensive analysis
+          # Run all test configurations
+        total_configs = len(config.get('test_configurations', []))
+        for i, test_config in enumerate(config.get('test_configurations', []), 1):
+            print(f"\n{'='*80}")
+            print(f"🧪 Running Test Configuration {i}/{total_configs}: {test_config.get('test_name', 'Unknown')}")
+            print(f"📝 Description: {test_config.get('test_description', 'No description')}")
+            
+            # Extract and display strategy info
+            crawler_config = test_config.get('crawler_config', {})
+            if crawler_config:
+                strategy = crawler_config.get('benchmark_config', {}).get('strategy', 'unknown')
+                print(f"🚀 Crawler Strategy: {strategy}")
+                if test_config.get('force_refresh'):
+                    print(f"🔄 Cache: Disabled (force refresh)")
+                else:
+                    print(f"💾 Cache: Enabled")
+            
+            print(f"{'='*80}")
+            
+            self._run_test_configuration(test_config)
+            
+            # Add longer pause between test configurations
+            if i < total_configs:
+                print(f"\n⏸️  Pausing 5 seconds between test configurations to avoid rate limits...")
+                time.sleep(5)# Generate comprehensive analysis
         total_time = time.time() - start_time
         analysis = self._generate_comprehensive_analysis()
         
@@ -280,19 +300,25 @@ class ComprehensiveTestRunner:
             'analysis': analysis,
             'results': [r.to_dict() for r in self.results]
         }
-    
     def _run_test_configuration(self, test_config: Dict[str, Any]):
         """Run a single test configuration with multiple institutions and output types."""
         institutions = test_config.get('institutions', [])
         output_types = test_config.get('output_types', ['json'])
         iterations = test_config.get('iterations', 1)
         
-        print(f"   📈 Testing {len(institutions)} institutions x {len(output_types)} output types x {iterations} iterations")
+        total_tests = len(institutions) * len(output_types) * iterations
+        print(f"   📈 Testing {len(institutions)} institutions x {len(output_types)} output types x {iterations} iterations = {total_tests} total tests")
         
+        test_counter = 0        
         for institution in institutions:
             for output_type in output_types:
-                for iteration in range(iterations):                    
-                        self._run_single_test(
+                for iteration in range(iterations):
+                    test_counter += 1
+                    
+                    # Print detailed test info with progress
+                    print(f"\n      🧪 Test {test_counter}/{total_tests}: {institution.get('institution_name')} | {output_type} | iteration {iteration + 1}/{iterations}")
+                    
+                    self._run_single_test(
                         institution, 
                         output_type, 
                         test_config.get('category', 'pipeline'),
@@ -300,6 +326,13 @@ class ComprehensiveTestRunner:
                         iterations,
                         test_config
                     )
+                    
+                    # Add pause between tests to avoid rate limits
+                    if test_counter < total_tests:
+                        print(f"      ⏸️  Pausing 3 seconds to avoid rate limits...")
+                        time.sleep(3)
+        
+        print(f"\n   ✅ Test configuration completed: {test_counter}/{total_tests} tests finished")
     def _run_single_test(
         self, 
         institution: Dict[str, Any], 
@@ -312,11 +345,19 @@ class ComprehensiveTestRunner:
         """Run a single test case with comprehensive metrics collection."""
         # Import here to avoid circular dependency
         from institution_processor import process_institution_pipeline
-        
         institution_name = institution.get('institution_name', 'Unknown')
         institution_type = institution.get('institution_type', 'general')
         
+        # Extract crawler strategy info for logging
+        crawler_strategy = "default"
+        if config and config.get('crawler_config'):
+            benchmark_config = config.get('crawler_config', {}).get('benchmark_config', {})
+            crawler_strategy = benchmark_config.get('strategy', 'unknown')
+        
         print(f"      🏛️  {institution_name} ({institution_type}) - {output_type} format - iteration {iteration}/{total_iterations}")
+        print(f"         📊 Strategy: {crawler_strategy} | Force Refresh: {config.get('force_refresh', False)}")
+        print(f"         🚀 Starting pipeline execution...")
+        
         start_time = time.time()
         success = False
         error_message = None
@@ -353,17 +394,35 @@ class ComprehensiveTestRunner:
                     crawler_config=crawler_config,
                     force_refresh=force_refresh
                 )
-            
             if processed_data and not processed_data.get('error'):
                 success = True
+                print(f"         ✅ Pipeline completed successfully in {time.time() - start_time:.2f}s")
+                
+                # Log phase completion details
+                processing_phases = processed_data.get('processing_phases', {})
+                if processing_phases:
+                    print(f"         📋 Phase results:")
+                    for phase_name, phase_data in processing_phases.items():
+                        status = "✅" if phase_data.get('success', False) else "❌"
+                        phase_time = phase_data.get('time', 0)
+                        print(f"            {status} {phase_name}: {phase_time:.2f}s")
+                
+                # Log crawling summary if available
+                crawl_summary = processed_data.get('crawl_summary', {})
+                if crawl_summary:
+                    print(f"         🕷️  Crawl summary: {crawl_summary.get('successful_crawls', 0)}/{crawl_summary.get('total_urls_requested', 0)} URLs")
+                
             else:
                 error_message = processed_data.get('error', 'Unknown processing error') if processed_data else 'No data returned'
+                print(f"         ❌ Pipeline failed: {error_message}")
                 
         except Exception as e:
             error_message = str(e)
             success = False
+            print(f"         💥 Exception occurred: {error_message}")
         
         execution_time = time.time() - start_time
+        print(f"         ⏱️  Total execution time: {execution_time:.2f}s")
           # Calculate comprehensive metrics using quality score integration
         if success and processed_data:
             try:
