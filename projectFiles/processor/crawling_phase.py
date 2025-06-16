@@ -16,13 +16,13 @@ class CrawlingPhaseHandler:
     def __init__(self, base_dir: str, crawler_service: CrawlerService):
         self.base_dir = base_dir
         self.crawler_service = crawler_service
-    
     def execute_crawling_phase(
         self,
         institution_name: str,
         links: List[Dict],
         institution_type: Optional[str] = None,
-        max_pages: int = DEFAULT_MAX_PAGES
+        max_pages: int = DEFAULT_MAX_PAGES,
+        force_refresh: bool = False
     ) -> Dict:
         """
         Execute the crawling phase to extract detailed content.
@@ -32,6 +32,7 @@ class CrawlingPhaseHandler:
             links: List of URLs to crawl
             institution_type: Type of institution
             max_pages: Maximum number of pages to crawl
+            force_refresh: Force refresh cached content (bypass crawler cache)
             
         Returns:
             Dict containing crawling results and extracted content
@@ -57,14 +58,14 @@ class CrawlingPhaseHandler:
             # Run async crawling
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
-            
             crawl_result = loop.run_until_complete(
                 self.crawler_service.crawl_institution_urls(
                     institution_name=institution_name,
                     urls=[link['url'] for link in links],
                     institution_type=detected_type,  # Pass string instead of enum
                     max_pages=max_pages,
-                    strategy=CrawlingStrategy.ADVANCED
+                    strategy=CrawlingStrategy.ADVANCED,
+                    force_refresh=force_refresh
                 )
             )
             

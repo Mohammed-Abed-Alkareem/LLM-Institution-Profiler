@@ -292,21 +292,23 @@ class ComprehensiveTestRunner:
         
         for institution in institutions:
             for output_type in output_types:
-                for iteration in range(iterations):
-                    self._run_single_test(
+                for iteration in range(iterations):                    
+                        self._run_single_test(
                         institution, 
                         output_type, 
-                        test_config.get('category', 'pipeline'),                        iteration + 1,
-                        iterations
+                        test_config.get('category', 'pipeline'),
+                        iteration + 1,
+                        iterations,
+                        test_config
                     )
-    
     def _run_single_test(
         self, 
         institution: Dict[str, Any], 
         output_type: str, 
         category: str,
         iteration: int,
-        total_iterations: int
+        total_iterations: int,
+        config: Dict[str, Any] = None
     ):
         """Run a single test case with comprehensive metrics collection."""
         # Import here to avoid circular dependency
@@ -324,7 +326,10 @@ class ComprehensiveTestRunner:
             # Enable benchmarking context for proper cost tracking
             from benchmarking.integration import get_benchmarking_manager, benchmark_context, BenchmarkCategory
               # Get benchmarking manager
-            benchmarking_manager = get_benchmarking_manager()
+            benchmarking_manager = get_benchmarking_manager()            # Get crawler config and cache settings from test configuration
+            config = config or {}
+            crawler_config = config.get('crawler_config')
+            force_refresh = config.get('force_refresh', False)
             
             if benchmarking_manager:                # Use benchmarking context for proper cost tracking
                 with benchmark_context(
@@ -335,16 +340,19 @@ class ComprehensiveTestRunner:
                         institution_name=institution_name,
                         institution_type=institution_type,
                         search_params=None,
-                        output_type=output_type
+                        output_type=output_type,
+                        crawler_config=crawler_config,
+                        force_refresh=force_refresh
                     )
-            else:
-                # Fallback without benchmarking context
+            else:                # Fallback without benchmarking context
                 print(f"⚠️ Warning: Benchmarking manager not available, cost tracking will be limited")
                 processed_data = process_institution_pipeline(
                     institution_name=institution_name,
                     institution_type=institution_type,
                     search_params=None,
-                    output_type=output_type
+                    output_type=output_type,
+                    crawler_config=crawler_config,
+                    force_refresh=force_refresh
                 )
             
             if processed_data and not processed_data.get('error'):

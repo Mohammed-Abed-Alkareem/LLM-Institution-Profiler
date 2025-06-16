@@ -173,11 +173,18 @@
         "institution_type": "international"
       },
       "cached_at": 1750046584.8784947
+    },
+    "01a14deaaec1e06faf5c9e960dd2ca6d": {
+      "query": "Microsoft Corporation",
+      "params": {
+        "institution_type": "corporate"
+      },
+      "cached_at": 1750057269.772381
     }
   },
   "stats": {
-    "hits": 209,
-    "misses": 32,
+    "hits": 229,
+    "misses": 33,
     "similar_hits": 43
   }
 }

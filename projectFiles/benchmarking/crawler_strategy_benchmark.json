@@ -1,0 +1,201 @@
+{
+	"test_suite_name": "Crawler Strategy Benchmark Test Suite",
+	"description": "Testing different crawling strategies (priority-based, equal, high-links, high-depth) across 4 institution categories",
+	"version": "1.0",
+	"created_date": "2025-06-16",
+	"test_configurations": [
+		{			"test_name": "priority_based_crawler_test",
+			"test_description": "Test priority-based crawling strategy with adaptive depth and link limits",
+			"category": "crawler_strategy",
+			"crawler_config": {
+				"benchmark_config": {
+					"strategy": "priority_based"
+				},
+				"priority_config": {
+					"high_priority_max_depth": 3,
+					"high_priority_max_pages": 25,
+					"medium_priority_max_depth": 2,
+					"medium_priority_max_pages": 15,
+					"low_priority_max_depth": 1,
+					"low_priority_max_pages": 8,
+					"priority_threshold_high": 100,
+					"priority_threshold_medium": 50
+				}
+			},
+			"force_refresh": true,
+			"institutions": [
+				{
+					"institution_name": "Harvard University",
+					"institution_type": "university",
+					"expected_min_quality": 0.75,
+					"expected_max_cost": 0.03,
+					"expected_max_time": 20.0
+				},
+				{
+					"institution_name": "Mayo Clinic",
+					"institution_type": "hospital",
+					"expected_min_quality": 0.75,
+					"expected_max_cost": 0.03,
+					"expected_max_time": 20.0
+				},
+				{
+					"institution_name": "JPMorgan Chase",
+					"institution_type": "financial",
+					"expected_min_quality": 0.70,
+					"expected_max_cost": 0.03,
+					"expected_max_time": 20.0
+				},
+				{
+					"institution_name": "Microsoft Corporation",
+					"institution_type": "corporate",
+					"expected_min_quality": 0.70,
+					"expected_max_cost": 0.03,
+					"expected_max_time": 20.0
+				}
+			],
+			"output_types": ["json"],
+			"iterations": 1,
+			"parallel_execution": false
+		},
+		{			"test_name": "equal_distribution_crawler_test",
+			"test_description": "Test equal distribution strategy - same depth and link limits for all sites",
+			"category": "crawler_strategy",
+			"crawler_config": {
+				"benchmark_config": {
+					"strategy": "equal",
+					"equal_depth": 2,
+					"equal_max_pages": 15
+				}
+			},
+			"force_refresh": true,
+			"institutions": [
+				{
+					"institution_name": "Harvard University",
+					"institution_type": "university",
+					"expected_min_quality": 0.70,
+					"expected_max_cost": 0.025,
+					"expected_max_time": 18.0
+				},
+				{
+					"institution_name": "Mayo Clinic",
+					"institution_type": "hospital",
+					"expected_min_quality": 0.70,
+					"expected_max_cost": 0.025,
+					"expected_max_time": 18.0
+				},
+				{
+					"institution_name": "JPMorgan Chase",
+					"institution_type": "financial",
+					"expected_min_quality": 0.65,
+					"expected_max_cost": 0.025,
+					"expected_max_time": 18.0
+				},
+				{
+					"institution_name": "Microsoft Corporation",
+					"institution_type": "corporate",
+					"expected_min_quality": 0.65,
+					"expected_max_cost": 0.025,
+					"expected_max_time": 18.0
+				}
+			],
+			"output_types": ["json"],
+			"iterations": 1,
+			"parallel_execution": false
+		},
+		{			"test_name": "high_links_crawler_test",
+			"test_description": "Test high-links strategy - more links for high priority sites, same depth",
+			"category": "crawler_strategy",
+			"crawler_config": {
+				"benchmark_config": {
+					"strategy": "high_links",
+					"high_links_multiplier": 1.8
+				}
+			},
+			"force_refresh": true,
+			"institutions": [
+				{
+					"institution_name": "Harvard University",
+					"institution_type": "university",
+					"expected_min_quality": 0.75,
+					"expected_max_cost": 0.035,
+					"expected_max_time": 22.0
+				},
+				{
+					"institution_name": "Mayo Clinic",
+					"institution_type": "hospital",
+					"expected_min_quality": 0.75,
+					"expected_max_cost": 0.035,
+					"expected_max_time": 22.0
+				},
+				{
+					"institution_name": "JPMorgan Chase",
+					"institution_type": "financial",
+					"expected_min_quality": 0.70,
+					"expected_max_cost": 0.035,
+					"expected_max_time": 22.0
+				},
+				{
+					"institution_name": "Microsoft Corporation",
+					"institution_type": "corporate",
+					"expected_min_quality": 0.70,
+					"expected_max_cost": 0.035,
+					"expected_max_time": 22.0
+				}
+			],
+			"output_types": ["json"],
+			"iterations": 1,
+			"parallel_execution": false
+		},
+		{			"test_name": "high_depth_crawler_test",
+			"test_description": "Test high-depth strategy - deeper crawling for high priority sites",
+			"category": "crawler_strategy",
+			"crawler_config": {
+				"benchmark_config": {
+					"strategy": "high_depth",
+					"high_depth_multiplier": 1.5
+				}
+			},
+			"force_refresh": true,
+			"institutions": [
+				{
+					"institution_name": "Harvard University",
+					"institution_type": "university",
+					"expected_min_quality": 0.80,
+					"expected_max_cost": 0.04,
+					"expected_max_time": 25.0
+				},
+				{
+					"institution_name": "Mayo Clinic",
+					"institution_type": "hospital",
+					"expected_min_quality": 0.80,
+					"expected_max_cost": 0.04,
+					"expected_max_time": 25.0
+				},
+				{
+					"institution_name": "JPMorgan Chase",
+					"institution_type": "financial",
+					"expected_min_quality": 0.75,
+					"expected_max_cost": 0.04,
+					"expected_max_time": 25.0
+				},
+				{
+					"institution_name": "Microsoft Corporation",
+					"institution_type": "corporate",
+					"expected_min_quality": 0.75,
+					"expected_max_cost": 0.04,
+					"expected_max_time": 25.0
+				}
+			],
+			"output_types": ["json"],
+			"iterations": 1,
+			"parallel_execution": false
+		}
+	],
+	"global_settings": {
+		"max_parallel_tests": 1,
+		"output_dir": "crawler_benchmark_results",
+		"enable_cost_tracking": true,
+		"enable_quality_scoring": true,
+		"cache_disabled_for_crawler_tests": true
+	}
+}
