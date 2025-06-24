@@ -11,7 +11,7 @@ An advanced, AI-powered system that automatically generates comprehensive instit
 The LLM Institution Profiler is a cutting-edge system designed to automatically create detailed profiles of institutions (universities, hospitals, financial institutions) by leveraging state-of-the-art NLP techniques, intelligent web crawling, and LLM-powered data extraction. The system combines multiple AI technologies to deliver high-quality, structured institutional data with comprehensive quality scoring and cost optimization.
 
 ## Demo
-[Watch the demo video](https://github.com/user-attachments/assets/ebd967a6-3446-4251-a597-4eee4a7934ef)
+[Watch the demo video](https://github.com/user-attachments/assets/e45ede95-76b6-49ad-aaab-1e2fd094f2aa)
 
 ### 🎯 Key Innovations
 
